@@ -1,72 +1,76 @@
-# Canal de GTA 6: 10 vídeos de lanzamiento
+# Canal de GTA 6: 10 vídeos de lanzamiento (versión 2)
 
-Diez vídeos completos (guion, voz, imágenes, animaciones, música y montaje) para
-subir el **jueves 19 de noviembre de 2026**, el día que sale GTA 6.
+Diez vídeos completos para subir el **jueves 19 de noviembre de 2026**, el día que sale GTA 6.
 
-Cada carpeta de `salida/` contiene todo lo necesario para subir el vídeo:
+**Los vídeos de la v2 están en `salida_v2/`.** Los de la v1 (`salida/`) quedan como
+referencia y han sido sustituidos.
 
-| Archivo | Para qué |
-|---|---|
-| `NN-slug.mp4` | Vídeo final 1080p 30 fps, H.264 + AAC |
-| `miniatura.jpg` | Miniatura 1280×720 |
-| `NN-slug.srt` | Subtítulos en español (súbelos en YouTube Studio → Subtítulos) |
-| `youtube.txt` | Título, descripción con capítulos y etiquetas para copiar y pegar |
+## Qué cambia en la v2
 
-Los últimos 8 s de cada vídeo son una pantalla final con dos huecos para los
-**elementos finales** de YouTube (vídeo sugerido + suscripción).
+- **Imágenes reales que cambian con cada frase.** Se usan capturas y artes oficiales de
+  Rockstar, y cada frase va con la imagen de lo que se está contando: personaje, lugar,
+  coche o escena.
+- **Movimiento constante.** Zoom y paneo suave en cada imagen, transiciones con "whoosh",
+  golpe de cámara y destello en los momentos clave.
+- **Subtítulos palabra a palabra** en grande, con la palabra que suena resaltada en
+  amarillo, estilo shorts y TikTok.
+- **Rótulos animados** (lugares, nombres, "#1, #2…"), textos grandes con golpe de
+  sonido, barra de progreso y aviso animado de "SUSCRÍBETE → SUSCRITO" con campana.
+- **Guiones con gancho.** Cada vídeo abre con un gancho fuerte, promete algo para el
+  final, hace preguntas al público y deja un adelanto del siguiente vídeo.
+- **Música original tipo trap**, sintetizada por código, que baja automáticamente
+  cuando hay voz.
+- **Miniaturas de estilo realista**, con capturas oficiales retocadas, recortes de
+  personajes con contorno blanco, texto enorme con borde y etiqueta roja.
 
-## Por qué estos 10 temas (lo que va a buscar la gente)
+## Los 10 vídeos
 
-Son las preguntas que más se repiten en la cobertura previa al lanzamiento
-(fecha, precio, tamaño, FPS, mapa, online, PC). Están ordenados por prioridad:
-
-| # | Vídeo | Búsqueda que ataca |
+| # | Título | Gancho |
 |---|---|---|
-| 01 | GTA 6 ya está aquí: todo lo que necesitas saber | "gta 6 fecha", "gta 6 lanzamiento" |
-| 02 | ¿Cuánto ocupa GTA 6? 212 GB | "gta 6 cuanto ocupa", "gta 6 gb" |
-| 03 | Estándar vs Ultimate | "gta 6 precio", "gta 6 ediciones" |
-| 04 | El mapa: las 6 regiones de Leonida | "gta 6 mapa", "gta 6 leonida" |
-| 05 | ¿Quiénes son Jason y Lucia? | "gta 6 protagonistas", "gta 6 historia" |
-| 06 | 30 FPS: ¿merece la pena la PS5 Pro? | "gta 6 60 fps", "gta 6 ps5 pro" |
-| 07 | ¿Tiene GTA 6 modo online? | "gta 6 online" |
-| 08 | ¿Sale GTA 6 en PC? | "gta 6 pc" |
-| 09 | 10 consejos para tus primeras horas | "gta 6 consejos", "gta 6 trucos" |
-| 10 | Configura tu TV y consola | "gta 6 hdr", "gta 6 ajustes" |
+| 01 | GTA 6 YA ESTÁ AQUÍ: 15 cosas que tienes que saber ANTES de jugar | día de lanzamiento |
+| 02 | Los 8 PERSONAJES de GTA 6 (el último es el más peligroso) | personajes |
+| 03 | VICE CITY en GTA 6: todos los lugares (y un guiño al original) | lugares |
+| 04 | Fuera de Vice City: lo más SALVAJE de Leonida | regiones, fauna |
+| 05 | Los GUIÑOS al Vice City original escondidos en GTA 6 | nostalgia, Vercetti |
+| 06 | Edición ULTIMATE al detalle: ¿merece la pena pagar 20 $ más? | compra |
+| 07 | La MÚSICA de GTA 6: Justice, Flash FM y todas las radios | música |
+| 08 | El HACKEO que casi DESTRUYE GTA 6 | historia, polémica |
+| 09 | 13 AÑOS esperando GTA 6: historia, retrasos y récords | historia |
+| 10 | ATRACOS, persecuciones y CAOS: toda la acción vista | acción |
 
-## Calendario de subida sugerido (jueves 19/11, hora peninsular)
+Cada carpeta de `salida_v2/` trae el `.mp4` (1080p, 30 fps), `miniatura.jpg` (1280×720),
+los subtítulos `.srt` y `youtube.txt` (título, descripción con capítulos, créditos y etiquetas).
 
-- **00:00–01:00**: 01 (todo lo que necesitas saber) y 02 (cuánto ocupa): la gente busca justo al desbloquear.
-- **10:00**: 03, 06 y 10 (compra y configuración).
-- **16:00**: 04 y 05 (mapa y protagonistas).
-- **20:00**: 07, 08 y 09.
+## Calendario sugerido (jueves 19/11, hora peninsular)
 
-Programa todos el miércoles desde YouTube Studio para no estar pendiente.
+- **00:00**: 01 (15 cosas), justo cuando se desbloquea el juego.
+- **10:00**: 06 (Ultimate) y 02 (personajes).
+- **14:00**: 03 (Vice City) y 05 (guiños).
+- **18:00**: 10 (acción) y 04 (Leonida).
+- **21:00**: 07 (música), 08 (hackeo) y 09 (13 años).
 
-## Antes de publicar: revisa esto
+## Antes de publicar
 
-1. **Datos de última hora.** Los guiones reflejan lo confirmado a 16/11/2026
-   (ver `FUENTES.md`). Si Rockstar anuncia algo el miércoles (online, PC, parche de
-   60 FPS…), cambia la frase en `canal/videos.py` y regenera ese vídeo.
-2. **Nombre del canal.** "ZONA VI" es provisional: cámbialo en `canal/videos.py`.
-3. **Sin material de Rockstar.** Todas las imágenes y la música son originales,
-   generadas por código, así que no hay riesgo de reclamaciones de copyright. No
-   uses el logotipo oficial ni capturas del juego en las miniaturas sin revisar
-   las políticas de Rockstar. La descripción ya indica que es un canal de fans no
-   oficial.
-4. **Voz sintética.** Es una voz de IA (Piper, `es_ES-davefx`). YouTube pide marcar
-   el contenido alterado o sintético solo cuando es realista y puede confundirse
-   con algo real; una locución de IA en un vídeo informativo no suele requerirlo,
-   pero revisa la casilla al subir.
+1. **Imágenes de Rockstar.** Son material promocional oficial y se usan para informar y
+   comentar, como hacen la mayoría de canales de noticias de videojuegos. La descripción
+   lo acredita y aclara que el canal no es oficial. Aun así, el riesgo de reclamación no
+   es cero.
+2. **Nombre del canal.** "ZONA VI" es provisional: cámbialo en `canal/guiones_v2.py` y regenera.
+3. **Voz sintética** (Piper, `es_ES-davefx`). YouTube solo pide marcar el contenido
+   sintético realista que pueda confundirse con algo real. Revisa la casilla al subir.
+4. **Datos de última hora.** Todo está verificado a 16/11/2026 (`FUENTES.md`). Si cambia
+   algo, edita la frase y regenera solo ese vídeo.
 
-## Regenerar o editar los vídeos
+## Regenerar
 
 ```bash
-pip install piper-tts numpy pillow   # y ffmpeg instalado
-# voz: vits-piper-es_ES-davefx-medium (releases "tts-models" de k2-fsa/sherpa-onnx)
+pip install piper-tts numpy pillow opencv-python-headless   # y ffmpeg con libass
+python canal/descargar_imagenes.py        # baja las imágenes oficiales a canal/imagenes/
 export PIPER_VOICE=/ruta/es_ES-davefx-medium.onnx
-python canal/build.py          # los 10 (~2-3 min por vídeo con 4 núcleos)
-python canal/build.py 03 07    # solo algunos
+python canal/render_v2.py                 # los 10 (≈1,3× la duración del vídeo cada uno)
+python canal/render_v2.py 03 07           # solo algunos
 ```
 
-- Guiones, rótulos, títulos, descripciones y etiquetas: `canal/videos.py`.
-- Diseño, animaciones, música y montaje: `canal/build.py`.
+- Guiones, imágenes por frase, rótulos, títulos y miniaturas: `canal/guiones_v2.py`.
+- Montaje, animaciones, música y efectos: `canal/render_v2.py`.
+- Fuentes tipográficas (licencia OFL): `canal/fuentes/`.

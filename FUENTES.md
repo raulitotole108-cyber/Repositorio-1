@@ -10,5 +10,10 @@
 | Online sin confirmar; pistas en los archivos; instalación separada | [Noping](https://noping.com/blog/gta-6-preload-22gb-audio-files-online-mode), [FRVR](https://frvr.com/blog/news/gta-6-files-reveal-gta-online-and-single-player-wont-need-to-be-installed-at-the-same-time/) |
 | Perfil de Jason y Lucia | Web oficial de GTA VI de Rockstar (descripciones de personajes) |
 
+| Bios de personajes, descripciones de regiones, contenido de la edición Ultimate y del Vintage Vice City Pack, radios, Justice y los álbumes | Web oficial: [rockstargames.com/VI](https://www.rockstargames.com/VI), [/VI/only-in-leonida](https://www.rockstargames.com/VI/only-in-leonida), [/VI/music](https://www.rockstargames.com/VI/music), [/VI/launch-gallery](https://www.rockstargames.com/VI/launch-gallery) |
+| Hackeo de 2022: Arion Kurtaj, Lapsus$, +90 vídeos, 5 M$, internamiento indefinido (dic. 2023) | [VGC](https://videogameschronicle.com/news/gta-6-hacker-sentenced-to-an-indefinite-hospital-order), [TechRadar](https://www.techradar.com/gaming/gta-6-hacker-who-intended-to-return-to-cyber-crime-as-soon-as-possible-sentenced-to-an-indefinite-hospital-order) |
+| Tráiler 1: 90,4 M de visitas en 24 h (Guinness); tráiler 2: 475 M en todas las plataformas (según Rockstar) | [Push Square](https://pushsquare.com/news/2023/12/gta-6-trailer-pulls-90-million-views-in-24-hours-sets-new-world-records), [TechRadar](https://www.techradar.com/gaming/the-latest-grand-theft-auto-6-trailer-has-set-a-major-record-by-racking-up-475-million-views-in-just-24-hours) |
+| Retraso a mayo de 2026 y después al 19/11/2026 (anunciado en noviembre de 2025) | [VGC](https://www.videogameschronicle.com/news/grand-theft-auto-6-has-been-delayed-again-to-the-end-of-2026/), [Tom's Hardware](https://www.tomshardware.com/video-games/gta-6-delayed-again-this-time-to-november-2026-rockstar-says-extra-time-needed-to-deliver-quality-that-players-have-come-to-expect-and-deserve) |
+
 Los datos históricos (GTA V en PC 19 meses después, RDR2 unos 13 meses después,
 GTA Online unas dos semanas después de GTA V) son de dominio público.
