@@ -354,7 +354,7 @@ V("10-atracos-y-accion",
    ("Vice_City_06", "Detenciones a pie de calle mientras alguien graba con el móvil. Muy Leonida.", None),
    ("Raul_Bautista_02", "Octavo: los encargos. Raul Bautista conduce con una mano y esconde la pistola con la otra, con una bolsa llena de dinero al lado.", "LOS ENCARGOS"),
    ("Brian_Heder_04", "Y Brian le entrega una pistola a Jason. En Leonida, los trabajos nunca faltan.", None),
-   ("Jason_Duval_16", "Y el detalle prometido: Jason apuntando con un fusil personalizado frente a un avión de carga... y a su lado, un perro con gafas tácticas.", "!EL PERRO"),
+   ("Jason_Duval_16", "Y el detalle prometido: Jason apuntando con un fusil personalizado frente a un avión de carga... y a su lado, un perro con arnés y un pañuelo con la bandera.", "!EL PERRO"),
    ("Jason_and_Lucia_20", "¿Qué misión te mueres por jugar? Dímelo en comentarios. " + CIERRE, None),
   ]),
 ]

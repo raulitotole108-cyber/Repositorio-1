@@ -51,6 +51,9 @@ MORADO_OSC = (42, 14, 63)
 TURQUESA = (46, 230, 214)
 TR = 9
 END_CARD = 8.0
+# posiciones (los Shorts verticales las cambian para esquivar la interfaz de TikTok/YouTube)
+CHIP_Y, STARS_Y, MASC_BOTTOM, SUB_Y_OFF = 110, 120, 135, 150
+CAP_STYLE = "Style: Cap,Rubik Black,86,&H00FFFFFF,&H00FFFFFF,&H003F0E2A,&H963F0E2A,0,0,0,0,100,100,1,0,1,8,4,2,80,80,100,1"
 PARALAJE = os.environ.get("PARALAJE", "0") == "1"
 MAS_CAPAS = json.loads((CAPAS / "capas.json").read_text()) if (CAPAS / "capas.json").exists() else {}
 ACCION = re.compile(r"atrac|persecuc|polic|tirote|golpe|furg|asalt|hackeo|robad|disparando|pistola|banda", re.I)
@@ -139,7 +142,7 @@ def chip_img(txt):
 
 def big_img(txt):
     size = 240
-    while size > 90 and F(RUBIK, size).getbbox(txt, stroke_width=20)[2] > 1650:
+    while size > 90 and F(RUBIK, size).getbbox(txt, stroke_width=20)[2] > W - 270:
         size -= 10
     return to_bgra(grad_text(txt, F(RUBIK, size), stroke=14, outer=7, shadow=16))
 
@@ -448,9 +451,9 @@ def build(v):
     v2.write_wav(wd / "audio.wav", mix / max(1e-6, np.abs(mix).max()) * 0.95)
 
     # --- subtítulos estilo GTA 6 (blanco, contorno morado, palabra activa rosa)
-    ass = [v2.ASS_HEAD.replace(
-        "Style: Cap,Montserrat Black,84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,0,0,0,0,100,100,1,0,1,7,3,2,80,80,105,1",
-        "Style: Cap,Rubik Black,86,&H00FFFFFF,&H00FFFFFF,&H003F0E2A,&H963F0E2A,0,0,0,0,100,100,1,0,1,8,4,2,80,80,100,1")]
+    head = re.sub(r"Style: Cap,[^\n]*", lambda m_: CAP_STYLE, v2.ASS_HEAD)
+    head = head.replace("PlayResX: 1920", f"PlayResX: {W}").replace("PlayResY: 1080", f"PlayResY: {H}")
+    ass = [head]
     srt = []
     for s in segs:
         wt = v2.word_times_real(s["txt"], s["t0"] + v2.PAD_IN, len(s["vo"]) / SR, s["words"])
@@ -534,7 +537,7 @@ def build(v):
                 ch = s["chip"]
                 x = int(-ch.shape[1] + (ch.shape[1] + 60) * back((lt - 0.2) / 0.4))
                 wob = int(4 * math.sin(lt * 3))
-                comp(frame, ch, x, 110 + wob)
+                comp(frame, ch, x, CHIP_Y + wob)
             if s["big"] is not None and lt > 0.1:
                 bg_ = s["big"]
                 tt = (lt - 0.1) / 0.32
@@ -546,7 +549,7 @@ def build(v):
             if s["stars"] and lt > 0.3:
                 nst = min(5, 1 + int((lt - 0.3) / 0.35))
                 blink = (int(lt * 6) % 2 == 0) or nst < 5
-                comp(frame, stars[nst if blink else nst - 1], W - stars[0].shape[1] - 40, 120)
+                comp(frame, stars[nst if blink else nst - 1], W - stars[0].shape[1] - 40, STARS_Y)
             # mascota animada
             if mf is not None and 0.5 < lt < min(n / FPS - 0.2, 4.8):
                 mt = lt - 0.5
@@ -557,9 +560,9 @@ def build(v):
                 if out_t < 0.35:
                     pos = out_t / 0.35
                 mh, mw = mfr.shape[:2]
-                y = int(H - 135 - mh * pos + mh * 0.05)
+                y = int(H - MASC_BOTTOM - mh * pos + mh * 0.05)
                 x = 40 if s["masc_side"] == 0 else W - mw - 40
-                comp(frame, mfr, x, max(y, H - 135 - mh), 1.0)
+                comp(frame, mfr, x, max(y, H - MASC_BOTTOM - mh), 1.0)
             # notificación de comentarios
             if s["notif"] and 0.4 < lt < n / FPS:
                 nt = lt - 0.4
@@ -570,7 +573,7 @@ def build(v):
                 st = gt - sub_t
                 ov = subs_ov[1] if st > 1.6 else subs_ov[0]
                 y = int(H - 40 - ov.shape[0] * back(st / 0.45)) if st < 4.0 else int(H - 40 - ov.shape[0] + (st - 4.0) / 0.5 * 300)
-                comp(frame, ov, W - ov.shape[1] - 60, y - 150)
+                comp(frame, ov, W - ov.shape[1] - 60, y - SUB_Y_OFF)
             comp(frame, bug, W - bug.shape[1] - 40, 24, 0.95)
             # barra de progreso degradada
             pw = int(W * gt / total)
@@ -600,8 +603,12 @@ def build(v):
     print(f"OK {slug}: {total:.1f} s, {len(segs)} escenas", flush=True)
 
 
-PROG = cv2.cvtColor(np.array(grad(W, 12, [NARANJA, ROSA, MORADO], horizontal=True).convert("RGB")),
-                    cv2.COLOR_RGB2BGR)
+def make_prog():
+    return cv2.cvtColor(np.array(grad(W, 12, [NARANJA, ROSA, MORADO], horizontal=True).convert("RGB")),
+                        cv2.COLOR_RGB2BGR)
+
+
+PROG = make_prog()
 
 
 # ------------------------------------------------------------ miniatura estilo GTA 6
