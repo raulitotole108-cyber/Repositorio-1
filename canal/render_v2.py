@@ -41,7 +41,7 @@ AMARILLO = (255, 212, 0)
 ROJO = (229, 37, 37)
 TR = 8          # frames de transición
 PAD_IN = 0.12   # silencio antes de la voz en cada segmento
-PAD_OUT = 0.30  # silencio después
+PAD_OUT = 0.22  # silencio después
 END_CARD = 8.0
 
 
@@ -81,17 +81,109 @@ def write_wav(path, x):
         w.writeframes((st * 32767).astype(np.int16).tobytes())
 
 
+TTS_ENGINE = os.environ.get("TTS_ENGINE", "edge")   # "edge" (voz neural) o "piper"
+EDGE_VOICE = os.environ.get("EDGE_VOICE", "es-ES-AlvaroNeural")
+EDGE_RATE = os.environ.get("EDGE_RATE", "+10%")
+# cadena de voz tipo YouTuber: limpia graves, más presencia y compresión
+VOICE_FX = ("highpass=f=75,equalizer=f=220:t=q:w=1:g=1.5,equalizer=f=3800:t=q:w=1.2:g=3,"
+            "acompressor=threshold=-20dB:ratio=3.5:attack=4:release=80:makeup=4,alimiter=limit=0.95")
+
+
+def _edge(text, mp3):
+    import asyncio
+    import json
+    import edge_tts
+
+    async def run():
+        com = edge_tts.Communicate(text, EDGE_VOICE, rate=EDGE_RATE, boundary="WordBoundary",
+                                   proxy=os.environ.get("HTTPS_PROXY"))
+        words = []
+        with open(mp3, "wb") as f:
+            async for ch in com.stream():
+                if ch["type"] == "audio":
+                    f.write(ch["data"])
+                elif ch["type"] == "WordBoundary":
+                    words.append((ch["text"], ch["offset"] / 1e7, (ch["offset"] + ch["duration"]) / 1e7))
+        return words
+    for intento in range(4):
+        try:
+            words = asyncio.run(run())
+            break
+        except Exception:
+            if intento == 3:
+                raise
+    mp3.with_suffix(".json").write_text(json.dumps(words, ensure_ascii=False))
+
+
 def tts(text, path):
-    if not path.exists():
+    """Devuelve la locución (float32, 44,1 kHz). Con la voz neural guarda también los
+    tiempos reales de cada palabra en path.json (relativos al audio ya recortado)."""
+    import json
+    if TTS_ENGINE == "edge":
+        mp3 = path.with_suffix(".mp3")
+        if not mp3.exists() or not mp3.with_suffix(".json").exists():
+            _edge(text, mp3)
+        if not path.exists():
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-af", VOICE_FX,
+                            "-ar", str(SR), "-ac", "1", str(path)], check=True)
+    elif not path.exists():
         subprocess.run(["piper", "--model", VOICE, "--output_file", str(path),
                         "--length_scale", "0.9", "--sentence_silence", "0.15"],
                        input=text, text=True, capture_output=True, check=True)
     x = read_wav(path)
     # recorta silencios de los extremos
     nz = np.where(np.abs(x) > 0.01)[0]
+    a = 0
     if len(nz):
-        x = x[max(0, nz[0] - 800): nz[-1] + 1600]
+        a = max(0, nz[0] - 800)
+        x = x[a: nz[-1] + 1600]
+    js = path.with_suffix(".json")
+    if TTS_ENGINE == "edge" and js.exists():
+        sh = a / SR
+        tts.words = [(w, max(0.0, s - sh), max(0.0, e - sh)) for w, s, e in json.loads(js.read_text())]
+    else:
+        tts.words = None
     return x
+
+
+def _norm(w):
+    return "".join(c for c in w.lower() if c.isalnum())
+
+
+def word_times_real(text, t0, dur, words):
+    """Tiempos de palabra reales de la voz neural, alineados con las palabras del guion.
+    Si no se pueden alinear, reparte por longitud (word_times)."""
+    if not words:
+        return word_times(text, t0, dur)
+    toks = text.split()
+    out, j = [], 0
+    for tok in toks:
+        n = _norm(tok)
+        if not n:
+            out.append(None)
+            continue
+        # busca la siguiente palabra del TTS que encaje (permite números leídos, etc.)
+        k = next((jj for jj in range(j, min(j + 4, len(words))) if _norm(words[jj][0]) and
+                  (_norm(words[jj][0]) == n or n.startswith(_norm(words[jj][0])) or
+                   _norm(words[jj][0]).startswith(n))), None)
+        if k is None:
+            out.append(None)
+            continue
+        out.append((tok, t0 + words[k][1], t0 + words[k][2]))
+        j = k + 1
+    if sum(o is not None for o in out) < 0.7 * len(toks):
+        return word_times(text, t0, dur)
+    # rellena huecos interpolando y encadena cada palabra hasta la siguiente
+    for i, o in enumerate(out):
+        if o is None:
+            prev = next((out[k][2] for k in range(i - 1, -1, -1) if out[k]), t0)
+            nxt = next((out[k][1] for k in range(i + 1, len(out)) if out[k]), t0 + dur)
+            out[i] = (toks[i], prev, max(prev + 0.05, nxt))
+    res = []
+    for i, (w, a, b) in enumerate(out):
+        b2 = out[i + 1][1] if i + 1 < len(out) else max(b, a + 0.2)
+        res.append((w, a, max(a + 0.05, b2)))
+    return res
 
 
 def noise(n, rnd):

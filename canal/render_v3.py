@@ -380,7 +380,7 @@ def build(v):
     for i, (img, txt, label) in enumerate(v["segs"]):
         vo = v2.tts(txt, wd / f"voz{i:02}.wav")
         n = int(round((v2.PAD_IN + len(vo) / SR + v2.PAD_OUT) * FPS))
-        segs.append(dict(img=img, txt=txt, label=label, vo=vo, t0=t, n=n))
+        segs.append(dict(img=img, txt=txt, label=label, vo=vo, t0=t, n=n, words=v2.tts.words))
         t += n / FPS
     t_voice_end, total = t, t + END_CARD
     nfr = int(round(total * FPS))
@@ -450,7 +450,7 @@ def build(v):
         "Style: Cap,Rubik Black,86,&H00FFFFFF,&H00FFFFFF,&H003F0E2A,&H963F0E2A,0,0,0,0,100,100,1,0,1,8,4,2,80,80,100,1")]
     srt = []
     for s in segs:
-        wt = v2.word_times(s["txt"], s["t0"] + v2.PAD_IN, len(s["vo"]) / SR)
+        wt = v2.word_times_real(s["txt"], s["t0"] + v2.PAD_IN, len(s["vo"]) / SR, s["words"])
         for ch in v2.chunks(wt):
             c_end = ch[-1][2] + 0.05
             srt.append((ch[0][1], c_end, " ".join(w for w, _, _ in ch)))
