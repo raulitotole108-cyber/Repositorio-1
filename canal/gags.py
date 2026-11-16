@@ -111,12 +111,6 @@ def chat_frame(t, titulo, msgs, sub=None):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     d.rounded_rectangle([40, 230, W - 40, H - 330], 40, fill=(18, 12, 30, 225))
-    d.rounded_rectangle([40, 230, W - 40, 360], 40, fill=(42, 14, 63, 255))
-    d.rectangle([40, 320, W - 40, 360], fill=(42, 14, 63, 255))
-    d.ellipse([75, 255, 155, 335], fill=(255, 170, 64, 255))
-    d.text((115, 295), titulo[0], font=F(MSB, 46), fill=(42, 14, 63, 255), anchor="mm")
-    d.text((180, 268), titulo, font=F(MSB, 44), fill=(255, 255, 255, 255))
-    d.text((180, 320), sub or "en línea", font=F(MS, 28), fill=(200, 200, 220, 255))
     vis = [m for i, m in enumerate(msgs) if m[0] <= t and not
            (m[1] == "esc" and any(x[0] <= t for x in msgs[i + 1:]))]  # "escribiendo..." se va al llegar el mensaje
     # altura de cada mensaje para hacer scroll si no cabe
@@ -156,6 +150,15 @@ def chat_frame(t, titulo, msgs, sub=None):
                 else:
                     im.alpha_composite(b, (0, int(y)))
         y += h_
+    # la cabecera se pinta al final para tapar los mensajes que suben con el scroll
+    d = ImageDraw.Draw(im)
+    d.rectangle([40, 230, W - 40, 385], fill=(18, 12, 30, 255))
+    d.rounded_rectangle([40, 230, W - 40, 360], 40, fill=(42, 14, 63, 255))
+    d.rectangle([40, 320, W - 40, 360], fill=(42, 14, 63, 255))
+    d.ellipse([75, 255, 155, 335], fill=(255, 170, 64, 255))
+    d.text((115, 295), titulo[0], font=F(MSB, 46), fill=(42, 14, 63, 255), anchor="mm")
+    d.text((180, 268), titulo, font=F(MSB, 44), fill=(255, 255, 255, 255))
+    d.text((180, 320), sub or "en línea", font=F(MS, 28), fill=(200, 200, 220, 255))
     return im
 
 
