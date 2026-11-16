@@ -82,7 +82,7 @@ def write_wav(path, x):
 
 
 TTS_ENGINE = os.environ.get("TTS_ENGINE", "edge")   # "edge" (voz neural) o "piper"
-EDGE_VOICE = os.environ.get("EDGE_VOICE", "es-ES-AlvaroNeural")
+EDGE_VOICE = os.environ.get("EDGE_VOICE", "it-IT-GiuseppeMultilingualNeural")
 # cadena de voz tipo YouTuber: limpia graves, más presencia y compresión
 VOICE_FX = ("highpass=f=75,equalizer=f=220:t=q:w=1:g=1.5,equalizer=f=3800:t=q:w=1.2:g=3,"
             "acompressor=threshold=-20dB:ratio=3.5:attack=4:release=80:makeup=4,alimiter=limit=0.95")
