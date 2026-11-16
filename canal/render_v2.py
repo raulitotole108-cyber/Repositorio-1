@@ -40,8 +40,8 @@ MBLACK = str(FUENTES / "Montserrat-Black.ttf")
 AMARILLO = (255, 212, 0)
 ROJO = (229, 37, 37)
 TR = 8          # frames de transición
-PAD_IN = 0.12   # silencio antes de la voz en cada segmento
-PAD_OUT = 0.22  # silencio después
+PAD_IN = 0.06   # silencio antes de la voz en cada segmento
+PAD_OUT = 0.12  # silencio después
 END_CARD = 8.0
 
 
@@ -83,36 +83,107 @@ def write_wav(path, x):
 
 TTS_ENGINE = os.environ.get("TTS_ENGINE", "edge")   # "edge" (voz neural) o "piper"
 EDGE_VOICE = os.environ.get("EDGE_VOICE", "es-ES-AlvaroNeural")
-EDGE_RATE = os.environ.get("EDGE_RATE", "+10%")
 # cadena de voz tipo YouTuber: limpia graves, más presencia y compresión
 VOICE_FX = ("highpass=f=75,equalizer=f=220:t=q:w=1:g=1.5,equalizer=f=3800:t=q:w=1.2:g=3,"
             "acompressor=threshold=-20dB:ratio=3.5:attack=4:release=80:makeup=4,alimiter=limit=0.95")
 
 
+def _frases(text):
+    """Parte el texto en frases (conservando la puntuación) para entonar cada una."""
+    import re
+    return [f.strip() for f in re.findall(r"[^.?!…]+[.?!…]*", text) if f.strip()]
+
+
+def _prosodia(frase, k):
+    """Entonación por frase, como un narrador de YouTube: preguntas más agudas,
+    exclamaciones y ganchos más rápidos y arriba, el resto alternando para no sonar plano."""
+    f = frase.strip()
+    if f.endswith("?"):
+        return "+14%", "+9Hz"
+    if f.endswith("!") or f.isupper() or len(f) < 28:
+        return "+18%", "+12Hz"
+    cic = [("+12%", "+4Hz"), ("+16%", "-2Hz"), ("+10%", "+7Hz"), ("+14%", "+1Hz")]
+    return cic[k % len(cic)]
+
+
 def _edge(text, mp3):
+    """Sintetiza frase a frase con prosodia variada y las une. Guarda mp3.json con
+    los tiempos de cada palabra."""
     import asyncio
     import json
     import edge_tts
 
-    async def run():
-        com = edge_tts.Communicate(text, EDGE_VOICE, rate=EDGE_RATE, boundary="WordBoundary",
+    async def una(frase, rate, pitch, dst):
+        com = edge_tts.Communicate(frase, EDGE_VOICE, rate=rate, pitch=pitch, boundary="WordBoundary",
                                    proxy=os.environ.get("HTTPS_PROXY"))
         words = []
-        with open(mp3, "wb") as f:
+        with open(dst, "wb") as f:
             async for ch in com.stream():
                 if ch["type"] == "audio":
                     f.write(ch["data"])
                 elif ch["type"] == "WordBoundary":
                     words.append((ch["text"], ch["offset"] / 1e7, (ch["offset"] + ch["duration"]) / 1e7))
         return words
-    for intento in range(4):
-        try:
-            words = asyncio.run(run())
-            break
-        except Exception:
-            if intento == 3:
-                raise
+
+    partes, words, t = [], [], 0.0
+    for k, fr in enumerate(_frases(text)):
+        rate, pitch = _prosodia(fr, k + len(text))
+        dst = mp3.with_name(f"{mp3.stem}_{k}.mp3")
+        for intento in range(6):
+            try:
+                ws = asyncio.run(una(fr, rate, pitch, dst))
+                break
+            except Exception:
+                if intento == 5:
+                    raise
+                import time
+                time.sleep(2 * (intento + 1))
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(dst), "-f", "s16le", "-ac", "1",
+                              "-ar", str(SR), "-"], capture_output=True, check=True).stdout
+        x = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+        nz = np.where(np.abs(x) > 0.01)[0]
+        a0 = max(0, nz[0] - 400) if len(nz) else 0
+        a1 = nz[-1] + 1200 if len(nz) else len(x)
+        x = x[a0:a1]
+        words += [(w, t + s0 - a0 / SR, t + e0 - a0 / SR) for w, s0, e0 in ws]
+        partes.append(x)
+        gap = 0.16 if fr.endswith((".", "?", "!", "…")) else 0.08
+        partes.append(np.zeros(int(gap * SR), np.float32))
+        t += len(x) / SR + gap
+    y = np.concatenate(partes)
+    y, words = _comprime_pausas(y, words)
+    write_wav(mp3.with_suffix(".raw.wav"), y)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3.with_suffix(".raw.wav")),
+                    "-b:a", "192k", str(mp3)], check=True)
     mp3.with_suffix(".json").write_text(json.dumps(words, ensure_ascii=False))
+
+
+def _comprime_pausas(y, words, umbral=0.012, max_pausa=0.14):
+    """Acorta cualquier silencio interno a max_pausa s y reajusta los tiempos de palabra."""
+    hop = int(0.01 * SR)
+    env = np.array([np.abs(y[i:i + hop]).max() for i in range(0, len(y), hop)])
+    sil = env < umbral
+    keep = np.ones(len(y), bool)
+    cortes = []   # (instante original, segundos quitados)
+    i = 0
+    while i < len(sil):
+        if sil[i]:
+            j = i
+            while j < len(sil) and sil[j]:
+                j += 1
+            dur = (j - i) * hop / SR
+            if dur > max_pausa and i > 0 and j < len(sil):
+                quitar = dur - max_pausa
+                c0 = i * hop + int(max_pausa / 2 * SR)
+                keep[c0:c0 + int(quitar * SR)] = False
+                cortes.append((c0 / SR, quitar))
+            i = j
+        else:
+            i += 1
+
+    def mapa(t):
+        return t - sum(q if t >= c + q else max(0.0, t - c) for c, q in cortes if t > c)
+    return y[keep], [(w, mapa(a), mapa(b)) for w, a, b in words]
 
 
 def tts(text, path):

@@ -51,6 +51,7 @@ MORADO_OSC = (42, 14, 63)
 TURQUESA = (46, 230, 214)
 TR = 9
 END_CARD = 8.0
+PARALAJE = os.environ.get("PARALAJE", "0") == "1"
 MAS_CAPAS = json.loads((CAPAS / "capas.json").read_text()) if (CAPAS / "capas.json").exists() else {}
 ACCION = re.compile(r"atrac|persecuc|polic|tirote|golpe|furg|asalt|hackeo|robad|disparando|pistola|banda", re.I)
 MASCOTA_POR_TEMA = [
@@ -255,7 +256,9 @@ class Visual:
             self.clip = [grade(f) for f in fr]
             return
         cov = MAS_CAPAS.get(name, 0)
-        if (CAPAS / f"{name}_fg.png").exists() and 0.03 <= cov <= 0.55:
+        # El paralaje 2.5D (recorte + fondo rellenado por IA) dejaba bordes y manchas raras:
+        # desactivado por defecto; se usa la imagen original limpia con movimiento de cámara.
+        if PARALAJE and (CAPAS / f"{name}_fg.png").exists() and 0.03 <= cov <= 0.55:
             self.bg = grade(fit(cv2.imread(str(CAPAS / f"{name}_bg.jpg"))))
             fg = cv2.imread(str(CAPAS / f"{name}_fg.png"), cv2.IMREAD_UNCHANGED)
             fg = fit(fg)
