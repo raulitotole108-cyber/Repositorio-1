@@ -151,6 +151,10 @@ if __name__ == "__main__":
         from guiones_tiktok import TIKTOKS
         lista, sel = TIKTOKS, sel[1:]
         r3.OUT = r3.HERE.parent / "salida_tiktok"
+    elif sel and sel[0] == "ahora":           # tercera tanda: noticias de esta semana
+        from guiones_ahora import AHORA
+        lista, sel = AHORA, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_ahora"
     for v in lista:
         if not sel or any(v["slug"].startswith(x) for x in sel):
             r3.build(v)

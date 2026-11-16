@@ -29,3 +29,15 @@ GTA Online unas dos semanas después de GTA V) son de dominio público.
 | t05 ¿Downgrade? | [GamingBible](https://www.gamingbible.com/news/gta-6-graphics-downgrade-launch-trailer-fan-reaction-595394-20261016) |
 | t06 El fan con enfermedad terminal | [GamesRadar](https://www.gamesradar.com/games/grand-theft-auto/terminally-ill-gta-6-fan-with-6-12-months-to-live-has-seemingly-been-put-in-touch-with-rockstar-about-playing-the-game-early), [PC Gamer](https://www.pcgamer.com/games/grand-theft-auto/rockstar-responds-to-plea-for-a-terminally-ill-huge-gta-fan-to-get-his-hands-on-the-game-early) (no confirmado por Rockstar) |
 | t07 Reservas | [Variety](https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/) |
+
+## Tanda ahora (`canal/guiones_ahora.py`, noticias del 16/11/2026)
+
+| Short | Fuentes |
+|---|---|
+| n01 El hacker se declara culpable (16/11) | [GamesRadar](https://www.gamesradar.com/games/grand-theft-auto/gta-6-hacker-who-reportedly-cost-rockstar-usd5-million-pleads-guilty-to-everything/), [Kotaku](https://kotaku.com/grand-theft-auto-6-leak-gta6-hacker-pleads-guilty-2000757500), [Forbes](https://www.forbes.com/sites/paultassi/2026/11/16/caught-gta-6-leaker-pleads-guilty-to-extorting-rockstar-games/), [Destructoid](https://www.destructoid.com/gta-6-hacker-original-2022-leaks-guilty-ahead-launch/) |
+| n02 Dr. Xbox / DJ Khaled | [Variety](https://variety.com/2026/gaming/news/gta-6-day-off-note-xbox-dj-khaled-1236949034/), [TheGamer](https://www.thegamer.com/dr-xbox-dj-khaled-doctors-note-doesnt-mention-gta-6/), [Beebom](https://beebom.com/dj-khaled-becomes-dr-xbox-to-help-gamers-take-day-off-for-gta-6/) |
+| n03 Edición física sin disco | [Insider Gaming](https://insider-gaming.com/gta-6-physical-editions-wont-include-discs-just-download-codes/), [Dexerto](https://www.dexerto.com/gta/game-stores-are-refusing-to-sell-gta-6-because-physical-copies-dont-contain-a-disc-3379202/), [TechRadar](https://techradar.com/gaming/physical-copies-of-gta-6-are-flying-off-the-shelves-despite-the-download-code-controversy), [Notebookcheck](https://www.notebookcheck.net/Rockstar-confirms-GTA-6-PS5-codes-are-region-locked-Xbox-players-unaffected.1353053.0.html) |
+| n04 Hora de lanzamiento | [Vandal](https://vandal.elespanol.com/noticia/2026250032/gta-6-confirma-la-hora-exacta-para-su-lanzamiento-en-espana-y-el-resto-del-mundo/), [allthings.how](https://allthings.how/gta-6-release-times-by-region-and-the-19-hour-spoiler-gap/) |
+| n05/n06 Spoilers, clips y estafas | [Help Net Security](https://www.helpnetsecurity.com/2026/11/05/gta-6-scams-fake-leaks-early-access/), [Shattered](https://shattered.io/gta-6-gameplay-clips-circulate-launch-nov-19-ocean-drive-2026/) |
+| n07 Fecha de reviews (no oficial) | [Insider Gaming](https://insider-gaming.com/grand-theft-auto-6-review-embargo/), [HappyGamer](https://happygamer.com/gta-6-review-embargo-date-november-18-174367/) |
+| n09 Parches previos | [ComicBook](https://comicbook.com/gaming/news/gta-6-grand-theft-auto-vi-rockstar-games-update-1-002-today-ps5-xbox/) |
