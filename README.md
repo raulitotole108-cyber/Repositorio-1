@@ -1,11 +1,27 @@
-# Canal de GTA 6: 10 vídeos de lanzamiento (versión 2)
+# Canal de GTA 6: 10 vídeos de lanzamiento (versión 3, estilo GTA 6)
 
 Diez vídeos completos para subir el **jueves 19 de noviembre de 2026**, el día que sale GTA 6.
 
-**Los vídeos de la v2 están en `salida_v2/`.** Los de la v1 (`salida/`) quedan como
-referencia y han sido sustituidos.
+**Los vídeos finales están en `salida_v3/`.** Los de la v1 (`salida/`) quedan como referencia.
 
-## Qué cambia en la v2
+## Versión 3: estilo GTA 6
+
+- **Identidad visual de atardecer de Vice City**: degradados naranja-rosa-morado, contornos
+  morado oscuro y tipografía redonda gruesa (Rubik Black), en títulos, rótulos, subtítulos,
+  barra de progreso y miniaturas.
+- **Profundidad 2.5D**: cada personaje u objeto se separa del fondo (IA, rembg) y se mueve
+  en su propia capa.
+- **Clips de juego oficiales** de Jason y Lucia, a cámara lenta.
+- **Transiciones al estilo GTA**: panel inclinado con borde grueso (como la portada),
+  barrido de color de atardecer, barrido rápido con desenfoque y fundido.
+- **Mascotas animadas oficiales de Leonida** (sol, flamenco, caimán, manatí, cangrejo,
+  palmera, lowrider, hidroavión) que asoman según el tema.
+- **Interacción**: estrellas de búsqueda en las escenas de acción, notificación de móvil
+  pidiendo comentarios, aviso SUSCRÍBETE→SUSCRITO y pantalla final animada.
+- **Miniaturas tipo portada de GTA 6**: paneles inclinados con borde, fondo de atardecer
+  y texto enorme con degradado.
+
+## Qué se añadió en la v2
 
 - **Imágenes reales que cambian con cada frase.** Se usan capturas y artes oficiales de
   Rockstar, y cada frase va con la imagen de lo que se está contando: personaje, lugar,
@@ -38,7 +54,7 @@ referencia y han sido sustituidos.
 | 09 | 13 AÑOS esperando GTA 6: historia, retrasos y récords | historia |
 | 10 | ATRACOS, persecuciones y CAOS: toda la acción vista | acción |
 
-Cada carpeta de `salida_v2/` trae el `.mp4` (1080p, 30 fps), `miniatura.jpg` (1280×720),
+Cada carpeta de `salida_v3/` trae el `.mp4` (1080p, 30 fps), `miniatura.jpg` (1280×720),
 los subtítulos `.srt` y `youtube.txt` (título, descripción con capítulos, créditos y etiquetas).
 
 ## Calendario sugerido (jueves 19/11, hora peninsular)
@@ -67,10 +83,12 @@ los subtítulos `.srt` y `youtube.txt` (título, descripción con capítulos, cr
 pip install piper-tts numpy pillow opencv-python-headless   # y ffmpeg con libass
 python canal/descargar_imagenes.py        # baja las imágenes oficiales a canal/imagenes/
 export PIPER_VOICE=/ruta/es_ES-davefx-medium.onnx
-python canal/render_v2.py                 # los 10 (≈1,3× la duración del vídeo cada uno)
-python canal/render_v2.py 03 07           # solo algunos
+pip install rembg onnxruntime
+python canal/preparar_capas.py            # clips, mascotas y capas 2.5D
+python canal/render_v3.py                 # los 10 (≈2,3× la duración del vídeo cada uno)
+python canal/render_v3.py 03 07           # solo algunos
 ```
 
 - Guiones, imágenes por frase, rótulos, títulos y miniaturas: `canal/guiones_v2.py`.
-- Montaje, animaciones, música y efectos: `canal/render_v2.py`.
+- Montaje estilo GTA 6: `canal/render_v3.py` (reutiliza audio y subtítulos de `render_v2.py`).
 - Fuentes tipográficas (licencia OFL): `canal/fuentes/`.

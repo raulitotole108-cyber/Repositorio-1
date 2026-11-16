@@ -168,7 +168,7 @@ def stars_imgs():
 
 
 def notif_img(texto):
-    w, h = 720, 170
+    w, h = max(720, int(F(RUBIK, 44).getbbox(texto)[2]) + 200), 170
     im = Image.new("RGBA", (w + 20, h + 20), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     d.rounded_rectangle([12, 14, w + 12, h + 14], 34, fill=(0, 0, 0, 110))
