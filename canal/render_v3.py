@@ -53,6 +53,8 @@ TR = 9
 END_CARD = 8.0
 # posiciones (los Shorts verticales las cambian para esquivar la interfaz de TikTok/YouTube)
 CHIP_Y, STARS_Y, MASC_BOTTOM, SUB_Y_OFF = 110, 120, 135, 150
+HOOK_PUNCH = False   # gancho agresivo en el primer plano (zoom de golpe, destello, temblor)
+HEAD_Y = 200         # posición del titular fijo (solo si el vídeo trae "cabecera")
 CAP_STYLE = "Style: Cap,Rubik Black,86,&H00FFFFFF,&H00FFFFFF,&H003F0E2A,&H963F0E2A,0,0,0,0,100,100,1,0,1,8,4,2,80,80,100,1"
 PARALAJE = os.environ.get("PARALAJE", "0") == "1"
 MAS_CAPAS = json.loads((CAPAS / "capas.json").read_text()) if (CAPAS / "capas.json").exists() else {}
@@ -145,6 +147,22 @@ def big_img(txt):
     while size > 90 and F(RUBIK, size).getbbox(txt, stroke_width=20)[2] > W - 270:
         size -= 10
     return to_bgra(grad_text(txt, F(RUBIK, size), stroke=14, outer=7, shadow=16))
+
+
+def cabecera_img(txt):
+    """Titular fijo arriba (estilo TikTok): texto blanco gigante en caja morada con borde."""
+    size = 74
+    while size > 40 and F(RUBIK, size).getbbox(txt)[2] > W - 160:
+        size -= 2
+    t = grad_text(txt, F(RUBIK, size), cols=[(255, 255, 255), (255, 236, 250)], stroke=0, shadow=0)
+    w, h = t.size[0] + 60, t.size[1] + 34
+    im = Image.new("RGBA", (w + 12, h + 12), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle([8, 10, w + 8, h + 10], 26, fill=(0, 0, 0, 130))
+    d.rounded_rectangle([0, 0, w, h], 26, fill=(255, 255, 255, 255))
+    d.rounded_rectangle([6, 6, w - 6, h - 6], 22, fill=MORADO_OSC + (255,))
+    im.alpha_composite(t, (30, (h - t.size[1]) // 2 - 2))
+    return to_bgra(im)
 
 
 def bug_img():
@@ -435,6 +453,8 @@ def build(v):
             put(fx, v2.sfx_pop(nrng), s["t0"] + 0.6, 0.6)
         if s["notif"]:
             put(fx, v2.sfx_ding(), s["t0"] + 0.4, 0.55)
+    if HOOK_PUNCH:
+        put(fx, v2.sfx_boom(), 0.0, 0.9)
     sub_t = max(20.0, total * 0.3)
     put(fx, v2.sfx_pop(nrng), sub_t + 0.2, 0.8)
     put(fx, v2.sfx_ding(), sub_t + 1.6, 0.7)
@@ -442,7 +462,11 @@ def build(v):
     mus = v2.music(total + 1, zlib.crc32(slug.encode()) % 1000)
     mus = np.pad(mus, (0, max(0, len(voice) - len(mus))))[: len(voice)]
     k = int(0.25 * SR)
-    env = np.convolve(np.abs(voice), np.ones(k) / k, mode="same")
+    # media móvil con suma acumulada (np.convolve con un núcleo tan largo tarda minutos)
+    cs = np.concatenate([[0.0], np.cumsum(np.abs(voice), dtype=np.float64)])
+    lo = np.clip(np.arange(len(voice)) - k // 2, 0, len(voice))
+    hi = np.clip(np.arange(len(voice)) + (k - k // 2), 0, len(voice))
+    env = ((cs[hi] - cs[lo]) / k).astype(np.float32)
     duck = 0.30 - 0.21 * np.clip(env / 0.03, 0, 1)
     fade = np.ones_like(voice)
     fe = int((total - 2.5) * SR)
@@ -498,6 +522,8 @@ def build(v):
     e.alpha_composite(t2, ((W - t2.size[0]) // 2, 830))
     end_ov = to_bgra(e)
 
+    head = cabecera_img(v["cabecera"]) if v.get("cabecera") else None
+
     # --- frames
     out_mp4 = od / f"{slug}.mp4"
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24",
@@ -516,9 +542,15 @@ def build(v):
         whip_dir = rnd.choice([-1, 1])
         for k in range(n):
             punch = 0.06 * (1 - k / 8) if (s["big"] is not None and k < 8) else 0.0
+            if HOOK_PUNCH and i == 0 and k < 10:
+                punch = 0.45 * (1 - k / 10) ** 2          # entra de golpe con zoom
             frame = vis.frame(k, punch)
+            if HOOK_PUNCH and i == 0 and k < 8:          # temblor de cámara
+                dx, dy = int(18 * math.sin(k * 2.7) * (1 - k / 8)), int(14 * math.cos(k * 3.1) * (1 - k / 8))
+                frame = np.roll(frame, (dy, dx), (0, 1))
             if s["big"] is not None:
-                frame = cv2.convertScaleAbs(frame, alpha=1 - 0.4 * min(1, k / 6))
+                dim = 0.15 if (HOOK_PUNCH and i == 0) else 0.4   # el gancho no se oscurece
+                frame = cv2.convertScaleAbs(frame, alpha=1 - dim * min(1, k / 6))
             if k < TR and prev_last is not None and s["tr"]:
                 a = ease((k + 1) / (TR + 1))
                 if s["tr"] == "whip":
@@ -531,6 +563,8 @@ def build(v):
                     frame = tr_fade(prev_last, frame, a)
             if s["big"] is not None and 0 <= k - 0 < 3 and s["tr"] != "panel":
                 frame = cv2.addWeighted(frame, 1, np.full_like(frame, 255), 0.3 * (1 - k / 3), 0)
+            if HOOK_PUNCH and i == 0 and k < 4:
+                frame = cv2.addWeighted(frame, 1, np.full_like(frame, 255), 0.6 * (1 - k / 4), 0)
             gt, lt = fr / FPS, k / FPS
             # rótulo
             if s["chip"] is not None and lt > 0.2:
@@ -538,9 +572,10 @@ def build(v):
                 x = int(-ch.shape[1] + (ch.shape[1] + 60) * back((lt - 0.2) / 0.4))
                 wob = int(4 * math.sin(lt * 3))
                 comp(frame, ch, x, CHIP_Y + wob)
-            if s["big"] is not None and lt > 0.1:
+            t_in = 0.0 if (HOOK_PUNCH and i == 0) else 0.1
+            if s["big"] is not None and lt >= t_in:
                 bg_ = s["big"]
-                tt = (lt - 0.1) / 0.32
+                tt = (lt - t_in) / (0.18 if t_in == 0 else 0.32)
                 sc = 0.5 + 0.5 * back(tt)
                 sc *= 1 + 0.015 * math.sin(lt * 5)
                 ov = cv2.resize(bg_, (max(1, int(bg_.shape[1] * sc)), max(1, int(bg_.shape[0] * sc))))
@@ -575,6 +610,8 @@ def build(v):
                 y = int(H - 40 - ov.shape[0] * back(st / 0.45)) if st < 4.0 else int(H - 40 - ov.shape[0] + (st - 4.0) / 0.5 * 300)
                 comp(frame, ov, W - ov.shape[1] - 60, y - SUB_Y_OFF)
             comp(frame, bug, W - bug.shape[1] - 40, 24, 0.95)
+            if head is not None:
+                comp(frame, head, (W - head.shape[1]) // 2, HEAD_Y)
             # barra de progreso degradada
             pw = int(W * gt / total)
             frame[H - 12:H, :] = (frame[H - 12:H, :] * 0.35).astype(np.uint8)

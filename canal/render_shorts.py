@@ -27,8 +27,10 @@ for m in (r3, v2):
 r3.OUT = r3.HERE.parent / "salida_shorts"
 r3.END_CARD = 0.0          # sin pantalla final: el short se repite en bucle
 r3.TR = 6                  # transiciones más rápidas
-r3.CHIP_Y = 300            # por debajo de la barra superior
-r3.STARS_Y = 300
+r3.CHIP_Y = 400            # por debajo del titular fijo
+r3.STARS_Y = 410
+r3.HEAD_Y = 205            # titular fijo, justo bajo la barra superior de la app
+r3.HOOK_PUNCH = True       # el primer segundo entra de golpe
 r3.MASC_BOTTOM = 470       # por encima del título/descripción
 r3.SUB_Y_OFF = 420
 # subtítulos grandes, en el tercio inferior-central
@@ -94,10 +96,13 @@ class VVisual(r3.Visual):
             x0 = (fondo.shape[1] - W) // 2
             fondo = cv2.GaussianBlur(fondo[:, x0:x0 + W], (0, 0), 28)
             fondo = (fondo * 0.55).astype(np.uint8)
+            # recorte central al 80 % del ancho para que se vea más grande
+            cw = int(w * 0.8)
+            im = im[:, (w - cw) // 2:(w - cw) // 2 + cw]
             fw = W - 40
-            fh = int(h * fw / w)
+            fh = int(h * fw / cw)
             img = cv2.resize(im, (fw, fh), interpolation=cv2.INTER_AREA)
-            y0 = int(H * 0.36 - fh / 2)
+            y0 = int(H * 0.40 - fh / 2)
             cv2.rectangle(fondo, (14, y0 - 6), (W - 14, y0 + fh + 6), (63, 14, 42), -1)
             fondo[y0:y0 + fh, 20:20 + fw] = img
             self.big = _grade_color(fondo)
