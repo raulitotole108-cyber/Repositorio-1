@@ -17,3 +17,15 @@
 
 Los datos históricos (GTA V en PC 19 meses después, RDR2 unos 13 meses después,
 GTA Online unas dos semanas después de GTA V) son de dominio público.
+
+## Tanda TikTok (`canal/guiones_tiktok.py`, consultado el 16/11/2026)
+
+| Short | Fuentes |
+|---|---|
+| t01 ¿Es poner los cuernos? | [Gulf News](https://gulfnews.com/technology/gaming/is-playing-gta-6-cheating-on-your-partner-a-tiktok-argument-says-yes-and-its-spreading-1.500660493), [SVG](https://www.svg.com/2249883/gta-6-lucia-jason-tiktok-cheating-arguments/), [GadgetReview](https://www.gadgetreview.com/some-spouses-say-playing-gta-6-is-cheating-its-already-causing-real-life-relationship-fights) |
+| t02 Vídeos falsos con IA | [NME](https://www.nme.com/news/gaming-news/grand-theft-auto-6-viral-video-hoax-ai-lucia-3913177), [games.gg](https://games.gg/news/ai-gta6-slop-millions-views-social/) |
+| t03 Dacity Coin | [Decrypt](https://decrypt.co/381122/gta-6-trailer-features-meme-coin-and-solana-copycat-soars-2900), [Decrypt (2)](https://decrypt.co/381511/gta-6-trailer-features-dacity-meme-coin-heres-what-traders-think-itll-do), [Yahoo Finance](https://finance.yahoo.com/markets/crypto/articles/gta-6-fans-spot-mysterious-200428909.html) |
+| t04 El backflip | [Notebookcheck](https://notebookcheck.net/GTA-6-New-pre-load-trailer-appears-to-take-a-swipe-at-critical-fans.1447784.0.html), [Analytics Insight](https://www.analyticsinsight.net/news/rockstar-may-have-taken-a-dig-at-gta-6-critics-in-its-latest-pre-load-trailer), [GamingBolt](https://gamingbolt.com/?p=656693) |
+| t05 ¿Downgrade? | [GamingBible](https://www.gamingbible.com/news/gta-6-graphics-downgrade-launch-trailer-fan-reaction-595394-20261016) |
+| t06 El fan con enfermedad terminal | [GamesRadar](https://www.gamesradar.com/games/grand-theft-auto/terminally-ill-gta-6-fan-with-6-12-months-to-live-has-seemingly-been-put-in-touch-with-rockstar-about-playing-the-game-early), [PC Gamer](https://www.pcgamer.com/games/grand-theft-auto/rockstar-responds-to-plea-for-a-terminally-ill-huge-gta-fan-to-get-his-hands-on-the-game-early) (no confirmado por Rockstar) |
+| t07 Reservas | [Variety](https://variety.com/2026/gaming/news/gta-6-preorders-expectations-launch-1236943278/) |

@@ -146,6 +146,11 @@ v2.write_meta = write_meta
 
 if __name__ == "__main__":
     sel = sys.argv[1:]
-    for v in SHORTS:
+    lista = SHORTS
+    if sel and sel[0] == "tiktok":            # segunda tanda: python canal/render_shorts.py tiktok [t01 ...]
+        from guiones_tiktok import TIKTOKS
+        lista, sel = TIKTOKS, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_tiktok"
+    for v in lista:
         if not sel or any(v["slug"].startswith(x) for x in sel):
             r3.build(v)
