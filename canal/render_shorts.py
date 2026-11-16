@@ -151,6 +151,10 @@ if __name__ == "__main__":
         from guiones_tiktok import TIKTOKS
         lista, sel = TIKTOKS, sel[1:]
         r3.OUT = r3.HERE.parent / "salida_tiktok"
+    elif sel and sel[0] == "virales":         # tanda con lo aprendido de los TikToks virales
+        from guiones_virales import VIRALES_VOZ
+        lista, sel = VIRALES_VOZ, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_virales_voz"
     elif sel and sel[0] == "ahora":           # tercera tanda: noticias de esta semana
         from guiones_ahora import AHORA
         lista, sel = AHORA, sel[1:]

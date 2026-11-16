@@ -85,6 +85,52 @@ def caption(txt):
     return r3.to_bgra(im)
 
 
+_MASC = {}
+
+
+def mascota(nombre, alto=1000):
+    """Animación oficial de una mascota de Leonida a tamaño grande (RGBA, 15 fps), con caché."""
+    if nombre in _MASC:
+        return _MASC[nombre]
+    src = r3.IMG / "mascotas" / f"{nombre}.mp4"
+    cache = src.with_name(f"{nombre}_{alto}.npz")
+    if cache.exists():
+        fr = np.load(cache)["frames"]
+    else:
+        w, h = map(int, subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                                        "stream=width,height", "-of", "csv=p=0", str(src)],
+                                       capture_output=True, text=True).stdout.strip().split(","))
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(src), "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
+                             capture_output=True).stdout
+        v = np.frombuffer(raw, np.uint8).reshape(-1, h, w, 3)
+        half = h // 2
+        color, alpha = v[:, :half], v[:, half:2 * half, :, 1]
+        ys, xs = np.where(alpha.max(0) > 20)
+        y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        sc = alto / (y1 - y0)
+        tw = int((x1 - x0) * sc)
+        if tw > W - 60:
+            sc = (W - 60) / (x1 - x0)
+            tw = W - 60
+        th = int((y1 - y0) * sc)
+        fr = np.stack([cv2.resize(np.dstack([c[y0:y1, x0:x1], a[y0:y1, x0:x1]]), (tw, th), interpolation=cv2.INTER_AREA)
+                       for c, a in zip(color, alpha)])
+        np.savez_compressed(cache, frames=fr)
+    _MASC[nombre] = fr
+    return fr
+
+
+def big_word(txt):
+    """Palabra gigante con degradado de atardecer (para los edits al ritmo)."""
+    size = 200
+    while size > 80 and r3.F(r3.RUBIK, size).getbbox(txt, stroke_width=20)[2] > W - 120:
+        size -= 8
+    return r3.to_bgra(r3.grad_text(txt, r3.F(r3.RUBIK, size), stroke=14, outer=8, shadow=16))
+
+
+BEAT = 60 / 140  # la base musical va a 140 BPM
+
+
 def build(slug, beats):
     rnd = __import__("random").Random(zlib.crc32(slug.encode()))
     nrng = np.random.default_rng(zlib.crc32(slug.encode()))
@@ -94,7 +140,7 @@ def build(slug, beats):
     mus = v2.music(total + 1, zlib.crc32(slug.encode()) % 1000)[: int(total * SR)] * 0.35
     fx = np.zeros_like(mus)
     t = 0.0
-    for i, (_, _, dur, golpe) in enumerate(beats):
+    for i, (_, _, dur, golpe, *_x) in enumerate(beats):
         a = int(t * SR)
         if golpe:
             b = v2.sfx_boom()
@@ -113,10 +159,13 @@ def build(slug, beats):
            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     fr = 0
-    for i, (img, txt, dur, golpe) in enumerate(beats):
+    for i, (img, txt, dur, golpe, *extra) in enumerate(beats):
+        masc_n = extra[0] if extra else None
+        grande = len(extra) > 1 and extra[1]
         n = int(round(dur * FPS))
         vis = rs.VVisual(img, n, "in", rnd)
-        cap = caption(txt)
+        cap = (big_word(txt) if grande else caption(txt)) if txt else None
+        mf = mascota(masc_n) if masc_n else None
         for k in range(n):
             punch = 0.35 * (1 - k / 8) ** 2 if (golpe and k < 8) else 0.0
             f = vis.frame(k, punch)
@@ -124,9 +173,19 @@ def build(slug, beats):
                 f = np.roll(f, (int(14 * math.sin(k * 2.9) * (1 - k / 6)), int(18 * math.cos(k * 3.3) * (1 - k / 6))), (0, 1))
             if golpe and k < 3:
                 f = cv2.addWeighted(f, 1, np.full_like(f, 255), 0.5 * (1 - k / 3), 0)
-            sc = 1.0 if k > 4 else 0.85 + 0.15 * r3.back(k / 4)
-            c = cv2.resize(cap, (int(cap.shape[1] * sc), int(cap.shape[0] * sc))) if sc != 1 else cap
-            r3.comp(f, c, (W - c.shape[1]) // 2, 330 - (c.shape[0] - cap.shape[0]) // 2)
+            if mf is not None:  # la mascota "reacciona": entra desde abajo y bota al ritmo
+                lt = k / FPS
+                m_ = mf[int(lt * 15) % len(mf)]
+                ent = r3.back(min(1, lt / 0.35))
+                bote = abs(math.sin(math.pi * lt / BEAT)) * 28
+                x = (W - m_.shape[1]) // 2
+                y = int(H - 330 - m_.shape[0] * ent - bote + (1 - ent) * 200)
+                r3.comp(f, m_, x, max(y, 600))
+            if cap is not None:
+                sc = 1.0 if k > 4 else 0.85 + 0.15 * r3.back(k / 4)
+                c = cv2.resize(cap, (int(cap.shape[1] * sc), int(cap.shape[0] * sc))) if sc != 1 else cap
+                yc = int(H * 0.42 - c.shape[0] / 2) if grande else 330 - (c.shape[0] - cap.shape[0]) // 2
+                r3.comp(f, c, (W - c.shape[1]) // 2, yc)
             r3.comp(f, _bug[0], W - _bug[0].shape[1] - 40, 24, 0.9)
             p.stdin.write(f.tobytes())
             fr += 1
@@ -138,11 +197,47 @@ def build(slug, beats):
 
 _bug = [None]
 
+B2 = BEAT * 2
+# Tanda "virales": memes con las mascotas oficiales como reacción + un edit al ritmo
+VIRALES = [
+ ("v01-3am-discoteca", "POV: las 3 am en Vice City 🦩🕺 #gta6 #gtavi #vicecity #humor #meme #fyp #parati",
+  [("Vice_City_13", "POV: yo a las 3 am en una discoteca de Vice City", 7.0, True, "flamenco")]),
+ ("v02-mi-jefe", "Lo siento jefe 🐊🍹 #gta6 #gtavi #humor #meme #trabajo #fyp #parati",
+  [("Vice_City_02", "Mi jefe: ¿vienes a trabajar el jueves?", 2.4, False),
+   ("Leonida_Keys_01", "Yo:", 5.0, True, "caiman")]),
+ ("v03-mi-cartera", "Merecía la pena 🦀💸 #gta6 #gtavi #ultimate #humor #meme #fyp #parati",
+  [("ULTIMATE_EDITION_02", "Yo: solo voy a mirar las ediciones", 2.4, False),
+   ("Vice_City_05", "Mi cartera después de pillar la Ultimate:", 5.0, True, "cangrejo")]),
+ ("v04-mi-ps5", "Aguanta, campeona 🫠 #gta6 #gtavi #ps5 #humor #meme #fyp #parati",
+  [("GTAVI_Pre_Load", "GTA 6: necesito 212 GB", 2.2, False),
+   ("Leonida_Keys_04", "Mi PS5:", 5.0, True, "manati")]),
+ ("v05-mi-entrada", "Así voy a entrar el jueves 😎 #gta6 #gtavi #vicecity #humor #meme #fyp #parati",
+  [("Vice_City_24", "Yo entrando a Vice City el jueves a las 00:01:", 7.0, True, "lowrider")]),
+ ("v06-hasta-que-hora", "Solo una misión más ☀️ #gta6 #gtavi #humor #meme #pareja #fyp #parati",
+  [("Jason_and_Lucia_17", "Mi novia: ¿hasta qué hora vas a jugar?", 2.4, False),
+   ("Vice_City_15", "Yo, solo una misión más:", 1.8, False),
+   ("Leonida_Keys_05", "", 4.6, True, "sol")]),
+ ("v10-edit-vice-city", "Vice City nos espera 🌴 (pon tu canción favorita) #gta6 #gtavi #edit #vicecity #fyp #parati",
+  [("Vice_City_01", "VICE CITY", B2, True, None, True),
+   ("Jason_Duval_Video_Clip", "JASON", B2, True, None, True),
+   ("Lucia_Caminos_Video_Clip", "LUCIA", B2, True, None, True),
+   ("Grassrivers_03", "CAIMANES", B2, True, None, True),
+   ("Vice_City_13", "NEÓN", B2, True, None, True),
+   ("Jason_and_Lucia_19", "ATRACOS", B2, True, None, True),
+   ("Vice_City_17", "POLICÍA", B2, True, None, True),
+   ("Leonida_Keys_04", "LEONIDA", B2, True, None, True),
+   ("Jason_Lucia_Rooftop_landscape", "19 · 11", B2 * 2, True, None, True),
+   ("Jason_and_Lucia_17", "¿LISTO?", B2 * 2, True, None, True)]),
+]
+
 if __name__ == "__main__":
-    OUT.mkdir(exist_ok=True)
     _bug[0] = r3.bug_img()
     sel = sys.argv[1:]
-    with open(OUT / "descripciones.txt", "w", encoding="utf-8") as fd:
+    if sel and sel[0] == "virales":
+        MEMES, sel = VIRALES, sel[1:]
+        OUT = r3.HERE.parent / "salida_virales"
+    OUT.mkdir(exist_ok=True)
+    with open(OUT / ("descripciones_memes.txt" if OUT.name == "salida_virales" else "descripciones.txt"), "w", encoding="utf-8") as fd:
         for slug, desc, beats in MEMES:
             fd.write(f"{slug}\n{desc}\n\n")
             if not sel or any(slug.startswith(x) for x in sel):
