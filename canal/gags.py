@@ -536,12 +536,126 @@ GAGS = [
  ("g10-diccionario-de-pareja", g10, "Traductor oficial 📖 #gta6 #gtavi #humor #meme #pareja #fyp #parati"),
 ]
 
-if __name__ == "__main__":
+def _main():
+    global OUT
     sel = sys.argv[1:]
+    lista = GAGS
+    if sel and sel[0] == "chats":
+        lista, sel = [(s_, f_, d_) for s_, d_, f_ in CHATS], sel[1:]
+        OUT = r3.HERE.parent / "salida_chats"
     OUT.mkdir(exist_ok=True)
     with open(OUT / "descripciones.txt", "w", encoding="utf-8") as fd:
-        for slug, fn, desc in GAGS:
+        for slug, fn, desc in lista:
             fd.write(f"{slug}\n{desc}\n\n")
             if not sel or any(slug.startswith(x) for x in sel):
                 dur, fondo_cb, capa, son, golpes = fn()
                 render(slug, dur, fondo_cb, capa, son, golpes)
+
+
+# ================================================================ tanda "chats" (estilo del de la fiebre)
+def chat_gag(titulo, sub, bg_img, guion, remates, fin=2.6):
+    """guion: lista de (pausa_antes, lado, texto[, nombre]). Calcula los tiempos solo:
+    cada mensaje espera según lo que tarda en leerse el anterior."""
+    msgs, t = [], 0.3
+    for pausa, lado, txt, *nombre in guion:
+        t += pausa
+        msgs.append((round(t, 2), lado, txt, *nombre))
+        t += 0.35 + len(txt) * 0.045 if lado in ("yo", "el") else 0.9
+    dur = t + fin
+    bg = fondo(bg_img, int(dur * FPS) + 5)
+    rem = [msgs[i][0] for i in remates]
+    son = sonidos_chat(msgs) + [(x, "boom") for x in rem[:-1]] + [(rem[-1], "scratch"), (rem[-1] + 0.05, "boom")]
+    return dur, (lambda k, t: bg(k)), (lambda t: chat_frame(t, titulo, msgs, sub)), son, tuple(rem)
+
+
+CHATS = [
+ ("c01-mama-florida", "Las madres y la geografía 😭 #gta6 #gtavi #humor #meme #madres #fyp #parati",
+  lambda: chat_gag("Mamá", None, "Vice_City_05", [
+      (0, "el", "¿Vienes a comer el domingo?"),
+      (0, "yo", "No puedo, estoy en Vice City"),
+      (0, "el", "¿Y eso dónde está?"),
+      (0, "yo", "En Florida, más o menos"),
+      (0.2, "esc", "Mamá"),
+      (0, "el", "¿¿TE HAS IDO A FLORIDA SIN DECIRME NADA??"),
+      (0, "yo", "Mamá, que es un videojuego"),
+      (0.3, "esc", "Mamá"),
+      (0, "el", "Ya lo sé. Tu padre también lo ha comprado. No vengáis ninguno.")], (5, 8))),
+ ("c02-o-gta-o-yo", "Era una pregunta fácil 🤓 #gta6 #gtavi #humor #meme #pareja #fyp #parati",
+  lambda: chat_gag("Ella", None, "Jason_and_Lucia_14", [
+      (0, "el", "Elige: o GTA 6 o yo"),
+      (0.4, "esc", "Tú"),
+      (0.6, "el", "¿Te lo estás pensando?"),
+      (0, "el", "¿EN SERIO?"),
+      (0, "yo", "Perdona, es que estaba calculando cuánto ocupas en GB")], (4,))),
+ ("c03-la-abuela", "La abuela va por la misión 14 👵🎮 #gta6 #gtavi #humor #meme #abuela #fyp #parati",
+  lambda: chat_gag("Familia", "Abuela, Mamá, Papá, tú", "Vice_City_26", [
+      (0, "el", "Nieto, ¿qué quieres para Navidad?", "Abuela"),
+      (0, "yo", "GTA 6, abuela"),
+      (0, "el", "¿Eso es lo de los tiros?", "Abuela"),
+      (0, "yo", "No abuela, es educativo. Se aprende geografía de Florida"),
+      (0.3, "esc", "Abuela"),
+      (0, "el", "Ya me lo he comprado. La Ultimate. Llevo jugando desde las 12", "Abuela"),
+      (0, "el", "Y no me llames, que estoy en un atraco", "Abuela")], (5, 6))),
+ ("c04-el-jefe-otra-vez", "Pillado 💀 #gta6 #gtavi #humor #meme #trabajo #fyp #parati",
+  lambda: chat_gag("Jefe", None, "Vice_City_02", [
+      (0, "el", "¿Qué tal esa fiebre?"),
+      (0, "yo", "Fatal jefe, no me levanto de la cama"),
+      (0, "el", "Ya. Te he visto conectado en la PS5 a las 3 de la mañana"),
+      (0, "yo", "Era mi hermano"),
+      (0.3, "esc", "Jefe"),
+      (0, "el", "Tu usuario se llama «NoVoyElJueves»")], (5,))),
+ ("c05-el-libro", "El libro más caro de la carrera 📚 #gta6 #gtavi #humor #meme #amigos #fyp #parati",
+  lambda: chat_gag("Álex", None, "ULTIMATE_EDITION_02", [
+      (0, "el", "Bro, ¿me prestas 80 pavos?"),
+      (0, "yo", "¿Para qué?"),
+      (0, "el", "Para un libro de la uni"),
+      (0, "yo", "¿Qué libro?"),
+      (0.3, "esc", "Álex"),
+      (0, "el", "Grand Theft Auto. Volumen 6.")], (5,))),
+ ("c06-la-ex", "Tenía argumentos 🤷 #gta6 #gtavi #humor #meme #ex #fyp #parati",
+  lambda: chat_gag("Ex", None, "Vice_City_13", [
+      (0, "el", "Hola... ¿cómo estás?"),
+      (0, "yo", "Bien"),
+      (0, "el", "Te echo de menos"),
+      (0, "yo", "Ya, bueno"),
+      (0, "el", "¿Te vienes el jueves a mi casa?"),
+      (0, "yo", "Tengo planes"),
+      (0.3, "esc", "Ex"),
+      (0, "el", "Tengo una PS5 Pro y GTA 6 descargado"),
+      (0, "yo", "Llego en 10 minutos")], (7, 8))),
+ ("c07-el-profe", "El profe es de los nuestros 🫡 #gta6 #gtavi #humor #meme #clase #fyp #parati",
+  lambda: chat_gag("2º B", "Profe, Lucas, Marta, tú", "Vice_City_15", [
+      (0, "el", "Recordad: examen el jueves 19 a las 9:00", "Profe"),
+      (0, "el", "Profe, ese día tengo un funeral", "Lucas"),
+      (0, "el", "¿De quién?", "Profe"),
+      (0, "el", "De mi vida social. Sale GTA 6", "Lucas"),
+      (0.3, "esc", "Profe"),
+      (0, "el", "Examen aplazado al lunes. Yo también tengo un funeral.", "Profe")], (3, 5))),
+ ("c08-quien-es-lucia", "No ayudó 🫠 #gta6 #gtavi #humor #meme #pareja #fyp #parati",
+  lambda: chat_gag("Ella", None, "Lucia_Caminos_13", [
+      (0, "el", "¿Quién es Lucia y por qué está en tu historial?"),
+      (0, "yo", "No es lo que parece"),
+      (0, "el", "¿Y qué es?"),
+      (0, "yo", "Una presa recién salida de la cárcel que atraca bancos con su novio"),
+      (0.4, "esc", "Ella"),
+      (0, "el", "¿Y eso te parece MEJOR?")], (5,))),
+ ("c09-el-medico", "Diagnóstico confirmado 🩺 #gta6 #gtavi #humor #meme #fyp #parati",
+  lambda: chat_gag("Dr. Martínez", "Centro de salud", "Mount_Kalaga_National_Park_04", [
+      (0, "el", "Le doy la baja hasta el lunes"),
+      (0, "yo", "Gracias doctor"),
+      (0, "el", "Por curiosidad, ¿qué síntomas tiene?"),
+      (0, "yo", "Pulgares nerviosos y ganas de ir a Florida"),
+      (0.3, "esc", "Dr. Martínez"),
+      (0, "el", "Lo sospechaba. El jueves la consulta está cerrada.")], (5,))),
+ ("c10-dani-vuelve", "Dani tenía razón 🫡 #gta6 #gtavi #humor #meme #amigos #fyp #parati",
+  lambda: chat_gag("Los de la Play", "Pablo, Álex, tú", "Jason_and_Lucia_17", [
+      (0, "el", "¿Quién se ha pasado ya la historia?", "Pablo"),
+      (0, "el", "Yo. 14 horas sin dormir", "Álex"),
+      (0, "el", "¿Y qué tal?", "Pablo"),
+      (0, "el", "No puedo hablar, me acaba de despedir mi jefe", "Álex"),
+      (0.3, "sis", "Pablo añadió a Dani"),
+      (0, "el", "Os lo dije", "Dani")], (3, 5))),
+]
+
+if __name__ == "__main__":
+    _main()
