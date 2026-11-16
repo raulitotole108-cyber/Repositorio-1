@@ -2,7 +2,19 @@
 
 Diez vídeos completos para subir el **jueves 19 de noviembre de 2026**, el día que sale GTA 6.
 
-**Los vídeos finales están en `salida_v3/`.** Los de la v1 (`salida/`) quedan como referencia.
+**Los vídeos finales están en `salida_v3/` (10 largos, 16:9) y `salida_shorts/` (10 Shorts/TikToks, 9:16).**
+Los de la v1 (`salida/`) quedan como referencia.
+
+## Voz y Shorts
+
+- Voz neural expresiva (Microsoft Edge TTS, `it-IT-GiuseppeMultilingualNeural` hablando en español):
+  cada frase con su propia entonación, silencios internos recortados a 0,14 s y subtítulos con el
+  tiempo real de cada palabra. Muestras en `muestras_voz/`.
+- Imágenes oficiales limpias (sin recortes ni rellenos por IA).
+- **Shorts verticales** (`canal/guiones_shorts.py`, `canal/render_shorts.py`): gancho en el primer
+  segundo (zoom de golpe, destello, temblor y boom), titular fijo arriba, subtítulos grandes en el
+  centro, elementos fuera de las zonas que tapa la interfaz de TikTok/YouTube y final en bucle.
+  Publica 2–3 al día durante la semana del lanzamiento; el `youtube.txt` sirve también para TikTok.
 
 ## Versión 3: estilo GTA 6
 
@@ -82,11 +94,12 @@ los subtítulos `.srt` y `youtube.txt` (título, descripción con capítulos, cr
 ```bash
 pip install piper-tts numpy pillow opencv-python-headless   # y ffmpeg con libass
 python canal/descargar_imagenes.py        # baja las imágenes oficiales a canal/imagenes/
-export PIPER_VOICE=/ruta/es_ES-davefx-medium.onnx
+pip install edge-tts librosa             # voz neural (necesita acceso a speech.platform.bing.com)
 pip install rembg onnxruntime
 python canal/preparar_capas.py            # clips, mascotas y capas 2.5D
 python canal/render_v3.py                 # los 10 (≈2,3× la duración del vídeo cada uno)
 python canal/render_v3.py 03 07           # solo algunos
+python canal/render_shorts.py             # los 10 Shorts verticales
 ```
 
 - Guiones, imágenes por frase, rótulos, títulos y miniaturas: `canal/guiones_v2.py`.
