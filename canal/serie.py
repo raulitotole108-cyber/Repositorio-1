@@ -261,6 +261,8 @@ def bocadillo(quien, texto, prog):
 
 
 def texto_gordo(txt, size=130):
+    while size > 50 and F(r3.RUBIK, size).getbbox(txt, stroke_width=20)[2] > W - 110:  # que nunca se corte
+        size -= 4
     return r3.to_bgra(r3.grad_text(txt, F(r3.RUBIK, size), stroke=12, outer=7, shadow=14))
 
 
