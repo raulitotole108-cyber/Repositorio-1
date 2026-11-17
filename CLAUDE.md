@@ -35,3 +35,15 @@ vídeo antes de deslizar. El algoritmo lo enseña a unos pocos y, si se quedan, 
   sonidos de tendencia los pone el usuario en TikTok.
 - Datos siempre verificados (fuentes en `FUENTES.md`). Los rumores se dicen como rumores.
 - Cada vídeo se entrega con su descripción para copiar y pegar.
+
+## Skills instaladas: YouTube Agent (11 skills, licencia MIT)
+
+En `.claude/skills/yt-*` (de github.com/Jakeschincariol/youtube-agent-skill, revisadas: todo local,
+sin red, no publican). El perfil de voz está en `.claude/youtube/voice.md`; cópialo en
+`~/.claude/youtube/voice.md` al empezar una sesión nueva. Úsalas así:
+- `/yt-script`: guion con 21 fórmulas de gancho y nota del gancho (`hookscore.py`). La nota está calibrada en
+  inglés, así que con ganchos en español sirve para comparar entre ellos, no como nota absoluta.
+- `/yt-package`: título y miniatura juntos. `/yt-seo`: descripción. `/yt-chapters`: capítulos.
+- `/yt-viral`: qué funciona en el nicho, ordenado por cuántas veces supera la media de su propio canal.
+- `/yt-plan`: plan semanal. `/yt-comment`: respuestas a comentarios. `/yt-retention`: lectura de la retención.
+- `/yt-shorts`, `/yt-edit`, `/yt-audit`.
