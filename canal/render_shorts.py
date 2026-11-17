@@ -31,7 +31,7 @@ r3.CHIP_Y = 400            # por debajo del titular fijo
 r3.STARS_Y = 410
 r3.HEAD_Y = 205            # titular fijo, justo bajo la barra superior de la app
 r3.HOOK_PUNCH = True
-r3.MASCOTAS = False        # nada de mascotas en los Shorts       # el primer segundo entra de golpe
+r3.MASCOTAS = False        # nada de mascotas en los Shorts
 r3.MASC_BOTTOM = 470       # por encima del título/descripción
 r3.SUB_Y_OFF = 420
 # subtítulos grandes, en el tercio inferior-central
