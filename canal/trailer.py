@@ -28,6 +28,7 @@ FUENTES = HERE / "fuentes"
 OUT = HERE.parent / "salida_trailer"
 W, H, FPS = 1920, 1080, 60
 BAR = 70  # bandas negras (≈ 2.0:1)
+MAX_FR_CLIP = 90
 
 
 def ease(x):
@@ -60,6 +61,7 @@ def clip_frames(nombre):
                               f"crop={int(W * 1.12)}:{int(H * 1.12)}",
                               "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
         fr = np.frombuffer(raw, np.uint8).reshape(-1, int(H * 1.12), int(W * 1.12), 3)
+        fr = fr[:MAX_FR_CLIP]  # con 3 s de cada clip hay de sobra (y no se agota la memoria)
         # flujo óptico entre fotogramas consecutivos (a media resolución) para la cámara lenta
         dis = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_MEDIUM)
         small = [cv2.cvtColor(cv2.resize(f, (f.shape[1] // 2, f.shape[0] // 2)), cv2.COLOR_BGR2GRAY) for f in fr]
@@ -352,5 +354,79 @@ def render():
     print("OK", out, f"{t_glob:.1f} s")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "corto" not in sys.argv:
     render()
+
+
+# ================================================================ tráiler corto "preload" (13-15 s, corte cada pulso)
+def trailer_corto(nombre="trailer-corto", bpm=115):
+    """Formato del tráiler viral de @norage_ae (1,5 M de vistas): corte en CADA pulso desde el primer
+    fotograma, casi todo movimiento real, color saturado con mucho resplandor, título encima de
+    imágenes en movimiento a los ~2 s y final en la ciudad de noche. Sin audio."""
+    beat = 60 / bpm
+    planos = ["CLIP:clip_jason_lucia_salto", "extra/x125_radio_background_mobile", "CLIP:clip_abrazo_neon",
+              "Vice_City_13", "CLIP:clip_skyline_noche", "CLIP:clip_skyline_noche", "CLIP:clip_cayos_hidroavion",
+              "CLIP:Jason_Duval_Video_Clip", "extra/x055_mediaDesktop", "CLIP:clip_jason_neon",
+              "CLIP:Lucia_Caminos_Video_Clip", "Vice_City_17", "CLIP:clip_playa_skyline", "CLIP:clip_coche_playa",
+              "Grassrivers_04", "extra/x067_poster", "CLIP:clip_atardecer_aereo", "extra/x124_score_background_mobile",
+              "Vice_City_05", "CLIP:clip_ambrosia_atardecer", "extra/x129_album_background_mobile", "Jason_Duval_16",
+              "CLIP:clip_port_gellhorn_tormenta", "CLIP:clip_bosque_rio", "extra/x033_desktop"]
+    largos = {len(planos) - 1: 3}  # el último plano dura 3 pulsos
+    OUT.mkdir(exist_ok=True)
+    out = OUT / f"{nombre}.mp4"
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{H}x{W}",
+           "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "slow", "-crf", "21", "-pix_fmt", "yuv420p",
+           "-movflags", "+faststart", str(out)]
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    fecha = titulo("19 · 11", 230, 0.06, "Montserrat-Black.ttf")
+    lema = titulo("NOS VEMOS EN LEONIDA", 54, 0.3, color=(255, 255, 255))
+    marca = titulo("FAN EDIT · ZONA VI", 30, 0.25, color=(220, 220, 220))
+    t_tit0, t_tit1 = 4 * beat, 7 * beat  # título encima de los planos 5-7
+    k_glob, t = 0, 0.0
+    total = sum(largos.get(i, 1) for i in range(len(planos))) * beat
+    for i, src_n in enumerate(planos):
+        dur = largos.get(i, 1) * beat
+        n = int(round((t + dur) * FPS)) - int(round(t * FPS))
+        rng = np.random.default_rng(i)
+        cx0, cy0 = 0.5 + rng.uniform(-0.06, 0.06), 0.5 + rng.uniform(-0.04, 0.04)
+        for k in range(n):
+            tg = t + k / FPS
+            x = k / max(1, n - 1)
+            z = 1.0 + 0.16 * (1 - ease_out(min(1, k / (0.18 * FPS)))) + 0.05 * x  # entra de golpe y sigue empujando
+            if src_n.startswith("CLIP:"):
+                nom = src_n[5:]
+                fr_, _ = clip_frames(nom)
+                pos = (k / FPS) * 30 * 0.6 + (len(fr_) * 0.4 if i == 5 else 0)
+                src = clip_en(nom, pos % max(1, len(fr_) - 1))
+            else:
+                src = imagen(src_n)
+            f = camara(src, z, cx0 + 0.02 * x, cy0, 0.4 * math.sin(tg * 1.7))
+            if k < 4:
+                f = barrido(f, 70 * (1 - k / 4))
+                f = rgb(f, int(9 * (1 - k / 4)))
+            # color saturado y mucho resplandor (look del original)
+            hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV).astype(np.float32)
+            hsv[..., 1] = np.clip(hsv[..., 1] * 1.22, 0, 255)
+            f = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
+            f = acabado(f, k_glob, bloom=0.75)
+            if i % 4 == 0 and k < 3:
+                f = cv2.addWeighted(f, 1, np.full_like(f, 255), 0.35 * (1 - k / 3), 0)
+            if t_tit0 <= tg < t_tit1:  # título encima de imágenes en movimiento
+                lt = tg - t_tit0
+                a = min(1, lt / 0.15) * min(1, (t_tit1 - tg) / 0.15)
+                f = poner(f, fecha, a, y=H * 0.46, escala=1.0 + 0.06 * lt)
+                f = poner(f, lema, a, y=H * 0.66)
+            if i == len(planos) - 1:
+                f = poner(f, fecha, min(1, k / 20), y=H * 0.44)
+                f = poner(f, marca, min(1, max(0, (k - 25) / 20)), y=H * 0.62)
+            f = bandas(f)
+            p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
+            k_glob += 1
+        t += dur
+    p.stdin.close()
+    p.wait()
+    print("OK", out, f"{total:.1f} s", flush=True)
+
+
+if __name__ == "__main__" and "corto" in sys.argv:
+    trailer_corto()
