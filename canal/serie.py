@@ -486,17 +486,19 @@ def construir(ep):
 # ================================================================ capítulos
 X = "extra/"
 CAPITULOS = {
- 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1", reloj=(24.0, 0.02), reloj_desde=2,
-         descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Robar la primera copia de GTA 6… de la caja fuerte "
-                     "de la comisaría de Vice City. Pero el mensaje venía de alguien de esa misma sala 😳 ¿Quién es "
-                     "el traidor? 👇 Envíaselo a tu socio del crimen. Serie de fans · historia inventada "
-                     "#gta6 #gtavi #serie #raulbautista #fyp #parati",
+ 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE", reloj=(24.0, 0.02), reloj_desde=1,
+         titulo="6 criminales quieren robar GTA 6. Uno miente",
+         descripcion="6 criminales quieren robar GTA 6. Uno miente 😳 Capítulo 1 de UN ÚLTIMO GOLPE: la primera copia "
+                     "está en la caja fuerte de la comisaría de Vice City… y alguien de la banda ya les ha vendido. "
+                     "¿Quién es el traidor? Comenta 👇 y envíaselo a tu socio del crimen. Serie de fans · historia "
+                     "inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
          planos=[
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.15, 1.0, 0.5, 0.5), fx=["policia", "lluvia"], golpe=True,
-         grande="00:00", grande_size=170,
-         lineas=[("narrador", "Medianoche. Ocean Drive. Uno de ellos va a traicionar al resto.")]),
+    dict(fondo=X + "x067_poster", cam=(1.25, 1.1, 0.42, 0.5), fx=["policia"], golpe=True,
+         noti=("Número desconocido", "Sé lo que vais a hacer."),
+         grande="¿QUIÉN ES EL TRAIDOR?", grande_size=96, grande_y=0.66,
+         lineas=[("narrador", "¡Alto! Este mensaje lo mandó alguien de la banda. ¿Quién?")]),
     dict(fondo=X + "x033_desktop", cam=(1.0, 1.05, 0.5, 0.5), oscuro=0.55, grande="24 HORAS ANTES", grande_size=110,
-         dur=0.9, golpe=True),
+         dur=0.7, golpe=True),
     dict(fondo=X + "x016_Hero_BG", cam=(1.25, 1.12, 0.3, 0.38), fx=["neon", "particulas"], actores=[("raul", "c")], alto=1300,
          lineas=[("raul", "Mañana robamos la primera copia de GTA seis.")]),
     dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1250,
@@ -528,7 +530,8 @@ CAPITULOS = {
     dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("boobie", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
     dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("raul", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
     dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5,
-         golpe=True, lineas=[("narrador", "Capítulo dos, mañana. Envíaselo a tu socio del crimen.")], post=0.5),
+         golpe=True, lineas=[("narrador", "Comenta quién crees que es, y envíaselo a tu socio del crimen. Porque ese mensaje decía...")],
+         post=0.2),
  ]),
 }
 
