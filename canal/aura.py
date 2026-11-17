@@ -151,65 +151,123 @@ def look(f, rnd):
     return np.clip(x, 0, 255).astype(np.uint8)
 
 
-def final_card(k, n):
+def final_card(k, n, txt="19 · 11 · 2026", sub="NOS VEMOS EN LEONIDA"):
     im = np.zeros((H, W, 3), np.uint8)
     a = min(1, k / 18)
-    t1 = r3.to_bgra(r3.grad_text("19 · 11 · 2026", r3.F(r3.RUBIK, 170), stroke=10, outer=0, shadow=0))
+    t1 = r3.to_bgra(r3.grad_text(txt, r3.F(r3.RUBIK, 170), stroke=10, outer=0, shadow=0))
     sc = 1 + 0.03 * k / n
     t1 = cv2.resize(t1, None, fx=sc, fy=sc)
     r3.comp(im, t1, (W - t1.shape[1]) // 2, (H - t1.shape[0]) // 2 - 40, a)
-    if k > 25:
-        t2 = r3.to_bgra(r3.grad_text("NOS VEMOS EN LEONIDA", r3.F(r3.RUBIK, 48),
+    if k > 25 and sub:
+        t2 = r3.to_bgra(r3.grad_text(sub, r3.F(r3.RUBIK, 48),
                                      cols=[(255, 255, 255), (255, 255, 255)], stroke=0, shadow=0))
         r3.comp(im, t2, (W - t2.shape[1]) // 2, H // 2 + 110, min(1, (k - 25) / 15))
     return im
 
 
-def main():
+def caja(f, titulo, esquina, cache={}):
+    """Formato "cuenta atrás": el plano horizontal centrado sobre negro, título arriba."""
+    VW, VH = 1080, 1920
+    if titulo not in cache:
+        size = 84
+        fnt = r3.F(str(r3.FUENTES / "Anton-Regular.ttf"), size)
+        while fnt.getbbox(titulo)[2] > VW - 80:
+            size -= 4
+            fnt = r3.F(str(r3.FUENTES / "Anton-Regular.ttf"), size)
+        im = Image.new("RGBA", (VW, size + 40), (0, 0, 0, 0))
+        from PIL import ImageDraw
+        d = ImageDraw.Draw(im)
+        d.text((VW // 2, (size + 40) // 2), titulo, font=fnt, fill=(255, 255, 255, 255), anchor="mm")
+        cache[titulo] = r3.to_bgra(im)
+        im2 = Image.new("RGBA", (300, 50), (0, 0, 0, 0))
+        ImageDraw.Draw(im2).text((0, 0), esquina, font=r3.F(r3.FRED, 30), fill=(235, 235, 235, 230))
+        cache[titulo + "_e"] = r3.to_bgra(im2)
+    lienzo = np.zeros((VH, VW, 3), np.uint8)
+    fh = int(H * VW / W)
+    y0 = (VH - fh) // 2 + 40
+    lienzo[y0:y0 + fh] = cv2.resize(f, (VW, fh), interpolation=cv2.INTER_AREA)
+    t = cache[titulo]
+    r3.comp(lienzo, t, 0, y0 - t.shape[0] - 30)
+    r3.comp(lienzo, cache[titulo + "_e"], 24, y0 + 16)
+    return lienzo
+
+
+def main(nombre="aura-vice-city", planos=None, titulo=None, esquina="", final=("19 · 11 · 2026", "NOS VEMOS EN LEONIDA"),
+         final_beats=FINAL_BEATS, drop=4, semilla=7):
+    planos = planos or PLANOS
     OUT.mkdir(exist_ok=True)
-    rnd_py = random.Random(7)
-    rnd = np.random.default_rng(7)
+    rnd_py = random.Random(semilla)
+    rnd = np.random.default_rng(semilla)
     tiempos, t = [], 0.0
-    for img, beats, mode in PLANOS:
+    for img, beats, mode in planos:
         tiempos.append(t)
         t += beats * BEAT
     t_fin = t
-    dur = t_fin + FINAL_BEATS * BEAT
-    t_drop = tiempos[4]  # empieza la batería en el 5º plano
-    wav = OUT / ".aura.wav"
+    dur = t_fin + final_beats * BEAT
+    t_drop = tiempos[drop]
+    wav = OUT / f".{nombre}.wav"
     v2.write_wav(wav, musica(dur, t_drop, t_fin))
-    out = OUT / "aura-vice-city.mp4"
+    out = OUT / f"{nombre}.mp4"
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{H}x{W}",
            "-r", str(FPS), "-i", "-", "-i", str(wav), "-c:v", "libx264", "-preset", "slow", "-crf", "21",
            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out)]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     bug = r3.to_bgra(r3.grad_text(r3.CANAL, r3.F(r3.RUBIK, 34), stroke=4, shadow=3))
+
+    def salida(f):
+        if titulo:
+            return caja(f, titulo, esquina)
+        return np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE))
     prev = None
-    for i, (img, beats, mode) in enumerate(PLANOS):
+    for i, (img, beats, mode) in enumerate(planos):
         n = int(round(beats * BEAT * FPS))
         vis = r3.Visual(img, n, mode, rnd_py)
         for k in range(n):
-            f = vis.frame(k, 0.04 * max(0, 1 - k / 6) if i >= 4 else 0.0)
+            f = vis.frame(k, 0.04 * max(0, 1 - k / 6) if i >= drop else 0.0)
             if prev is not None and k < 5:  # fundido corto entre planos
                 f = cv2.addWeighted(prev, 1 - (k + 1) / 6, f, (k + 1) / 6, 0)
-            if i == 4 and k < 3:  # destello en el drop
+            if i == drop and k < 3:  # destello en el drop
                 f = cv2.addWeighted(f, 1, np.full_like(f, 255), 0.6 * (1 - k / 3), 0)
             f = look(f, rnd)
             if k == n - 1:
                 prev = f.copy()
             r3.comp(f, bug, W - bug.shape[1] - 30, H - bug.shape[0] - 24, 0.8)
-            p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
-    nf = int(round(FINAL_BEATS * BEAT * FPS))
+            p.stdin.write(salida(f).tobytes())
+    nf = int(round(final_beats * BEAT * FPS))
     for k in range(nf):
-        f = final_card(k, nf)
+        f = final_card(k, nf, *final)
         if k < 6 and prev is not None:
             f = cv2.addWeighted(prev, 1 - (k + 1) / 7, f, (k + 1) / 7, 0)
-        p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
+        p.stdin.write(salida(f).tobytes())
     p.stdin.close()
     p.wait()
     wav.unlink()
-    print("OK", out, f"{dur:.1f} s")
+    print("OK", out, f"{dur:.1f} s", flush=True)
 
+
+# Serie "cuenta atrás" (formato de los edits de 5,6 M de vistas: plano horizontal sobre negro + título)
+CUENTA = {
+ "cuenta-2-dias": ("FALTAN 2 DÍAS PARA GTA 6", "2 days left", [
+     ("Vice_City_13", 2, "in"), ("Jason_Duval_Video_Clip", 2, "in"), ("Vice_City_17", 2, "left"),
+     ("Lucia_Caminos_Video_Clip", 2, "in"), ("Vice_City_22", 2, "right"), ("Grassrivers_04", 2, "in"),
+     ("Vice_City_16", 2, "out"), ("Leonida_Keys_05", 2, "left"), ("Mount_Kalaga_National_Park_05", 2, "in"),
+     ("Vice_City_27", 4, "out")], ("2 DÍAS", "JUEVES 19 · 00:00")),
+ "cuenta-1-dia": ("FALTA 1 DÍA PARA GTA 6", "1 day left", [
+     ("Vice_City_01", 2, "in"), ("Jason_and_Lucia_19", 2, "in"), ("Vice_City_08", 2, "left"),
+     ("Jason_Duval_05", 2, "in"), ("Leonida_Keys_04", 2, "right"), ("Vice_City_24", 2, "in"),
+     ("Lucia_Caminos_Video_Clip", 2, "in"), ("Port_Gellhorn_01", 2, "left"), ("Vice_City_26", 2, "out"),
+     ("Jason_Lucia_Rooftop_landscape", 4, "in")], ("MAÑANA", "ESTA NOCHE A LAS 00:00")),
+ "cuenta-hoy": ("HOY SALE GTA 6", "it's here", [
+     ("Jason_Lucia_Rooftop_landscape", 2, "in"), ("Vice_City_01", 2, "in"), ("Jason_Duval_Video_Clip", 2, "in"),
+     ("Vice_City_13", 2, "out"), ("Lucia_Caminos_Video_Clip", 2, "in"), ("Grassrivers_03", 2, "left"),
+     ("Vice_City_15", 2, "in"), ("Jason_and_Lucia_15", 2, "right"), ("Leonida_Keys_01", 2, "in"),
+     ("Vice_City_27", 4, "out")], ("YA ESTÁ AQUÍ", "BIENVENIDO A LEONIDA")),
+}
 
 if __name__ == "__main__":
-    main()
+    args = sys.argv[1:]
+    if not args:
+        main()
+    for nombre in args:
+        tit, esq, planos, fin = CUENTA[nombre]
+        main(nombre, planos, tit, esq, fin, final_beats=5, drop=2, semilla=len(nombre))

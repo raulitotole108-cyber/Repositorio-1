@@ -662,3 +662,53 @@ CHATS = [
 
 if __name__ == "__main__":
     _main()
+
+
+# ================================================================ meme "antes y ahora" (formato del de 1,9 M de vistas)
+def tarjeta(d, x0, y0, x1, y1, titulo, items, t, col_tit):
+    d.rounded_rectangle([x0, y0, x1, y1], 34, fill=(255, 250, 240, 245))
+    d.text((x0 + 40, y0 + 26), titulo, font=F(MSB, 50), fill=col_tit)
+    y = y0 + 106
+    for t0, txt in items:
+        if t < t0:
+            continue
+        a = int(255 * min(1, (t - t0) / 0.2))
+        for j, l in enumerate(wrap("• " + txt, F(MS, 52), x1 - x0 - 90)):
+            d.text((x0 + 44 + (34 if j else 0), y), l, font=F(MS, 52), fill=(30, 30, 30, a))
+            y += 64
+        y += 12
+
+
+def noche_frame(t, arriba, abajo, remate, t_rem):
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    tarjeta(d, 50, 300, W - 50, 860, "Una noche perfecta en 2013:", arriba, t, (60, 60, 160, 255))
+    tarjeta(d, 50, 890, W - 50, 1450, "Una noche perfecta en 2026:", abajo, t, (255, 79, 163, 255))
+    if t >= t_rem:
+        f = F(MSB, 64)
+        lines = wrap(remate, f, W - 160)
+        yy = 1490
+        for l in lines:
+            tw = f.getbbox(l)[2]
+            d.rounded_rectangle([(W - tw) // 2 - 24, yy, (W + tw) // 2 + 24, yy + 76], 18, fill=(255, 79, 163, 255))
+            d.text((W // 2, yy + 38), l, font=f, fill=(255, 255, 255, 255), anchor="mm")
+            yy += 86
+    return im
+
+
+def n01():
+    arriba = [(0.4, "PS3 y GTA V recién comprado"), (1.4, "Una pizza familiar entera para mí"),
+              (2.4, "2 litros de Coca-Cola"), (3.4, "Jugar hasta las 7 de la mañana")]
+    abajo = [(5.0, "PS5 y GTA VI recién descargado"), (6.0, "Media pizza, por el colesterol"),
+             (7.0, "Un Aquarius y un ibuprofeno"), (8.2, "Jugar hasta las 00:30, que mañana curro")]
+    t_rem = 10.0
+    bg = fondo("Vice_City_08", 420, 0.55)
+    son = [(t0, "pop") for t0, _ in arriba + abajo] + [(4.8, "whoosh"), (t_rem, "scratch"), (t_rem + 0.05, "boom")]
+    return 13.0, (lambda k, t: bg(k)), (lambda t: noche_frame(t, arriba, abajo,
+                                                              "13 años esperando para esto", t_rem)), son, (t_rem,)
+
+
+if __name__ == "__main__" and sys.argv[1:2] == ["noche"]:
+    OUT = r3.HERE.parent / "salida_gags"
+    dur, fb, capa, son, gol = n01()
+    render("n01-noche-perfecta-2013-vs-2026", dur, fb, capa, son, gol)
