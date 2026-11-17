@@ -37,13 +37,13 @@ MS = str(HERE / "fuentes" / "Montserrat-ExtraBold.ttf")
 
 # reparto: voz neural, tono, velocidad, color del nombre
 REPARTO = {
-    "narrador": ("it-IT-GiuseppeMultilingualNeural", "+0Hz", "+8%", (255, 255, 255)),
-    "raul": ("es-ES-AlvaroNeural", "-6Hz", "+0%", (230, 230, 230)),
-    "jason": ("es-MX-JorgeNeural", "-2Hz", "+6%", (120, 190, 255)),
-    "lucia": ("es-ES-XimenaNeural", "+0Hz", "+6%", (255, 120, 190)),
-    "cal": ("es-AR-TomasNeural", "+4Hz", "+12%", (255, 200, 80)),
-    "brian": ("es-CO-GonzaloNeural", "-10Hz", "-4%", (255, 150, 90)),
-    "boobie": ("es-CU-ManuelNeural", "-8Hz", "+0%", (200, 160, 255)),
+    "narrador": ("it-IT-GiuseppeMultilingualNeural", "-4Hz", "+14%", (255, 255, 255)),
+    "raul": ("es-ES-AlvaroNeural", "-6Hz", "+14%", (230, 230, 230)),
+    "jason": ("es-MX-JorgeNeural", "-2Hz", "+18%", (120, 190, 255)),
+    "lucia": ("es-ES-XimenaNeural", "+0Hz", "+18%", (255, 120, 190)),
+    "cal": ("es-AR-TomasNeural", "+4Hz", "+24%", (255, 200, 80)),
+    "brian": ("es-CO-GonzaloNeural", "-10Hz", "+10%", (255, 150, 90)),
+    "boobie": ("es-CU-ManuelNeural", "-8Hz", "+14%", (200, 160, 255)),
 }
 NOMBRES = {"raul": "RAUL", "jason": "JASON", "lucia": "LUCIA", "cal": "CAL", "brian": "BRIAN", "boobie": "BOOBIE"}
 
@@ -71,7 +71,9 @@ def voz(quien, texto):
                         "-ar", str(SR), "-ac", "1", str(wav)], check=True)
     x = v2.read_wav(wav)
     nz = np.where(np.abs(x) > 0.01)[0]
-    return x[max(0, nz[0] - 600): nz[-1] + 1200] if len(nz) else x
+    x = x[max(0, nz[0] - 400): nz[-1] + 800] if len(nz) else x
+    y, _ = v2._comprime_pausas(x, [], umbral=0.012, max_pausa=0.10)  # nada de pausas largas al hablar
+    return y
 
 
 # ------------------------------------------------------------ capas
@@ -263,6 +265,45 @@ def cabecera(txt):
     return r3.cabecera_img(txt)
 
 
+def reloj_img(txt, urgente=False, _c={}):
+    if (txt, urgente) not in _c:
+        _c.clear()
+        f = F(str(HERE / "fuentes" / "Anton-Regular.ttf"), 70)
+        tw = f.getbbox(txt)[2]
+        im = Image.new("RGBA", (tw + 60, 100), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        d.rounded_rectangle([0, 0, tw + 59, 99], 20, fill=(200, 20, 40, 230) if urgente else (12, 6, 20, 200))
+        d.text((30, 6), txt, font=f, fill=(255, 255, 255, 255))
+        _c[(txt, urgente)] = cv2.cvtColor(np.array(im), cv2.COLOR_RGBA2BGRA)
+    return _c[(txt, urgente)]
+
+
+def musica_tension(dur):
+    """Tensión: zumbido grave, latido de corazón y tic-tac de reloj (original, sintetizado)."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    rng = np.random.default_rng(9)
+    dron = (np.sin(2 * np.pi * 55 * t) * 0.5 + np.sin(2 * np.pi * 55.6 * t) * 0.5 +
+            np.sin(2 * np.pi * 82.4 * t) * 0.25) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.15 * t))
+    out = dron.astype(np.float32) * 0.25
+    L = int(0.25 * SR)
+    tt = np.arange(L) / SR
+    latido = (np.sin(2 * np.pi * (48 + 40 * np.exp(-tt * 30)) * tt) * np.exp(-tt * 14)).astype(np.float32)
+    tic = (rng.standard_normal(int(0.015 * SR)) * np.exp(-np.arange(int(0.015 * SR)) / SR * 300)).astype(np.float32)
+    k = 0.0
+    while k < dur:
+        for off, g in ((0, 0.9), (0.22, 0.6)):
+            a = int((k + off) * SR)
+            if a + L < n:
+                out[a:a + L] += latido * g
+        k += 0.8 - 0.25 * min(1, k / dur)  # el latido se acelera
+    for i in range(int(dur * 2)):
+        a = int(i * 0.5 * SR)
+        if a + len(tic) < n:
+            out[a:a + len(tic)] += tic * (0.35 if i % 2 else 0.22)
+    return out / np.abs(out).max()
+
+
 # ------------------------------------------------------------ montaje
 def construir(ep):
     """ep: dict con 'slug', 'cabecera', 'planos'. Cada plano: fondo|clip, cam, actores, lineas, fx, grande."""
@@ -273,13 +314,13 @@ def construir(ep):
     planos = []
     for pl in ep["planos"]:
         lineas = []
-        t0 = t + pl.get("pre", 0.35)
+        t0 = t + pl.get("pre", 0.05)
         tt = t0
         for quien, txt in pl.get("lineas", []):
             a = voz(quien, txt)
             lineas.append(dict(quien=quien, txt=txt, audio=a, t0=tt, t1=tt + len(a) / SR))
-            tt += len(a) / SR + 0.22
-        dur = max(pl.get("dur", 0), (tt - t) + pl.get("post", 0.25))
+            tt += len(a) / SR + 0.04
+        dur = max(pl.get("dur", 0), (tt - t) + pl.get("post", 0.06))
         planos.append(dict(pl, t0=t, t1=t + dur, lineas_t=lineas))
         t += dur
     total = t
@@ -296,7 +337,7 @@ def construir(ep):
                 s = int((k / FPS - li["t0"]) * SR)
                 seg = li["audio"][max(0, s - 700): s + 700]
                 e[k] = min(1.0, float(np.abs(seg).mean()) * 9) if len(seg) else 0
-    mus = v2.music(total + 1, 77)[: len(voz_tr)] * 0.18
+    mus = musica_tension(total + 1)[: len(voz_tr)] * 0.5
     mus = np.pad(mus, (0, max(0, len(voz_tr) - len(mus))))
     fx = np.zeros_like(voz_tr)
     rng = np.random.default_rng(1)
@@ -350,10 +391,11 @@ def construir(ep):
         for i, (quien, pos) in enumerate(acts):
             alto = pl.get("alto", 1150 if len(acts) == 1 else 860)
             img = actor_img(quien, alto)
-            entra = ease_back(lt / 0.45 - i * 0.25)
+            entra = ease_back(lt / 0.22 - i * 0.12)  # entrada rápida, con impacto
             hablando = env_por.get(quien, np.zeros(1))[min(k, len(env_por.get(quien, [0])) - 1)] if quien in env_por else 0
             resp = 1 + 0.012 * math.sin(tg * 2.4 + i)
-            sc = resp * (1 + 0.035 * hablando)
+            punch = 1 + 0.18 * max(0, 1 - lt / 0.22) ** 2 if pl.get("punch", True) else 1
+            sc = resp * (1 + 0.035 * hablando) * punch
             ov = cv2.resize(img, None, fx=sc, fy=sc, interpolation=cv2.INTER_LINEAR) if abs(sc - 1) > 0.002 else img
             bx = {"izq": -0.18, "c": 0.5, "der": 1.18, "ci": 0.22, "cd": 0.78}[pos]
             desde = -0.9 if bx < 0.5 else (1.9 if bx > 0.5 else 0.5)
@@ -394,7 +436,16 @@ def construir(ep):
             if li["t0"] - 0.05 <= tg <= li["t1"] + 0.15:
                 b = bocadillo(li["quien"], li["txt"], (tg - li["t0"]) / max(0.1, li["t1"] - li["t0"]))
                 comp(f, b, 0, H - b.shape[0] - 300)
+        if lt < 0.2 and pl.get("punch", True) and pl.get("actores"):
+            f = np.roll(f, (int(10 * math.sin(lt * 120)), int(12 * math.cos(lt * 100))), (0, 1))
         comp(f, cab, (W - cab.shape[1]) // 2, 205)
+        if ep.get("reloj"):
+            h0, h1 = ep["reloj"]
+            restante = h0 + (h1 - h0) * min(1, tg / total)  # horas que faltan, bajando
+            seg = max(0, int(restante * 3600))
+            rel = f"{seg // 3600:02d}:{seg % 3600 // 60:02d}:{seg % 60:02d}"
+            ri = reloj_img(rel, urgente=restante < 1)
+            comp(f, ri, (W - ri.shape[1]) // 2, 330)
         comp(f, bug, W - bug.shape[1] - 40, 24, 0.9)
         if k + 1 < n and next((x for x in planos if x["t0"] <= (k + 1) / FPS < x["t1"]), pl) is not pl:
             prev = f.copy()
@@ -408,30 +459,41 @@ def construir(ep):
 # ================================================================ capítulos
 X = "extra/"
 CAPITULOS = {
- 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1",
-         descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Quedan 24 horas para GTA 6 y Raul quiere robar la "
-                     "primera copia… pero alguien se acaba de salir del grupo. ¿Quién? 👇 Envíaselo a tu socio del "
-                     "crimen. Serie de fans · historia inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
+ 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1", reloj=(24.0, 0.02),
+         descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Raul quiere robar la primera copia de GTA 6… y "
+                     "alguien del grupo se acaba de salir. ¿Quién? 👇 Envíaselo a tu socio del crimen. "
+                     "Serie de fans · historia inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
          planos=[
-    dict(clip="clip_skyline_noche", cam=(1.0, 1.08, 0.5, 0.42), fx=["particulas"], golpe=True, grande="24 HORAS",
-         lineas=[("narrador", "Quedan veinticuatro horas para GTA seis. Y alguien va a robar la primera copia.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.0, 1.1, 0.3, 0.45), fx=["neon", "particulas"], actores=[("raul", "c")],
-         lineas=[("raul", "Escuchadme bien. Mañana a medianoche, la primera copia de GTA seis de Leonida va a ser nuestra.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.1, 1.18, 0.55, 0.62), fx=["neon"], actores=[("jason", "ci"), ("raul", "cd")],
-         lineas=[("jason", "¿Robar un videojuego? ¿Para eso me has despertado?"),
-                 ("raul", "No es un videojuego. Es el primero. El que lo tenga, jugará antes que nadie.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.05, 1.15, 0.6, 0.5), fx=["particulas"], actores=[("lucia", "c")],
-         lineas=[("lucia", "Suena a cárcel. Y yo de la cárcel acabo de salir.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.0, 1.1, 0.4, 0.55), actores=[("cal", "c")],
-         lineas=[("cal", "Yo pincho la radio de la Guardia Costera. Por si acaso. Tengo cervezas para tres días.")]),
-    dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.1, 0.5, 0.4), actores=[("brian", "ci"), ("boobie", "cd")],
-         lineas=[("brian", "El barco lo pongo yo. Y Lori hace sangría."),
-                 ("boobie", "Y mi club es la tapadera. Pero me llevo el cincuenta por ciento.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.12, 0.5, 0.5), fx=["policia"], golpe=True,
-         grande="«YO ME SALGO»", grande_size=110, oscuro=0.25,
-         lineas=[("narrador", "Pero esa noche, en el grupo, alguien escribió: yo me salgo. ¿Quién ha sido?")]),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.45,
-         lineas=[("narrador", "Capítulo dos, mañana. Envíaselo a tu socio del crimen.")], post=0.8),
+    dict(fondo=X + "x038_album_background_desktop", cam=(1.15, 1.0, 0.5, 0.5), fx=["policia", "lluvia"], golpe=True,
+         grande="00:00", grande_size=170,
+         lineas=[("narrador", "Medianoche. Ocean Drive. Seis criminales... y una sola copia de GTA seis.")]),
+    dict(fondo=X + "x033_desktop", cam=(1.0, 1.05, 0.5, 0.5), oscuro=0.55, grande="24 HORAS ANTES", grande_size=110,
+         dur=1.0, golpe=True),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.25, 1.12, 0.3, 0.38), fx=["neon", "particulas"], actores=[("raul", "c")], alto=1300,
+         lineas=[("raul", "Mañana a las doce robamos la primera copia de GTA seis.")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1250,
+         lineas=[("jason", "¿Un videojuego? ¿En serio?")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.2, 1.3, 0.35, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1350,
+         lineas=[("raul", "El primero. El que lo tenga, juega antes que nadie.")]),
+    dict(fondo=X + "x017_vice_city", cam=(1.1, 1.2, 0.6, 0.5), fx=["particulas"], actores=[("lucia", "c")], alto=1300,
+         lineas=[("lucia", "Raul, acabo de salir de la cárcel.")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.45, 0.3, 0.32), fx=["neon"], actores=[("raul", "c")], alto=1450,
+         lineas=[("raul", "Por eso. Nadie sospecha de ti.")]),
+    dict(fondo=X + "x012_Hero_BG", cam=(1.0, 1.15, 0.4, 0.55), actores=[("cal", "c")], alto=1250,
+         lineas=[("cal", "Yo pincho la radio de la Guardia Costera.")]),
+    dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.5, 0.4), actores=[("brian", "ci"), ("boobie", "cd")],
+         lineas=[("brian", "Yo pongo el barco."), ("boobie", "Y yo el club. Pero me quedo la mitad.")]),
+    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.15, 0.5, 0.5), fx=["policia"], golpe=True,
+         grande="«YO ME SALGO»", grande_size=110, oscuro=0.3,
+         lineas=[("narrador", "Pero esa noche, alguien del grupo escribió: yo me salgo.")]),
+    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("jason", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x017_vice_city", oscuro=0.2, actores=[("lucia", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x012_Hero_BG", oscuro=0.2, actores=[("cal", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("brian", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("boobie", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("raul", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5,
+         golpe=True, lineas=[("narrador", "Capítulo dos, mañana. Envíaselo a tu socio del crimen.")], post=0.5),
  ]),
 }
 
