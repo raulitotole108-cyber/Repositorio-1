@@ -8,7 +8,7 @@ S("k01-lucia",
   "3 cosas de LUCIA que no sabías 😳 #shorts",
   "La tercera casi nadie la sabe. #GTA6 #Lucia #shorts",
   [
-   ("Lucia_Caminos_13", "¡Para! Tres cosas de Lucia que seguro que no sabías. La tercera casi nadie la conoce.", "!¡PARA!"),
+   ("Lucia_Caminos_13#full", "¡Para! Tres cosas de Lucia que seguro que no sabías. La tercera casi nadie la conoce.", "!¡PARA!"),
    ("Lucia_Caminos_02", "Una: es la primera protagonista mujer de la saga desde el primer GTA, el de mil novecientos noventa y siete.", "!1/3 · 1997"),
    ("Lucia_Caminos_05", "Dos: según Rockstar, salió de la cárcel de Leonida por pura suerte.", "2/3 · LA CÁRCEL"),
    ("Lucia_Caminos_11", "Y tres: su madre soñaba con la buena vida desde sus días en Liberty City. Sí, la ciudad de GTA cuatro.", "!3/3 · LIBERTY CITY"),
