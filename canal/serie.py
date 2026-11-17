@@ -497,7 +497,7 @@ CAPITULOS = {
          planos=[
     dict(fondo=X + "x067_poster", cam=(1.25, 1.1, 0.42, 0.5), fx=["policia"], golpe=True,
          noti=("Número desconocido", "Sé lo que vais a hacer."),
-         grande="¿QUIÉN ES EL TRAIDOR?", grande_size=96, grande_y=0.66,
+         grande="¿QUIÉN ES EL TRAIDOR?", grande_size=96, grande_y=0.55,
          lineas=[("narrador", "¡Alto! Este mensaje lo mandó alguien de la banda. ¿Quién?")]),
     dict(fondo=X + "x033_desktop", cam=(1.0, 1.05, 0.5, 0.5), oscuro=0.55, grande="24 HORAS ANTES", grande_size=110,
          dur=0.7, golpe=True),
@@ -541,7 +541,7 @@ CAPITULOS = {
                      "Serie de fans · historia inventada #gta6 #gtavi #serie #jasonduval #fyp #parati",
          planos=[
     dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.2, 0.3, 0.36), fx=["policia"], golpe=True, actores=[("raul", "c")], alto=1450,
-         noti=("Móvil encontrado", "En la chaqueta de Jason."), grande="¿FUE JASON?", grande_y=0.68,
+         noti=("Móvil encontrado", "En la chaqueta de Jason."), grande="¿FUE JASON?", grande_y=0.55,
          lineas=[("narrador", "¡Quieto! El móvil del traidor estaba en la chaqueta de Jason.")]),
     dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1300,
          lineas=[("jason", "Ese móvil no es mío. Me lo han metido.")]),
@@ -566,7 +566,7 @@ CAPITULOS = {
                      "inventada #gta6 #gtavi #serie #fyp #parati",
          planos=[
     dict(fondo=X + "x012_Hero_BG", cam=(1.3, 1.15, 0.45, 0.5), fx=["policia"], golpe=True, actores=[("cal", "c")], alto=1450,
-         grande="ESA VOZ...", grande_y=0.66,
+         grande="ESA VOZ...", grande_y=0.55,
          lineas=[("narrador", "¡Ojo! Cal acaba de oír la voz del chivato por la radio de la policía. Y la conoce.")]),
     dict(clip="clip_port_gellhorn_tormenta", cam=(1.0, 1.1, 0.5, 0.5), fx=["lluvia"], grande="6 HORAS ANTES", dur=0.9),
     dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.4, 0.55), actores=[("brian", "c")], alto=1250,
@@ -614,7 +614,7 @@ CAPITULOS = {
                      "Capítulo 5 de UN ÚLTIMO GOLPE. ¿Quién? Comenta 👇 y envíaselo a tu socio del crimen. Serie de "
                      "fans · historia inventada #gta6 #gtavi #serie #fyp #parati",
          planos=[
-    dict(fondo="ULTIMATE_EDITION_02", cam=(1.3, 1.1, 0.5, 0.5), golpe=True, grande="SIN DISCO", grande_y=0.42,
+    dict(fondo=X + "x055_mediaDesktop", cam=(1.3, 1.1, 0.5, 0.5), fx=["policia"], golpe=True, grande="SIN DISCO", grande_y=0.42,
          lineas=[("narrador", "¡Mira esto! Han robado GTA seis... y la caja está vacía.")]),
     dict(clip="clip_cayos_hidroavion", cam=(1.0, 1.1, 0.5, 0.5), grande="LA HUIDA", dur=1.0),
     dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.4, 0.55), actores=[("brian", "c")], alto=1300,
@@ -638,7 +638,7 @@ CAPITULOS = {
                      "#fyp #parati",
          planos=[
     dict(fondo=X + "x012_Hero_BG", cam=(1.35, 1.15, 0.45, 0.5), fx=["policia"], golpe=True, actores=[("cal", "c")], alto=1450,
-         grande="EL TRAIDOR", grande_y=0.66,
+         grande="EL TRAIDOR", grande_y=0.55,
          lineas=[("narrador", "¡No deslices! Por fin sabemos quién es el traidor. Y nadie lo vio venir.")]),
     dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450,
          lineas=[("raul", "Os voy a contar algo. El primer mensaje lo mandé yo.")]),
