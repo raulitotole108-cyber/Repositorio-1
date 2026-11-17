@@ -65,3 +65,10 @@ sin red, no publican). El perfil de voz está en `.claude/youtube/voice.md`; có
 - `/yt-viral`: qué funciona en el nicho, ordenado por cuántas veces supera la media de su propio canal.
 - `/yt-plan`: plan semanal. `/yt-comment`: respuestas a comentarios. `/yt-retention`: lectura de la retención.
 - `/yt-shorts`, `/yt-edit`, `/yt-audit`.
+
+## Voz (medido en los virales que pasó el usuario, 17/11)
+
+Los narradores virales hablan a **3,1–4,4 palabras/s** (media ≈ 4), con tono masculino de **125–155 Hz** y
+una variación de entonación de **11–23 semitonos**. Nuestra voz neural sin ajustar iba a ~2 palabras/s:
+lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0,1 s, narrador de la serie
+`es-ES-AlvaroNeural` a -12 Hz y +34 % (≈ 4,4 palabras/s, 119 Hz).

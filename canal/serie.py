@@ -37,13 +37,13 @@ MS = str(HERE / "fuentes" / "Montserrat-ExtraBold.ttf")
 
 # reparto: voz neural, tono, velocidad, color del nombre
 REPARTO = {
-    "narrador": ("es-ES-AlvaroNeural", "-18Hz", "+4%", (255, 255, 255)),  # voz de tráiler: grave, española
-    "raul": ("es-ES-AlvaroNeural", "-6Hz", "+14%", (230, 230, 230)),
-    "jason": ("es-MX-JorgeNeural", "-2Hz", "+18%", (120, 190, 255)),
-    "lucia": ("es-ES-XimenaNeural", "+0Hz", "+18%", (255, 120, 190)),
-    "cal": ("es-AR-TomasNeural", "+4Hz", "+24%", (255, 200, 80)),
-    "brian": ("es-CO-GonzaloNeural", "-10Hz", "+10%", (255, 150, 90)),
-    "boobie": ("es-CU-ManuelNeural", "-8Hz", "+14%", (200, 160, 255)),
+    "narrador": ("es-ES-AlvaroNeural", "-12Hz", "+34%", (255, 255, 255)),  # grave y a ~4,4 palabras/s, como los virales
+    "raul": ("es-ES-AlvaroNeural", "-2Hz", "+26%", (230, 230, 230)),
+    "jason": ("es-MX-JorgeNeural", "-2Hz", "+28%", (120, 190, 255)),
+    "lucia": ("es-ES-XimenaNeural", "+0Hz", "+28%", (255, 120, 190)),
+    "cal": ("es-AR-TomasNeural", "+4Hz", "+32%", (255, 200, 80)),
+    "brian": ("es-CO-GonzaloNeural", "-10Hz", "+20%", (255, 150, 90)),
+    "boobie": ("es-CU-ManuelNeural", "-8Hz", "+24%", (200, 160, 255)),
 }
 NOMBRES = {"raul": "RAUL", "jason": "JASON", "lucia": "LUCIA", "cal": "CAL", "brian": "BRIAN", "boobie": "BOOBIE"}
 
@@ -69,7 +69,7 @@ def voz(quien, texto):
                 time.sleep(2 * (i + 1))
         fx_voz = v2.VOICE_FX
         if quien == "narrador":  # más cuerpo en graves y un poco de sala, como un narrador de cine
-            fx_voz = "equalizer=f=110:t=q:w=1:g=5,equalizer=f=3000:t=q:w=1:g=2," + v2.VOICE_FX + ",aecho=0.8:0.6:45:0.18"
+            fx_voz = "equalizer=f=110:t=q:w=1:g=5,equalizer=f=3000:t=q:w=1:g=2," + v2.VOICE_FX + ",aecho=0.8:0.4:35:0.10"
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-af", fx_voz,
                         "-ar", str(SR), "-ac", "1", str(wav)], check=True)
     x = v2.read_wav(wav)
