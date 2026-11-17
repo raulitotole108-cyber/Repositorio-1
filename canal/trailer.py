@@ -28,7 +28,7 @@ FUENTES = HERE / "fuentes"
 OUT = HERE.parent / "salida_trailer"
 W, H, FPS = 1920, 1080, 60
 BAR = 70  # bandas negras (≈ 2.0:1)
-MAX_FR_CLIP = 90
+MAX_FR_CLIP = 45
 
 
 def ease(x):
@@ -423,6 +423,9 @@ def trailer_corto(nombre="trailer-corto", bpm=115):
             p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
             k_glob += 1
         t += dur
+        # liberar la memoria del clip si el siguiente plano no lo usa (los clips 4K ocupan mucho)
+        if src_n.startswith("CLIP:") and (i + 1 >= len(planos) or planos[i + 1] != src_n):
+            _cache.pop(src_n[5:], None)
     p.stdin.close()
     p.wait()
     print("OK", out, f"{total:.1f} s", flush=True)
