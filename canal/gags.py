@@ -151,6 +151,7 @@ def chat_frame(t, titulo, msgs, sub=None):
                     im.alpha_composite(b, (0, int(y)))
         y += h_
     # la cabecera se pinta al final para tapar los mensajes que suben con el scroll
+    im.paste((0, 0, 0, 0), (0, 0, W, 230))
     d = ImageDraw.Draw(im)
     d.rectangle([40, 230, W - 40, 385], fill=(18, 12, 30, 255))
     d.rounded_rectangle([40, 230, W - 40, 360], 40, fill=(42, 14, 63, 255))
@@ -203,10 +204,19 @@ def lista_frame(t, titulo, items, t_tacha):
     """items: (t_aparece, texto, t_tachado or None, resaltado)"""
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle([60, 260, W - 60, H - 380], 40, fill=(255, 250, 240, 245))
-    d.text((110, 300), titulo, font=F(MSB, 52), fill=(42, 14, 63, 255))
-    d.line([110, 380, W - 110, 380], fill=(255, 79, 163, 255), width=6)
-    y = 420
+    # medir antes de pintar: la tarjeta crece con el contenido y el título se parte en líneas
+    tl = wrap(titulo, F(MSB, 52), W - 220)
+    alto = 0
+    for _, txt, _, res in items:
+        f_ = F(MSB, 70) if res else F(MS, 54)
+        alto += int(f_.size * 1.25) * len(wrap(("• " if not res else "") + txt, f_, W - 240)) + (34 if not res else 40)
+    y_lin = 300 + 64 * len(tl) + 16
+    fondo_y = max(H - 380, y_lin + 40 + alto + 30)
+    d.rounded_rectangle([60, 260, W - 60, fondo_y], 40, fill=(255, 250, 240, 245))
+    for j, l in enumerate(tl):
+        d.text((110, 300 + 64 * j), l, font=F(MSB, 52), fill=(42, 14, 63, 255))
+    d.line([110, y_lin, W - 110, y_lin], fill=(255, 79, 163, 255), width=6)
+    y = y_lin + 40
     for t0, txt, tt, res in items:
         if t < t0:
             continue
