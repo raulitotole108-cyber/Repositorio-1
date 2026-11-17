@@ -265,7 +265,7 @@ CUENTA = {
 }
 
 if __name__ == "__main__":
-    args = [a for a in sys.argv[1:] if a != "rapido"]
+    args = [a for a in sys.argv[1:] if a not in ("rapido", "dia")]
     if not sys.argv[1:]:
         main()
     for nombre in args:
@@ -394,3 +394,14 @@ RAPIDO = [("Vice_City_13", 2), ("Vice_City_22", 2),  # intro (4 pulsos)
 
 if __name__ == "__main__" and sys.argv[1:2] == ["rapido"]:
     edit_rapido("edit-dembow", RAPIDO)
+
+
+DIA = [("Leonida_Keys_05", 4, "in"), ("Vice_City_26", 4, "out"), ("Vice_City_05", 4, "left"),
+       ("ULTIMATE_EDITION_SQUALO_01", 4, "right"), ("Leonida_Keys_02", 2, "in"), ("Vice_City_02", 2, "left"),
+       ("Port_Gellhorn_02", 2, "in"), ("Jason_and_Lucia_16", 2, "out"), ("Grassrivers_02", 2, "right"),
+       ("Vice_City_09", 2, "in"), ("Mount_Kalaga_National_Park_01", 2, "left"), ("Vice_City_03", 2, "in"),
+       ("Leonida_Keys_07", 2, "out"), ("Ambrosia_02", 2, "in"), ("Jason_Lucia_Lock_And_Load_landscape", 2, "in"),
+       ("Vice_City_15", 2, "left"), ("Leonida_Keys_01", 4, "out")]
+
+if __name__ == "__main__" and sys.argv[1:2] == ["dia"]:
+    main("aura-de-dia", DIA, None, "", ("19 · 11 · 2026", "EL VERANO ETERNO DE LEONIDA"), drop=4, semilla=21)
