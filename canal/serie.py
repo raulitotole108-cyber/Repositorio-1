@@ -37,7 +37,7 @@ MS = str(HERE / "fuentes" / "Montserrat-ExtraBold.ttf")
 
 # reparto: voz neural, tono, velocidad, color del nombre
 REPARTO = {
-    "narrador": ("it-IT-GiuseppeMultilingualNeural", "-4Hz", "+14%", (255, 255, 255)),
+    "narrador": ("es-ES-AlvaroNeural", "-18Hz", "+4%", (255, 255, 255)),  # voz de tráiler: grave, española
     "raul": ("es-ES-AlvaroNeural", "-6Hz", "+14%", (230, 230, 230)),
     "jason": ("es-MX-JorgeNeural", "-2Hz", "+18%", (120, 190, 255)),
     "lucia": ("es-ES-XimenaNeural", "+0Hz", "+18%", (255, 120, 190)),
@@ -67,7 +67,10 @@ def voz(quien, texto):
             except Exception:
                 import time
                 time.sleep(2 * (i + 1))
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-af", v2.VOICE_FX,
+        fx_voz = v2.VOICE_FX
+        if quien == "narrador":  # más cuerpo en graves y un poco de sala, como un narrador de cine
+            fx_voz = "equalizer=f=110:t=q:w=1:g=5,equalizer=f=3000:t=q:w=1:g=2," + v2.VOICE_FX + ",aecho=0.8:0.6:45:0.18"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-af", fx_voz,
                         "-ar", str(SR), "-ac", "1", str(wav)], check=True)
     x = v2.read_wav(wav)
     nz = np.where(np.abs(x) > 0.01)[0]
