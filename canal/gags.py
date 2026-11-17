@@ -712,3 +712,71 @@ if __name__ == "__main__" and sys.argv[1:2] == ["noche"]:
     OUT = r3.HERE.parent / "salida_gags"
     dur, fb, capa, son, gol = n01()
     render("n01-noche-perfecta-2013-vs-2026", dur, fb, capa, son, gol)
+
+
+# ================================================================ tanda "dale" (ideas 1, 3, 4 y 10)
+def d01():
+    items = [(0.4, "Min. 0 · 5 minutos mirando el menú porque es precioso", None, False),
+             (2.0, "Min. 2 · Peluquería para Lucia", None, False),
+             (3.4, "Min. 4 · Probar el claxon de todos los coches", None, False),
+             (4.8, "Min. 6 · Atropellar a alguien sin querer", None, False),
+             (6.0, "Min. 7 · Tres estrellas", None, False),
+             (7.2, "Min. 8 · Tirarte al agua para escapar", None, False),
+             (8.4, "Min. 9 · Descubrir que en el agua hay caimanes", None, False),
+             (10.0, "Min. 10 · Cargar partida", None, True)]
+    bg = fondo("extra/x050_hero_background_ultrawide", 420, 0.4)
+    son = [(t0, "pop") for t0, *_ in items[:-1]] + [(8.4, "boom"), (10.0, "scratch")]
+    return 13.0, (lambda k, t: bg(k)), (lambda t: lista_frame(t, "Tus primeros 10 minutos en GTA 6:", items, None)), son, (8.4, 10.0)
+
+
+def d02():
+    items = [(0.4, "5. «Se me ha muerto el pez»", None, False),
+             (2.0, "4. «Tengo que llevar a mi abuela a Florida»", None, False),
+             (3.8, "3. «Me he quedado encerrado en el baño»", None, False),
+             (5.6, "2. «Mi PS5 está malita y no la puedo dejar sola»", None, False),
+             (7.8, "1. «Fiebre de 212 GB»", None, True)]
+    bg = fondo("extra/x033_desktop", 330, 0.4)
+    son = [(t0, "pop") for t0, *_ in items[:-1]] + [(7.8, "scratch"), (7.85, "boom")]
+    return 10.8, (lambda k, t: bg(k)), (lambda t: lista_frame(t, "Excusas para faltar el jueves:", items, None)), son, (7.8,)
+
+
+DALE = [
+ ("d01-primeros-10-minutos", d01, "Tus primeros 10 minutos en GTA 6 😂 ¿Cuál vas a hacer tú? 👇 #gta6 #gtavi #humor #meme #fyp #parati"),
+ ("d02-excusas-jueves", d02, "Top 5 excusas para faltar el jueves 🤒 La 1 nunca falla #gta6 #gtavi #humor #meme #trabajo #fyp #parati"),
+ ("d03-mi-ps5", lambda: chat_gag("PS5", "descargando...", "extra/x066_pre_load_mobile", [
+      (0, "yo", "¿Cómo vas?"),
+      (0, "el", "99 %"),
+      (0, "yo", "¿Y ahora?"),
+      (0, "el", "99 %"),
+      (0, "yo", "Venga, que son las 23:59"),
+      (0.3, "esc", "PS5"),
+      (0, "el", "Necesito que borres el Fortnite"),
+      (0, "yo", "Hecho"),
+      (0, "el", "Y el FIFA"),
+      (0, "yo", "Hecho"),
+      (0.3, "esc", "PS5"),
+      (0, "el", "Y las fotos de tu boda")], (6, 11)),
+  "Mi PS5 a las 23:59 💀 ¿Qué borrarías tú? #gta6 #gtavi #ps5 #humor #meme #fyp #parati"),
+ ("d04-whatsapp-del-atraco", lambda: chat_gag("Golpe del jueves", "Raul, Jason, Lucia, Cal, Brian", "extra/x055_mediaDesktop", [
+      (0, "el", "Plan: entramos el jueves a las 00:00", "Raul"),
+      (0, "el", "Yo vigilo la radio de la Guardia Costera", "Cal"),
+      (0, "el", "Jason, ¿traes las máscaras?", "Lucia"),
+      (0, "el", "Traigo las máscaras, el coche y seis pizzas", "Jason"),
+      (0, "el", "¿Seis pizzas?", "Raul"),
+      (0, "el", "Es que va para largo. Son 212 GB", "Jason"),
+      (0, "el", "Lori ha hecho sangría para todos", "Brian"),
+      (0, "el", "Esto es un atraco, no un cumpleaños", "Raul"),
+      (0.3, "sis", "Brian cambió el nombre a «Cumple de Raul»")], (5, 8)),
+  "Si los personajes de GTA 6 tuvieran WhatsApp 😂 Parte 1 #gta6 #gtavi #humor #meme #whatsapp #fyp #parati"),
+]
+
+if __name__ == "__main__" and sys.argv[1:2] == ["dale"]:
+    OUT = r3.HERE.parent / "salida_dale"
+    OUT.mkdir(exist_ok=True)
+    with open(OUT / "descripciones.txt", "w", encoding="utf-8") as fd:
+        for slug, fn, desc in DALE:
+            fd.write(f"{slug}\n{desc}\n\n")
+            if sys.argv[2:] and not any(slug.startswith(x) for x in sys.argv[2:]):
+                continue
+            dur, fb, capa, son, gol = fn()
+            render(slug, dur, fb, capa, son, gol)
