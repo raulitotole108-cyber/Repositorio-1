@@ -265,6 +265,23 @@ def cabecera(txt):
     return r3.cabecera_img(txt)
 
 
+def noti_img(quien, texto, _c={}):
+    if (quien, texto) not in _c:
+        f, fb = F(MS, 52), F(MSB, 40)
+        lines = wrap(texto, f, W - 260)
+        h = 150 + 66 * len(lines)
+        im = Image.new("RGBA", (W - 100, h), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        d.rounded_rectangle([0, 0, W - 101, h - 1], 44, fill=(245, 245, 250, 245))
+        d.rounded_rectangle([34, 34, 104, 104], 18, fill=(40, 200, 90, 255))
+        d.text((128, 40), quien.upper(), font=fb, fill=(60, 60, 70, 255))
+        d.text((W - 150, 44), "ahora", font=F(MS, 32), fill=(120, 120, 130, 255), anchor="ra")
+        for i, l in enumerate(lines):
+            d.text((40, 124 + 66 * i), l, font=f, fill=(15, 15, 20, 255))
+        _c[(quien, texto)] = cv2.cvtColor(np.array(im), cv2.COLOR_RGBA2BGRA)
+    return _c[(quien, texto)]
+
+
 def reloj_img(txt, urgente=False, _c={}):
     if (txt, urgente) not in _c:
         _c.clear()
@@ -424,6 +441,12 @@ def construir(ep):
             mezcla[:, W - off:] = f[:, :off]
             f = cv2.blur(mezcla, (int(10 + 60 * math.sin(math.pi * a)), 1))
         f = grano_vineta(f, k)
+        # notificación de móvil (entra de golpe desde arriba y vibra)
+        if pl.get("noti"):
+            ni = noti_img(*pl["noti"])
+            ent = ease_back(lt / 0.3)
+            vib = int(10 * math.sin(lt * 70)) if lt < 0.6 else 0
+            comp(f, ni, (W - ni.shape[1]) // 2 + vib, int(-ni.shape[0] + (ni.shape[0] + 620) * ent))
         # texto grande
         if pl.get("grande"):
             g = gordos.setdefault(pl["grande"], texto_gordo(pl["grande"], pl.get("grande_size", 130)))
@@ -461,38 +484,46 @@ def construir(ep):
 X = "extra/"
 CAPITULOS = {
  1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1", reloj=(24.0, 0.02), reloj_desde=2,
-         descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Raul quiere robar la primera copia de GTA 6… y "
-                     "alguien del grupo se acaba de salir. ¿Quién? 👇 Envíaselo a tu socio del crimen. "
-                     "Serie de fans · historia inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
+         descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Robar la primera copia de GTA 6… de la caja fuerte "
+                     "de la comisaría de Vice City. Pero el mensaje venía de alguien de esa misma sala 😳 ¿Quién es "
+                     "el traidor? 👇 Envíaselo a tu socio del crimen. Serie de fans · historia inventada "
+                     "#gta6 #gtavi #serie #raulbautista #fyp #parati",
          planos=[
     dict(fondo=X + "x038_album_background_desktop", cam=(1.15, 1.0, 0.5, 0.5), fx=["policia", "lluvia"], golpe=True,
          grande="00:00", grande_size=170,
-         lineas=[("narrador", "Medianoche. Ocean Drive. Seis criminales... y una sola copia de GTA seis.")]),
+         lineas=[("narrador", "Medianoche. Ocean Drive. Uno de ellos va a traicionar al resto.")]),
     dict(fondo=X + "x033_desktop", cam=(1.0, 1.05, 0.5, 0.5), oscuro=0.55, grande="24 HORAS ANTES", grande_size=110,
-         dur=1.0, golpe=True),
+         dur=0.9, golpe=True),
     dict(fondo=X + "x016_Hero_BG", cam=(1.25, 1.12, 0.3, 0.38), fx=["neon", "particulas"], actores=[("raul", "c")], alto=1300,
-         lineas=[("raul", "Mañana a las doce robamos la primera copia de GTA seis.")]),
+         lineas=[("raul", "Mañana robamos la primera copia de GTA seis.")]),
     dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1250,
-         lineas=[("jason", "¿Un videojuego? ¿En serio?")]),
+         lineas=[("jason", "¿Y dónde está?")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.45, 0.3, 0.32), fx=["neon"], actores=[("raul", "c")], alto=1400,
+         golpe=True, grande="COMISARÍA", grande_size=120, grande_y=0.3,
+         lineas=[("raul", "En la caja fuerte de la comisaría de Vice City.")]),
+    dict(fondo=X + "x017_vice_city", cam=(1.1, 1.2, 0.6, 0.5), actores=[("lucia", "c")], alto=1300,
+         lineas=[("lucia", "¿En la comisaría? Estás loco.")]),
     dict(fondo=X + "x016_Hero_BG", cam=(1.2, 1.3, 0.35, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1350,
-         lineas=[("raul", "El primero. El que lo tenga, juega antes que nadie.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.1, 1.2, 0.6, 0.5), fx=["particulas"], actores=[("lucia", "c")], alto=1300,
-         lineas=[("lucia", "Raul, acabo de salir de la cárcel.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.45, 0.3, 0.32), fx=["neon"], actores=[("raul", "c")], alto=1450,
-         lineas=[("raul", "Por eso. Nadie sospecha de ti.")]),
+         lineas=[("raul", "Por eso pago bien. Un millón por cabeza.")]),
     dict(fondo=X + "x012_Hero_BG", cam=(1.0, 1.15, 0.4, 0.55), actores=[("cal", "c")], alto=1250,
-         lineas=[("cal", "Yo pincho la radio de la Guardia Costera.")]),
+         lineas=[("cal", "Yo pincho la radio de la policía.")]),
     dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.5, 0.4), actores=[("brian", "ci"), ("boobie", "cd")],
-         lineas=[("brian", "Yo pongo el barco."), ("boobie", "Y yo el club. Pero me quedo la mitad.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.15, 0.5, 0.5), fx=["policia"], golpe=True,
-         grande="«YO ME SALGO»", grande_size=110, oscuro=0.3,
-         lineas=[("narrador", "Pero esa noche, alguien del grupo escribió: yo me salgo.")]),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("jason", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x017_vice_city", oscuro=0.2, actores=[("lucia", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x012_Hero_BG", oscuro=0.2, actores=[("cal", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("brian", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("boobie", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("raul", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
+         lineas=[("brian", "Yo pongo el barco."), ("boobie", "Y yo el club. La mitad para mí.")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.1, 1.0, 0.5, 0.5), fx=["policia"], oscuro=0.35, golpe=True,
+         noti=("Número desconocido", "Sé lo que vais a hacer. 🙂".replace(" 🙂", "")), dur=1.6),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450,
+         lineas=[("raul", "¿Quién más sabe esto?")]),
+    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.35, 0.7, 0.66), fx=["neon"], actores=[("jason", "c")], alto=1300,
+         lineas=[("jason", "Nadie. Solo nosotros seis.")]),
+    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.15, 0.5, 0.5), fx=["policia"], golpe=True, oscuro=0.35,
+         grande="ESTABA AQUÍ", grande_size=120,
+         lineas=[("narrador", "El mensaje venía de un móvil... que estaba en esa misma sala.")]),
+    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("jason", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
+    dict(fondo=X + "x017_vice_city", oscuro=0.2, actores=[("lucia", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
+    dict(fondo=X + "x012_Hero_BG", oscuro=0.2, actores=[("cal", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
+    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("brian", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
+    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("boobie", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
+    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("raul", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
     dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5,
          golpe=True, lineas=[("narrador", "Capítulo dos, mañana. Envíaselo a tu socio del crimen.")], post=0.5),
  ]),
