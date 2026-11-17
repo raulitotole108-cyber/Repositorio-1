@@ -265,9 +265,132 @@ CUENTA = {
 }
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    if not args:
+    args = [a for a in sys.argv[1:] if a != "rapido"]
+    if not sys.argv[1:]:
         main()
     for nombre in args:
         tit, esq, planos, fin = CUENTA[nombre]
         main(nombre, planos, tit, esq, fin, final_beats=5, drop=2, semilla=len(nombre))
+
+
+# ================================================================ edit rápido al ritmo (un corte por golpe)
+def musica_dembow(dur, bpm, t_drop):
+    """Base original de dembow: bombo en cada pulso, caja con el patrón típico, bajo y acordes."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    beat = 60 / bpm
+    out = np.zeros(n, np.float32)
+    rnd = np.random.default_rng(5)
+
+    def put(x, at, g=1.0):
+        a = int(at * SR)
+        if a < n:
+            out[a:a + len(x)] += x[: n - a] * g
+    L = int(0.3 * SR)
+    tt = np.arange(L) / SR
+    kick = (np.sin(2 * np.pi * (48 + 110 * np.exp(-tt * 35)) * tt) * np.exp(-tt * 9)).astype(np.float32)
+    snare = (lp(rnd.standard_normal(L).astype(np.float32), 7000) * np.exp(-tt * 22) * 0.5 +
+             np.sin(2 * np.pi * 190 * tt) * np.exp(-tt * 30) * 0.3).astype(np.float32)
+    hat = (rnd.standard_normal(int(0.05 * SR)).astype(np.float32) * np.exp(-np.arange(int(0.05 * SR)) / SR * 80) * 0.12)
+    acordes = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]
+    nb = int(dur / beat)
+    for k in range(nb):
+        tb = k * beat
+        if tb >= t_drop:
+            put(kick, tb, 0.9)
+            # dembow: caja en el 2º y 4º semicorchea "adelantada" de cada pulso par
+            if k % 2 == 0:
+                put(snare, tb + beat * 0.75, 0.8)
+            else:
+                put(snare, tb + beat * 0.5, 0.8)
+            for s16 in range(4):
+                put(hat, tb + s16 * beat / 4, 0.9 if s16 % 2 else 0.5)
+        # bajo y acordes cortos (stabs)
+        ac = acordes[(k // 4) % 4]
+        if tb >= t_drop or k % 2 == 0:
+            Lb = int(beat * 0.9 * SR)
+            tb_ = np.arange(Lb) / SR
+            put((np.sin(2 * np.pi * nota(ac[0] - 12) * tb_) * np.exp(-tb_ * 3) * 0.45).astype(np.float32), tb)
+            stab = sum(saw(nota(x + 12), tb_[: int(0.18 * SR)]) for x in ac) * np.exp(-tb_[: int(0.18 * SR)] * 14)
+            put(lp(stab.astype(np.float32), 3000) * 0.10, tb + beat * 0.5)
+    # subida y golpe en el drop
+    a, b = int(max(0, t_drop - 1.6) * SR), int(t_drop * SR)
+    put(lp(rnd.standard_normal(b - a).astype(np.float32), 3000) * (np.linspace(0, 1, b - a) ** 2) * 0.4, t_drop - 1.6)
+    put(v2.sfx_boom(), t_drop, 1.0)
+    out = reverb(out, 0.2)
+    fe = int((dur - 1.5) * SR)
+    out[fe:] *= np.linspace(1, 0, n - fe)
+    return out / np.abs(out).max() * 0.92
+
+
+def rgb_split(f, px):
+    if px <= 0:
+        return f
+    b, g, r = cv2.split(f)
+    return cv2.merge([np.roll(b, -px, 1), g, np.roll(r, px, 1)])
+
+
+def edit_rapido(nombre, planos, bpm=118, intro_beats=4, final=("19 · 11", "NOS VEMOS EN LEONIDA"), semilla=11):
+    """planos: (imagen, beats). Corte en cada golpe, zoom de impacto, temblor, separación RGB y destellos."""
+    OUT.mkdir(exist_ok=True)
+    beat = 60 / bpm
+    rnd_py, rnd = random.Random(semilla), np.random.default_rng(semilla)
+    t_drop = intro_beats * beat
+    total_beats = sum(b for _, b in planos)
+    fin_beats = 6
+    dur = (total_beats + fin_beats) * beat
+    wav = OUT / f".{nombre}.wav"
+    v2.write_wav(wav, musica_dembow(dur, bpm, t_drop))
+    out = OUT / f"{nombre}.mp4"
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{H}x{W}",
+           "-r", str(FPS), "-i", "-", "-i", str(wav), "-c:v", "libx264", "-preset", "slow", "-crf", "21",
+           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out)]
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    bug = r3.to_bgra(r3.grad_text(r3.CANAL, r3.F(r3.RUBIK, 34), stroke=4, shadow=3))
+    t_acum, nfr, prev = 0.0, 0, None
+    for i, (img, beats) in enumerate(planos):
+        t_fin = t_acum + beats * beat
+        n = int(round(t_fin * FPS)) - nfr
+        vis = r3.Visual(img, n, rnd_py.choice(["in", "left", "right", "out"]), rnd_py)
+        rapido = t_acum >= t_drop - 1e-6
+        for k in range(n):
+            pk = 0.28 * (1 - k / 7) ** 2 if (rapido and k < 7) else 0.0  # zoom de impacto en cada corte
+            f = vis.frame(k, pk)
+            if rapido and k < 4:
+                f = np.roll(f, (int(10 * math.sin(k * 2.3)), int(14 * math.cos(k * 2.9))), (0, 1))
+                f = rgb_split(f, int(12 * (1 - k / 4)))
+            if not rapido and prev is not None and k < 6:
+                f = cv2.addWeighted(prev, 1 - (k + 1) / 7, f, (k + 1) / 7, 0)
+            beat_idx = int(round(t_acum / beat))
+            if rapido and k < 3 and beat_idx % 4 == 0:
+                f = cv2.addWeighted(f, 1, np.full_like(f, 255), 0.45 * (1 - k / 3), 0)
+            f = look(f, rnd)
+            if k == n - 1:
+                prev = f.copy()
+            r3.comp(f, bug, W - bug.shape[1] - 30, H - bug.shape[0] - 24, 0.8)
+            p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
+        nfr += n
+        t_acum = t_fin
+    nf = int(round(dur * FPS)) - nfr
+    for k in range(nf):
+        f = final_card(k, nf, *final)
+        if k < 5 and prev is not None:
+            f = cv2.addWeighted(prev, 1 - (k + 1) / 6, f, (k + 1) / 6, 0)
+        p.stdin.write(np.ascontiguousarray(cv2.rotate(f, cv2.ROTATE_90_CLOCKWISE)).tobytes())
+    p.stdin.close()
+    p.wait()
+    wav.unlink()
+    print("OK", out, f"{dur:.1f} s", flush=True)
+
+
+RAPIDO = [("Vice_City_13", 2), ("Vice_City_22", 2),  # intro (4 pulsos)
+          ("Jason_Duval_Video_Clip", 1), ("Vice_City_08", 1), ("Lucia_Caminos_Video_Clip", 1), ("Vice_City_17", 1),
+          ("Jason_and_Lucia_19", 1), ("Vice_City_05", 1), ("Leonida_Keys_04", 1), ("Grassrivers_03", 1),
+          ("Vice_City_24", 1), ("Jason_Duval_05", 1), ("Vice_City_26", 1), ("Port_Gellhorn_02", 1),
+          ("Mount_Kalaga_National_Park_05", 1), ("Vice_City_16", 1), ("ULTIMATE_EDITION_GROTTI_CHEETAH_02", 1),
+          ("Jason_Duval_13", 1), ("Leonida_Keys_05", 1), ("Vice_City_14", 1), ("Grassrivers_04", 1),
+          ("Raul_Bautista_02", 1), ("Vice_City_15", 1), ("Lucia_Caminos_11", 1), ("Vice_City_01", 2),
+          ("Jason_Lucia_Rooftop_landscape", 2)]
+
+if __name__ == "__main__" and sys.argv[1:2] == ["rapido"]:
+    edit_rapido("edit-dembow", RAPIDO)
