@@ -1,5 +1,23 @@
 # Reglas para CADA vídeo del canal (obligatorias)
 
+## Flujo obligatorio con las skills (SIEMPRE, en cada vídeo)
+
+1. **`/yt-script`**: escribir 5 ganchos con las 21 fórmulas (`.claude/skills/yt-script/hooks.json`),
+   puntuarlos con `python3 .claude/skills/yt-script/hookscore.py` y quedarse con el mejor. Guion con
+   las preguntas en cadena y el bucle (reglas de abajo).
+2. **`/yt-package`**: escribir 10 títulos, pasarlos por `python3 .claude/skills/yt-package/title.py`
+   junto con el texto de la miniatura o la cabecera (3 palabras como máximo y sin repetir el título),
+   y quedarse con el mejor.
+3. **`/yt-seo`**: descripción con las dos primeras líneas pensadas para la búsqueda y las 3 búsquedas que
+   el vídeo debería ganar (para TikTok, la descripción para pegar y sus hashtags).
+4. **`/yt-shorts`**: para cada Short, texto en pantalla en los 2 primeros segundos con palabras distintas
+   a las de la locución, y punto de bucle.
+5. Vídeos largos: además **`/yt-chapters`**. Semanalmente: **`/yt-plan`**; con comentarios:
+   **`/yt-comment`**; con datos de YouTube Studio: **`/yt-retention`** y **`/yt-audit`**.
+6. Con cada entrega, decir al usuario la nota del gancho y del título, y terminar con la pregunta de las
+   skills: **¿lo subes o lo cambiamos?**
+
+
 Sacadas del TikTok de referencia que pasó el usuario (@labsia_agency, «Por qué tu short se queda en
 200 visitas», 194 K vistas) y de todo lo analizado en `APRENDIZAJES_TIKTOK.md`. **Antes de montar
 cualquier vídeo, comprobar que cumple las 5 reglas. Si no las cumple, se reescribe el guion.**
