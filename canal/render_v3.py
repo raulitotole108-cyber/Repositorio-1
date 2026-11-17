@@ -53,6 +53,7 @@ TR = 9
 END_CARD = 8.0
 # posiciones (los Shorts verticales las cambian para esquivar la interfaz de TikTok/YouTube)
 CHIP_Y, STARS_Y, MASC_BOTTOM, SUB_Y_OFF = 110, 120, 135, 150
+MASCOTAS = True      # mascotas animadas que asoman (desactivadas en los Shorts)
 HOOK_PUNCH = False   # gancho agresivo en el primer plano (zoom de golpe, destello, temblor)
 HEAD_Y = 200         # posición del titular fijo (solo si el vídeo trae "cabecera")
 CAP_STYLE = "Style: Cap,Rubik Black,86,&H00FFFFFF,&H00FFFFFF,&H003F0E2A,&H963F0E2A,0,0,0,0,100,100,1,0,1,8,4,2,80,80,100,1"
@@ -425,7 +426,7 @@ def build(v):
         s["stars"] = bool(ACCION.search(s["txt"])) and not lab.startswith("!")
         s["notif"] = "comentarios" in s["txt"].lower()
         s["masc"] = None
-        if not lab.startswith("!") and (s["notif"] or i - last_masc >= 4) and i > 1:
+        if MASCOTAS and not lab.startswith("!") and (s["notif"] or i - last_masc >= 4) and i > 1:
             name = next((m for rg, m in MASCOTA_POR_TEMA if rg.search(s["txt"])), None)
             s["masc"] = name or rnd.choice(["sol", "flamenco", "palmera", "manati", "cangrejo"])
             s["masc_side"] = rnd.choice([0, 1])

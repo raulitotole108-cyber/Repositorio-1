@@ -30,7 +30,8 @@ r3.TR = 6                  # transiciones más rápidas
 r3.CHIP_Y = 400            # por debajo del titular fijo
 r3.STARS_Y = 410
 r3.HEAD_Y = 205            # titular fijo, justo bajo la barra superior de la app
-r3.HOOK_PUNCH = True       # el primer segundo entra de golpe
+r3.HOOK_PUNCH = True
+r3.MASCOTAS = False        # nada de mascotas en los Shorts       # el primer segundo entra de golpe
 r3.MASC_BOTTOM = 470       # por encima del título/descripción
 r3.SUB_Y_OFF = 420
 # subtítulos grandes, en el tercio inferior-central
@@ -87,6 +88,24 @@ class VVisual(r3.Visual):
         clip = r3.IMG / "clips" / f"{name}.mp4"
         if clip.exists():
             super().__init__(name, n, mode, rnd)   # el clip se recorta al centro
+            return
+        png = r3.IMG / f"{name}.png"
+        if not (r3.IMG / f"{name}.jpg").exists() and png.exists():
+            # personaje recortado oficial (con transparencia): sobre un degradado de atardecer
+            rgba = cv2.imread(str(png), cv2.IMREAD_UNCHANGED)
+            ys, xs = np.where(rgba[..., 3] > 10)
+            rgba = rgba[max(0, ys.min() - 20):ys.max() + 1, max(0, xs.min() - 20):xs.max() + 21]
+            ch, cw = rgba.shape[:2]
+            sc = min(W * 0.98 / cw, H * 0.72 / ch)
+            rgba = cv2.resize(rgba, (int(cw * sc), int(ch * sc)), interpolation=cv2.INTER_AREA)
+            bg = cv2.cvtColor(np.array(r3.grad(W, H, [r3.MORADO_OSC, r3.MORADO, r3.ROSA, r3.NARANJA]).convert("RGB")),
+                              cv2.COLOR_RGB2BGR)
+            x0, y0 = (W - rgba.shape[1]) // 2, H - rgba.shape[0] - 360
+            a = rgba[..., 3:4].astype(np.float32) / 255
+            roi = bg[y0:y0 + rgba.shape[0], x0:x0 + rgba.shape[1]].astype(np.float32)
+            bg[y0:y0 + rgba.shape[0], x0:x0 + rgba.shape[1]] = (roi * (1 - a) + rgba[..., :3] * a).astype(np.uint8)
+            self.big = cv2.resize(bg, (int(W * 1.04), int(H * 1.04)))
+            self.cx0, self.slack, self.dir, self.bg, self.full = self.big.shape[1] / 2, 0.0, 1, None, False
             return
         im = cv2.imread(str(r3.IMG / f"{name}.jpg"))
         h, w = im.shape[:2]
@@ -159,6 +178,10 @@ if __name__ == "__main__":
         from guiones_curiosidades import CURIOSIDADES
         lista, sel = CURIOSIDADES, sel[1:]
         r3.OUT = r3.HERE.parent / "salida_curiosidades"
+    elif sel and sel[0] == "nuevo":           # tanda con el material nuevo (arte 4K, verticales, clips 4K)
+        from guiones_nuevo import NUEVO
+        lista, sel = NUEVO, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_nuevo"
     elif sel and sel[0] == "ahora":           # tercera tanda: noticias de esta semana
         from guiones_ahora import AHORA
         lista, sel = AHORA, sel[1:]
