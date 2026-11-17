@@ -44,8 +44,11 @@ REPARTO = {
     "cal": ("es-AR-TomasNeural", "+4Hz", "+32%", (255, 200, 80)),
     "brian": ("es-CO-GonzaloNeural", "-10Hz", "+20%", (255, 150, 90)),
     "boobie": ("es-CU-ManuelNeural", "-8Hz", "+24%", (200, 160, 255)),
+    "agente": ("en-US-AndrewMultilingualNeural", "-14Hz", "+22%", (255, 80, 80)),
+    "coleccionista": ("es-CU-ManuelNeural", "-34Hz", "+10%", (170, 170, 170)),  # misma voz que Boobie, distorsionada
 }
-NOMBRES = {"raul": "RAUL", "jason": "JASON", "lucia": "LUCIA", "cal": "CAL", "brian": "BRIAN", "boobie": "BOOBIE"}
+NOMBRES = {"raul": "RAUL", "jason": "JASON", "lucia": "LUCIA", "cal": "CAL", "brian": "BRIAN", "boobie": "BOOBIE",
+           "agente": "AGENTE TORRES", "coleccionista": "???"}
 
 
 # ------------------------------------------------------------ voz
@@ -487,176 +490,200 @@ def construir(ep):
 
 # ================================================================ capítulos
 X = "extra/"
-CAPITULOS = {
- 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE", reloj=(24.0, 0.02), reloj_desde=1,
-         titulo="6 criminales quieren robar GTA 6. Uno miente",
-         descripcion="6 criminales quieren robar GTA 6. Uno miente 😳 Capítulo 1 de UN ÚLTIMO GOLPE: la primera copia "
-                     "está en la caja fuerte de la comisaría de Vice City… y alguien de la banda ya les ha vendido. "
-                     "¿Quién es el traidor? Comenta 👇 y envíaselo a tu socio del crimen. Serie de fans · historia "
-                     "inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
-         planos=[
-    dict(fondo=X + "x067_poster", cam=(1.25, 1.1, 0.42, 0.5), fx=["policia"], golpe=True,
-         noti=("Número desconocido", "Sé lo que vais a hacer."),
-         grande="¿QUIÉN ES EL TRAIDOR?", grande_size=96, grande_y=0.55,
-         lineas=[("narrador", "¡Alto! Este mensaje lo mandó alguien de la banda. ¿Quién?")]),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.05, 0.5, 0.5), oscuro=0.55, grande="24 HORAS ANTES", grande_size=110,
-         dur=0.7, golpe=True),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.25, 1.12, 0.3, 0.38), fx=["neon", "particulas"], actores=[("raul", "c")], alto=1300,
-         lineas=[("raul", "Mañana robamos la primera copia de GTA seis.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1250,
-         lineas=[("jason", "¿Y dónde está?")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.45, 0.3, 0.32), fx=["neon"], actores=[("raul", "c")], alto=1400,
-         golpe=True, grande="COMISARÍA", grande_size=120, grande_y=0.3,
-         lineas=[("raul", "En la caja fuerte de la comisaría de Vice City.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.1, 1.2, 0.6, 0.5), actores=[("lucia", "c")], alto=1300,
-         lineas=[("lucia", "¿En la comisaría? Estás loco.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.2, 1.3, 0.35, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1350,
-         lineas=[("raul", "Por eso pago bien. Un millón por cabeza.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.0, 1.15, 0.4, 0.55), actores=[("cal", "c")], alto=1250,
-         lineas=[("cal", "Yo pincho la radio de la policía.")]),
-    dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.5, 0.4), actores=[("brian", "ci"), ("boobie", "cd")],
-         lineas=[("brian", "Yo pongo el barco."), ("boobie", "Y yo el club. La mitad para mí.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.1, 1.0, 0.5, 0.5), fx=["policia"], oscuro=0.35, golpe=True,
-         noti=("Número desconocido", "Sé lo que vais a hacer. 🙂".replace(" 🙂", "")), dur=1.6),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450,
-         lineas=[("raul", "¿Quién más sabe esto?")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.35, 0.7, 0.66), fx=["neon"], actores=[("jason", "c")], alto=1300,
-         lineas=[("jason", "Nadie. Solo nosotros seis.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.15, 0.5, 0.5), fx=["policia"], golpe=True, oscuro=0.35,
-         grande="ESTABA AQUÍ", grande_size=120,
-         lineas=[("narrador", "El mensaje venía de un móvil... que estaba en esa misma sala.")]),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("jason", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x017_vice_city", oscuro=0.2, actores=[("lucia", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x012_Hero_BG", oscuro=0.2, actores=[("cal", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("brian", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.2, actores=[("boobie", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.2, actores=[("raul", "c")], alto=1500, dur=0.26, grande="¿QUIÉN?"),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5,
-         golpe=True, lineas=[("narrador", "Comenta quién crees que es, y envíaselo a tu socio del crimen. Porque ese mensaje decía...")],
-         post=0.2),
- ]),
- 2: dict(slug="cap02-sospechosos", cabecera="UN ÚLTIMO GOLPE", reloj=(20.0, 14.0), reloj_desde=0,
-         descripcion="El móvil del traidor estaba en la chaqueta de Jason 😳 Capítulo 2 de UN ÚLTIMO GOLPE. "
-                     "¿Le han tendido una trampa o es él? Comenta 👇 y envíaselo a tu socio del crimen. "
-                     "Serie de fans · historia inventada #gta6 #gtavi #serie #jasonduval #fyp #parati",
-         planos=[
-    dict(fondo=X + "x016_Hero_BG", cam=(1.35, 1.2, 0.3, 0.36), fx=["policia"], golpe=True, actores=[("raul", "c")], alto=1450,
-         noti=("Móvil encontrado", "En la chaqueta de Jason."), grande="¿FUE JASON?", grande_y=0.55,
-         lineas=[("narrador", "¡Quieto! El móvil del traidor estaba en la chaqueta de Jason.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), fx=["neon"], actores=[("jason", "c")], alto=1300,
-         lineas=[("jason", "Ese móvil no es mío. Me lo han metido.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.32), fx=["neon"], actores=[("raul", "c")], alto=1450,
-         lineas=[("raul", "Eso diría un traidor.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.1, 1.2, 0.6, 0.5), actores=[("lucia", "c")], alto=1300,
-         lineas=[("lucia", "Si Jason es un chivato, yo soy monja. Alguien quiere que parezca él.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.0, 1.15, 0.4, 0.55), actores=[("cal", "c")], alto=1250,
-         lineas=[("cal", "Pues yo tengo otro problema. He escuchado la radio de la policía.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.15, 0.5, 0.5), fx=["policia"], oscuro=0.3, golpe=True,
-         grande="SABEN LA HORA", lineas=[("cal", "Saben la hora exacta del golpe. Las doce.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.55, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1500,
-         lineas=[("raul", "Entonces lo hacemos igual. Y el traidor viene con nosotros.")]),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.25, actores=[("jason", "c")], alto=1500, dur=0.3, grande="¿TRAMPA?"),
-    dict(fondo=X + "x017_vice_city", oscuro=0.25, actores=[("lucia", "c")], alto=1500, dur=0.3, grande="¿TRAMPA?"),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5, golpe=True,
-         lineas=[("narrador", "¿Jason o una trampa? Comenta y envíaselo a tu socio. Porque ese móvil estaba...")], post=0.2),
- ]),
- 3: dict(slug="cap03-la-voz", cabecera="UN ÚLTIMO GOLPE", reloj=(6.0, 1.0), reloj_desde=0,
-         descripcion="Cal escucha la radio de la policía… y reconoce la voz del chivato 🎧 Capítulo 3 de UN ÚLTIMO "
-                     "GOLPE. ¿De quién es? Comenta 👇 y envíaselo a tu socio del crimen. Serie de fans · historia "
-                     "inventada #gta6 #gtavi #serie #fyp #parati",
-         planos=[
-    dict(fondo=X + "x012_Hero_BG", cam=(1.3, 1.15, 0.45, 0.5), fx=["policia"], golpe=True, actores=[("cal", "c")], alto=1450,
-         grande="ESA VOZ...", grande_y=0.55,
-         lineas=[("narrador", "¡Ojo! Cal acaba de oír la voz del chivato por la radio de la policía. Y la conoce.")]),
-    dict(clip="clip_port_gellhorn_tormenta", cam=(1.0, 1.1, 0.5, 0.5), fx=["lluvia"], grande="6 HORAS ANTES", dur=0.9),
-    dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.4, 0.55), actores=[("brian", "c")], alto=1250,
-         lineas=[("brian", "El barco está listo en el muelle. Entramos por el agua y salimos por el agua.")]),
-    dict(fondo=X + "x014_Hero_BG", cam=(1.2, 1.3, 0.6, 0.55), actores=[("boobie", "c")], alto=1300,
-         lineas=[("boobie", "Y si alguien pregunta, esta noche estabais todos en mi club.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.2, 1.35, 0.45, 0.5), fx=["policia"], actores=[("cal", "c")], alto=1400, golpe=True,
-         grande="POLICÍA", grande_y=0.3,
-         lineas=[("cal", "Callaos. La radio. Dicen que su infiltrado está con nosotros.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.1, 1.0, 0.5, 0.5), fx=["policia", "lluvia"], oscuro=0.35,
-         lineas=[("narrador", "Y entonces, por la radio, sonó la voz del infiltrado.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.45, 1.6, 0.45, 0.45), actores=[("cal", "c")], alto=1550, golpe=True,
-         lineas=[("cal", "No puede ser. Esa voz es de...")]),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.25, actores=[("brian", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x014_Hero_BG", oscuro=0.25, actores=[("boobie", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x016_Hero_BG", oscuro=0.25, actores=[("raul", "c")], alto=1500, dur=0.28, grande="¿QUIÉN?"),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5, golpe=True,
-         lineas=[("narrador", "¿De quién era la voz? Comenta y envíaselo a tu socio. Porque Cal acaba de oír...")], post=0.2),
- ]),
- 4: dict(slug="cap04-23-58", cabecera="UN ÚLTIMO GOLPE", reloj=(0.04, 0.0), reloj_desde=0,
-         descripcion="23:58. Lucia y Jason dentro de la comisaría… y la alarma salta antes de tiempo 🚨 Capítulo 4 de "
-                     "UN ÚLTIMO GOLPE. ¿Quién la ha activado? Comenta 👇 y envíaselo a tu socio del crimen. Serie de "
-                     "fans · historia inventada #gta6 #gtavi #serie #luciacaminos #fyp #parati",
-         planos=[
-    dict(clip="clip_skyline_noche", cam=(1.15, 1.0, 0.5, 0.45), fx=["policia"], golpe=True, grande="ALARMA", grande_y=0.4,
-         lineas=[("narrador", "¡Espera! La alarma de la comisaría ha saltado. Y todavía no han tocado nada.")]),
-    dict(fondo="Vice_City_17", cam=(1.0, 1.1, 0.5, 0.5), oscuro=0.4, grande="2 MINUTOS ANTES", dur=0.9, golpe=True),
-    dict(fondo=X + "x017_vice_city", cam=(1.2, 1.3, 0.55, 0.5), fx=["lluvia"], actores=[("lucia", "c")], alto=1350,
-         lineas=[("lucia", "Estamos dentro. Cal, ¿las cámaras?")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.2, 1.3, 0.45, 0.5), actores=[("cal", "c")], alto=1300,
-         lineas=[("cal", "Apagadas. Tenéis noventa segundos.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), actores=[("jason", "c")], alto=1350,
-         lineas=[("jason", "La caja fuerte está abierta. Raul, esto no estaba en el plan.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450,
-         lineas=[("raul", "Coged la copia y salid. Ya.")]),
-    dict(fondo=X + "x038_album_background_desktop", cam=(1.0, 1.2, 0.5, 0.5), fx=["policia", "lluvia"], golpe=True,
-         grande="00:00", lineas=[("narrador", "A las doce en punto, alguien activó la alarma desde fuera.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.4, 1.55, 0.55, 0.55), fx=["policia"], actores=[("lucia", "c")], alto=1550, golpe=True,
-         lineas=[("lucia", "Jason... nos han vendido.")]),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5, golpe=True,
-         lineas=[("narrador", "¿Quién activó la alarma? Comenta y envíaselo a tu socio. Porque la alarma...")], post=0.2),
- ]),
- 5: dict(slug="cap05-sin-disco", cabecera="UN ÚLTIMO GOLPE",
-         descripcion="Lo consiguen… pero la caja de GTA 6 NO trae disco, solo un código. Y alguien ya lo ha usado 😱 "
-                     "Capítulo 5 de UN ÚLTIMO GOLPE. ¿Quién? Comenta 👇 y envíaselo a tu socio del crimen. Serie de "
-                     "fans · historia inventada #gta6 #gtavi #serie #fyp #parati",
-         planos=[
-    dict(fondo=X + "x055_mediaDesktop", cam=(1.3, 1.1, 0.5, 0.5), fx=["policia"], golpe=True, grande="SIN DISCO", grande_y=0.42,
-         lineas=[("narrador", "¡Mira esto! Han robado GTA seis... y la caja está vacía.")]),
-    dict(clip="clip_cayos_hidroavion", cam=(1.0, 1.1, 0.5, 0.5), grande="LA HUIDA", dur=1.0),
-    dict(fondo=X + "x014_Hero_BG", cam=(1.0, 1.12, 0.4, 0.55), actores=[("brian", "c")], alto=1300,
-         lineas=[("brian", "Agarraos, que este barco no tiene frenos.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), actores=[("jason", "c")], alto=1350,
-         lineas=[("jason", "Raul, abre la caja. Quiero ver por qué casi morimos.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450, golpe=True,
-         lineas=[("raul", "No hay disco. Solo un código de descarga.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.2, 1.3, 0.55, 0.5), actores=[("lucia", "c")], alto=1350,
-         lineas=[("lucia", "Pues se canjea y listo. ¿No?")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.1, 1.0, 0.5, 0.5), fx=["policia"], oscuro=0.35, golpe=True,
-         noti=("Tienda online", "Este código ya ha sido canjeado."), dur=1.8),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.45, 1.6, 0.3, 0.3), actores=[("raul", "c")], alto=1550,
-         lineas=[("raul", "Alguien lo ha canjeado hace un minuto. Y está en este barco.")]),
-    dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande="CONTINUARÁ...", grande_size=120, oscuro=0.5, golpe=True,
-         lineas=[("narrador", "Mañana, el traidor. Comenta quién es y envíaselo a tu socio. Porque la caja...")], post=0.2),
- ]),
- 6: dict(slug="cap06-el-traidor", cabecera="UN ÚLTIMO GOLPE",
-         descripcion="FINAL: por fin sabemos quién es el traidor de UN ÚLTIMO GOLPE 😂 ¿Lo habías adivinado? Comenta 👇 "
-                     "y envíaselo a tu socio del crimen. Serie de fans · historia inventada #gta6 #gtavi #serie #final "
-                     "#fyp #parati",
-         planos=[
-    dict(fondo=X + "x012_Hero_BG", cam=(1.35, 1.15, 0.45, 0.5), fx=["policia"], golpe=True, actores=[("cal", "c")], alto=1450,
-         grande="EL TRAIDOR", grande_y=0.55,
-         lineas=[("narrador", "¡No deslices! Por fin sabemos quién es el traidor. Y nadie lo vio venir.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.4, 1.5, 0.3, 0.3), fx=["neon"], actores=[("raul", "c")], alto=1450,
-         lineas=[("raul", "Os voy a contar algo. El primer mensaje lo mandé yo.")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.3, 1.2, 0.7, 0.62), actores=[("jason", "c")], alto=1350,
-         lineas=[("jason", "¿Tú? ¿Y lo del móvil en mi chaqueta?")]),
-    dict(fondo=X + "x016_Hero_BG", cam=(1.45, 1.55, 0.3, 0.3), actores=[("raul", "c")], alto=1500,
-         lineas=[("raul", "Un cebo. Quería ver quién se ponía nervioso. Y alguien canjeó el código.")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.4, 1.55, 0.45, 0.45), actores=[("cal", "c")], alto=1550, golpe=True,
-         grande="CAL", grande_y=0.3,
-         lineas=[("cal", "Vale, fui yo. Pero es que llevaba trece años esperando.")]),
-    dict(fondo=X + "x017_vice_city", cam=(1.2, 1.3, 0.55, 0.5), actores=[("lucia", "c")], alto=1350,
-         lineas=[("lucia", "¿Has vendido a la banda... para jugar antes?")]),
-    dict(fondo=X + "x012_Hero_BG", cam=(1.3, 1.4, 0.45, 0.5), actores=[("cal", "c")], alto=1450,
-         lineas=[("cal", "Y tengo cervezas para tres días. ¿Alguien se apunta?")]),
-    dict(fondo=X + "x049_outro", cam=(1.0, 1.1, 0.5, 0.5), grande="FIN... ¿O NO?", grande_size=120, oscuro=0.3, golpe=True,
-         lineas=[("narrador", "¿Lo habías adivinado? Comenta, y envíaselo a tu socio del crimen. Porque el traidor...")], post=0.2),
- ]),
+# ================================================================ TEMPORADA 1 · «LA LISTA» (8 capítulos)
+FONDO = {"raul": X + "x016_Hero_BG", "jason": X + "x016_Hero_BG", "lucia": X + "x017_vice_city", "cal": X + "x012_Hero_BG",
+         "brian": X + "x014_Hero_BG", "boobie": X + "x013_Hero_BG"}
+ENCUADRE = {"raul": (0.3, 1450), "jason": (0.66, 1350), "lucia": (0.55, 1350), "cal": (0.45, 1300), "brian": (0.4, 1300),
+            "boobie": (0.55, 1350)}
+_n = [0]
 
+
+def P(quien, texto, **kw):
+    """Plano de un personaje hablando (primer plano con impacto)."""
+    _n[0] += 1
+    if quien in ("agente", "coleccionista"):  # personajes sin cara: silueta en la oscuridad
+        d = dict(fondo="Vice_City_17", cam=(1.25, 1.35, 0.5, 0.45), oscuro=0.6, fx=["policia"])
+    else:
+        cx, alto = ENCUADRE[quien]
+        z0 = 1.15 + 0.1 * (_n[0] % 3)
+        d = dict(fondo=FONDO[quien], cam=(z0, z0 + 0.1, cx, cx + (0.04 if _n[0] % 2 else -0.04)),
+                 actores=[(quien, "c")], alto=alto + 60 * (_n[0] % 3))
+        if quien in ("raul", "jason"):
+            d["fx"] = ["neon"]
+    d.update(kw)
+    d["lineas"] = [(quien, texto)]
+    return d
+
+
+def N(fondo, texto=None, **kw):
+    d = dict(fondo=fondo, cam=kw.pop("cam", (1.0, 1.12, 0.5, 0.5)))
+    if fondo.startswith("clip_"):
+        d = dict(clip=fondo, cam=d["cam"])
+    d.update(kw)
+    if texto:
+        d["lineas"] = [("narrador", texto)]
+    return d
+
+
+def Q(*quienes, txt="¿QUIÉN?"):
+    return [dict(fondo=FONDO[q], oscuro=0.25, actores=[(q, "c")], alto=1500, dur=0.28, grande=txt) for q in quienes]
+
+
+def FIN(texto, grande="CONTINUARÁ..."):
+    return dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande=grande, grande_size=120, oscuro=0.5,
+                golpe=True, lineas=[("narrador", texto)], post=0.2)
+
+
+SERIE = "Serie de fans · historia inventada"
+CAPITULOS = {
+ 1: dict(slug="ep01-la-lista", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Una lista con todos los chivatos de Leonida vale 10 millones… y el primer nombre es Jason 😳 "
+                     "Capítulo 1 de UN ÚLTIMO GOLPE. ¿Jason es un chivato? Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #jasonduval #fyp #parati",
+         planos=[
+    N(X + "x055_mediaDesktop", "¡Alto! En esta banda hay un chivato. Y su nombre está en una lista que vale diez millones.",
+      fx=["policia"], golpe=True, grande="LA LISTA", grande_y=0.55, cam=(1.3, 1.1, 0.5, 0.5)),
+    N(X + "x033_desktop", oscuro=0.55, grande="48 HORAS ANTES", dur=0.8, golpe=True),
+    P("raul", "Tenemos un encargo. Diez millones por robar un pendrive."),
+    P("jason", "¿Diez millones por un pendrive? ¿Qué hay dentro?"),
+    P("raul", "La lista de todos los chivatos de la policía de Leonida."),
+    P("lucia", "¿Y dónde está?"),
+    P("raul", "En la sala de pruebas de la comisaría de Vice City.", golpe=True, grande="COMISARÍA", grande_y=0.3),
+    P("cal", "¿Y quién paga diez millones por eso?"),
+    P("raul", "Le llaman el Coleccionista. Nadie le ha visto la cara."),
+    N(X + "x016_Hero_BG", "Esa noche llegó un mensaje. Con la primera página de la lista.", oscuro=0.35, fx=["policia"],
+      noti=("Coleccionista", "Mirad el primer nombre.")),
+    P("raul", "El primer nombre de la lista... es Jason Duval.", golpe=True, grande="JASON DUVAL", grande_y=0.3),
+    *Q("jason", "lucia", "raul", txt="¿CHIVATO?"),
+    FIN("¿Jason es un chivato? Comenta y envíaselo a tu socio. Porque en esta banda hay un chivato..."),
+ ]),
+ 2: dict(slug="ep02-el-primer-nombre", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Jason confiesa… y descubren que el Coleccionista llama desde DENTRO de la comisaría 🚔 Capítulo 2 "
+                     "de UN ÚLTIMO GOLPE. ¿Quién es? Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #fyp #parati",
+         planos=[
+    P("jason", "¡Quieto! Jason está en la lista de chivatos. Y tiene doce horas para demostrar que es mentira.",
+      golpe=True, grande="¿CHIVATO?", grande_y=0.55),
+    P("jason", "Me obligaron. Un poli me pilló hace dos años. Le di un nombre falso. Nada más."),
+    P("lucia", "¿Y no me lo contaste?"),
+    P("jason", "Quería protegerte."),
+    P("raul", "O protegerte a ti. Tienes hasta medianoche."),
+    P("cal", "Raul. He rastreado las llamadas del Coleccionista."),
+    P("raul", "¿Y?"),
+    P("cal", "Llama desde dentro de la comisaría.", golpe=True, grande="DESDE DENTRO", grande_y=0.3),
+    N("Vice_City_17", "El hombre que paga por la lista de chivatos... es un policía.", fx=["policia"], oscuro=0.3,
+      golpe=True, grande="ES UN POLI"),
+    *Q("cal", "raul", "lucia"),
+    FIN("¿Qué poli es? Comenta y envíaselo a tu socio. Porque Jason tiene doce horas..."),
+ ]),
+ 3: dict(slug="ep03-doble-juego", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Las cámaras del club pillan a Lucia con un policía 😱 Y Brian conoce a ese poli de hace 20 años. "
+                     "Capítulo 3 de UN ÚLTIMO GOLPE. ¿Quién miente? Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #luciacaminos #fyp #parati",
+         planos=[
+    N(X + "x013_Hero_BG", "¡Ojo! Las cámaras del club de Boobie han grabado a Lucia... con un policía.", golpe=True,
+      grande="LUCIA", grande_y=0.55, fx=["neon"], cam=(1.3, 1.1, 0.5, 0.5)),
+    P("boobie", "Jason, ven. Tengo algo que enseñarte."),
+    P("boobie", "Anoche, tu chica, en mi aparcamiento. Hablando con el agente Torres."),
+    P("jason", "Eso es mentira."),
+    P("boobie", "Las cámaras no mienten. Te ofrezco un trato: tráeme el pendrive y borro tu nombre de la lista."),
+    P("brian", "Yo de ti no me fiaría de Boobie. Ni de nadie."),
+    P("jason", "¿Por qué dices eso?"),
+    P("brian", "Porque Torres fue mi socio hace veinte años. Y nunca hace nada gratis.", golpe=True, grande="TORRES", grande_y=0.3),
+    *Q("lucia", "boobie", "brian", txt="¿QUIÉN MIENTE?"),
+    FIN("¿Quién miente? Comenta y envíaselo a tu socio. Porque las cámaras del club..."),
+ ]),
+ 4: dict(slug="ep04-pura-suerte", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Lucia no salió de la cárcel por suerte 😳 Y ahora el poli quiere a Jason. Capítulo 4 de UN "
+                     "ÚLTIMO GOLPE. ¿Le entregará? Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #luciacaminos #fyp #parati",
+         planos=[
+    P("lucia", "¡Espera! Lucia salió de la cárcel por pura suerte. O eso creíamos.", golpe=True,
+      grande="NO FUE SUERTE", grande_y=0.55),
+    P("jason", "Lucia. Dime la verdad."),
+    P("lucia", "Torres me sacó de la cárcel. A cambio de un favor."),
+    P("jason", "¿Qué favor?"),
+    P("lucia", "Este golpe. Tenía que entregarle el pendrive."),
+    P("jason", "¿Y por qué me lo cuentas ahora?"),
+    P("lucia", "Porque ayer cambió el trato. Ya no quiere el pendrive. Te quiere a ti.", golpe=True,
+      grande="A TI", grande_y=0.3),
+    N(X + "x049_outro", "Mañana a medianoche, Lucia tendrá que elegir. Jason... o su libertad.", oscuro=0.3),
+    *Q("lucia", "jason", txt="¿ELEGIRÁ?"),
+    FIN("¿Qué elegirá Lucia? Comenta y envíaselo a tu socio. Porque Lucia no salió por suerte..."),
+ ]),
+ 5: dict(slug="ep05-la-sala-de-pruebas", cabecera="UN ÚLTIMO GOLPE", reloj=(0.03, 0.0), reloj_desde=0,
+         descripcion="Entran en la sala de pruebas de la comisaría… y el pendrive ya no está. Solo una nota firmada "
+                     "con una R 😳 Capítulo 5 de UN ÚLTIMO GOLPE. ¿Quién es R? Comenta 👇 y envíaselo a tu socio del "
+                     "crimen. " + SERIE + " #gta6 #gtavi #serie #fyp #parati",
+         planos=[
+    N("clip_skyline_noche", "¡No deslices! Han entrado en la sala de pruebas de la comisaría... y el pendrive ya no está.",
+      fx=["policia"], golpe=True, grande="VACÍA", cam=(1.15, 1.0, 0.5, 0.45)),
+    N("Vice_City_17", oscuro=0.4, grande="23:58", dur=0.8, golpe=True),
+    P("cal", "Cámaras apagadas. Tenéis noventa segundos."),
+    P("lucia", "Estamos dentro. Caja catorce."),
+    P("jason", "Está abierta. Y vacía."),
+    P("jason", "Solo hay una nota."),
+    N(X + "x016_Hero_BG", oscuro=0.4, fx=["policia"], golpe=True, noti=("Nota", "Llegáis tarde. Firmado: R."), dur=1.6),
+    P("lucia", "Erre... ¿Raul?", golpe=True, grande="R", grande_y=0.3, grande_size=200),
+    *Q("raul", "jason", "lucia", txt="¿R?"),
+    FIN("¿Quién es R? Comenta y envíaselo a tu socio. Porque el pendrive ya no está..."),
+ ]),
+ 6: dict(slug="ep06-r", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Raul tenía el pendrive… y la lista era una trampa para pillarlos a todos 🚨 Y Cal se ha quedado "
+                     "atrás. Capítulo 6 de UN ÚLTIMO GOLPE. Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #raulbautista #fyp #parati",
+         planos=[
+    P("raul", "¡Atención! La nota estaba firmada con una erre. Y Raul no contesta al teléfono.", golpe=True,
+      grande="¿FUE RAUL?", grande_y=0.55),
+    N("Vice_City_17", "Mientras, la policía rodea la comisaría.", fx=["policia"], golpe=True),
+    P("brian", "¡Al barco, ya! ¡Corred!"),
+    N("clip_cayos_hidroavion", "Huyen por el agua.", dur=1.1),
+    P("raul", "Tranquilos. El pendrive lo cogí yo esta tarde."),
+    P("jason", "¿Y por qué no nos lo dijiste?"),
+    P("raul", "Porque la lista era un cebo. Torres quería pillarnos a todos dentro.", golpe=True, grande="UN CEBO", grande_y=0.3),
+    P("lucia", "Raul... ¿dónde está Cal?"),
+    N("Vice_City_06", "Cal se quedó atrás. Y la policía le acaba de detener.", fx=["policia"], golpe=True, grande="DETENIDO"),
+    FIN("¿Qué hará Cal? Comenta y envíaselo a tu socio. Porque la nota estaba firmada..."),
+ ]),
+ 7: dict(slug="ep07-interrogatorio", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="Interrogatorio: el poli le da las gracias a Cal por avisarles «como siempre» 😳 ¿Cal era el "
+                     "chivato? Capítulo 7 de UN ÚLTIMO GOLPE. Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #fyp #parati",
+         planos=[
+    N("Vice_City_17", "¡Mira esto! Cal está en la sala de interrogatorios. Y el agente Torres sonríe.", oscuro=0.45,
+      fx=["policia"], golpe=True, grande="INTERROGATORIO", cam=(1.3, 1.15, 0.5, 0.5)),
+    P("agente", "Hola, Cal. Gracias por todo."),
+    P("cal", "¿Gracias por qué?"),
+    P("agente", "Por avisarnos de la hora del golpe. Como siempre."),
+    P("cal", "Yo no... Yo nunca...", golpe=True, grande="¿CAL?", grande_y=0.3),
+    N(X + "x016_Hero_BG", "Al otro lado de la ciudad, Raul recibe un mensaje.", oscuro=0.35,
+      noti=("Torres", "Cambio a Cal por el pendrive. Muelle de Port Gellhorn. Medianoche.")),
+    P("raul", "Vamos a ir. Y vamos a llevar el pendrive."),
+    P("jason", "¿El de verdad?"),
+    P("raul", "No. El de verdad no lo va a ver nadie.", golpe=True),
+    *Q("cal", "raul", txt="¿TRAMPA?"),
+    FIN("¿Cal es el chivato? Comenta y envíaselo a tu socio. Porque Torres le dio las gracias..."),
+ ]),
+ 8: dict(slug="ep08-el-coleccionista", cabecera="UN ÚLTIMO GOLPE",
+         descripcion="FINAL: por fin vemos la cara del Coleccionista 😱 Capítulo 8 y último de UN ÚLTIMO GOLPE. ¿Lo "
+                     "habías adivinado? Comenta 👇 y envíaselo a tu socio del crimen. "
+                     + SERIE + " #gta6 #gtavi #serie #final #fyp #parati",
+         planos=[
+    N(X + "x021_port_gellhorn", "¡Oye tú! Por fin vamos a ver la cara del Coleccionista. Y lo tienes delante desde el capítulo uno.",
+      fx=["policia", "lluvia"], golpe=True, grande="EL COLECCIONISTA", grande_y=0.55, cam=(1.3, 1.1, 0.5, 0.5)),
+    N("clip_port_gellhorn_tormenta", "Muelle de Port Gellhorn. Medianoche.", fx=["lluvia"]),
+    P("agente", "El pendrive. Y os devuelvo a vuestro amigo."),
+    P("coleccionista", "Torres... no tan rápido."),
+    P("boobie", "Sorpresa. Con esa lista, Vice City entera trabaja para mí.", golpe=True, grande="BOOBIE", grande_y=0.3),
+    P("jason", "¿Tú eras el Coleccionista? ¿Y el trato que me ofreciste?"),
+    P("boobie", "Yo siempre gano. Dadme el pendrive."),
+    P("raul", "Tómalo. Está vacío. El de verdad ya lo tiene la prensa.", golpe=True, grande="VACÍO", grande_y=0.3),
+    N("Vice_City_06", "Sirenas. Torres y Boobie, esposados en el muelle.", fx=["policia"], golpe=True),
+    P("cal", "¿Me he perdido algo?"),
+    P("lucia", "¿Y ahora qué?"),
+    P("jason", "Ahora... Leonida es nuestra."),
+    FIN("¿Lo habías adivinado? Comenta y envíaselo a tu socio. Porque el Coleccionista...", grande="FIN · TEMPORADA 1"),
+ ]),
 }
 
 if __name__ == "__main__":
