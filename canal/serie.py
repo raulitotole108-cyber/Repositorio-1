@@ -441,7 +441,8 @@ def construir(ep):
         comp(f, cab, (W - cab.shape[1]) // 2, 205)
         if ep.get("reloj"):
             h0, h1 = ep["reloj"]
-            restante = h0 + (h1 - h0) * min(1, tg / total)  # horas que faltan, bajando
+            ini = planos[ep.get("reloj_desde", 0)]["t0"]  # el reloj arranca tras el salto atrás
+            restante = 0.0 if tg < ini else h0 + (h1 - h0) * min(1, (tg - ini) / max(0.1, total - ini))
             seg = max(0, int(restante * 3600))
             rel = f"{seg // 3600:02d}:{seg % 3600 // 60:02d}:{seg % 60:02d}"
             ri = reloj_img(rel, urgente=restante < 1)
@@ -459,7 +460,7 @@ def construir(ep):
 # ================================================================ capítulos
 X = "extra/"
 CAPITULOS = {
- 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1", reloj=(24.0, 0.02),
+ 1: dict(slug="cap01-el-plan", cabecera="UN ÚLTIMO GOLPE · CAP. 1", reloj=(24.0, 0.02), reloj_desde=2,
          descripcion="UN ÚLTIMO GOLPE · Capítulo 1: El plan 🎬 Raul quiere robar la primera copia de GTA 6… y "
                      "alguien del grupo se acaba de salir. ¿Quién? 👇 Envíaselo a tu socio del crimen. "
                      "Serie de fans · historia inventada #gta6 #gtavi #serie #raulbautista #fyp #parati",
