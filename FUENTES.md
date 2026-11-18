@@ -41,3 +41,10 @@ GTA Online unas dos semanas después de GTA V) son de dominio público.
 | n05/n06 Spoilers, clips y estafas | [Help Net Security](https://www.helpnetsecurity.com/2026/11/05/gta-6-scams-fake-leaks-early-access/), [Shattered](https://shattered.io/gta-6-gameplay-clips-circulate-launch-nov-19-ocean-drive-2026/) |
 | n07 Fecha de reviews (no oficial) | [Insider Gaming](https://insider-gaming.com/grand-theft-auto-6-review-embargo/), [HappyGamer](https://happygamer.com/gta-6-review-embargo-date-november-18-174367/) |
 | n09 Parches previos | [ComicBook](https://comicbook.com/gaming/news/gta-6-grand-theft-auto-vi-rockstar-games-update-1-002-today-ps5-xbox/) |
+
+## Lanzamiento (18/11/2026)
+- Metacritic 99, empate con Ocarina of Time (1998, 22 críticas); quejas: 30 fps y conducción: https://www.forbes.com/sites/paultassi/2026/11/18/the-gta-6-metacritic-review-score-is-in-and-ties-an-all-time-record/ · https://www.metacritic.com/game/grand-theft-auto-vi/ · https://www.thenationalnews.com/arts-culture/pop-culture/2026/11/18/gta-6-reviews-metacritic/
+- Nota de usuarios: 36 h de espera tras el lanzamiento: https://www.yahoo.com/entertainment/movies/articles/gta-6-metacritic-score-did-124312618.html
+- Nueva Zelanda primero, medianoche local; España 00:00 del 19 (peninsular); precarga bloqueada hasta la hora: https://www.cnnchile.com/bits/gta-vi-estreno-nueva-zelanda-hora-lanzamiento-chile/ · https://vandal.elespanol.com/noticia/2026250032/gta-6-confirma-la-hora-exacta-para-su-lanzamiento-en-espana-y-el-resto-del-mundo/
+- +7 millones de espectadores simultáneos en directo (datos preliminares); en Twitch, ~46.000 por debajo del récord de LoL (2022): https://streamscharts.com/news/gta-vi-breaks-streaming-launch-records-within-minutes-its-release · https://win.gg/gta-6-smashes-streaming-records/
+- Galería de lanzamiento oficial (5/11): https://www.rockstargames.com/newswire/article/39ak81277255o9/explore-the-grand-theft-auto-vi-launch-gallery

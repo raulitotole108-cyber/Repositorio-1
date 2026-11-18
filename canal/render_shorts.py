@@ -182,6 +182,10 @@ if __name__ == "__main__":
         from guiones_nuevo import NUEVO
         lista, sel = NUEVO, sel[1:]
         r3.OUT = r3.HERE.parent / "salida_nuevo"
+    elif sel and sel[0] == "lanzamiento":     # noticias del lanzamiento + imágenes oficiales sin usar
+        from guiones_lanzamiento import LANZAMIENTO
+        lista, sel = LANZAMIENTO, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_lanzamiento"
     elif sel and sel[0] == "ahora":           # tercera tanda: noticias de esta semana
         from guiones_ahora import AHORA
         lista, sel = AHORA, sel[1:]
