@@ -77,8 +77,10 @@ def voz(quien, texto):
                         "-ar", str(SR), "-ac", "1", str(wav)], check=True)
     x = v2.read_wav(wav)
     nz = np.where(np.abs(x) > 0.01)[0]
-    x = x[max(0, nz[0] - 400): nz[-1] + 800] if len(nz) else x
+    x = x[max(0, nz[0] - 400): nz[-1] + int(0.12 * SR)] if len(nz) else x  # sin comerse el final de la última palabra
     y, _ = v2._comprime_pausas(x, [], umbral=0.012, max_pausa=0.10)  # nada de pausas largas al hablar
+    fade = min(len(y), int(0.06 * SR))
+    y[len(y) - fade:] *= np.linspace(1, 0, fade)
     return y
 
 
@@ -535,7 +537,7 @@ def Q(*quienes, txt="¿QUIÉN?"):
 
 def FIN(texto, grande="CONTINUARÁ..."):
     return dict(fondo=X + "x033_desktop", cam=(1.0, 1.06, 0.5, 0.5), grande=grande, grande_size=120, oscuro=0.5,
-                golpe=True, lineas=[("narrador", texto)], post=0.2)
+                golpe=True, lineas=[("narrador", texto)], post=0.9)
 
 
 SERIE = "Serie de fans · historia inventada"
@@ -668,25 +670,32 @@ CAPITULOS = {
     *Q("cal", "raul", txt="¿TRAMPA?"),
     FIN("¿Cal es el chivato? Comenta y envíaselo a tu socio. Porque Torres le dio las gracias..."),
  ]),
- 8: dict(slug="ep08-el-coleccionista", cabecera="UN ÚLTIMO GOLPE · PARTE 8",
-         descripcion="FINAL: por fin vemos la cara del Coleccionista 😱 Capítulo 8 y último de UN ÚLTIMO GOLPE. ¿Lo "
-                     "habías adivinado? Comenta 👇 y envíaselo a tu socio del crimen. "
-                     + SERIE + " #gta6 #gtavi #serie #final #fyp #parati",
+ 8: dict(slug="ep08-el-coleccionista", cabecera="UN ÚLTIMO GOLPE · PARTE 8", reloj=(0.008, 0.0), reloj_desde=1,
+         descripcion="FINAL: por fin vemos la cara del Coleccionista 😱 …y el último segundo lo cambia TODO. Capítulo 8 "
+                     "de UN ÚLTIMO GOLPE. ¿Quién es el verdadero Coleccionista? Comenta 👇 y envíaselo a tu socio del "
+                     "crimen. " + SERIE + " #gta6 #gtavi #serie #final #fyp #parati",
          planos=[
-    N(X + "x021_port_gellhorn", "¡Oye tú! Por fin vamos a ver la cara del Coleccionista. Y lo tienes delante desde el capítulo uno.",
-      fx=["policia", "lluvia"], golpe=True, grande="EL COLECCIONISTA", grande_size=105, grande_y=0.55, cam=(1.3, 1.1, 0.5, 0.5)),
-    N("clip_port_gellhorn_tormenta", "Muelle de Port Gellhorn. Medianoche.", fx=["lluvia"]),
-    P("agente", "El pendrive. Y os devuelvo a vuestro amigo."),
-    P("coleccionista", "Torres... no tan rápido."),
-    P("boobie", "Sorpresa. Con esa lista, Vice City entera trabaja para mí.", golpe=True, grande="BOOBIE", grande_y=0.3),
-    P("jason", "¿Tú eras el Coleccionista? ¿Y el trato que me ofreciste?"),
-    P("boobie", "Yo siempre gano. Dadme el pendrive."),
-    P("raul", "Tómalo. Está vacío. El de verdad ya lo tiene la prensa.", golpe=True, grande="VACÍO", grande_y=0.3),
-    N("Vice_City_06", "Sirenas. Torres y Boobie, esposados en el muelle.", fx=["policia"], golpe=True),
-    P("cal", "¿Me he perdido algo?"),
-    P("lucia", "¿Y ahora qué?"),
-    P("jason", "Ahora... Leonida es nuestra."),
-    FIN("¿Lo habías adivinado? Comenta y envíaselo a tu socio. Porque el Coleccionista...", grande="FIN · TEMPORADA 1"),
+    N(X + "x021_port_gellhorn", "¡Oye tú! Hoy ves la cara del Coleccionista. Y lo tienes delante desde el capítulo uno.",
+      fx=["policia", "lluvia"], golpe=True, grande="EL COLECCIONISTA", grande_size=105, grande_y=0.55, oscuro=0.35,
+      cam=(1.35, 1.12, 0.5, 0.5)),
+    N("clip_port_gellhorn_tormenta", "Port Gellhorn. Medianoche.", fx=["lluvia"]),
+    P("agente", "El pendrive. O Cal no sale vivo.", fx=["policia", "lluvia"]),
+    P("coleccionista", "Torres... baja el arma.", fx=["lluvia"], golpe=True),
+    *Q("raul", "brian", "lucia", "boobie"),
+    P("boobie", "Sorpresa. Con esa lista, Vice City es mía.", golpe=True, grande="BOOBIE",
+      grande_y=0.3, fx=["policia", "neon"]),
+    P("jason", "Me ofreciste un trato para salvarme."),
+    P("boobie", "Te ofrecí un trato para tenerte."),
+    P("raul", "Pues toma. Todo tuyo.", golpe=True),
+    N(X + "x013_Hero_BG", oscuro=0.5, golpe=True, grande="VACÍO", grande_y=0.55, noti=("Pendrive", "0 archivos"), dur=1.0),
+    P("raul", "La lista de verdad ya está en las noticias. Y los primeros nombres... sois vosotros.",
+      golpe=True, grande="EN LAS NOTICIAS", grande_y=0.3, grande_size=110),
+    N("clip_jason_lucia_salto", "Sirenas. Y la banda desaparece.", dur=1.2),
+    P("jason", "Leonida es nuestra.", fx=["neon"]),
+    N(X + "x016_Hero_BG", oscuro=0.55, golpe=True, dur=1.6,
+      noti=("Número oculto", "Buen trabajo, Raul. Ahora trabajas para mí. — El Coleccionista de verdad")),
+    FIN("¿Quién es el de verdad? Envíaselo a tu socio. Porque hoy ves la cara del Coleccionista...",
+        grande="¿TEMPORADA 2?"),
  ]),
 }
 
