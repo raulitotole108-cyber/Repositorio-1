@@ -270,7 +270,11 @@ def texto_gordo(txt, size=130):
 
 
 def cabecera(txt):
-    return r3.cabecera_img(txt)
+    im = r3.cabecera_img(txt)
+    if im.shape[1] > W - 90:  # que no toque los bordes del vertical
+        f = (W - 90) / im.shape[1]
+        im = cv2.resize(im, (int(im.shape[1] * f), int(im.shape[0] * f)), interpolation=cv2.INTER_AREA)
+    return im
 
 
 def noti_img(quien, texto, _c={}):
@@ -536,7 +540,7 @@ def FIN(texto, grande="CONTINUARÁ..."):
 
 SERIE = "Serie de fans · historia inventada"
 CAPITULOS = {
- 1: dict(slug="ep01-la-lista", cabecera="UN ÚLTIMO GOLPE",
+ 1: dict(slug="ep01-la-lista", cabecera="UN ÚLTIMO GOLPE · PARTE 1",
          descripcion="Una lista con todos los chivatos de Leonida vale 10 millones… y el primer nombre es Jason 😳 "
                      "Capítulo 1 de UN ÚLTIMO GOLPE. ¿Jason es un chivato? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #jasonduval #fyp #parati",
@@ -557,7 +561,7 @@ CAPITULOS = {
     *Q("jason", "lucia", "raul", txt="¿CHIVATO?"),
     FIN("¿Jason es un chivato? Comenta y envíaselo a tu socio. Porque en esta banda hay un chivato..."),
  ]),
- 2: dict(slug="ep02-el-primer-nombre", cabecera="UN ÚLTIMO GOLPE",
+ 2: dict(slug="ep02-el-primer-nombre", cabecera="UN ÚLTIMO GOLPE · PARTE 2",
          descripcion="Jason confiesa… y descubren que el Coleccionista llama desde DENTRO de la comisaría 🚔 Capítulo 2 "
                      "de UN ÚLTIMO GOLPE. ¿Quién es? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #fyp #parati",
@@ -576,7 +580,7 @@ CAPITULOS = {
     *Q("cal", "raul", "lucia"),
     FIN("¿Qué poli es? Comenta y envíaselo a tu socio. Porque Jason tiene doce horas..."),
  ]),
- 3: dict(slug="ep03-doble-juego", cabecera="UN ÚLTIMO GOLPE",
+ 3: dict(slug="ep03-doble-juego", cabecera="UN ÚLTIMO GOLPE · PARTE 3",
          descripcion="Las cámaras del club pillan a Lucia con un policía 😱 Y Brian conoce a ese poli de hace 20 años. "
                      "Capítulo 3 de UN ÚLTIMO GOLPE. ¿Quién miente? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #luciacaminos #fyp #parati",
@@ -593,7 +597,7 @@ CAPITULOS = {
     *Q("lucia", "boobie", "brian", txt="¿QUIÉN MIENTE?"),
     FIN("¿Quién miente? Comenta y envíaselo a tu socio. Porque las cámaras del club..."),
  ]),
- 4: dict(slug="ep04-pura-suerte", cabecera="UN ÚLTIMO GOLPE",
+ 4: dict(slug="ep04-pura-suerte", cabecera="UN ÚLTIMO GOLPE · PARTE 4",
          descripcion="Lucia no salió de la cárcel por suerte 😳 Y ahora el poli quiere a Jason. Capítulo 4 de UN "
                      "ÚLTIMO GOLPE. ¿Le entregará? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #luciacaminos #fyp #parati",
@@ -611,7 +615,7 @@ CAPITULOS = {
     *Q("lucia", "jason", txt="¿ELEGIRÁ?"),
     FIN("¿Qué elegirá Lucia? Comenta y envíaselo a tu socio. Porque Lucia no salió por suerte..."),
  ]),
- 5: dict(slug="ep05-la-sala-de-pruebas", cabecera="UN ÚLTIMO GOLPE", reloj=(0.03, 0.0), reloj_desde=0,
+ 5: dict(slug="ep05-la-sala-de-pruebas", cabecera="UN ÚLTIMO GOLPE · PARTE 5", reloj=(0.03, 0.0), reloj_desde=0,
          descripcion="Entran en la sala de pruebas de la comisaría… y el pendrive ya no está. Solo una nota firmada "
                      "con una R 😳 Capítulo 5 de UN ÚLTIMO GOLPE. ¿Quién es R? Comenta 👇 y envíaselo a tu socio del "
                      "crimen. " + SERIE + " #gta6 #gtavi #serie #fyp #parati",
@@ -628,7 +632,7 @@ CAPITULOS = {
     *Q("raul", "jason", "lucia", txt="¿R?"),
     FIN("¿Quién es R? Comenta y envíaselo a tu socio. Porque el pendrive ya no está..."),
  ]),
- 6: dict(slug="ep06-r", cabecera="UN ÚLTIMO GOLPE",
+ 6: dict(slug="ep06-r", cabecera="UN ÚLTIMO GOLPE · PARTE 6",
          descripcion="Raul tenía el pendrive… y la lista era una trampa para pillarlos a todos 🚨 Y Cal se ha quedado "
                      "atrás. Capítulo 6 de UN ÚLTIMO GOLPE. Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #raulbautista #fyp #parati",
@@ -645,7 +649,7 @@ CAPITULOS = {
     N("Vice_City_06", "Cal se quedó atrás. Y la policía le acaba de detener.", fx=["policia"], golpe=True, grande="DETENIDO"),
     FIN("¿Qué hará Cal? Comenta y envíaselo a tu socio. Porque la nota estaba firmada..."),
  ]),
- 7: dict(slug="ep07-interrogatorio", cabecera="UN ÚLTIMO GOLPE",
+ 7: dict(slug="ep07-interrogatorio", cabecera="UN ÚLTIMO GOLPE · PARTE 7",
          descripcion="Interrogatorio: el poli le da las gracias a Cal por avisarles «como siempre» 😳 ¿Cal era el "
                      "chivato? Capítulo 7 de UN ÚLTIMO GOLPE. Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #fyp #parati",
@@ -664,7 +668,7 @@ CAPITULOS = {
     *Q("cal", "raul", txt="¿TRAMPA?"),
     FIN("¿Cal es el chivato? Comenta y envíaselo a tu socio. Porque Torres le dio las gracias..."),
  ]),
- 8: dict(slug="ep08-el-coleccionista", cabecera="UN ÚLTIMO GOLPE",
+ 8: dict(slug="ep08-el-coleccionista", cabecera="UN ÚLTIMO GOLPE · PARTE 8",
          descripcion="FINAL: por fin vemos la cara del Coleccionista 😱 Capítulo 8 y último de UN ÚLTIMO GOLPE. ¿Lo "
                      "habías adivinado? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #final #fyp #parati",
