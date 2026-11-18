@@ -498,8 +498,8 @@ ENCUADRE = {"raul": (0.3, 1450), "jason": (0.66, 1350), "lucia": (0.55, 1350), "
 _n = [0]
 
 
-def P(quien, texto, **kw):
-    """Plano de un personaje hablando (primer plano con impacto)."""
+def P(quien, texto, narra=False, **kw):
+    """Plano de un personaje hablando (primer plano con impacto). narra=True: le vemos, pero habla el narrador."""
     _n[0] += 1
     if quien in ("agente", "coleccionista"):  # personajes sin cara: silueta en la oscuridad
         d = dict(fondo="Vice_City_17", cam=(1.25, 1.35, 0.5, 0.45), oscuro=0.6, fx=["policia"])
@@ -511,7 +511,7 @@ def P(quien, texto, **kw):
         if quien in ("raul", "jason"):
             d["fx"] = ["neon"]
     d.update(kw)
-    d["lineas"] = [(quien, texto)]
+    d["lineas"] = [("narrador" if narra else quien, texto)]
     return d
 
 
@@ -563,7 +563,7 @@ CAPITULOS = {
                      + SERIE + " #gta6 #gtavi #serie #fyp #parati",
          planos=[
     P("jason", "¡Quieto! Jason está en la lista de chivatos. Y tiene doce horas para demostrar que es mentira.",
-      golpe=True, grande="¿CHIVATO?", grande_y=0.55),
+      narra=True, golpe=True, grande="¿CHIVATO?", grande_y=0.55),
     P("jason", "Me obligaron. Un poli me pilló hace dos años. Le di un nombre falso. Nada más."),
     P("lucia", "¿Y no me lo contaste?"),
     P("jason", "Quería protegerte."),
@@ -598,7 +598,7 @@ CAPITULOS = {
                      "ÚLTIMO GOLPE. ¿Le entregará? Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #luciacaminos #fyp #parati",
          planos=[
-    P("lucia", "¡Espera! Lucia salió de la cárcel por pura suerte. O eso creíamos.", golpe=True,
+    P("lucia", "¡Espera! Lucia salió de la cárcel por pura suerte. O eso creíamos.", narra=True, golpe=True,
       grande="NO FUE SUERTE", grande_y=0.55),
     P("jason", "Lucia. Dime la verdad."),
     P("lucia", "Torres me sacó de la cárcel. A cambio de un favor."),
@@ -633,7 +633,7 @@ CAPITULOS = {
                      "atrás. Capítulo 6 de UN ÚLTIMO GOLPE. Comenta 👇 y envíaselo a tu socio del crimen. "
                      + SERIE + " #gta6 #gtavi #serie #raulbautista #fyp #parati",
          planos=[
-    P("raul", "¡Atención! La nota estaba firmada con una erre. Y Raul no contesta al teléfono.", golpe=True,
+    P("raul", "¡Atención! La nota estaba firmada con una erre. Y Raul no contesta al teléfono.", narra=True, golpe=True,
       grande="¿FUE RAUL?", grande_y=0.55),
     N("Vice_City_17", "Mientras, la policía rodea la comisaría.", fx=["policia"], golpe=True),
     P("brian", "¡Al barco, ya! ¡Corred!"),
@@ -670,7 +670,7 @@ CAPITULOS = {
                      + SERIE + " #gta6 #gtavi #serie #final #fyp #parati",
          planos=[
     N(X + "x021_port_gellhorn", "¡Oye tú! Por fin vamos a ver la cara del Coleccionista. Y lo tienes delante desde el capítulo uno.",
-      fx=["policia", "lluvia"], golpe=True, grande="EL COLECCIONISTA", grande_y=0.55, cam=(1.3, 1.1, 0.5, 0.5)),
+      fx=["policia", "lluvia"], golpe=True, grande="EL COLECCIONISTA", grande_size=105, grande_y=0.55, cam=(1.3, 1.1, 0.5, 0.5)),
     N("clip_port_gellhorn_tormenta", "Muelle de Port Gellhorn. Medianoche.", fx=["lluvia"]),
     P("agente", "El pendrive. Y os devuelvo a vuestro amigo."),
     P("coleccionista", "Torres... no tan rápido."),
