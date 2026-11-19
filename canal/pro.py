@@ -235,11 +235,11 @@ def pegar(f, ov, cx, cy, escala=1.0, alpha=1.0):
 
 
 def es_clave(w):
-    return w.startswith("*") or any(c.isdigit() for c in w)
+    return "*" in w or any(c.isdigit() for c in w)
 
 
 def limpia(w):
-    return w.strip("*").upper()
+    return w.replace("*", "").upper()
 
 
 _cap_cache = {}
@@ -495,7 +495,7 @@ def construir(v, out_dir):
             txt = beats[bi]["stat"]
             num = re.fullmatch(r"([^\d]*)(\d[\d.]*)([^\d]*)", txt)
             img = stats[bi]
-            if num and st < 0.45 and int(num.group(2).replace(".", "")) >= 10:
+            if bi > 0 and num and st < 0.45 and int(num.group(2).replace(".", "")) >= 10:
                 valor = int(num.group(2).replace(".", ""))
                 cur = int(valor * min(1, st / 0.45) ** 0.6)
                 s_cur = f"{cur:,}".replace(",", ".") if "." in num.group(2) else str(cur)
