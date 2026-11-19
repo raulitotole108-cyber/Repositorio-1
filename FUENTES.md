@@ -48,3 +48,16 @@ GTA Online unas dos semanas después de GTA V) son de dominio público.
 - Nueva Zelanda primero, medianoche local; España 00:00 del 19 (peninsular); precarga bloqueada hasta la hora: https://www.cnnchile.com/bits/gta-vi-estreno-nueva-zelanda-hora-lanzamiento-chile/ · https://vandal.elespanol.com/noticia/2026250032/gta-6-confirma-la-hora-exacta-para-su-lanzamiento-en-espana-y-el-resto-del-mundo/
 - +7 millones de espectadores simultáneos en directo (datos preliminares); en Twitch, ~46.000 por debajo del récord de LoL (2022): https://streamscharts.com/news/gta-vi-breaks-streaming-launch-records-within-minutes-its-release · https://win.gg/gta-6-smashes-streaming-records/
 - Galería de lanzamiento oficial (5/11): https://www.rockstargames.com/newswire/article/39ak81277255o9/explore-the-grand-theft-auto-vi-launch-gallery
+
+## Tanda dopamina (19/11/2026)
+- Mapa ~2x GTA 5, ~3x RDR2, Vice City 2x Los Santos; huracanes; +170 especies (60+ aves, 30+ mamíferos; raros/descubribles/legendarios) — Game Informer vía VGC: https://www.videogameschronicle.com/news/gta-6-map-is-officially-twice-as-large-as-gta-5-features-hurricanes-and-tropical-storms/ · https://www.ghacks.net/2026/09/30/rockstar-confirms-gta-6-hurricanes-170-animal-species-and-six-map-regions-ahead-of-november-19-launch/
+- Masa de tierra ≈ GTA 4 + GTA 5 + RDR2: https://tech.yahoo.com/gaming/articles/gta-6-map-nearly-big-041358197.html
+- No se pueden rejugar misiones: https://www.talkesport.com/gta-6/gta-6-launch-live-updates/ · https://www.univision.com/noticias/trending/estreno-de-gta-6-las-cinco-claves-de-una-de-las-franquicias-de-videojuegos-mas-exitosas-de-la-historia
+- Sin PC ni Online al salir (Online se espera en 2027): https://www.univision.com/noticias/trending/estreno-de-gta-6-las-cinco-claves-de-una-de-las-franquicias-de-videojuegos-mas-exitosas-de-la-historia
+- Primera protagonista mujer con voz: misma fuente (Univision)
+- Móvil físico; Jason y Lucia no pueden publicar fotos por ser fugitivos: https://gtaintel.com/news/gta-6-phone-social-media-system
+- Lucia escribe para que la recojas de servicios comunitarios (análisis): https://cogconnected.com/review/grand-theft-auto-vi-review/
+- 1.000 M$ en la primera hora de reservas (ESTIMACIÓN de un analista, no oficial): https://opencritic.com/news/33773/gta-6-made-1-billion-in-its-first-hour-report-says ; récord GTA V 815,7 M$: https://www.benzinga.com/markets/prediction-markets/26/11/63248840/gta-6-preorders
+- Piso de Dexter (lo cuentan fans, no confirmado): https://www.dexterdaily.com/2026/11/gta-6-dexter-apartment-easter-egg.html
+- Actualización obligatoria de PS5 para jugar: https://kotaku.com/ps5-gets-last-minute-software-update-thats-required-to-play-gta-6-2000757868
+- Clips: «GTA VI: An Extended Look» (vídeo oficial de Rockstar)

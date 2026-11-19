@@ -182,6 +182,10 @@ if __name__ == "__main__":
         from guiones_nuevo import NUEVO
         lista, sel = NUEVO, sel[1:]
         r3.OUT = r3.HERE.parent / "salida_nuevo"
+    elif sel and sel[0] == "dopamina":        # datos del lanzamiento sobre gameplay real (An Extended Look)
+        from guiones_dopamina import DOPAMINA
+        lista, sel = DOPAMINA, sel[1:]
+        r3.OUT = r3.HERE.parent / "salida_dopamina"
     elif sel and sel[0] == "lanzamiento":     # noticias del lanzamiento + imágenes oficiales sin usar
         from guiones_lanzamiento import LANZAMIENTO
         lista, sel = LANZAMIENTO, sel[1:]
