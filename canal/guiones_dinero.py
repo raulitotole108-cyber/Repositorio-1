@@ -53,7 +53,7 @@ V("d03-moses", "3 TRAMPAS",
    B("Si lo robas muy cerca de su garaje, tampoco. Y cada golpe que le das baja el precio.", ["ol_171"],
      stat="- PRECIO", golpe=True, riser=True),
    B("Y después de cada venta, el garaje cierra un par de minutos. Envíaselo a ese amigo que roba todo lo que ve. Y pregúntale...",
-     ["ol_082"]),
+     ["ol_077"]),
   ], titulo="COCHE INVENDIBLE🚗 en gta 6 y por qué"),
 
 V("d04-localizador", "EL LOCALIZADOR",

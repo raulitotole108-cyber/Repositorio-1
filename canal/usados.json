@@ -76,12 +76,6 @@
 "w02-casa-2021": [
 "ol_087"
 ],
-"d01-bancos": [
-"img:Vice_City_18",
-"ol_043",
-"ol_127",
-"ol_208"
-],
 "d02-joyerias": [
 "img:Jason_and_Lucia_15",
 "img:Vice_City_07",
@@ -94,5 +88,55 @@
 "ol_082",
 "ol_136",
 "ol_171"
+],
+"d04-localizador": [
+"img:ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_01",
+"img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_02",
+"img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_04",
+"ol_116",
+"ol_138"
+],
+"d05-registrar": [
+"img:ULTIMATE_EDITION_ONE_EYED_WILLIE_03",
+"img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_01",
+"img:ULTIMATE_EDITION_VAPID_GANADO_RETRO_BUILD_01",
+"ol_076"
+],
+"d06-tres-coches": [
+"img:ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_02",
+"img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_01",
+"img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_06",
+"ol_160"
+],
+"d07-cajero": [
+"img:Jason_Duval_14",
+"img:Lucia_Caminos_05",
+"ol_128",
+"ol_142"
+],
+"d08-sin-dinero": [
+"img:Jason_Duval_02",
+"img:Jason_Duval_Video_Clip",
+"img:Jason_and_Lucia_17",
+"img:Lucia_Caminos_12"
+],
+"d09-pesca": [
+"img:Jason_Duval_03",
+"img:ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_03",
+"ol_072",
+"ol_154"
+],
+"d10-randy": [
+"img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_03",
+"img:VINTAGE_VICE_CITY_PACK_VAPID_STANIER_01",
+"img:VINTAGE_VICE_CITY_PACK_VAPID_STANIER_02",
+"ol_185"
+],
+"d01-bancos": [
+"img:Vice_City_18",
+"ol_044",
+"ol_051",
+"ol_127",
+"ol_209"
 ]
 }
