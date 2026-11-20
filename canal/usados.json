@@ -1,10 +1,4 @@
 {
-"w01-weird-al": [
-"img:x125_radio_background_mobile",
-"ol_078",
-"ol_082",
-"ol_170"
-],
 "w02-casa-2021": [
 "ol_087"
 ],
@@ -75,5 +69,11 @@
 "ol_232",
 "ol_233",
 "ol_234"
+],
+"w01-weird-al": [
+"img:x125_radio_background_mobile",
+"ol_078",
+"ol_082",
+"ol_170"
 ]
 }
