@@ -17,14 +17,26 @@ def texto(d, xy, txt, size, fill):
     return f.getbbox(txt)
 
 
-def main(fondo, personaje, p1, p2, salida):
+def main(fondo, personaje, p1, p2, salida, foco="0.5"):
+    foco = float(foco)
     bg = Image.open(fondo).convert("RGB")
     s = max(W / bg.width, H / bg.height)
     bg = bg.resize((int(bg.width * s), int(bg.height * s)), Image.LANCZOS)
-    bg = bg.crop(((bg.width - W) // 2, (bg.height - H) // 2, (bg.width - W) // 2 + W, (bg.height - H) // 2 + H))
+    x0 = int((bg.width - W) * foco)
+    bg = bg.crop((x0, (bg.height - H) // 2, x0 + W, (bg.height - H) // 2 + H))
     bg = ImageEnhance.Color(bg).enhance(1.5)
     bg = ImageEnhance.Contrast(bg).enhance(1.2)
-    bg = bg.filter(ImageFilter.GaussianBlur(1.2)).convert("RGBA")
+    bg = bg.filter(ImageFilter.GaussianBlur(1.2 if personaje != "-" else 0)).convert("RGBA")
+    if personaje == "-":   # sin recorte: la propia captura es la protagonista
+        d = ImageDraw.Draw(bg)
+        b1 = texto(d, (44, 60), p1, 165, (255, 255, 255))
+        texto(d, (44, 60 + b1[3] + 8), p2, 165, (235, 30, 40))
+        logo = Image.open(HERE / "imagenes" / "extra" / "x133_poster_logo.png").convert("RGBA")
+        logo = logo.crop(logo.getbbox()); logo.thumbnail((230, 230))
+        bg.alpha_composite(logo, (40, H - logo.height - 30))
+        bg.convert("RGB").save(salida, quality=93)
+        print("ok", salida)
+        return
     # personaje recortado, grande, a la derecha, con brillo detrás
     pj = Image.open(HERE / "imagenes" / "reparto" / f"{personaje}.png").convert("RGBA")
     bb = pj.getbbox()
@@ -50,4 +62,4 @@ def main(fondo, personaje, p1, p2, salida):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:6])
+    main(*sys.argv[1:7])
