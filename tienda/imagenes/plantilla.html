@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",sans-serif;background:#ddd}
+  .card{width:1200px;height:1200px;position:relative;overflow:hidden;color:#0f2a4a}
+  .bg1{background:radial-gradient(circle at 70% 30%,#e9f4ff 0,#cfe4fa 45%,#b7d3f2 100%)}
+  .bg2{background:linear-gradient(160deg,#f6f9fc 0%,#e3edf7 100%)}
+  .bg3{background:linear-gradient(170deg,#0f2a4a 0%,#1e4b7c 100%);color:#fff}
+  .bg4{background:linear-gradient(160deg,#fff7ef 0%,#ffe6cf 100%)}
+  .bg5{background:linear-gradient(160deg,#f3f8f6 0%,#d8efe6 100%)}
+  h1{font-family:"Inter Display","Inter";font-weight:800;font-size:92px;line-height:1.0;letter-spacing:-2.5px}
+  h2{font-family:"Inter Display","Inter";font-weight:800;font-size:84px;line-height:1.02;letter-spacing:-2px}
+  .sub{font-size:36px;font-weight:500;opacity:.8;margin-top:18px}
+  .pill{display:inline-flex;align-items:center;gap:12px;background:#fff;color:#0f2a4a;border-radius:999px;padding:18px 30px;font-size:30px;font-weight:700;box-shadow:0 8px 24px rgba(15,42,74,.12)}
+  .pill .i{font-size:34px}
+  .accent{color:#ff6b3d}
+  .tag{position:absolute;background:#ff6b3d;color:#fff;font-weight:800;border-radius:24px;padding:14px 26px;font-size:34px;box-shadow:0 10px 30px rgba(255,107,61,.35)}
+  .pad{position:absolute;left:80px;top:80px;right:80px}
+  svg{position:absolute}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="bagG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f4f7fa"/><stop offset="1" stop-color="#e3e9ef"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#0f2a4a" flood-opacity=".22"/></filter>
+    <!-- bolsa: 350 x 465 (proporción real 35 x 46,5) -->
+    <g id="bag">
+      <rect x="0" y="0" width="350" height="465" rx="10" fill="url(#bagG)" stroke="#d5dde6" stroke-width="2"/>
+      <rect x="0" y="0" width="350" height="62" rx="10" fill="#eef2f6" stroke="#d5dde6" stroke-width="2"/>
+      <rect x="22" y="22" width="306" height="18" rx="4" fill="#cfd8e2"/>
+      <path d="M0 62 H350" stroke="#c8d2dd" stroke-width="2" stroke-dasharray="6 6"/>
+      <rect x="60" y="90" width="40" height="360" fill="url(#sheen)" opacity=".7" transform="skewX(-12)"/>
+      <!-- etiqueta propia -->
+      <rect x="40" y="330" width="170" height="90" rx="8" fill="#fff" stroke="#e1e7ee"/>
+      <rect x="56" y="348" width="110" height="10" rx="5" fill="#0f2a4a" opacity=".75"/>
+      <rect x="56" y="368" width="80" height="8" rx="4" fill="#9fb2c6"/>
+      <rect x="56" y="384" width="120" height="8" rx="4" fill="#9fb2c6"/>
+      <rect x="56" y="400" width="60" height="8" rx="4" fill="#9fb2c6"/>
+    </g>
+    <g id="bagPlain">
+      <rect x="0" y="0" width="350" height="465" rx="10" fill="url(#bagG)" stroke="#d5dde6" stroke-width="2"/>
+      <rect x="0" y="0" width="350" height="62" rx="10" fill="#eef2f6" stroke="#d5dde6" stroke-width="2"/>
+      <rect x="22" y="22" width="306" height="18" rx="4" fill="#cfd8e2"/>
+      <path d="M0 62 H350" stroke="#c8d2dd" stroke-width="2" stroke-dasharray="6 6"/>
+      <rect x="60" y="90" width="40" height="360" fill="url(#sheen)" opacity=".7" transform="skewX(-12)"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- 1. PORTADA -->
+<div class="card bg1" id="c1">
+  <div class="pad">
+    <div class="pill" style="margin-bottom:34px"><span class="i">📦</span>Ideal para Vinted y Wallapop</div>
+    <h1>Bolsas de envío<br><span class="accent">que protegen</span><br>cada pedido</h1>
+  </div>
+  <svg width="1200" height="1200" viewBox="0 0 1200 1200">
+    <g filter="url(#sh)">
+      <use href="#bagPlain" transform="translate(560 560) rotate(-14) scale(1.1)"/>
+      <use href="#bagPlain" transform="translate(600 540) rotate(-6) scale(1.1)"/>
+      <use href="#bag" transform="translate(660 520) rotate(4) scale(1.1)"/>
+    </g>
+  </svg>
+  <div style="position:absolute;left:80px;bottom:90px;display:flex;flex-direction:column;gap:18px">
+    <div class="pill"><span class="i">💧</span>Impermeables</div>
+    <div class="pill"><span class="i">🔒</span>Cierre adhesivo</div>
+    <div class="pill"><span class="i">💪</span>Resistentes</div>
+    <div class="pill"><span class="i">📏</span>46,5 × 35 cm</div>
+  </div>
+  <div class="tag" style="right:70px;top:470px;transform:rotate(6deg)">Desde 0,12 €/bolsa</div>
+</div>
+
+<!-- 2. MEDIDAS -->
+<div class="card bg2" id="c2">
+  <div class="pad" style="text-align:center">
+    <h2>Tamaño perfecto<br>para enviar ropa</h2>
+    <div class="sub">Cabe una sudadera, unos vaqueros o varias camisetas</div>
+  </div>
+  <svg width="1200" height="1200" viewBox="0 0 1200 1200">
+    <g filter="url(#sh)"><use href="#bag" transform="translate(425 400) scale(1.0)"/></g>
+    <!-- cota ancho -->
+    <g stroke="#ff6b3d" stroke-width="5" fill="#ff6b3d">
+      <line x1="425" y1="910" x2="775" y2="910"/>
+      <line x1="425" y1="890" x2="425" y2="930"/><line x1="775" y1="890" x2="775" y2="930"/>
+    </g>
+    <text x="600" y="985" text-anchor="middle" font-family="Inter Display" font-weight="800" font-size="60" fill="#0f2a4a">35 cm</text>
+    <!-- cota alto -->
+    <g stroke="#ff6b3d" stroke-width="5">
+      <line x1="830" y1="400" x2="830" y2="865"/>
+      <line x1="810" y1="400" x2="850" y2="400"/><line x1="810" y1="865" x2="850" y2="865"/>
+    </g>
+    <text x="870" y="655" font-family="Inter Display" font-weight="800" font-size="60" fill="#0f2a4a">46,5 cm</text>
+  </svg>
+  <div style="position:absolute;bottom:70px;width:100%;text-align:center;font-size:30px;font-weight:600;color:#56708c">Con solapa y tira adhesiva para cerrarla</div>
+</div>
+
+<!-- 3. IMPERMEABLE -->
+<div class="card bg3" id="c3">
+  <div class="pad">
+    <h2>Llueve.<br><span style="color:#7fd1ff">Tu pedido,<br>seco.</span></h2>
+    <div class="sub" style="max-width:520px">Plástico impermeable que no deja pasar el agua ni la suciedad</div>
+  </div>
+  <svg width="1200" height="1200" viewBox="0 0 1200 1200">
+    <defs>
+      <path id="drop" d="M0 -38 C 14 -16 24 0 24 14 A24 24 0 0 1 -24 14 C -24 0 -14 -16 0 -38Z"/>
+      <linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe9ff"/><stop offset="1" stop-color="#4fb8f0"/></linearGradient>
+    </defs>
+    <g filter="url(#sh)"><use href="#bag" transform="translate(640 470) rotate(5) scale(1.05)"/></g>
+    <g fill="url(#dg)" opacity=".95">
+      <use href="#drop" x="700" y="380"/><use href="#drop" x="820" y="300"/><use href="#drop" x="960" y="390"/>
+      <use href="#drop" x="1060" y="300"/><use href="#drop" x="760" y="560" transform="scale(1)"/>
+      <use href="#drop" x="930" y="620"/><use href="#drop" x="1010" y="760"/><use href="#drop" x="800" y="800"/>
+      <use href="#drop" x="640" y="250"/><use href="#drop" x="1110" y="560"/>
+    </g>
+    <!-- gotas resbalando -->
+    <g fill="#9edcff" opacity=".8">
+      <ellipse cx="760" cy="700" rx="8" ry="14"/><ellipse cx="900" cy="860" rx="7" ry="12"/><ellipse cx="840" cy="640" rx="6" ry="10"/>
+    </g>
+  </svg>
+  <div class="pill" style="position:absolute;left:80px;bottom:90px"><span class="i">💧</span>Resisten la lluvia</div>
+</div>
+
+<!-- 4. AUTOADHESIVA -->
+<div class="card bg4" id="c4">
+  <div class="pad">
+    <h2>Quitas la tira,<br>cierras <span class="accent">y listo</span></h2>
+    <div class="sub">Sin cinta, sin grapas, sin tijeras. En 3 segundos.</div>
+  </div>
+  <svg width="1200" height="1200" viewBox="0 0 1200 1200">
+    <g filter="url(#sh)">
+      <rect x="200" y="560" width="800" height="440" rx="16" fill="url(#bagG)" stroke="#d5dde6" stroke-width="2"/>
+      <!-- solapa -->
+      <rect x="200" y="470" width="800" height="120" rx="14" fill="#f3f6f9" stroke="#d5dde6" stroke-width="2"/>
+      <!-- pegamento -->
+      <rect x="240" y="505" width="720" height="44" rx="8" fill="#f7e8b5"/>
+      <!-- tira protectora despegándose -->
+      <path d="M560 505 H960 a8 8 0 0 1 8 8 V541 a8 8 0 0 1 -8 8 H560Z" fill="#ffffff" stroke="#d9c88a" stroke-width="2"/>
+      <path d="M560 505 C 500 470, 470 400, 520 330 L 560 345 C 520 400, 545 460, 600 505Z" fill="#ffffff" stroke="#d9c88a" stroke-width="2"/>
+    </g>
+    <g font-family="Inter Display" font-weight="800" fill="#0f2a4a">
+      <circle cx="320" cy="760" r="46" fill="#ff6b3d"/><text x="320" y="779" text-anchor="middle" font-size="52" fill="#fff">1</text>
+      <circle cx="600" cy="760" r="46" fill="#ff6b3d"/><text x="600" y="779" text-anchor="middle" font-size="52" fill="#fff">2</text>
+      <circle cx="880" cy="760" r="46" fill="#ff6b3d"/><text x="880" y="779" text-anchor="middle" font-size="52" fill="#fff">3</text>
+      <text x="320" y="870" text-anchor="middle" font-size="40">Mete</text>
+      <text x="600" y="870" text-anchor="middle" font-size="40">Despega</text>
+      <text x="880" y="870" text-anchor="middle" font-size="40">Cierra</text>
+    </g>
+  </svg>
+</div>
+
+<!-- 5. PACKS -->
+<div class="card bg5" id="c5">
+  <div class="pad" style="text-align:center">
+    <h2>Cuantas más,<br><span style="color:#12a37a">más ahorras</span></h2>
+  </div>
+  <div style="position:absolute;left:80px;right:80px;top:380px;display:grid;grid-template-columns:1fr 1fr;gap:34px">
+    <div class="box">25<small>bolsas</small><b>0,20 €/u</b></div>
+    <div class="box">50<small>bolsas</small><b>0,17 €/u</b></div>
+    <div class="box">100<small>bolsas</small><b>0,15 €/u</b></div>
+    <div class="box best">200<small>bolsas</small><b>0,12 €/u</b><i>MEJOR PRECIO</i></div>
+  </div>
+  <style>
+    .box{position:relative;background:#fff;border-radius:32px;height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Inter Display";font-weight:800;font-size:130px;line-height:1;color:#0f2a4a;box-shadow:0 14px 34px rgba(15,74,52,.12)}
+    .box small{font-size:36px;font-weight:600;color:#56708c;margin-top:6px}
+    .box b{margin-top:22px;font-size:40px;background:#e6f6f0;color:#12a37a;padding:10px 24px;border-radius:999px}
+    .box.best{background:#0f2a4a;color:#fff}
+    .box.best small{color:#b7c9dc}
+    .box.best b{background:#12a37a;color:#fff}
+    .box i{position:absolute;top:-22px;right:30px;font-style:normal;font-size:26px;background:#ff6b3d;color:#fff;padding:10px 20px;border-radius:999px;letter-spacing:1px}
+  </style>
+</div>
+
+</body></html>
