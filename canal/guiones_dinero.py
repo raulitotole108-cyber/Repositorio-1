@@ -207,8 +207,8 @@ V("d12-carta", "LEROY ROOK",
      ["img:Vice_City_19"]),
   ], titulo="CARTA MILLONARIA🃏 en una caja fuerte de gta 6"),
 V("d13-muelle", "PELICAN VALLEY",
-  "En un muelle de GTA 6 hay una bolsa con 10.000 $ 💰 Contraseña CLEAVES, caja fuerte 0072 y muelle 0212\n\n"
-  "gta 6, dinero gta 6, codigos gta 6, pelican valley gta 6, laboratorio cangrejos gta 6, cleaves gta 6, 0212 gta 6\n\n"
+  "En un muelle de GTA 6 hay una bolsa con 10.000 $ y un subfusil especial 💰🔫 Contraseña CLEAVES, caja fuerte 0072 y muelle 0212\n\n"
+  "gta 6, dinero gta 6, codigos gta 6, pelican valley gta 6, laboratorio cangrejos gta 6, cleaves gta 6, 0212 gta 6, crabshack vf5\n\n"
   "#shorts #videoshorts #gta6 #dinerogta6 #codigosgta6",
   [
    B("¡Ojo! ¿Sabías que en un muelle de GTA seis hay una bolsa con *diez mil* dólares?", ["map:pelican"],
@@ -220,8 +220,10 @@ V("d13-muelle", "PELICAN VALLEY",
    B("La caja fuerte: cero, cero, siete, dos. Y la puerta del muelle: cero, dos, uno, dos.", ["bg:"],
      gfx=[dict(t="teclado", codigo="0072", etiqueta="Caja fuerte", desde="caja", hasta="Y la"),
           dict(t="teclado", codigo="0212", etiqueta="Muelle", desde="Y la")]),
-   B("Dentro está la bolsa. Pero son billetes marcados: tienes que llevarlos al punto de entrega para cobrarlos.", ["ol_048"],
-     stat="MARCADOS", riser=True),
+   B("Y dentro, además de la bolsa, hay un subfusil especial: la *Crabshack VF5*.", ["ol_048"],
+     gfx=[dict(t="icono", emoji="🔫", titulo="CRABSHACK VF5", sub="subfusil especial", y=0.52, desde="subfusil")], riser=True),
+   B("Eso sí: son billetes marcados. Tienes que llevarlos al punto de entrega para cobrarlos.", ["ol_049"],
+     stat="MARCADOS"),
    B("Envíaselo a ese amigo que nunca encuentra nada. Y pregúntale...", ["ol_050"]),
   ], titulo="BOLSA ESCONDIDA💰 con 10.000 dólares en gta 6",
   mapas=dict(pelican=dict(lugar="Pelican Valley", zoom=(1.6, 3.2), pins=[("Pelican Valley", "muelle", "El muelle")]))),
