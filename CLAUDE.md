@@ -72,3 +72,16 @@ Los narradores virales hablan a **3,1–4,4 palabras/s** (media ≈ 4), con tono
 una variación de entonación de **11–23 semitonos**. Nuestra voz neural sin ajustar iba a ~2 palabras/s:
 lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0,1 s, narrador de la serie
 `es-ES-AlvaroNeural` a -12 Hz y +34 % (≈ 4,4 palabras/s, 119 Hz).
+
+## Reglas añadidas por el usuario (20/11/2026) — obligatorias
+
+1. **Cada frase enseña lo que se dice.** Si se habla del loro, sale el loro (o su sitio en el mapa); si se habla de
+   Weird Al, sale la radio. Se elige la imagen exacta del catálogo (`canal/imagenes/catalogo_clips.json` para el
+   gameplay, capturas oficiales por nombre, mapa oficial `canal/imagenes/oficial_extra/Leonida_Map_Poster.jpg`). Si no
+   existe imagen, se hace un gráfico (mapa con chincheta, icono, titular de prensa, contador, trofeo, pasos, teclado,
+   línea de tiempo: `canal/graficos.py`). Prohibido rellenar con planos al azar.
+2. **Ningún plano repetido** en el mismo vídeo ni en el vídeo anterior (el motor avisa con `canal/usados.json`).
+3. **Títulos de los Shorts:** las DOS primeras palabras, las más llamativas, en MAYÚSCULAS y con un emoji pegado; el
+   resto de la frase en minúscula. Ejemplo: «TRUCO SECRETO🤔 para ganar dinero».
+4. **Vídeos largos de YouTube:** unos 10 minutos, con el formato de análisis del canal de referencia
+   (`APRENDIZAJES_GLOOBY.md`): mapa y capturas analizadas con etiquetas y lupa, capítulos, datos en tarjetas.

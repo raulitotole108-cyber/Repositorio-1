@@ -4,12 +4,12 @@
 *palabra* = palabra clave (en rosa). stat = dato gigante. golpe = flash + impacto. riser = subida antes."""
 
 
-def B(texto, clips, stat=None, golpe=False, riser=False):
-    return dict(texto=texto, clips=clips, stat=stat, golpe=golpe, riser=riser)
+def B(texto, clips, stat=None, golpe=False, riser=False, gfx=None):
+    return dict(texto=texto, clips=clips, stat=stat, golpe=golpe, riser=riser, gfx=gfx)
 
 
-def V(slug, cabecera, descripcion, beats):
-    return dict(slug=slug, cabecera=cabecera, descripcion=descripcion, beats=beats)
+def V(slug, cabecera, descripcion, beats, titulo=None, mapas=None):
+    return dict(slug=slug, cabecera=cabecera, descripcion=descripcion, beats=beats, titulo=titulo, mapas=mapas or {})
 
 
 VIDEOS = [

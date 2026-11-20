@@ -178,6 +178,9 @@ def grade(f, k):
 def cargar_plano(nombre, t0, dur):
     """Frames del clip (velocidad real) ya recortados a vertical con margen para zoom."""
     foco = 0.5
+    if "+" in nombre:   # «ol_037+2.0»: el plano empieza en el segundo 2,0 del clip
+        nombre, ini = nombre.split("+")
+        t0 = float(ini)
     if "@" in nombre:
         nombre, foco = nombre.split("@")
         foco = float(foco)
@@ -521,7 +524,24 @@ def construir(v, out_dir):
             if a1 - a0 < 0.3:
                 continue
             planos.append(dict(clip=c, t0=a0, t1=a1, golpe=b.get("golpe") and k == 0, beat=i,
-                               whip=(len(planos) % 3 == 2), off=rnd.uniform(0.0, 0.8)))
+                               whip=(len(planos) % 3 == 2), off=0.0 if "+" in c else rnd.uniform(0.0, 0.8)))
+    # control de calidad: ningún plano repetido en el vídeo ni en el vídeo anterior
+    usos = [p["clip"].split("@")[0] for p in planos if not p["clip"].startswith(("map:", "bg:"))]
+    for c in sorted({c for c in usos if usos.count(c) > 1}):
+        print(f"AVISO {v['slug']}: plano repetido {usos.count(c)} veces: {c}", flush=True)
+    reg = HERE / "usados.json"
+    try:
+        hist = json.loads(reg.read_text())
+    except Exception:
+        hist = {}
+    previo = [k for k in hist if k != v["slug"]][-1:]
+    for k in previo:
+        comunes = sorted(set(usos) & set(hist[k]))
+        if comunes:
+            print(f"AVISO {v['slug']}: {len(comunes)} planos ya usados en {k}: {comunes[:8]}", flush=True)
+    hist.pop(v["slug"], None)
+    hist[v["slug"]] = sorted(set(usos))
+    reg.write_text(json.dumps(hist, ensure_ascii=False, indent=0))
     # 3) sonido
     voz_tr = np.zeros(int(total * SR) + SR, np.float32)
     for b in beats:
@@ -574,6 +594,9 @@ def construir(v, out_dir):
         pi = next((i for i, p in enumerate(planos) if p["t0"] <= tg < p["t1"]), len(planos) - 1)
         p = planos[pi]
         cmp_ = p["clip"].startswith("cmp:")
+        esp_ = p["clip"].startswith(("map:", "bg:"))
+        if esp_:
+            pi_cache = (pi, None)
         if pi_cache[0] != pi:
             pi_cache = (None, None)
             if cmp_:
@@ -584,7 +607,7 @@ def construir(v, out_dir):
                 pi_cache = (pi, cargar_plano(p["clip"], p["off"], p["t1"] - p["t0"] + 0.1))
         frames = pi_cache[1]
         lk = int((tg - p["t0"]) * FPS)
-        src = None if cmp_ else frames[min(lk, len(frames) - 1)]
+        src = None if (cmp_ or esp_) else frames[min(lk, len(frames) - 1)]
         lt = tg - p["t0"]
         prog = lt / max(0.1, p["t1"] - p["t0"])
         z = 1.0 + 0.06 * prog
@@ -596,7 +619,12 @@ def construir(v, out_dir):
             z += 0.22 * e ** 2
             dx, dy = rnd.uniform(-1, 1) * 26 * e, rnd.uniform(-1, 1) * 26 * e
             rot = rnd.uniform(-1, 1) * 1.6 * e
-        if cmp_:   # pantalla partida: mitad central de cada clip
+        if esp_:   # mapa oficial animado o fondo de la marca (gráficos limpios, sin etalonaje)
+            if p["clip"].startswith("map:"):
+                f = gx.render_mapa(v.get("mapas", {})[p["clip"][4:]], lt, p["t1"] - p["t0"], W, H)
+            else:
+                f = gx.fondo_marca(W, H)
+        elif cmp_:   # pantalla partida: mitad central de cada clip
             fa, fb = frames
             A = encuadre(fa[min(lk, len(fa) - 1)], z)
             Bq = encuadre(fb[min(lk, len(fb) - 1)], z)
@@ -609,7 +637,8 @@ def construir(v, out_dir):
         nxt = planos[pi + 1] if pi + 1 < len(planos) else None
         if nxt is not None and nxt["whip"] and p["t1"] - tg < 0.12:
             f = barrido(f, 1 - (p["t1"] - tg) / 0.12, 1)
-        f = grade(f, k)
+        if not esp_:
+            f = grade(f, k)
         if cmp_:
             cv2.line(f, (W // 2, 0), (W // 2, H), (170, 70, 255), 10, cv2.LINE_AA)
             cv2.line(f, (W // 2, 0), (W // 2, H), (255, 255, 255), 3, cv2.LINE_AA)
@@ -619,14 +648,14 @@ def construir(v, out_dir):
             if lb:
                 f = pegar(f, cmp_pill(lb), 3 * W / 4, 95)
         fondo_ficha = None
-        if HORIZ:   # gráficos de la frase (etiquetas, lupa, contacto, fichas, datos...)
+        if True:   # gráficos de la frase (etiquetas, lupa, contacto, fichas, datos, iconos, titulares...)
             bq = next((i for i, b in enumerate(beats) if (b["t0"] - (1.4 if b.get("capitulo") else 0)) - 0.05 <= tg <
                        ((beats[i + 1]["t0"] - (1.4 if beats[i + 1].get("capitulo") else 0)) if i + 1 < len(beats) else total)), None)
             if bq is not None and beats[bq].get("gfx"):
                 if bq not in capas:
                     capas.clear()
                     fija = any(g_["t"] in ("etiquetas", "lupa") for g_ in beats[bq]["gfx"])
-                    capas[bq] = gx.Capa([g_ for g_ in beats[bq]["gfx"] if g_["t"] != "fuente"], W, H, k=1.0 if fija else 1.12)
+                    capas[bq] = gx.Capa2([g_ for g_ in beats[bq]["gfx"] if g_["t"] != "fuente"], W, H, k=1.0 if fija else 1.12)
                 stb = tg - beats[bq]["t0"]
                 fondo = capas[bq].fondo(stb)
                 fondo_ficha = fondo
@@ -679,8 +708,9 @@ def construir(v, out_dir):
         if HORIZ:
             f = gx.barra_progreso(f, tg / total)
             # origen de la imagen, automático: captura oficial o gameplay oficial
-            if fondo_ficha is None:
-                et = "Captura oficial" if p["clip"].startswith("img:") else "Gameplay oficial"
+            if fondo_ficha is None and not p["clip"].startswith("bg:"):
+                et = ("Captura oficial" if p["clip"].startswith("img:") else
+                      "Mapa oficial" if p["clip"].startswith("map:") else "Gameplay oficial")
                 e_ = gx.ease((tg - p["t0"]) / 0.3) if pi == 0 or planos[pi - 1]["clip"][:4] != p["clip"][:4] else 1.0
                 f = pegar(f, cmp_pill_dot(et), 40 + cmp_pill_dot(et).shape[1] / 2, 52, 1.0, e_)
         # bucle: el final funde con el primer fotograma
