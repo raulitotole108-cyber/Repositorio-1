@@ -82,13 +82,6 @@
 "img:Vice_City_16",
 "ol_163"
 ],
-"d03-moses": [
-"img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_03",
-"ol_057",
-"ol_082",
-"ol_136",
-"ol_171"
-],
 "d04-localizador": [
 "img:ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_01",
 "img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_02",
@@ -151,5 +144,12 @@
 "img:Vice_City_19",
 "ol_030",
 "ol_034"
+],
+"d03-moses": [
+"img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_03",
+"ol_057",
+"ol_077",
+"ol_136",
+"ol_171"
 ]
 }
