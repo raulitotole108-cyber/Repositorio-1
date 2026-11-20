@@ -335,5 +335,24 @@ V("d18-superdeportivo", "4 PASOS",
      gfx=[dict(t="pasos", items=["Perista: fuera localizador", "Paga el registro", "Es tuyo"], en=["perista", "pagas", "tuyo"])]),
    B("Consejo: empieza por los viejos. Envíaselo a ese amigo que quiere un superdeportivo ya. Y pregúntale...", ["ol_078"]),
   ], titulo="SUPERDEPORTIVO ROBADO🏎️ cómo quedártelo en gta 6"),
+V("d19-ajustes", "NADA MÁS EMPEZAR",
+  "5 ajustes de GTA 6 que te conviene cambiar nada más empezar ⚙️ Unidades, retícula, cámaras de cine, velocidad y avisos\n\n"
+  "gta 6, ajustes gta 6, configuracion gta 6, mejores ajustes gta 6, opciones gta 6, trucos gta 6\n\n"
+  "#shorts #videoshorts #gta6 #ajustesgta6 #trucosgta6",
+  [
+   B("¡Ojo! ¿Sabías que GTA seis viene con cinco ajustes que te conviene cambiar nada más empezar?", ["ol_118"],
+     stat="5 AJUSTES", golpe=True),
+   B("Uno: las unidades. Viene en millas, libras y grados Fahrenheit. Pásalo a kilómetros, kilos y grados Celsius.", ["ol_120"],
+     gfx=[dict(t="icono", emoji="📏", titulo="UNIDADES", sub="millas → kilómetros", y=0.78, desde="unidades")]),
+   B("Dos: la retícula. Ponla en forma de punto y apuntarás mucho más limpio.", ["img:Jason_Duval_05"],
+     gfx=[dict(t="icono", emoji="🎯", titulo="RETÍCULA", sub="en forma de punto", y=0.78, desde="retícula")]),
+   B("Tres: las cámaras de cine al matar y al chocar. Quítalas y no perderás el control en mitad de una persecución.", ["ol_225"],
+     gfx=[dict(t="icono", emoji="🎬", titulo="CÁMARAS DE CINE", sub="desactívalas", y=0.78, desde="cámaras")]),
+   B("Cuatro: la velocidad al andar. Por defecto vas paseando. Súbela.", ["img:Lucia_Caminos_03"],
+     gfx=[dict(t="icono", emoji="🚶", titulo="VELOCIDAD AL ANDAR", sub="súbela", y=0.78, desde="velocidad")], riser=True),
+   B("Y cinco: los avisos de progreso. Actívalos y sabrás cada vez que descubres un arma, un coche o un animal nuevo.", ["ol_071"],
+     gfx=[dict(t="icono", emoji="🔔", titulo="AVISOS DE PROGRESO", sub="actívalos", y=0.78, desde="avisos")]),
+   B("Envíaselo a ese amigo que juega con los ajustes de fábrica. Y pregúntale...", ["ol_154"]),
+  ], titulo="AJUSTES OCULTOS⚙️ que debes cambiar en gta 6"),
 ]
 
