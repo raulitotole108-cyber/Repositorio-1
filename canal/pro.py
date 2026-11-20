@@ -39,7 +39,8 @@ from PIL import Image, ImageDraw, ImageFont
 sys.path.insert(0, str(Path(__file__).parent))
 import render_v2 as v2  # noqa: E402
 
-W, H, FPS, SR = 1080, 1920, 30, 44100
+HORIZ = os.environ.get("PRO_HORIZONTAL") == "1"   # vídeo largo de YouTube (16:9), estilo análisis
+W, H, FPS, SR = (1920, 1080, 30, 44100) if HORIZ else (1080, 1920, 30, 44100)
 v2.SR = SR
 HERE = Path(__file__).resolve().parent
 IMG = HERE / "imagenes"
@@ -50,7 +51,19 @@ FONT = str(FUENTES / "Montserrat-Black.ttf")
 FONT_BIG = str(FUENTES / "Anton-Regular.ttf")
 AMARILLO = (255, 225, 40)
 ROSA = (255, 70, 170)
-VOZ = ("es-ES-AlvaroNeural", -8, 30)   # voz, Hz, % de velocidad
+VOZ = ("es-ES-AlvaroNeural", -8, 20 if HORIZ else 30)   # voz, Hz, % de velocidad
+# grupos de clips de gameplay para que el motor elija planos según el tema (vídeos largos)
+TAGS = {
+    "noche": [1, 2, 3, 4, 5, 6, 170, 171, 181, 182, 183, 184, 212, 216, 218, 219, 221, 222, 223, 224, 225, 226, 227, 231],
+    "interior": list(range(7, 35)) + list(range(36, 56)) + [62, 63, 64, 65, 66, 67, 89, 90, 91, 96, 97, 178, 179, 180, 193, 194, 195, 196, 197, 198, 199, 200, 201],
+    "ciudad": [57, 58, 59, 60, 61, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114, 115, 116, 117, 118, 119, 120, 127, 128, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 159, 160, 161, 162, 163, 164, 165, 166, 168, 169],
+    "naturaleza": [71, 72, 73, 154, 155, 156, 157],
+    "aereo": [146, 172, 173, 174, 232],
+    "playa": [158, 159, 160, 167, 233, 116, 119],
+    "fiesta": [186, 187, 188, 189, 190, 191, 192, 206, 207, 208, 209, 210, 211, 213, 214],
+    "accion": [108, 113, 121, 122, 123, 124, 125, 126, 127, 129, 130, 131, 132, 133, 134, 135, 136, 220, 228, 229, 230],
+    "coche": [78, 79, 80, 81, 116, 117, 118, 119, 120, 125, 141, 170, 171, 136, 185],
+}
 CAPTION_Y = 0.665                       # centro de los subtítulos (fracción de la altura)
 SAFE_X = 70
 
@@ -314,6 +327,22 @@ def cabecera_img(txt):
     return rgba_bgr(im)
 
 
+def capitulo_img(txt):
+    """Rótulo de capítulo: «3 · PIE GRANDE» en grande, con número en rosa."""
+    num, _, nombre = txt.partition("·")
+    f1, f2 = font(FONT_BIG, 120), font(FONT_BIG, 170)
+    b1, b2 = f1.getbbox(num.strip()), f2.getbbox(nombre.strip())
+    w = max(b1[2], b2[2]) + 160
+    h = b1[3] + b2[3] + 140
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.text(((w - b1[2]) // 2, 30), num.strip(), font=f1, fill=ROSA, stroke_width=8, stroke_fill=(0, 0, 0))
+    d.text(((w - b2[2]) // 2, b1[3] + 60), nombre.strip(), font=f2, fill=(255, 255, 255), stroke_width=10,
+           stroke_fill=(0, 0, 0))
+    d.rectangle([(w - 220) // 2, b1[3] + 44, (w + 220) // 2, b1[3] + 52], fill=AMARILLO)
+    return rgba_bgr(im)
+
+
 def marca_img():
     fnt = font(FONT, 34)
     im = Image.new("RGBA", (260, 60), (0, 0, 0, 0))
@@ -391,19 +420,40 @@ def construir(v, out_dir):
     t = 0.0
     beats = []
     for b in v["beats"]:
+        if b.get("capitulo"):
+            t += 1.4 if HORIZ else 0.0   # rótulo del capítulo antes de que hable el narrador
         a, ws = voz(b["texto"].replace("*", ""))
         dur = len(a) / SR
         wt = v2.word_times_real(b["texto"], t, dur, [(w, s, e) for w, s, e in ws])
         beats.append(dict(b, audio=a, t0=t, t1=t + dur, wt=wt))
-        t += dur + 0.05
+        t += dur + (0.22 if HORIZ else 0.05)
     total = t + 0.35
     n = int(round(total * FPS))
     # 2) planos: cada frase se reparte entre sus clips, cortando al empezar una palabra
     planos = []
+    usados = {}
     for i, b in enumerate(beats):
-        clips = b["clips"]
         ini = b["t0"] if i else 0.0
+        if b.get("capitulo") and HORIZ:
+            ini = b["t0"] - 1.4
+        clips = b["clips"]
+        if isinstance(clips, str):   # elegir planos del grupo, sin repetir hasta agotarlo
+            fin0 = beats[i + 1]["t0"] - (1.4 if i + 1 < len(beats) and beats[i + 1].get("capitulo") and HORIZ else 0) \
+                if i + 1 < len(beats) else total
+            nplan = max(1, int(round((fin0 - ini) / (2.6 if HORIZ else 1.3))))
+            grupo = [f"ol_{x:03d}" for x in TAGS[clips] if (CLIPS / f"ol_{x:03d}.mp4").exists()]
+            clips = []
+            for _ in range(nplan):
+                cola = [c for c in grupo if c not in usados.get("x", set())]
+                if not cola:
+                    usados["x"] = set()
+                    cola = grupo
+                c = rnd.choice(cola)
+                usados.setdefault("x", set()).add(c)
+                clips.append(c)
         fin = beats[i + 1]["t0"] if i + 1 < len(beats) else total
+        if i + 1 < len(beats) and beats[i + 1].get("capitulo") and HORIZ:
+            fin -= 1.4
         cortes = [ini]
         for k in range(1, len(clips)):
             obj = ini + (fin - ini) * k / len(clips)
@@ -423,7 +473,7 @@ def construir(v, out_dir):
     mus = v2.music(total + 1, int(hashlib.md5(v["slug"].encode()).hexdigest()[:6], 16) % 1000)[:len(voz_tr)]
     mus = np.pad(mus, (0, max(0, len(voz_tr) - len(mus))))
     duck = 1 - 0.62 * envolvente(voz_tr)
-    mus = mus / (np.abs(mus).max() + 1e-6) * 0.30 * duck
+    mus = mus / (np.abs(mus).max() + 1e-6) * (0.20 if HORIZ else 0.30) * duck
     fx = np.zeros_like(voz_tr)
     put(fx, impacto(), 0.0, 0.9)
     rr = np.random.default_rng(1)
@@ -437,6 +487,8 @@ def construir(v, out_dir):
             put(fx, r_, b["t0"] - len(r_) / SR, 0.55)
         if b.get("stat"):
             put(fx, v2.sfx_pop(rr), b["t0"] + 0.05, 0.9)
+        if b.get("capitulo") and HORIZ:
+            put(fx, impacto(), b["t0"] - 1.4, 0.6)
     fx = fx[:len(voz_tr)]
     WORK.mkdir(parents=True, exist_ok=True)
     mezcla = (voz_tr * 1.0 + mus + fx * 0.8)[:int(total * SR)]
@@ -451,7 +503,8 @@ def construir(v, out_dir):
                             "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "slow",
                             "-crf", "19", "-maxrate", "14M", "-bufsize", "28M", "-profile:v", "high", "-pix_fmt", "yuv420p", str(mudo)],
                            stdin=subprocess.PIPE)
-    cab = cabecera_img(v["cabecera"])
+    cab = cabecera_img(v["cabecera"]) if v.get("cabecera") else None
+    caps = {i: capitulo_img(b["capitulo"]) for i, b in enumerate(beats) if b.get("capitulo") and HORIZ}
     marca = marca_img()
     stats = {i: stat_img(b["stat"]) for i, b in enumerate(beats) if b.get("stat")}
     grp = []
@@ -495,7 +548,9 @@ def construir(v, out_dir):
             txt = beats[bi]["stat"]
             num = re.fullmatch(r"([^\d]*)(\d[\d.]*)([^\d]*)", txt)
             img = stats[bi]
-            if bi > 0 and num and st < 0.45 and int(num.group(2).replace(".", "")) >= 10:
+            es_codigo = "?" in txt or ":" in txt or num is not None and (num.group(2).startswith("0") or
+                                                                       re.fullmatch(r"\d{4}", num.group(2)) is not None)
+            if bi > 0 and num and not es_codigo and st < 0.45 and int(num.group(2).replace(".", "")) >= 10:
                 valor = int(num.group(2).replace(".", ""))
                 cur = int(valor * min(1, st / 0.45) ** 0.6)
                 s_cur = f"{cur:,}".replace(",", ".") if "." in num.group(2) else str(cur)
@@ -504,9 +559,17 @@ def construir(v, out_dir):
             if bi == 0 and st < 0.12:   # el gancho se lee desde el primer fotograma
                 sc = 1.12
             wob = 1 + 0.015 * np.sin(st * 6)
-            f = pegar(f, img, W / 2, H * 0.36, sc * wob)
+            f = pegar(f, img, W / 2, H * (0.40 if HORIZ else 0.36), sc * wob)
+        # rótulo de capítulo (vídeos largos)
+        ci_ = next((i for i in caps if beats[i]["t0"] - 1.4 <= tg < beats[i]["t0"] + 0.6), None)
+        if ci_ is not None:
+            ct = tg - (beats[ci_]["t0"] - 1.4)
+            f = (f.astype(np.float32) * 0.55).astype(np.uint8)
+            sc = 0.6 + 0.4 * min(1, ct / 0.15)
+            al = min(1.0, (beats[ci_]["t0"] + 0.6 - tg) / 0.3)
+            f = pegar(f, caps[ci_], W / 2, H / 2, sc, al)
         # subtítulos palabra a palabra
-        g = next((gg for gg in grp if gg[0][1] - 0.02 <= tg < gg[-1][2] + 0.02), None)
+        g = None if HORIZ else next((gg for gg in grp if gg[0][1] - 0.02 <= tg < gg[-1][2] + 0.02), None)
         if g is not None:
             act = max(0, max(i for i, w in enumerate(g) if w[1] - 0.02 <= tg) if any(w[1] - 0.02 <= tg for w in g) else 0)
             ci = caption_img([w[0] for w in g], act)
@@ -515,12 +578,13 @@ def construir(v, out_dir):
             we = tg - g[act][1]
             sc *= 1 + 0.06 * max(0, 1 - we / 0.1)
             f = pegar(f, ci, W / 2, H * CAPTION_Y, sc)
-        f = pegar(f, cab, W / 2, 250)
-        f = pegar(f, marca, W - 150, 150)
+        if cab is not None:
+            f = pegar(f, cab, W / 2, 250)
+        f = pegar(f, marca, W - 150, 80 if HORIZ else 150)
         # bucle: el final funde con el primer fotograma
         if primer is None:
             primer = f.copy()
-        if total - tg < 0.3:
+        if total - tg < 0.3 and not HORIZ:
             a = 1 - (total - tg) / 0.3
             f = cv2.addWeighted(f, 1 - a, primer, a, 0)
         enc.stdin.write(f.tobytes())
@@ -532,6 +596,10 @@ def construir(v, out_dir):
                         "-af", "loudnorm=I=-14:TP=-1.0:LRA=9", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
                         "-ar", "48000", "-shortest", "-movflags", "+faststart", str(out_dir / nombre)], check=True)
     (out_dir / "descripcion.txt").write_text(v["descripcion"] + "\n", encoding="utf-8")
+    if HORIZ:   # capítulos para la descripción de YouTube
+        lin = ["0:00 Intro"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {b['capitulo'].split('·')[-1].strip().capitalize()}"
+                                 for b in beats if b.get("capitulo")]
+        (out_dir / "capitulos.txt").write_text("\n".join(lin) + "\n", encoding="utf-8")
     print(f"OK {v['slug']}: {total:.1f} s, {len(planos)} planos", flush=True)
 
 
