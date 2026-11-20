@@ -205,13 +205,13 @@ def cargar_plano(nombre, t0, dur):
         iw, ih = cv2.imread(str(img)).shape[1::-1]
         if HORIZ and iw / ih < 1.5:   # arte vertical en vídeo 16:9: entero, sobre su propia imagen desenfocada
             vf = (f"split[a][b];[a]scale={cw}:{hh}:force_original_aspect_ratio=increase,crop={cw}:{hh},boxblur=28:2,"
-                  f"eq=brightness=-0.12:saturation=1.35[bg];[b]scale=-2:{hh}:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:0")
+                  f"eq=brightness=-0.12:saturation=1.35[bg];[b]scale=-2:{hh}:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:0,scale={cw}:{hh},format=bgr24")
         elif iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9
             vf = f"scale={cw}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={cw}:{hh}"
         else:
             vf = (f"scale={ww}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={ww}:{hh},"
                   f"crop={cw}:{hh}:{x0}:0")
-        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(img), "-vf", vf, "-frames:v", "1",
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(img), "-vf", "format=bgr24," + vf, "-frames:v", "1",
                               "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
         return np.frombuffer(raw, np.uint8).reshape(-1, hh, cw, 3)[:1]
     src = CLIPS / f"{nombre}.mp4"
