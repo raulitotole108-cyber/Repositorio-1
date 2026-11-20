@@ -6,8 +6,7 @@ from guiones_pro import B, V
 
 VIDEOS = [
 V("w01-weird-al", "¿QUIÉN GRITA?",
-  "Esa voz que grita en la radio de GTA 6 es WEIRD AL 📻😂 Es locutor de Vice City FM, la emisora de los 80 (Kotaku lo "
-  "confirmó con Rockstar).\n\ngta 6, weird al, vice city fm, radio gta 6, emisoras gta 6, locutores gta 6, secretos gta 6"
+  "Esa voz que grita en la radio de GTA 6 es WEIRD AL 📻😂 (confirmado por Rockstar)\n\ngta 6, weird al, vice city fm, radio gta 6, emisoras gta 6, locutores gta 6, secretos gta 6"
   "\n\n#shorts #videoshorts #gta6 #weirdal #vicecityfm",
   [
    B("¡Para! Pon la radio en GTA seis. Esa voz que grita entre canción y canción... es *Weird Al Yankovic*.",
@@ -22,8 +21,7 @@ V("w01-weird-al", "¿QUIÉN GRITA?",
   ], titulo="WEIRD AL📻 es locutor de la radio de gta 6"),
 
 V("w02-casa-2021", "5 AÑOS OCULTA",
-  "Rockstar escondió GTA 6 dentro de OTRO juego hace 5 años 😳 Una imagen secreta del remaster de San Andreas (2021)… "
-  "y los fans acaban de encontrar esa casa en Belville.\n\ngta 6, san andreas, casa secreta gta 6, belville gta 6, "
+  "Rockstar escondió GTA 6 en OTRO juego hace 5 años 😳 y los fans ya han encontrado la casa\n\ngta 6, san andreas, casa secreta gta 6, belville gta 6, "
   "easter egg gta 6, secretos gta 6, mapa gta 6\n\n#shorts #videoshorts #gta6 #sanandreas #eastereggs",
   [
    B("¡Alto! ¿Sabías que *GTA seis* estaba escondido en San Andreas desde dos mil veintiuno?", ["map:casa"], stat="2021", golpe=True),
@@ -38,8 +36,7 @@ V("w02-casa-2021", "5 AÑOS OCULTA",
              belville=dict(lugar="Belville", zoom=(2.6, 3.6), pins=[("Belville", 0.5), ("Lago Leonida", 1.2)]))),
 
 V("w03-loro", "EL LORO DEL TESORO",
-  "Un loro de GTA 6 te lleva a un tesoro 🦜💸 Está en la licorería Three Sheets de Key Lento: más de 1.300 $ "
-  "escondidos (según Mashable).\n\ngta 6, loro gta 6, dinero gta 6, key lento, three sheets, secretos gta 6, "
+  "Un loro de GTA 6 te lleva a más de 1.300 $ escondidos 🦜💸\n\ngta 6, loro gta 6, dinero gta 6, key lento, three sheets, secretos gta 6, "
   "como ganar dinero gta 6\n\n#shorts #videoshorts #gta6 #secretosgta6 #dinerogta6",
   [
    B("¡Ojo! Un loro de GTA seis esconde un *tesoro* en los Cayos.", ["map:keylento"], stat="EL LORO", golpe=True,
