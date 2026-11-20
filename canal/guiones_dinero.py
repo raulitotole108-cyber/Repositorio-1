@@ -270,4 +270,27 @@ V("d15-postales", "LA CARAVANA",
    B("Y las cartas las compran en las casas de empeños. Envíaselo a ese amigo que no sabe abrir una caja fuerte. Y pregúntale...",
      ["ol_164"]),
   ], titulo="CÓDIGO ESCONDIDO🖼️ en unas postales de gta 6"),
+V("d16-trucos", "AL ACABAR",
+  "GTA 6 tiene 61 trucos, pero no los puedes usar hasta acabar la historia 🎮 Así se meten y lo que no te cuentan\n\n"
+  "gta 6, trucos gta 6, cheats gta 6, como poner trucos gta 6, municion infinita gta 6, codigos gta 6\n\n"
+  "#shorts #videoshorts #gta6 #trucosgta6 #cheatsgta6",
+  [
+   B("¡Para! ¿Sabías que GTA seis tiene *sesenta y un* trucos... y que no puedes usar ninguno hasta acabar la historia?",
+     ["img:Jason_Duval_16"], stat="61 TRUCOS", golpe=True),
+   B("Cuando la terminas, aparece una lista nueva: Progreso, Trucos.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🔓", titulo="PROGRESO › TRUCOS", sub="al acabar la historia", y=0.45, desde="lista")]),
+   B("Diez para tu personaje, once de combate, veintiuno de vehículos, tres del entorno y dieciséis filtros de pantalla.",
+     ["img:Jason_Duval_01"], gfx=[dict(t="pasos", items=["10 de personaje", "11 de combate", "21 de vehículos", "3 del entorno", "16 filtros"],
+                                       en=["Diez", "once", "veintiuno", "tres", "dieciséis"])]),
+   B("¿Y cómo se meten? Nada de marcar números. Sacas el móvil, mantienes L uno, pulsas R uno... y metes la combinación con las flechas.",
+     ["img:Lucia_Caminos_Video_Clip"], gfx=[dict(t="pasos", items=["Saca el móvil", "Mantén L1 y pulsa R1", "Combinación con las flechas"],
+                                                 en=["Sacas", "mantienes", "combinación"])]),
+   B("Y la munición infinita se gana: *veinticinco* medallas de plata en los campos de tiro.", ["img:ULTIMATE_EDITION_HAWK_AND_LITTLE_MORGAN_REVOLVERS_01"],
+     gfx=[dict(t="contador", hasta=25, prefijo="", sufijo="", sub="medallas de plata", desde="veinticinco")], riser=True),
+   B("Eso sí: mientras usas trucos, no puedes guardar ni ganar trofeos.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🚫", titulo="SIN GUARDAR", sub="ni trofeos", y=0.45, desde="guardar")]),
+   B("Y las listas de números que corren por ahí son de GTA cinco: no funcionan. Envíaselo a ese amigo que juega con trucos. Y pregúntale...",
+     ["img:Jason_Duval_17"], stat="FALSAS"),
+  ], titulo="TRUCOS SECRETOS🎮 de gta 6 y cómo ponerlos"),
 ]
+
