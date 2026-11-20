@@ -175,7 +175,7 @@ def grade(f, k):
             f = cv2.LUT(f, _gamma[g])
     f = cv2.LUT(f, LUT)
     hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
-    hsv[..., 1] = cv2.add(hsv[..., 1], 18)               # +saturación
+    hsv[..., 1] = cv2.add(hsv[..., 1], 24 if HORIZ else 18)   # +saturación (más en los largos)
     f = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
     blur = cv2.GaussianBlur(f, (0, 0), 2.2)
     f = cv2.addWeighted(f, 1.45, blur, -0.45, 0)          # nitidez
@@ -203,7 +203,10 @@ def cargar_plano(nombre, t0, dur):
                 IMG / "frames_oficial" / f"{nm}.jpg", IMG / "oficial_extra" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
         img = next(c for c in cand if c.exists())
         iw, ih = cv2.imread(str(img)).shape[1::-1]
-        if iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9
+        if HORIZ and iw / ih < 1.5:   # arte vertical en vídeo 16:9: entero, sobre su propia imagen desenfocada
+            vf = (f"split[a][b];[a]scale={cw}:{hh}:force_original_aspect_ratio=increase,crop={cw}:{hh},boxblur=28:2,"
+                  f"eq=brightness=-0.12:saturation=1.35[bg];[b]scale=-2:{hh}:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:0")
+        elif iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9
             vf = f"scale={cw}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={cw}:{hh}"
         else:
             vf = (f"scale={ww}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={ww}:{hh},"
@@ -236,6 +239,39 @@ def cargar_plano(nombre, t0, dur):
     if len(fr) < n:
         fr = np.concatenate([fr, np.repeat(fr[-1:], n - len(fr), 0)])
     return fr
+
+
+FONDOS_VIVOS = [IMG / "extra" / n for n in ("x011_Hero_BG.jpg", "x017_vice_city.jpg", "x013_Hero_BG.jpg", "x021_port_gellhorn.jpg",
+                                              "x014_Hero_BG.jpg", "x023_leonida_keys.jpg", "x026_hero_background_desktop.jpg",
+                                              "x027_grassrivers.jpg", "x015_Hero_BG.jpg", "x050_hero_background_ultrawide.jpg",
+                                              "x016_Hero_BG.jpg", "x024_kalaga.jpg", "x012_Hero_BG.jpg", "x053_onlyInLeonidaDesktop.jpg")]
+_fv = {}
+
+
+def fondo_vivo(i, lt):
+    """Fondo de los gráficos en los vídeos largos: arte oficial de colores, desenfocado y moviéndose despacio
+    (en vez del morado liso), con un toque del morado de la marca para que se lean las tarjetas."""
+    path = FONDOS_VIVOS[i % len(FONDOS_VIVOS)]
+    if path not in _fv:
+        im = cv2.imread(str(path))
+        bw, bh = int(W * 1.3), int(H * 1.3)
+        s = max(bw / im.shape[1], bh / im.shape[0])
+        im = cv2.resize(im, (int(im.shape[1] * s) + 1, int(im.shape[0] * s) + 1), interpolation=cv2.INTER_AREA)
+        y0, x0 = (im.shape[0] - bh) // 2, (im.shape[1] - bw) // 2
+        im = cv2.GaussianBlur(im[y0:y0 + bh, x0:x0 + bw], (0, 0), 9)
+        hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV).astype(np.float32)
+        hsv[..., 1] = np.clip(hsv[..., 1] * 1.6, 0, 255)
+        hsv[..., 2] = np.clip(hsv[..., 2] * 0.6, 0, 255)
+        im = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
+        marca = cv2.resize(gx.fondo_marca(W, H), (bw, bh))
+        yy, xx = np.mgrid[0:bh, 0:bw]
+        vig = 1 - 0.45 * (((xx - bw / 2) / (bw / 2)) ** 2 + ((yy - bh / 2) / (bh / 2)) ** 2).clip(0, 1)
+        _fv[path] = (cv2.addWeighted(im, 0.85, marca, 0.15, 0).astype(np.float32) * vig[..., None]).astype(np.uint8)
+    base = _fv[path]
+    bh, bw = base.shape[:2]
+    x = int((bw - W) * (0.5 + 0.45 * np.sin(lt * 0.18 + i)))
+    y = int((bh - H) * (0.5 + 0.45 * np.cos(lt * 0.14 + i * 0.7)))
+    return base[y:y + H, x:x + W].copy()
 
 
 def encuadre(img, z, dx=0.0, dy=0.0, rot=0.0):
@@ -690,6 +726,8 @@ def construir(v, out_dir):
         lt = tg - p["t0"]
         prog = lt / max(0.1, p["t1"] - p["t0"])
         z = 1.0 + 0.06 * prog
+        if HORIZ and p["clip"].startswith("img:"):
+            z = (1 / 1.12) * (1.0 + 0.07 * prog)   # la captura se ve entera y la cámara se acerca despacio
         if HORIZ and any(g_["t"] in ("etiquetas", "lupa") for g_ in (beats[p["beat"]].get("gfx") or [])):
             z = 1 / 1.12   # imagen entera y quieta: las etiquetas y la lupa caen justo encima
         dx = dy = rot = 0.0
@@ -707,7 +745,7 @@ def construir(v, out_dir):
                     mapas_ok[pi] = sp
                 f = gx.render_mapa(mapas_ok[pi], lt, p["t1"] - p["t0"], W, H)
             else:
-                f = gx.fondo_marca(W, H)
+                f = fondo_vivo(pi, lt) if HORIZ else gx.fondo_marca(W, H)
         elif cmp_:   # pantalla partida: mitad central de cada clip
             fa, fb = frames
             A = encuadre(fa[min(lk, len(fa) - 1)], z)

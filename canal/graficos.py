@@ -616,7 +616,10 @@ class Capa2(Capa):
                 pos = g.get("pos", "centro")
                 cx = {"centro": W / 2, "izq": img.shape[1] / 2 + 60, "der": W - img.shape[1] / 2 - 60}[pos]
                 cy = g.get("y", 0.5 if not vert else 0.42) * H
-                sc = min(1.0, (W - 80) / img.shape[1]) * (0.85 + 0.15 * e)
+                grande = 1.6 if (not vert and pos == "centro") else (1.25 if not vert else 1.0)   # en 16:9 las fichas se leen mejor más grandes
+                sc = min(grande, (W - 80) / img.shape[1]) * (0.85 + 0.15 * e)
+                if not vert and pos != "centro":
+                    cx = {"izq": img.shape[1] * sc / 2 + 60, "der": W - img.shape[1] * sc / 2 - 60}[pos]
                 f = pegar(f, img, cx, cy, sc, e)
             elif k == "titular":
                 sc = min(1.0, (W - 60) / img.shape[1])
@@ -638,8 +641,10 @@ class Capa2(Capa):
                     if li < 0:
                         continue
                     ei = ease(li / 0.3)
-                    y = H / 2 + (i - (n - 1) / 2) * (im_.shape[0] + 10)
-                    f = pegar(f, im_, W / 2 - (1 - ei) * 200, y, 1.0, ei)
+                    paso = im_.shape[0] + 10
+                    esc = min(1.0, H * 0.78 / (n * paso))   # listas largas: se encogen para caber en pantalla
+                    y = H / 2 + (i - (n - 1) / 2) * paso * esc
+                    f = pegar(f, im_, W / 2 - (1 - ei) * 200, y, esc, ei)
             elif k == "teclado":
                 cajas, lab = img
                 n = len(cajas)
