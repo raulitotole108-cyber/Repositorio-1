@@ -12,10 +12,10 @@ V("d01-bancos", "HASTA 205.000 $",
   "#shorts #videoshorts #gta6 #dinerogta6 #atracosgta6",
   [
    B("¡Para! ¿Sabías que un banco de GTA seis te puede dar *doscientos cinco mil* dólares en cinco minutos?",
-     ["ol_043"], stat="205.000 $", golpe=True),
-   B("Es el robo a la cámara acorazada. Y lo puedes repetir.", ["ol_208"],
+     ["ol_044"], stat="205.000 $", golpe=True),
+   B("Es el robo a la cámara acorazada. Y lo puedes repetir.", ["ol_209"],
      gfx=[dict(t="icono", emoji="🏦", titulo="CÁMARA ACORAZADA", sub="atraco repetible", y=0.52, desde="cámara")]),
-   B("Se desbloquea al final del capítulo cuatro, con una misión opcional.", ["bg:"],
+   B("Se desbloquea al final del capítulo cuatro, con una misión opcional.", ["ol_051"],
      gfx=[dict(t="icono", emoji="📍", titulo="CAPÍTULO 4", sub="That's Where The Money Is…", y=0.45, desde="capítulo")]),
    B("¿Y cómo va? Sigues al furgón blindado, el guardia abre la cámara... y entras tú.", ["bg:"],
      gfx=[dict(t="pasos", items=["Sigue al furgón blindado", "El guardia abre la cámara", "Entra y coge el dinero"],
@@ -173,4 +173,38 @@ V("d10-randy", "+30.000 $",
    B("Además cuenta para el cien por cien. Envíaselo a ese amigo que roba coches por mil pavos. Y pregúntale...",
      ["ol_185"]),
   ], titulo="LISTA SECRETA📋 de coches que te pagan en gta 6"),
+V("d11-peluches", "EL ALMACÉN",
+  "Furgonetas llenas de peluches con droga dentro en GTA 6 🧸 Más de 10.000 $ en un almacén cerca de Hamlet\n\n"
+  "gta 6, dinero gta 6, almacen gta 6, hamlet gta 6, peluches gta 6, dinero facil gta 6\n\n"
+  "#shorts #videoshorts #gta6 #dinerogta6 #secretosgta6",
+  [
+   B("¡Espera! ¿Sabías que en GTA seis hay furgonetas llenas de peluches... con droga dentro?", ["ol_147"],
+     stat="PELUCHES", golpe=True),
+   B("Están en un almacén del sur de Vice-Dale, cerca de Hamlet.", ["bg:"],
+     gfx=[dict(t="icono", emoji="📍", titulo="EL ALMACÉN", sub="sur de Vice-Dale · cerca de Hamlet", y=0.45, desde="almacén")]),
+   B("En las furgonetas y en las mesas de la oficina hay paquetes. Cada uno suma unos *trescientos veinte* dólares.", ["ol_026"],
+     gfx=[dict(t="contador", hasta=320, prefijo="+", sufijo=" $", sub="por paquete", desde="trescientos")]),
+   B("Y hay seis mil en billetes marcados. ¿El truco? No los puedes gastar hasta que se los vendes a un perista.", ["ol_144"],
+     stat="6.000 $", riser=True),
+   B("En total, más de diez mil dólares. Envíaselo a ese amigo que nunca sabe de dónde sacar dinero. Y pregúntale...",
+     ["ol_046"]),
+  ], titulo="PELUCHES LOCOS🧸 con 10.000 dólares en gta 6"),
+
+V("d12-carta", "LEROY ROOK",
+  "En una caja fuerte de GTA 6 hay una carta que vale 6.000 $ 🃏 La de Leroy Rook, y se vende en la casa de empeños\n\n"
+  "gta 6, cartas gta 6, leroy rook gta 6, caja fuerte gta 6, casa de empeños gta 6, coleccionables gta 6\n\n"
+  "#shorts #videoshorts #gta6 #dinerogta6 #coleccionablesgta6",
+  [
+   B("¡Mira esto! ¿Sabías que en una caja fuerte de GTA seis hay una carta que vale *seis mil* dólares?", ["ol_034"],
+     stat="6.000 $", golpe=True, gfx=[dict(t="icono", emoji="🃏", titulo="LA CARTA", sub="dentro de una caja fuerte", y=0.62, desde=0.0)]),
+   B("Está en la caja fuerte de la oficina del almacén de los peluches, junto al dinero.", ["ol_030"],
+     gfx=[dict(t="icono", emoji="🔐", titulo="CAJA FUERTE", sub="oficina del almacén", y=0.52, desde="caja")]),
+   B("¿Y el código? Apunta a un empleado y amenázale. Te lo acaba diciendo.", ["img:Lucia_Caminos_13"],
+     gfx=[dict(t="icono", emoji="🔢", titulo="EL CÓDIGO", sub="amenaza a un empleado", y=0.52, desde="código")]),
+   B("La carta es de Leroy Rook. Y en la casa de empeños de Hamlet te dan seis mil por ella.", ["img:Vice_City_04"],
+     gfx=[dict(t="icono", emoji="🏪", titulo="CASA DE EMPEÑOS", sub="Hamlet · 6.000 $", y=0.52, desde="casa")], riser=True),
+   B("Y venderla no te quita el progreso de la colección. Envíaselo a ese amigo que lo colecciona todo. Y pregúntale...",
+     ["img:Vice_City_19"]),
+  ], titulo="CARTA MILLONARIA🃏 en una caja fuerte de gta 6"),
 ]
+
