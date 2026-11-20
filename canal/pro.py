@@ -52,7 +52,7 @@ FONT = str(FUENTES / "Montserrat-Black.ttf")
 FONT_BIG = str(FUENTES / "Anton-Regular.ttf")
 AMARILLO = (255, 225, 40)
 ROSA = (255, 70, 170)
-VOZ = ("es-ES-AlvaroNeural", -8, 12 if HORIZ else 30)   # voz, Hz, % de velocidad
+VOZ = ("es-ES-AlvaroNeural", -8, -6 if HORIZ else 30)   # voz, Hz, % de velocidad
 # grupos de clips de gameplay para que el motor elija planos según el tema (vídeos largos)
 TAGS = {
     "noche": [1, 2, 3, 4, 5, 6, 170, 171, 181, 182, 183, 184, 212, 216, 218, 219, 221, 222, 223, 224, 225, 226, 227, 231],
@@ -74,7 +74,7 @@ def _tts_frase(texto, rate, pitch, mp3):
     import edge_tts
 
     async def run():
-        com = edge_tts.Communicate(texto, VOZ[0], rate=f"+{rate}%", pitch=f"{pitch:+d}Hz", boundary="WordBoundary",
+        com = edge_tts.Communicate(texto, VOZ[0], rate=f"{rate:+d}%", pitch=f"{pitch:+d}Hz", boundary="WordBoundary",
                                    proxy=os.environ.get("HTTPS_PROXY"))
         words = []
         with open(mp3, "wb") as f:
