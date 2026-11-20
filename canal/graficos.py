@@ -444,7 +444,7 @@ def render_mapa(spec, lt, dur, W, H):
         f = cv2.addWeighted(ov, 0.6 * a * (1 - ((lt - desde) * 1.3 % 1.0)), f, 1 - 0.6 * a * (1 - ((lt - desde) * 1.3 % 1.0)), 0)
         cv2.circle(f, (int(x), int(y)), int(13 * a) + 1, (170, 70, 255), -1, cv2.LINE_AA)
         cv2.circle(f, (int(x), int(y)), int(6 * a) + 1, (255, 255, 255), -1, cv2.LINE_AA)
-        lab = pastilla(etiqueta.upper(), 26, punto=False)
+        lab = pastilla(etiqueta.upper(), 32 if W > H else 26, punto=False)
         f = pegar(f, lab, x + lab.shape[1] / 2 + 14, y - lab.shape[0] / 2 - 6, 1.0, a)
     return f
 
@@ -629,7 +629,7 @@ class Capa2(Capa):
                 cada = g.get("cada", 1.0)
                 n = len(img)
                 for i, im_ in enumerate(img):
-                    li = lt - i * cada
+                    li = (t - g["en_t"][i]) if g.get("en_t") else lt - i * cada
                     if li < 0:
                         continue
                     ei = ease(li / 0.3)

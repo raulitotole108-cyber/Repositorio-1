@@ -30,6 +30,7 @@ import random
 import re
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 import cv2
@@ -429,6 +430,23 @@ def marca_img():
     return rgba_bgr(im)
 
 
+def _norm(s):
+    s = unicodedata.normalize("NFD", str(s).lower())
+    return "".join(c for c in s if c.isalnum() or c == " ").split()
+
+
+def t_palabra(wt, clave, ref, slug=""):
+    """Segundo (desde ref) en que el narrador DICE `clave` (una palabra o varias seguidas), para que el gráfico o la
+    chincheta salga justo cuando se nombra. wt = [(palabra, inicio, fin)] en tiempo absoluto."""
+    cl = _norm(clave)
+    ws = [" ".join(_norm(w[0])) for w in wt]
+    for i in range(len(ws)):
+        if cl and ws[i:i + len(cl)] == cl:
+            return max(0.0, wt[i][1] - ref - 0.05)
+    print(f"AVISO {slug}: la palabra «{clave}» no está en la frase; el gráfico sale al principio", flush=True)
+    return 0.0
+
+
 def grupos(ws):
     """Agrupa palabras en bloques de 1-3 (corta en puntuación y en palabras clave largas)."""
     out, cur = [], []
@@ -504,6 +522,15 @@ def construir(v, out_dir):
         dur = len(a) / SR
         wt = v2.word_times_real(b["texto"], t, dur, [(w, s, e) for w, s, e in ws])
         b = dict(b)
+        if b.get("gfx"):   # «desde»/«hasta» como palabra: el gráfico sale cuando se dice
+            b["gfx"] = [dict(g_, **{k_: t_palabra(wt, g_[k_], t, v["slug"]) for k_ in ("desde", "hasta", "hasta_t")
+                                    if isinstance(g_.get(k_), str)}) for g_ in b["gfx"]]
+            for g_ in b["gfx"]:   # pasos: cada fila sale con su palabra; línea de tiempo: la 2.ª fecha, con la suya
+                if isinstance(g_.get("retardo"), str):
+                    g_["retardo"] = max(0.3, t_palabra(wt, g_["retardo"], t, v["slug"]) - g_.get("desde", 0.0))
+                if g_.get("en"):
+                    g_["en_t"] = [t_palabra(wt, w_, t, v["slug"]) for w_ in g_["en"]]
+                    g_["desde"] = g_["en_t"][0]
         if HORIZ and b.get("stat"):
             b["gfx"] = list(b.get("gfx") or []) + [dict(t="dato", txt=b["stat"], sub=b.get("stat_sub"))]
             b["stat"] = None
@@ -543,7 +570,12 @@ def construir(v, out_dir):
         if i + 1 < len(beats) and beats[i + 1].get("capitulo") and HORIZ:
             fin -= 1.4
         cortes = [ini]
+        pal = b.get("cortes") or []
         for k in range(1, len(clips)):
+            if k - 1 < len(pal):   # corte en la palabra pedida: la imagen cambia justo cuando se nombra lo que enseña
+                tc = b["t0"] + t_palabra(b["wt"], pal[k - 1], b["t0"], v["slug"])
+                cortes.append(min(fin - 0.3, max(cortes[-1] + 0.3, tc)))
+                continue
             obj = ini + (fin - ini) * k / len(clips)
             cand = [w[1] for w in b["wt"] if cortes[-1] + 0.7 < w[1] < fin - 0.7]
             cortes.append(min(cand, key=lambda x: abs(x - obj)) if cand else obj)
@@ -616,8 +648,10 @@ def construir(v, out_dir):
     for b in beats:
         grp += grupos(b["wt"])
     primer = None
+    limpio = None
     pi_cache = (None, None)
     capas = {}
+    mapas_ok = {}
     for k in range(n):
         tg = k / FPS
         pi = next((i for i, p in enumerate(planos) if p["t0"] <= tg < p["t1"]), len(planos) - 1)
@@ -650,7 +684,12 @@ def construir(v, out_dir):
             rot = rnd.uniform(-1, 1) * 1.6 * e
         if esp_:   # mapa oficial animado o fondo de la marca (gráficos limpios, sin etalonaje)
             if p["clip"].startswith("map:"):
-                f = gx.render_mapa(v.get("mapas", {})[p["clip"][4:]], lt, p["t1"] - p["t0"], W, H)
+                if pi not in mapas_ok:   # chinchetas con palabra: salen cuando el narrador nombra el sitio
+                    sp = dict(v.get("mapas", {})[p["clip"][4:]])
+                    sp["pins"] = [(it[0], t_palabra(beats[p["beat"]]["wt"], it[1], p["t0"], v["slug"])
+                                   if isinstance(it[1], str) else it[1]) + tuple(it[2:]) for it in sp.get("pins", [])]
+                    mapas_ok[pi] = sp
+                f = gx.render_mapa(mapas_ok[pi], lt, p["t1"] - p["t0"], W, H)
             else:
                 f = gx.fondo_marca(W, H)
         elif cmp_:   # pantalla partida: mitad central de cada clip
@@ -668,6 +707,8 @@ def construir(v, out_dir):
             f = barrido(f, 1 - (p["t1"] - tg) / 0.12, 1)
         if not esp_:
             f = grade(f, k)
+        if PORTADA and limpio is None and tg >= 0.45:
+            limpio = f.copy()   # fotograma limpio (sin textos) para la portada
         if cmp_:
             cv2.line(f, (W // 2, 0), (W // 2, H), (170, 70, 255), 10, cv2.LINE_AA)
             cv2.line(f, (W // 2, 0), (W // 2, H), (255, 255, 255), 3, cv2.LINE_AA)
@@ -749,7 +790,7 @@ def construir(v, out_dir):
             a = 1 - (fin_contenido - tg) / 0.3
             f = cv2.addWeighted(f, 1 - a, primer, a, 0)
         if PORTADA and tg >= fin_contenido:
-            f = portada_img(primer, v["titulo"])
+            f = portada_img(limpio if limpio is not None else primer, v["titulo"])
         enc.stdin.write(f.tobytes())
     enc.stdin.close()
     enc.wait()

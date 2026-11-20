@@ -5,7 +5,7 @@ DOS PALABRAS EN MAYÚSCULAS + emoji + resto en minúscula. Motor: canal/pro.py (
 from guiones_pro import B, V
 
 VIDEOS = [
-V("w01-weird-al", "LA VOZ DE LA RADIO",
+V("w01-weird-al", "¿QUIÉN GRITA?",
   "Esa voz que grita en la radio de GTA 6 es WEIRD AL 📻😂 Es locutor de Vice City FM, la emisora de los 80 (Kotaku lo "
   "confirmó con Rockstar).\n\ngta 6, weird al, vice city fm, radio gta 6, emisoras gta 6, locutores gta 6, secretos gta 6"
   "\n\n#shorts #videoshorts #gta6 #weirdal #vicecityfm",
@@ -21,17 +21,17 @@ V("w01-weird-al", "LA VOZ DE LA RADIO",
    B("Envíaselo a ese amigo que se sabe todas sus parodias. Porque esa voz que grita... es *Weird Al*...", ["ol_078"]),
   ], titulo="WEIRD AL📻 es locutor de la radio de gta 6"),
 
-V("w02-casa-2021", "ESCONDIDO DESDE 2021",
+V("w02-casa-2021", "5 AÑOS OCULTA",
   "Rockstar escondió GTA 6 dentro de OTRO juego hace 5 años 😳 Una imagen secreta del remaster de San Andreas (2021)… "
   "y los fans acaban de encontrar esa casa en Belville.\n\ngta 6, san andreas, casa secreta gta 6, belville gta 6, "
   "easter egg gta 6, secretos gta 6, mapa gta 6\n\n#shorts #videoshorts #gta6 #sanandreas #eastereggs",
   [
-   B("¡Alto! Lo que se escondía en San Andreas en dos mil veintiuno... era *GTA seis*.", ["map:casa"], stat="2021", golpe=True),
+   B("¡Alto! ¿Sabías que *GTA seis* estaba escondido en San Andreas desde dos mil veintiuno?", ["map:casa"], stat="2021", golpe=True),
    B("En dos mil veintiuno salió el remaster de GTA San Andreas. Y dentro había una imagen de una casa que no salía en ningún GTA.",
      ["bg:"], gfx=[dict(t="icono", emoji="🖼️", titulo="IMAGEN ESCONDIDA", sub="remaster de San Andreas", y=0.45, desde=0.4)]),
    B("Durante años nadie supo de dónde era. ¿Y ahora?", ["ol_087"], riser=True),
    B("Los fans la han encontrado en GTA seis. Está en *Belville*.", ["map:belville"], stat="BELVILLE", golpe=True),
-   B("El primer vistazo a GTA seis llevaba cinco años escondido. Envíaselo a ese amigo que dice que se fija en todo. Porque lo que se escondía en San Andreas... era *GTA seis*...",
+   B("El primer vistazo a GTA seis llevaba cinco años escondido. Envíaselo a ese amigo que dice que se fija en todo... y pregúntale:",
      ["bg:"], gfx=[dict(t="linea", a=("2021", "Remaster de|San Andreas"), b=("2026", "GTA 6|Belville"), retardo=1.2, desde=0.2)]),
   ], titulo="CASA ESCONDIDA🏠 desde 2021 en san andreas",
   mapas=dict(casa=dict(lugar="Belville", zoom=(1.2, 2.4), pins=[("Belville", 0.6, "La casa de 2021")]),
@@ -51,6 +51,6 @@ V("w03-loro", "EL LORO DEL TESORO",
    B("Y si abres también una caja fuerte y un cajero de la zona, hay quien ha sacado unos dos mil.", ["ol_112"], riser=True,
      gfx=[dict(t="icono", emoji="🏧", titulo="CAJA + CAJERO", sub="unos 2.000 $", y=0.45, desde=0.6)]),
    B("Envíaselo a ese amigo que siempre va pelado. Porque un loro de GTA seis esconde un *tesoro*...", ["ol_162"]),
-  ], titulo="LORO MILLONARIO🦜 esconde un tesoro en gta 6",
+  ], titulo="DINERO FÁCIL🦜 en una licorería de gta 6",   # ya subido: título cambiado en YouTube Studio (no repite la cabecera)
   mapas=dict(keylento=dict(lugar="Key Lento", zoom=(1.3, 3.0), pins=[("Key Lento", 0.5, "Key Lento")]))),
 ]

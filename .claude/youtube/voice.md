@@ -10,8 +10,8 @@ No es un experto: quiere el dato bestia, el meme y saber qué hacer el día 1.
 
 ## Cómo hablo
 
-Locución sintética (voz neural «Giuseppe multilingüe» hablando en español), frases cortas y
-directas, tuteo, español de España («la vas a liar», «currar», «pillar», «pavos»). Ejemplos que han
+Locución sintética (voz neural es-ES-AlvaroNeural, narrador grave y rápido en los Shorts y más pausado en
+los largos), frases cortas y directas, tuteo, español de España («la vas a liar», «currar», «pillar», «pavos»). Ejemplos que han
 funcionado:
 - «¡Para! Si juegas hoy a GTA seis sin saber esto, la vas a liar.» (el Short que más funciona)
 - Chat con el jefe: «¿Cuánta fiebre?» → «212 GB» → «Yo también. El jueves cerramos.»
@@ -36,4 +36,6 @@ tales. Nada de estadísticas inventadas («el 90 % falla…»). No somos un cana
 Shorts y TikToks verticales de 7 a 35 s, sin intro ni pantalla final. Gancho en el primer segundo y medio,
 preguntas en cadena, final en bucle y petición de envío (ver CLAUDE.md). Imágenes y clips oficiales
 de Rockstar, sin mascotas, sin clips de famosos y sin música con derechos (el sonido de tendencia lo
-pone el usuario en TikTok). Vídeos largos de 2 a 3 minutos en YouTube, con capítulos.
+pone el usuario en TikTok o en la app de YouTube). Vídeos largos de unos 10 minutos en YouTube con el formato de
+análisis de APRENDIZAJES_GLOOBY.md: mapa oficial con chinchetas, capturas con etiquetas y lupa, datos en tarjetas y
+capítulos. Cada frase enseña lo que dice y ninguna imagen se repite.

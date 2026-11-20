@@ -4,8 +4,9 @@
 *palabra* = palabra clave (en rosa). stat = dato gigante. golpe = flash + impacto. riser = subida antes."""
 
 
-def B(texto, clips, stat=None, golpe=False, riser=False, gfx=None):
-    return dict(texto=texto, clips=clips, stat=stat, golpe=golpe, riser=riser, gfx=gfx)
+def B(texto, clips, stat=None, golpe=False, riser=False, gfx=None, cortes=None):
+    """cortes = palabras en las que entra cada plano después del primero (la imagen cambia cuando se nombra)."""
+    return dict(texto=texto, clips=clips, stat=stat, golpe=golpe, riser=riser, gfx=gfx, cortes=cortes)
 
 
 def V(slug, cabecera, descripcion, beats, titulo=None, mapas=None):
