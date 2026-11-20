@@ -100,7 +100,15 @@ def voz(texto):
     WORK.mkdir(parents=True, exist_ok=True)
     key = hashlib.md5(f"{VOZ}|{texto}".encode()).hexdigest()[:16]
     wav, js = WORK / f"{key}.wav", WORK / f"{key}.json"
-    if not wav.exists() or not js.exists():
+    for intento in range(4):   # si la voz neural llega cortada (pasa a veces), se vuelve a pedir
+        if wav.exists() and js.exists():
+            y_, w_ = v2.read_wav(wav), json.loads(js.read_text())
+            if not w_ or len(y_) / SR >= w_[-1][2] - 0.15:
+                break
+            print(f"AVISO voz cortada ({len(y_) / SR:.2f} s de {w_[-1][2]:.2f} s), se repite: {texto[:40]}", flush=True)
+            wav.unlink(); js.unlink()
+            for m in WORK.glob(f"{key}_*.mp3"):
+                m.unlink()
         partes, words, t = [], [], 0.0
         for k, fr in enumerate(v2._frases(texto)):
             pitch = VOZ[1] + (5 if fr.endswith("?") else 3 if fr.endswith("!") else (-2, 1, -1)[k % 3])
@@ -519,6 +527,10 @@ def construir(v, out_dir):
         if b.get("capitulo"):
             t += 1.4 if HORIZ else 0.0   # rótulo del capítulo antes de que hable el narrador
         a, ws = voz(b["texto"].replace("*", ""))
+        if not HORIZ and not beats:   # Shorts: 0,15 s de aire antes de la primera palabra (el móvil se come el arranque)
+            pad = int(0.15 * SR)
+            a = np.concatenate([np.zeros(pad, a.dtype), a])
+            ws = [(w_, s_ + 0.15, e_ + 0.15) for w_, s_, e_ in ws]
         dur = len(a) / SR
         wt = v2.word_times_real(b["texto"], t, dur, [(w, s, e) for w, s, e in ws])
         b = dict(b)
