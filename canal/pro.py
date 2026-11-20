@@ -799,7 +799,7 @@ def construir(v, out_dir):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mudo), "-i", str(wav),
                         "-af", "loudnorm=I=-14:TP=-1.0:LRA=9", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
                         "-ar", "48000", "-shortest", "-movflags", "+faststart", str(out_dir / nombre)], check=True)
-    (out_dir / "descripcion.txt").write_text(v["descripcion"] + "\n", encoding="utf-8")
+    desc = v["descripcion"]
     if HORIZ:   # capítulos para la descripción de YouTube
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»
             pal = t.split("·")[-1].strip().split()
@@ -807,9 +807,11 @@ def construir(v, out_dir):
                        "DEXTER", "GTA", "ONLINE", "ÁREA", "PELICAN", "VALLEY", "CAYOS"}
             return " ".join(w.capitalize() if (k == 0 or w in nombres) else (w if any(c.isdigit() for c in w) else w.lower())
                             for k, w in enumerate(pal))
-        lin = ["0:00 Intro"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {bonito(b['capitulo'])}"
-                                 for b in beats if b.get("capitulo")]
+        lin = [f"0:00 {v.get('cap0', 'Intro')}"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {bonito(b['capitulo'])}"
+                                                    for b in beats if b.get("capitulo")]
         (out_dir / "capitulos.txt").write_text("\n".join(lin) + "\n", encoding="utf-8")
+        desc = desc.replace("{CAPITULOS}", "\n".join(lin))   # la descripción sale ya con sus capítulos
+    (out_dir / "descripcion.txt").write_text(desc + "\n", encoding="utf-8")
     print(f"OK {v['slug']}: {total:.1f} s, {len(planos)} planos", flush=True)
 
 

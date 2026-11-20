@@ -276,18 +276,14 @@ dict(slug="l03-cosas-gta5", cabecera=None,
      ["ol_232"]),
 ]),
 
-dict(slug="l04-mapa", cabecera=None,
-     titulo="Dónde está cada secreto del mapa de GTA 6",
-     descripcion=(
-         "Dónde está cada secreto del mapa de GTA 6: los aliens de Port Gellhorn, Pie Grande (el Skunk Ape) en Grassrivers, "
-         "el loro del tesoro en Key Lento, el piso de Dexter en Vice Beach y la casa escondida desde 2021 en Belville.\n"
-         "Recorremos Leonida zona por zona con el mapa oficial (Vice City, los Cayos, Grassrivers, Port Gellhorn, Ambrosia, "
-         "Belville y Mount Kalaga) y te digo dónde está cada easter egg.\n\n"
-         "🔔 Suscríbete: cada vez que se descubra algo nuevo en Leonida, lo verás aquí.\n"
-         "Datos: Rockstar, prensa especializada (Kotaku, Mashable) y hallazgos de jugadores de la primera semana. Lo que no "
-         "está confirmado se dice como rumor y puede cambiar con parches.\n"
-         "Canal de fans no oficial. Imágenes: mapa oficial, capturas oficiales y «GTA VI: An Extended Look» © Rockstar Games.\n\n"
-         "#gta6 #mapagta6 #secretosgta6 #leonida #vicecity"),
+dict(slug="l04-mapa", cabecera=None, cap0="Los secretos del mapa de GTA 6",
+     titulo="SECRETOS LOCOS🛸 del mapa de gta 6",
+     descripcion=(   # formato del canal: frase corta + capítulos (los añade el motor) + palabras clave + 5 hashtags
+         "Todos los secretos del mapa de GTA 6 y dónde están: aliens, Pie Grande y una casa escondida desde 2021 🗺️👽\n\n"
+         "{CAPITULOS}\n\n"
+         "gta 6, mapa gta 6, secretos gta 6, easter eggs gta 6, leonida, vice city, aliens gta 6, pie grande gta 6, "
+         "loro gta 6, dexter gta 6, casa san andreas gta 6, port gellhorn\n\n"
+         "#shorts #videoshorts #gta6 #mapagta6 #secretosgta6"),
      mapas=dict(
          intro=dict(centro=(0.56, 0.54), zoom=(1.12, 1.3), pins=[("Camino de tierra", "aliens", "Aliens"), ("Grassrivers", "Pie Grande", "Pie Grande"),
                                                                ("Belville", "casa", "La casa de 2021")]),

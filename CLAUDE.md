@@ -81,12 +81,13 @@ lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0
    existe imagen, se hace un gráfico (mapa con chincheta, icono, titular de prensa, contador, trofeo, pasos, teclado,
    línea de tiempo: `canal/graficos.py`). Prohibido rellenar con planos al azar.
 2. **Ningún plano repetido** en el mismo vídeo ni en el vídeo anterior (el motor avisa con `canal/usados.json`).
-3. **Títulos de los Shorts:** las DOS primeras palabras, las más llamativas, en MAYÚSCULAS y con un emoji pegado; el
-   resto de la frase en minúscula. Ejemplo: «TRUCO SECRETO🤔 para ganar dinero».
+3. **Títulos (Shorts Y vídeos largos):** las DOS primeras palabras, las más llamativas, en MAYÚSCULAS y con un emoji
+   pegado; el resto de la frase en minúscula. Ejemplo: «TRUCO SECRETO🤔 para ganar dinero».
 4. **Vídeos largos de YouTube:** unos 10 minutos, con el formato de análisis del canal de referencia
    (`APRENDIZAJES_GLOOBY.md`): mapa y capturas analizadas con etiquetas y lupa, capítulos, datos en tarjetas.
-5. **Descripciones de los Shorts:** frase corta e impactante de qué trata + palabras clave separadas por comas + al
-   final EXACTAMENTE 5 hashtags: `#shorts #videoshorts` y 3 sobre la temática del vídeo (nada genérico).
+5. **Descripciones (Shorts Y vídeos largos):** frase corta e impactante de qué trata + palabras clave separadas por
+   comas + al final EXACTAMENTE 5 hashtags: `#shorts #videoshorts` y 3 sobre la temática del vídeo (nada genérico).
+   En los largos, entre la frase y las palabras clave van los capítulos (sin ellos YouTube no los muestra).
 6. **Cómo se suben los Shorts** (vídeo de Edu Serrano que pasó el usuario):
    - Desde la app de YouTube o de YouTube Studio en el móvil (actualizadas), nunca desde el ordenador.
    - Primero en «Oculto/No listado», se termina de optimizar en la app y luego se publica.
