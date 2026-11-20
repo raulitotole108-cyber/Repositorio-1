@@ -227,5 +227,27 @@ V("d13-muelle", "PELICAN VALLEY",
    B("Envíaselo a ese amigo que nunca encuentra nada. Y pregúntale...", ["ol_050"]),
   ], titulo="BOLSA ESCONDIDA💰 con 10.000 dólares en gta 6",
   mapas=dict(pelican=dict(lugar="Pelican Valley", zoom=(1.6, 3.2), pins=[("Pelican Valley", "muelle", "El muelle")]))),
+V("d14-ruta-50k", "4 PARADAS",
+  "La ruta para juntar 50.000 $ en GTA 6 💸 Muelle de Pelican Valley, almacén de los peluches, el loro de Key Lento y una joyería\n\n"
+  "gta 6, dinero gta 6, como ganar dinero gta 6, ruta dinero gta 6, dinero rapido gta 6, 50000 gta 6\n\n"
+  "#shorts #videoshorts #gta6 #dinerogta6 #trucosgta6",
+  [
+   B("¡No deslices! ¿Sabías que en GTA seis puedes juntar *cincuenta mil* dólares con una sola ruta?", ["map:ruta"],
+     stat="50.000 $", golpe=True),
+   B("Parada uno: el muelle del laboratorio de cangrejos de Pelican Valley. Diez mil y un subfusil.", ["map:p1"],
+     gfx=[dict(t="contador", hasta=10000, prefijo="", sufijo=" $", sub="llevas", desde="Diez")]),
+   B("Parada dos: el almacén de los peluches, cerca de Hamlet. Otros diez mil entre paquetes y billetes.", ["ol_145"],
+     gfx=[dict(t="contador", hasta=20000, prefijo="", sufijo=" $", sub="llevas", desde="Otros")]),
+   B("Y en su caja fuerte, la carta de Leroy Rook. Seis mil más en la casa de empeños.", ["ol_036"],
+     gfx=[dict(t="contador", hasta=26000, prefijo="", sufijo=" $", sub="llevas", desde="Seis")]),
+   B("Parada tres: el loro de Key Lento. Unos dos mil con la caja fuerte y el cajero.", ["ol_112"],
+     gfx=[dict(t="contador", hasta=28000, prefijo="", sufijo=" $", sub="llevas", desde="dos")]),
+   B("Y el remate, en el capítulo tres: una joyería. Hasta veinticinco mil.", ["ol_162"], riser=True,
+     gfx=[dict(t="contador", hasta=53000, prefijo="", sufijo=" $", sub="llevas", desde="veinticinco")]),
+   B("Ojo: solo puedes llevar veinte mil encima. Pasa por un cajero entre parada y parada. Envíaselo a ese amigo que siempre va pelado. Y pregúntale...",
+     ["bg:"], gfx=[dict(t="icono", emoji="🏧", titulo="PASA POR EL CAJERO", sub="máximo 20.000 $ encima", y=0.45, desde="cajero")]),
+  ], titulo="RUTA MILLONARIA💸 50.000 dólares en gta 6",
+  mapas=dict(ruta=dict(centro=(0.55, 0.77), zoom=(1.3, 1.9), pins=[("Pelican Valley", 1.2, "Muelle y almacén"), ("Key Lento", 2.0, "El loro")]),
+                   p1=dict(lugar="Pelican Valley", zoom=(2.2, 3.4), pins=[("Pelican Valley", "muelle", "El muelle")]))),
 ]
 
