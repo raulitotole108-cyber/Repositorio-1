@@ -85,3 +85,13 @@ lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0
    resto de la frase en minúscula. Ejemplo: «TRUCO SECRETO🤔 para ganar dinero».
 4. **Vídeos largos de YouTube:** unos 10 minutos, con el formato de análisis del canal de referencia
    (`APRENDIZAJES_GLOOBY.md`): mapa y capturas analizadas con etiquetas y lupa, capítulos, datos en tarjetas.
+5. **Descripciones de los Shorts:** frase corta e impactante de qué trata + palabras clave separadas por comas + al
+   final EXACTAMENTE 5 hashtags: `#shorts #videoshorts` y 3 sobre la temática del vídeo (nada genérico).
+6. **Cómo se suben los Shorts** (vídeo de Edu Serrano que pasó el usuario):
+   - Desde la app de YouTube o de YouTube Studio en el móvil (actualizadas), nunca desde el ordenador.
+   - Primero en «Oculto/No listado», se termina de optimizar en la app y luego se publica.
+   - Sonido en tendencia de la biblioteca de la app, por debajo de la voz (por eso se entrega también la versión sin música).
+   - Portada: el último fotograma (0,3 s) que añade el motor con las dos palabras clave del título.
+   - Vídeo relacionado: el vídeo largo del mismo tema.
+   - Hora: probar entre la 1 y las 3 de la madrugada (hora de España) y comparar con las estadísticas.
+   - Ocultar el número de «me gusta» hasta que pase de unos 500-1.000.

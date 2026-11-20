@@ -6,8 +6,9 @@ from guiones_pro import B, V
 
 VIDEOS = [
 V("w01-weird-al", "LA VOZ DE LA RADIO",
-  "Pon la radio en GTA 6… esa voz que grita es WEIRD AL 📻😂 Es uno de los locutores de Vice City FM, la emisora de "
-  "éxitos de los 80 (Kotaku lo confirmó con Rockstar). Envíaselo a tu amigo el de las parodias 👇 #gta6 #gtavi #weirdal #fyp",
+  "Esa voz que grita en la radio de GTA 6 es WEIRD AL 📻😂 Es locutor de Vice City FM, la emisora de los 80 (Kotaku lo "
+  "confirmó con Rockstar).\n\ngta 6, weird al, vice city fm, radio gta 6, emisoras gta 6, locutores gta 6, secretos gta 6"
+  "\n\n#shorts #videoshorts #gta6 #weirdal #vicecityfm",
   [
    B("¡Para! Pon la radio en GTA seis. Esa voz que grita entre canción y canción... es *Weird Al Yankovic*.",
      ["img:x125_radio_background_mobile"], stat="WEIRD AL", golpe=True,
@@ -22,7 +23,8 @@ V("w01-weird-al", "LA VOZ DE LA RADIO",
 
 V("w02-casa-2021", "ESCONDIDO DESDE 2021",
   "Rockstar escondió GTA 6 dentro de OTRO juego hace 5 años 😳 Una imagen secreta del remaster de San Andreas (2021)… "
-  "y los fans acaban de encontrar esa casa en GTA 6, en Belville. #gta6 #gtavi #sanandreas #secretos #fyp",
+  "y los fans acaban de encontrar esa casa en Belville.\n\ngta 6, san andreas, casa secreta gta 6, belville gta 6, "
+  "easter egg gta 6, secretos gta 6, mapa gta 6\n\n#shorts #videoshorts #gta6 #sanandreas #eastereggs",
   [
    B("¡Alto! Lo que se escondía en San Andreas en dos mil veintiuno... era *GTA seis*.", ["map:casa"], stat="2021", golpe=True),
    B("En dos mil veintiuno salió el remaster de GTA San Andreas. Y dentro había una imagen de una casa que no salía en ningún GTA.",
@@ -36,8 +38,9 @@ V("w02-casa-2021", "ESCONDIDO DESDE 2021",
              belville=dict(lugar="Belville", zoom=(2.6, 3.6), pins=[("Belville", 0.5), ("Lago Leonida", 1.2)]))),
 
 V("w03-loro", "EL LORO DEL TESORO",
-  "En GTA 6 hay un LORO que te hace rico 🦜💸 Está en la licorería Three Sheets de Key Lento y te lleva a un alijo de "
-  "más de 1.300 $ (según Mashable). ¿Lo has encontrado? 👇 #gta6 #gtavi #secretos #dinero #fyp",
+  "Un loro de GTA 6 te lleva a un tesoro 🦜💸 Está en la licorería Three Sheets de Key Lento: más de 1.300 $ "
+  "escondidos (según Mashable).\n\ngta 6, loro gta 6, dinero gta 6, key lento, three sheets, secretos gta 6, "
+  "como ganar dinero gta 6\n\n#shorts #videoshorts #gta6 #secretosgta6 #dinerogta6",
   [
    B("¡Ojo! Un loro de GTA seis esconde un *tesoro* en los Cayos.", ["map:keylento"], stat="EL LORO", golpe=True,
      gfx=[dict(t="icono", emoji="🦜", titulo="EL LORO", sub="Key Lento", y=0.52, desde=0.0)]),

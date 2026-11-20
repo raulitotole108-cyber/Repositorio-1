@@ -381,6 +381,31 @@ def capitulo_img(txt):
 
 
 _pills = {}
+_portada = {}
+
+
+def portada_img(base, titulo):
+    """Portada del Short: el primer fotograma oscurecido con las DOS palabras clave del título en grande y su emoji."""
+    if titulo in _portada:
+        return _portada[titulo]
+    m = re.match(r"^([A-ZÁÉÍÓÚÑÜ0-9][A-ZÁÉÍÓÚÑÜ0-9 ,.:¡!¿?'-]*?)\s*([^\w\s]+)", titulo)
+    palabras = (m.group(1) if m else " ".join(titulo.split()[:2])).strip()
+    emo = m.group(2) if m else ""
+    f = cv2.GaussianBlur(base, (0, 0), 3)
+    f = (f.astype(np.float32) * 0.55).astype(np.uint8)
+    ws = palabras.split()
+    lineas = [" ".join(ws[:len(ws) // 2]), " ".join(ws[len(ws) // 2:])] if len(ws) >= 2 else [palabras]
+    for k, ln in enumerate(lineas):
+        img = stat_img(ln, 250)
+        f = pegar(f, img, W / 2, H * (0.45 + 0.13 * k), min(1.0, (W - 60) / img.shape[1]))
+    if emo:
+        try:
+            e = gx.emoji_img(emo[0], 230)
+            f = gx.pegar(f, gx.a_bgra(e), W / 2, H * 0.30)
+        except Exception:
+            pass
+    _portada[titulo] = f
+    return f
 
 
 def cmp_pill_dot(txt):
@@ -485,6 +510,10 @@ def construir(v, out_dir):
         beats.append(dict(b, audio=a, t0=t, t1=t + dur, wt=wt))
         t += dur + (0.30 if HORIZ else 0.05)
     total = t + 0.35
+    # Shorts: fotograma de portada al final (0,3 s) para elegirlo como miniatura en la app (truco de Edu Serrano)
+    PORTADA = 0.3 if (not HORIZ and v.get("titulo")) else 0.0
+    fin_contenido = total
+    total += PORTADA
     n = int(round(total * FPS))
     # 2) planos: cada frase se reparte entre sus clips, cortando al empezar una palabra
     planos = []
@@ -716,9 +745,11 @@ def construir(v, out_dir):
         # bucle: el final funde con el primer fotograma
         if primer is None:
             primer = f.copy()
-        if total - tg < 0.3 and not HORIZ:
-            a = 1 - (total - tg) / 0.3
+        if fin_contenido - tg < 0.3 and tg < fin_contenido and not HORIZ:
+            a = 1 - (fin_contenido - tg) / 0.3
             f = cv2.addWeighted(f, 1 - a, primer, a, 0)
+        if PORTADA and tg >= fin_contenido:
+            f = portada_img(primer, v["titulo"])
         enc.stdin.write(f.tobytes())
     enc.stdin.close()
     enc.wait()
