@@ -699,7 +699,13 @@ def construir(v, out_dir):
                         "-ar", "48000", "-shortest", "-movflags", "+faststart", str(out_dir / nombre)], check=True)
     (out_dir / "descripcion.txt").write_text(v["descripcion"] + "\n", encoding="utf-8")
     if HORIZ:   # capítulos para la descripción de YouTube
-        lin = ["0:00 Intro"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {b['capitulo'].split('·')[-1].strip().capitalize()}"
+        def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»
+            pal = t.split("·")[-1].strip().split()
+            nombres = {"VICE", "CITY", "PORT", "GELLHORN", "MOUNT", "KALAGA", "GRASSRIVERS", "AMBROSIA", "BELVILLE", "LEONIDA",
+                       "DEXTER", "GTA", "ONLINE", "ÁREA", "PELICAN", "VALLEY", "CAYOS"}
+            return " ".join(w.capitalize() if (k == 0 or w in nombres) else (w if any(c.isdigit() for c in w) else w.lower())
+                            for k, w in enumerate(pal))
+        lin = ["0:00 Intro"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {bonito(b['capitulo'])}"
                                  for b in beats if b.get("capitulo")]
         (out_dir / "capitulos.txt").write_text("\n".join(lin) + "\n", encoding="utf-8")
     print(f"OK {v['slug']}: {total:.1f} s, {len(planos)} planos", flush=True)
