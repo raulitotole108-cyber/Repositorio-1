@@ -252,5 +252,23 @@ V("d14-ruta-50k", "4 PARADAS",
   ], titulo="RUTA MILLONARIA💸 50.000 dólares en gta 6",
   mapas=dict(ruta=dict(centro=(0.55, 0.77), zoom=(1.3, 1.9), pins=[("Pelican Valley", 1.2, "Muelle y almacén"), ("Key Lento", 2.0, "El loro")]),
                    p1=dict(lugar="Pelican Valley", zoom=(2.2, 3.4), pins=[("Pelican Valley", "muelle", "El muelle")]))),
+V("d15-postales", "LA CARAVANA",
+  "El código de esta caja fuerte de GTA 6 está escondido en unas postales 🖼️ Caravana del lago Cottonmouth: código 44017\n\n"
+  "gta 6, caja fuerte gta 6, codigos gta 6, 44017 gta 6, lago cottonmouth gta 6, cartas gta 6, grassrivers gta 6\n\n"
+  "#shorts #videoshorts #gta6 #codigosgta6 #secretosgta6",
+  [
+   B("¡Espera! ¿Sabías que el código de esta caja fuerte de GTA seis está escondido en unas postales?", ["map:gr"],
+     stat="44017", golpe=True),
+   B("Está en una caravana en la orilla del lago Cottonmouth, en Grassrivers.", ["img:x027_grassrivers"],
+     gfx=[dict(t="icono", emoji="🚐", titulo="LA CARAVANA", sub="lago Cottonmouth · Grassrivers", y=0.52, desde="caravana")]),
+   B("Mira las fotos de la pared, a la izquierda de la caja. Cada una esconde un número: cuatro, cuatro, cero, uno, siete.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🖼️", titulo="LAS POSTALES", sub="cada una esconde un número", y=0.30, desde="fotos"),
+          dict(t="teclado", codigo="44017", etiqueta="Caja fuerte", desde="cuatro")]),
+   B("Dentro, algo de dinero y una carta de colección: Laki Maivia, de los Los Santos Pounders.", ["img:Vice_City_07"],
+     gfx=[dict(t="icono", emoji="🃏", titulo="LAKI MAIVIA", sub="carta de bronce · Los Santos Pounders", y=0.52, desde="carta")], riser=True),
+   B("Y las cartas las compran en las casas de empeños. Envíaselo a ese amigo que no sabe abrir una caja fuerte. Y pregúntale...",
+     ["ol_164"]),
+  ], titulo="CÓDIGO ESCONDIDO🖼️ en unas postales de gta 6",
+  mapas=dict(gr=dict(lugar="Grassrivers", zoom=(1.6, 2.8), pins=[("Grassrivers", "caja", "Grassrivers")]))),
 ]
 
