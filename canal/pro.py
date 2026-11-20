@@ -820,7 +820,7 @@ def construir(v, out_dir):
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»
             pal = t.split("·")[-1].strip().split()
             nombres = {"VICE", "CITY", "PORT", "GELLHORN", "MOUNT", "KALAGA", "GRASSRIVERS", "AMBROSIA", "BELVILLE", "LEONIDA",
-                       "DEXTER", "GTA", "ONLINE", "ÁREA", "PELICAN", "VALLEY", "CAYOS"}
+                       "DEXTER", "GTA", "ONLINE", "ÁREA", "PELICAN", "VALLEY", "CAYOS", "CAL", "JASON", "LUCIA"}
             return " ".join(w.capitalize() if (k == 0 or w in nombres) else (w if any(c.isdigit() for c in w) else w.lower())
                             for k, w in enumerate(pal))
         lin = [f"0:00 {v.get('cap0', 'Intro')}"] + [f"{int((b['t0'] - 1.4) // 60)}:{int((b['t0'] - 1.4) % 60):02d} {bonito(b['capitulo'])}"
