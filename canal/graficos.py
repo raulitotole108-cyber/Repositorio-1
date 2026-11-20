@@ -629,7 +629,12 @@ class Capa2(Capa):
                 cada = g.get("cada", 1.0)
                 n = len(img)
                 for i, im_ in enumerate(img):
-                    li = (t - g["en_t"][i]) if g.get("en_t") else lt - i * cada
+                    if g.get("en_t"):   # fila con su palabra; las que no la tienen salen seguidas tras la última
+                        et = g["en_t"]
+                        ti = et[i] if i < len(et) else et[-1] + (i - len(et) + 1) * g.get("cada", 0.5)
+                        li = t - ti
+                    else:
+                        li = lt - i * cada
                     if li < 0:
                         continue
                     ei = ease(li / 0.3)
