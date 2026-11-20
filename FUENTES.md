@@ -61,3 +61,18 @@ GTA Online unas dos semanas después de GTA V) son de dominio público.
 - Piso de Dexter (lo cuentan fans, no confirmado): https://www.dexterdaily.com/2026/11/gta-6-dexter-apartment-easter-egg.html
 - Actualización obligatoria de PS5 para jugar: https://kotaku.com/ps5-gets-last-minute-software-update-thats-required-to-play-gta-6-2000757868
 - Clips: «GTA VI: An Extended Look» (vídeo oficial de Rockstar)
+
+## Secretos encontrados tras el lanzamiento (19-20/11/2026)
+- Abducción (Kelly County, este de Port Gellhorn, tras las 2:00; despiertas 3 días después; trofeo; 1.ª de 3 partes): https://gamerant.com/gta-6-ufo-aliens-location-truth-is-out-there-trophy/ · https://beebom.com/gta-6-ufo-location-trophy-guide/ · https://vgtimes.com/gaming-news/175102-gta-6-players-discover-ufo-encounter-that-unlocks-a-secret-trophy.html
+- Área 51, sueño con código y rescate del alien: https://gamerant.com/gta-6-aliens-mysterious-location-area-51-code/ ; código 2314 (sin ubicación confirmada): https://www.wikigtavi.com/guides/gta-6-easter-eggs-secrets
+- Skunk Ape cerca de Cottonmouth Lake (Mariana County): https://gta-zone.com/news/gta-6-easter-eggs/ · https://nerdism.com/gta-6-easter-eggs-secrets-live/
+- Huevo en la torre de radio (6 min, escena al tirarlo): https://www.ibtimes.co.uk/gta-6-player-discovers-literal-easter-egg-leonida-1833342
+- Dexter: Trinity Apartments, kit en la azotea, barco Slice of Life robable: https://www.dexerto.com/gta/gta-6-players-find-dexters-apartment-serial-killer-kit-and-can-even-steal-his-boat-3429888/
+- Laboratorio de cangrejos de Pelican Valley (caja 0072, muelle 0212): https://www.thebiglead.com/gta-6-pelican-valley-crab-research-outpost-computer-password-keypad-codes/
+- Estatua de Manifest Canyon que pita (Reddit, sin confirmar): https://www.thegamer.com/gta-6-symbols-mount-chiliad-mystery/
+- Sombrero de Arthur Morgan, meme «antes de GTA 6», chiste de GTA 7: https://www.archyde.com/gta-6-players-discover-absurd-details-and-rockstar-parodies-its-own-development-cycle/ ; libro de Millport: https://www.analyticsinsight.net/news/gta-6s-hidden-secrets-connect-rockstars-biggest-games-in-unexpected-ways
+- Hijo de Jason y Lucia y perfil criminal (5 niveles): https://en.softonic.com/articles/gta-6-is-out-with-a-major-secret-its-marketing-never-revealed · https://www.gamespot.com/articles/gta-6-saved-a-shocking-reveal-for-launch-and-it-hits-hard/
+- Ventas estimadas (Sensor Tower: 24,58 M copias, ~2.360 M$; sin cifra oficial): https://www.theglobeandmail.com/business/article-take-two-grand-theft-auto-vi-sales/ · https://www.businesstoday.com.my/2026/11/20/gta-vi-estimated-to-generate-us2-36-billion-in-first-day-sales-for-take-two/
+- Bugs virales: https://gulfnews.com/technology/gaming/gta-6-glitches-go-viral-flying-cars-disappearing-characters-and-police-encounter-issues-spark-cyberpunk-2077-comparisons-1.500752989
+- Trucos (61, 19 con código, tras la historia; lista de 28 falsa): https://www.powerpyx.com/gta-6-all-cheats/ · https://insider-gaming.com/all-gta-6-cheats-best-grand-theft-auto-6-cheat-codes/ · https://news.jointly.mx/trucos-gta-6-lista-viral-falsa-codigos-reales-ps5-xbox/
+- Rob Nelson (nadie lo ha visto entero, secretos sin marcar): https://vandal.elespanol.com/noticia/2026240025/gta-6-quiere-que-te-pierdas-por-leonida-muchas-actividades-y-secretos-ni-siquiera-estaran-marcados-en-el-mapa/
