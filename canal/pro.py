@@ -38,6 +38,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, str(Path(__file__).parent))
 import render_v2 as v2  # noqa: E402
+import graficos as gx  # noqa: E402
 
 HORIZ = os.environ.get("PRO_HORIZONTAL") == "1"   # vídeo largo de YouTube (16:9), estilo análisis
 W, H, FPS, SR = (1920, 1080, 30, 44100) if HORIZ else (1080, 1920, 30, 44100)
@@ -51,7 +52,7 @@ FONT = str(FUENTES / "Montserrat-Black.ttf")
 FONT_BIG = str(FUENTES / "Anton-Regular.ttf")
 AMARILLO = (255, 225, 40)
 ROSA = (255, 70, 170)
-VOZ = ("es-ES-AlvaroNeural", -8, 20 if HORIZ else 30)   # voz, Hz, % de velocidad
+VOZ = ("es-ES-AlvaroNeural", -8, 12 if HORIZ else 30)   # voz, Hz, % de velocidad
 # grupos de clips de gameplay para que el motor elija planos según el tema (vídeos largos)
 TAGS = {
     "noche": [1, 2, 3, 4, 5, 6, 170, 171, 181, 182, 183, 184, 212, 216, 218, 219, 221, 222, 223, 224, 225, 226, 227, 231],
@@ -143,7 +144,7 @@ _yy, _xx = np.mgrid[0:H, 0:W]
 VIG = (1 - 0.40 * (((_xx - W / 2) / (W / 2)) ** 2 * 0.6 + ((_yy - H / 2) / (H / 2)) ** 2 * 0.4)).clip(0.45, 1)
 VIG = np.dstack([VIG] * 3).astype(np.float32)
 _rng = np.random.default_rng(3)
-GRANO = [(_rng.standard_normal((H // 2, W // 2)) * 3.2).astype(np.float32) for _ in range(4)]
+GRANO = [(_rng.standard_normal((H // 2, W // 2)) * (2.0 if HORIZ else 3.2)).astype(np.float32) for _ in range(4)]
 del _yy, _xx
 
 
@@ -165,6 +166,20 @@ def cargar_plano(nombre, t0, dur):
     if "@" in nombre:
         nombre, foco = nombre.split("@")
         foco = float(foco)
+    hh = int(H * 1.12)
+    cw = int(W * 1.12)
+    ww = max(cw, int(round(hh * 16 / 9)))   # en 16:9 el recorte ocupa todo el ancho (sin desbordar por redondeo)
+    x0 = int(np.clip(foco * ww - cw / 2, 0, ww - cw))
+    if nombre.startswith("img:"):   # captura oficial: un solo fotograma (el empuje de cámara le da vida)
+        nm = nombre[4:]
+        cand = [IMG / f"{nm}.jpg", IMG / "extra" / f"{nm}.jpg", IMG / "newswire" / f"{nm}.jpg",
+                IMG / "frames_oficial" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
+        img = next(c for c in cand if c.exists())
+        vf = (f"scale={ww}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={ww}:{hh},"
+              f"crop={cw}:{hh}:{x0}:0")
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(img), "-vf", vf, "-frames:v", "1",
+                              "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
+        return np.frombuffer(raw, np.uint8).reshape(-1, hh, cw, 3)[:1]
     src = CLIPS / f"{nombre}.mp4"
     total = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                                            "-of", "csv=p=0", str(src)]).decode())
@@ -174,10 +189,6 @@ def cargar_plano(nombre, t0, dur):
         t0 = max(0.0, total - dur - 0.05)
         if dur > total - 0.1:
             t0, vel = 0.0, (total - 0.1) / dur
-    hh = int(H * 1.12)
-    ww = int(hh * 16 / 9)
-    cw = int(W * 1.12)
-    x0 = int(np.clip(foco * ww - cw / 2, 0, ww - cw))
     vf = f"setpts=PTS/{vel:.4f},scale={ww}:{hh}:flags=lanczos,crop={cw}:{hh}:{x0}:0,fps={FPS}"
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", f"{t0:.3f}", "-i", str(src), "-vf", vf,
                           "-frames:v", str(n), "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
@@ -351,6 +362,22 @@ def capitulo_img(txt):
     return rgba_bgr(im)
 
 
+_pills = {}
+
+
+def cmp_pill_dot(txt):
+    k = ("dot", txt)
+    if k not in _pills:
+        _pills[k] = gx.pastilla(txt.upper(), 22)
+    return _pills[k]
+
+
+def cmp_pill(txt):
+    if txt not in _pills:
+        _pills[txt] = gx.pastilla(txt.upper(), 26, punto=False)
+    return _pills[txt]
+
+
 def marca_img():
     fnt = font(FONT, 34)
     im = Image.new("RGBA", (260, 60), (0, 0, 0, 0))
@@ -433,8 +460,12 @@ def construir(v, out_dir):
         a, ws = voz(b["texto"].replace("*", ""))
         dur = len(a) / SR
         wt = v2.word_times_real(b["texto"], t, dur, [(w, s, e) for w, s, e in ws])
+        b = dict(b)
+        if HORIZ and b.get("stat"):
+            b["gfx"] = list(b.get("gfx") or []) + [dict(t="dato", txt=b["stat"], sub=b.get("stat_sub"))]
+            b["stat"] = None
         beats.append(dict(b, audio=a, t0=t, t1=t + dur, wt=wt))
-        t += dur + (0.22 if HORIZ else 0.05)
+        t += dur + (0.30 if HORIZ else 0.05)
     total = t + 0.35
     n = int(round(total * FPS))
     # 2) planos: cada frase se reparte entre sus clips, cortando al empezar una palabra
@@ -509,7 +540,7 @@ def construir(v, out_dir):
     mudo = WORK / f"{v['slug']}_v.mp4"
     enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24",
                             "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "slow",
-                            "-crf", "19", "-maxrate", "14M", "-bufsize", "28M", "-profile:v", "high", "-pix_fmt", "yuv420p", str(mudo)],
+                            "-crf", "21" if HORIZ else "19", "-maxrate", "8M" if HORIZ else "14M", "-bufsize", "16M" if HORIZ else "28M", "-profile:v", "high", "-pix_fmt", "yuv420p", str(mudo)],
                            stdin=subprocess.PIPE)
     cab = cabecera_img(v["cabecera"]) if v.get("cabecera") else None
     caps = {i: capitulo_img(b["capitulo"]) for i, b in enumerate(beats) if b.get("capitulo") and HORIZ}
@@ -520,25 +551,41 @@ def construir(v, out_dir):
         grp += grupos(b["wt"])
     primer = None
     pi_cache = (None, None)
+    capas = {}
     for k in range(n):
         tg = k / FPS
         pi = next((i for i, p in enumerate(planos) if p["t0"] <= tg < p["t1"]), len(planos) - 1)
         p = planos[pi]
+        cmp_ = p["clip"].startswith("cmp:")
         if pi_cache[0] != pi:
-            pi_cache = (pi, cargar_plano(p["clip"], p["off"], p["t1"] - p["t0"] + 0.1))
+            pi_cache = (None, None)
+            if cmp_:
+                pa, pb = p["clip"][4:].split("|")[:2]
+                pi_cache = (pi, (cargar_plano(pa, p["off"], p["t1"] - p["t0"] + 0.1),
+                                 cargar_plano(pb, p["off"], p["t1"] - p["t0"] + 0.1)))
+            else:
+                pi_cache = (pi, cargar_plano(p["clip"], p["off"], p["t1"] - p["t0"] + 0.1))
         frames = pi_cache[1]
         lk = int((tg - p["t0"]) * FPS)
-        src = frames[min(lk, len(frames) - 1)]
+        src = None if cmp_ else frames[min(lk, len(frames) - 1)]
         lt = tg - p["t0"]
         prog = lt / max(0.1, p["t1"] - p["t0"])
         z = 1.0 + 0.06 * prog
+        if HORIZ and any(g_["t"] in ("etiquetas", "lupa") for g_ in (beats[p["beat"]].get("gfx") or [])):
+            z = 1 / 1.12   # imagen entera y quieta: las etiquetas y la lupa caen justo encima
         dx = dy = rot = 0.0
         if p["golpe"] or (pi == 0 and lt < 0.4):
             e = max(0.0, 1 - lt / 0.25)
             z += 0.22 * e ** 2
             dx, dy = rnd.uniform(-1, 1) * 26 * e, rnd.uniform(-1, 1) * 26 * e
             rot = rnd.uniform(-1, 1) * 1.6 * e
-        f = encuadre(src, z, dx, dy, rot)
+        if cmp_:   # pantalla partida: mitad central de cada clip
+            fa, fb = frames
+            A = encuadre(fa[min(lk, len(fa) - 1)], z)
+            Bq = encuadre(fb[min(lk, len(fb) - 1)], z)
+            f = np.ascontiguousarray(np.concatenate([A[:, W // 4:W // 4 + W // 2], Bq[:, W // 4:W // 4 + W - W // 2]], axis=1))
+        else:
+            f = encuadre(src, z, dx, dy, rot)
         # barrido de entrada/salida
         if p["whip"] and lt < 0.12:
             f = barrido(f, 1 - lt / 0.12, -1)
@@ -546,6 +593,29 @@ def construir(v, out_dir):
         if nxt is not None and nxt["whip"] and p["t1"] - tg < 0.12:
             f = barrido(f, 1 - (p["t1"] - tg) / 0.12, 1)
         f = grade(f, k)
+        if cmp_:
+            cv2.line(f, (W // 2, 0), (W // 2, H), (170, 70, 255), 10, cv2.LINE_AA)
+            cv2.line(f, (W // 2, 0), (W // 2, H), (255, 255, 255), 3, cv2.LINE_AA)
+            la, lb = (p["clip"][4:].split("|") + ["", "", "", ""])[2:4]
+            if la:
+                f = pegar(f, cmp_pill(la), W / 4, 95)
+            if lb:
+                f = pegar(f, cmp_pill(lb), 3 * W / 4, 95)
+        fondo_ficha = None
+        if HORIZ:   # gráficos de la frase (etiquetas, lupa, contacto, fichas, datos...)
+            bq = next((i for i, b in enumerate(beats) if (b["t0"] - (1.4 if b.get("capitulo") else 0)) - 0.05 <= tg <
+                       ((beats[i + 1]["t0"] - (1.4 if beats[i + 1].get("capitulo") else 0)) if i + 1 < len(beats) else total)), None)
+            if bq is not None and beats[bq].get("gfx"):
+                if bq not in capas:
+                    capas.clear()
+                    fija = any(g_["t"] in ("etiquetas", "lupa") for g_ in beats[bq]["gfx"])
+                    capas[bq] = gx.Capa([g_ for g_ in beats[bq]["gfx"] if g_["t"] != "fuente"], W, H, k=1.0 if fija else 1.12)
+                stb = tg - beats[bq]["t0"]
+                fondo = capas[bq].fondo(stb)
+                fondo_ficha = fondo
+                if fondo is not None:
+                    f = fondo.copy()
+                f = capas[bq].dibujar(f, stb)
         if p["golpe"] and lt < 0.15 and k > 2:
             f = aberracion(f, int(18 * (1 - lt / 0.15)))
             f = cv2.addWeighted(f, 1 - 0.75 * (1 - lt / 0.15), np.full_like(f, 255), 0.75 * (1 - lt / 0.15), 0)
@@ -589,6 +659,13 @@ def construir(v, out_dir):
         if cab is not None:
             f = pegar(f, cab, W / 2, 250)
         f = pegar(f, marca, W - 150, 80 if HORIZ else 150)
+        if HORIZ:
+            f = gx.barra_progreso(f, tg / total)
+            # origen de la imagen, automático: captura oficial o gameplay oficial
+            if fondo_ficha is None:
+                et = "Captura oficial" if p["clip"].startswith("img:") else "Gameplay oficial"
+                e_ = gx.ease((tg - p["t0"]) / 0.3) if pi == 0 or planos[pi - 1]["clip"][:4] != p["clip"][:4] else 1.0
+                f = pegar(f, cmp_pill_dot(et), 40 + cmp_pill_dot(et).shape[1] / 2, 52, 1.0, e_)
         # bucle: el final funde con el primer fotograma
         if primer is None:
             primer = f.copy()
