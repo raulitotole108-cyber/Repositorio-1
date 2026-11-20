@@ -139,6 +139,10 @@ def _curvas():
     return [(c * 255).astype(np.uint8) for c in (b, g, r)]
 
 
+try:
+    BRILLO = {int(k): v for k, v in json.loads((IMG / "brillo_clips.json").read_text()).items()}
+except Exception:
+    BRILLO = {}
 LUT = cv2.merge([c.reshape(256, 1) for c in _curvas()])
 _yy, _xx = np.mgrid[0:H, 0:W]
 VIG = (1 - 0.40 * (((_xx - W / 2) / (W / 2)) ** 2 * 0.6 + ((_yy - H / 2) / (H / 2)) ** 2 * 0.4)).clip(0.45, 1)
@@ -148,7 +152,18 @@ GRANO = [(_rng.standard_normal((H // 2, W // 2)) * (2.0 if HORIZ else 3.2)).asty
 del _yy, _xx
 
 
+_gamma = {}
+
+
 def grade(f, k):
+    # exposición automática: los planos oscuros se levantan (sin quemar las luces)
+    m = float(cv2.resize(f, (64, 36), interpolation=cv2.INTER_AREA).mean())
+    if m < 78:
+        g = round(min(1.7, max(1.0, np.log(max(m, 8) / 255) / np.log(78 / 255))), 2)
+        if g > 1.02:
+            if g not in _gamma:
+                _gamma[g] = (255 * (np.arange(256) / 255) ** (1 / g)).astype(np.uint8)
+            f = cv2.LUT(f, _gamma[g])
     f = cv2.LUT(f, LUT)
     hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
     hsv[..., 1] = cv2.add(hsv[..., 1], 18)               # +saturación
@@ -480,7 +495,9 @@ def construir(v, out_dir):
             fin0 = beats[i + 1]["t0"] - (1.4 if i + 1 < len(beats) and beats[i + 1].get("capitulo") and HORIZ else 0) \
                 if i + 1 < len(beats) else total
             nplan = max(1, int(round((fin0 - ini) / (2.6 if HORIZ else 1.3))))
-            grupo = [f"ol_{x:03d}" for x in TAGS[clips] if (CLIPS / f"ol_{x:03d}.mp4").exists()]
+            umbral = 30 if clips in ("noche", "fiesta") else 42   # fuera los planos casi negros
+            grupo = [f"ol_{x:03d}" for x in TAGS[clips] if (CLIPS / f"ol_{x:03d}.mp4").exists()
+                     and BRILLO.get(x, 255) >= umbral]
             clips = []
             for _ in range(nplan):
                 cola = [c for c in grupo if c not in usados.get("x", set())]
