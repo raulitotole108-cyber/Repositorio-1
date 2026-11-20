@@ -29,11 +29,11 @@ def grad_text(txt, font, cols, stroke=10):
     return out
 
 
-def main():
-    im = Image.open(HERE / "imagenes" / "extra" / "x002_Jason_Lucia_Lock_And_Load_ultrawide.jpg").convert("RGB")
+def main(fondo="x002_Jason_Lucia_Lock_And_Load_ultrawide", nombre="banner_youtube", desp=0.5):
+    im = Image.open(HERE / "imagenes" / "extra" / f"{fondo}.jpg").convert("RGB")
     s = H / im.height
     im = im.resize((int(im.width * s), H), Image.LANCZOS)
-    x0 = (im.width - W) // 2
+    x0 = int((im.width - W) * desp)
     im = im.crop((x0, 0, x0 + W, H)).convert("RGBA")
     # franja central oscurecida con degradado para que el texto se lea
     sombra = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -52,15 +52,16 @@ def main():
     im.alpha_composite(sub, ((W - sub.width) // 2, cy + 35))
     im.alpha_composite(tag, ((W - tag.width) // 2, cy + 110))
     OUT.mkdir(exist_ok=True)
-    im.convert("RGB").save(OUT / "banner_youtube.jpg", quality=92)
+    im.convert("RGB").save(OUT / f"{nombre}.jpg", quality=92)
     # vista previa con la zona segura marcada (para comprobar)
     pv = im.copy()
     ImageDraw.Draw(pv).rectangle([(W - SW) // 2, (H - SH) // 2, (W + SW) // 2, (H + SH) // 2], outline=(0, 255, 0, 255), width=6)
-    pv.convert("RGB").resize((1280, 720)).save(OUT / "banner_youtube_zona_segura.jpg", quality=85)
+    pv.convert("RGB").resize((1280, 720)).save(OUT / f"{nombre}_zona_segura.jpg", quality=85)
     # marca de agua de los vídeos (150x150, la foto de perfil)
     Image.open(OUT / "foto_perfil.png").convert("RGBA").resize((150, 150), Image.LANCZOS).save(OUT / "marca_de_agua.png")
-    print("ok", (OUT / "banner_youtube.jpg").stat().st_size)
+    print("ok", nombre)
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(*sys.argv[1:2], *sys.argv[2:3], *[float(x) for x in sys.argv[3:4]]) if len(sys.argv) > 1 else main()
