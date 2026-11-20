@@ -183,6 +183,14 @@ def cargar_plano(nombre, t0, dur):
                           "-frames:v", str(n), "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
                          capture_output=True).stdout
     fr = np.frombuffer(raw, np.uint8).reshape(-1, hh, cw, 3)
+    if len(fr) == 0:   # clip muy corto o fallo al buscar: se lee entero y se repite en ida y vuelta
+        vf = f"scale={ww}:{hh}:flags=lanczos,crop={cw}:{hh}:{x0}:0,fps={FPS}"
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(src), "-vf", vf, "-f", "rawvideo",
+                              "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
+        fr = np.frombuffer(raw, np.uint8).reshape(-1, hh, cw, 3)
+        if len(fr) == 0:
+            fr = np.zeros((1, hh, cw, 3), np.uint8)
+        fr = np.concatenate([fr, fr[::-1]] * (n // (2 * len(fr)) + 1))[:n]
     if len(fr) < n:
         fr = np.concatenate([fr, np.repeat(fr[-1:], n - len(fr), 0)])
     return fr
