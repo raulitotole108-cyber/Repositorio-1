@@ -102,3 +102,4 @@ Guías publicadas tras el lanzamiento; cuando solo una fuente da el dato, en el 
 - Pesca de captura y suelta (no se vende); la caza da dinero (Rob Nelson); +170 especies con legendarias: https://allthings.how/gta-6-how-fishing-and-hunting-work-catch-and-release-explained/ · https://www.notebookcheck.net/Fishing-in-GTA-6-will-be-as-extensive-as-in-RDR2-but-there-s-a-catch.1391730.0.html · https://www.dexerto.com/gta/gta-6-will-feature-over-170-different-animals-including-legendary-ones-3413584/
 - Randy's Wish List (Strangers & Freaks, cap. 3, cuenta para el 100 %); +30.000 $ por entrega según las guías: https://www.gtabase.com/gta-6/strangers/randys-wish-list · https://www.powerpyx.com/gta-6-money-guide-how-to-get-money-fast/
 - Descartado por no verificado: truco del «granero rojo» (dinero infinito), Infernus en una comisaría.
+- Código de la caja fuerte del almacén de los peluches (carta de Leroy Rook): 7700, comprobado por el usuario en su partida (20/11/2026).
