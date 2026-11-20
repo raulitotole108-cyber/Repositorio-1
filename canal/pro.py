@@ -202,8 +202,12 @@ def cargar_plano(nombre, t0, dur):
         cand = [IMG / f"{nm}.jpg", IMG / "extra" / f"{nm}.jpg", IMG / "newswire" / f"{nm}.jpg",
                 IMG / "frames_oficial" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
         img = next(c for c in cand if c.exists())
-        vf = (f"scale={ww}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={ww}:{hh},"
-              f"crop={cw}:{hh}:{x0}:0")
+        iw, ih = cv2.imread(str(img)).shape[1::-1]
+        if iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9
+            vf = f"scale={cw}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={cw}:{hh}"
+        else:
+            vf = (f"scale={ww}:{hh}:force_original_aspect_ratio=increase:flags=lanczos,crop={ww}:{hh},"
+                  f"crop={cw}:{hh}:{x0}:0")
         raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(img), "-vf", vf, "-frames:v", "1",
                               "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
         return np.frombuffer(raw, np.uint8).reshape(-1, hh, cw, 3)[:1]
