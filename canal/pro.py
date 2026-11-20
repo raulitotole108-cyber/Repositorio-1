@@ -200,7 +200,7 @@ def cargar_plano(nombre, t0, dur):
     if nombre.startswith("img:"):   # captura oficial: un solo fotograma (el empuje de cámara le da vida)
         nm = nombre[4:]
         cand = [IMG / f"{nm}.jpg", IMG / "extra" / f"{nm}.jpg", IMG / "newswire" / f"{nm}.jpg",
-                IMG / "frames_oficial" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
+                IMG / "frames_oficial" / f"{nm}.jpg", IMG / "oficial_extra" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
         img = next(c for c in cand if c.exists())
         iw, ih = cv2.imread(str(img)).shape[1::-1]
         if iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9

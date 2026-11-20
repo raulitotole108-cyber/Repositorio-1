@@ -292,5 +292,48 @@ V("d16-trucos", "AL ACABAR",
    B("Y las listas de números que corren por ahí son de GTA cinco: no funcionan. Envíaselo a ese amigo que juega con trucos. Y pregúntale...",
      ["img:Jason_Duval_17"], stat="FALSAS"),
   ], titulo="TRUCOS SECRETOS🎮 de gta 6 y cómo ponerlos"),
+V("d17-mapa-gratis", "PÓSTER OFICIAL",
+  "Rockstar regala el mapa oficial de GTA 6 para imprimir 🗺️ Gratis en su web, en máxima calidad, y el póster de la portada\n\n"
+  "gta 6, mapa gta 6, mapa gta 6 imprimir, poster gta 6, mapa leonida, rockstar gta 6, fondo de pantalla gta 6\n\n"
+  "#shorts #videoshorts #gta6 #mapagta6 #leonida",
+  [
+   B("¡Ojo! ¿Sabías que Rockstar ha regalado el mapa de GTA seis para que lo tengas en papel?", ["map:m1"], stat="GRATIS", golpe=True),
+   B("Desde el día del lanzamiento, el mapa de Leonida se descarga gratis en la web oficial de Rockstar. En máxima calidad.", ["map:m2"],
+     gfx=[dict(t="icono", emoji="🌐", titulo="WEB DE ROCKSTAR", sub="descarga gratis · máxima calidad", y=0.78, desde="web")]),
+   B("Y te regalan también el póster de la portada del juego.", ["img:Cover_Art_Poster"],
+     gfx=[dict(t="icono", emoji="🖼️", titulo="PÓSTER DE LA PORTADA", sub="también gratis", y=0.80, desde="póster")]),
+   B("Lo puedes imprimir en tamaño póster... o ponértelo de fondo de pantalla.", ["map:m3"],
+     gfx=[dict(t="icono", emoji="🖨️", titulo="IMPRÍMELO", sub="tamaño póster", y=0.30, desde="imprimir", hasta="fondo"),
+          dict(t="icono", emoji="📱", titulo="FONDO DE PANTALLA", sub="en el móvil", y=0.30, desde="fondo")]),
+   B("Y Rockstar ha anunciado una versión en papel de verdad en su tienda: noventa y nueve céntimos, o gratis con cualquier compra.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🛒", titulo="0,99 $", sub="o gratis con cualquier compra", y=0.45, desde="noventa")], riser=True),
+   B("Eso sí: en la caja del juego no viene. Envíaselo a ese amigo que se pierde por Leonida. Y pregúntale...", ["map:m4"],
+     stat="NO VIENE EN LA CAJA"),
+  ], titulo="MAPA GRATIS🗺️ de gta 6 para imprimir",
+  mapas=dict(m1=dict(centro=(0.55, 0.53), zoom=(1.3, 1.1), pins=[]),
+             m2=dict(lugar="Vice City", centro0=(0.55, 0.53), zoom=(1.1, 2.6), pins=[]),
+             m3=dict(lugar="Key Lento", zoom=(2.8, 2.2), pins=[]),
+             m4=dict(lugar="Mount Kalaga", zoom=(2.6, 1.2), pins=[]))),
+
+V("d18-superdeportivo", "4 PASOS",
+  "En GTA 6 robar un superdeportivo es fácil; lo difícil es quedártelo 🏎️ Los 4 pasos: escanear, entrar, escapar y quedártelo\n\n"
+  "gta 6, robar coches gta 6, superdeportivo gta 6, waink gta 6, coches gta 6, localizador gta 6, perista gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #robarcochesgta6",
+  [
+   B("¡Quieto! ¿Sabías que en GTA seis robar un superdeportivo es fácil... y lo difícil es quedártelo?",
+     ["img:ULTIMATE_EDITION_GROTTI_CHEETAH_01"], stat="QUEDÁRTELO", golpe=True),
+   B("Paso uno: escanéalo con WAINK. Te dice cuánto vale, cuánto cuesta registrarlo, si está cerrado y si tiene alarma.",
+     ["img:ULTIMATE_EDITION_WYMAN_CAR_COLLECTION_05"],
+     gfx=[dict(t="pasos", items=["Cuánto vale", "Cuánto cuesta registrarlo", "¿Cerrado?", "¿Alarma?"], en=["vale", "registrarlo", "cerrado", "alarma"])]),
+   B("Paso dos: entrar. Los coches viejos se abren con una ganzúa. Los modernos necesitan un clonador de llaves.",
+     ["ol_076", "img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_02"], cortes=["modernos"],
+     gfx=[dict(t="icono", emoji="🪛", titulo="GANZÚA", sub="coches viejos", y=0.78, desde="ganzúa", hasta="modernos"),
+          dict(t="icono", emoji="🔑", titulo="CLONADOR DE LLAVES", sub="coches modernos", y=0.78, desde="clonador")]),
+   B("Paso tres: escapar. El dueño te puede denunciar. Y si lleva localizador y vas lento, la policía sabe dónde estás.", ["ol_081"],
+     stat="NO FRENES", riser=True),
+   B("Paso cuatro: quedártelo. Un perista le quita el localizador, pagas el registro... y es tuyo.", ["ol_109"],
+     gfx=[dict(t="pasos", items=["Perista: fuera localizador", "Paga el registro", "Es tuyo"], en=["perista", "pagas", "tuyo"])]),
+   B("Consejo: empieza por los viejos. Envíaselo a ese amigo que quiere un superdeportivo ya. Y pregúntale...", ["ol_078"]),
+  ], titulo="SUPERDEPORTIVO ROBADO🏎️ cómo quedártelo en gta 6"),
 ]
 
