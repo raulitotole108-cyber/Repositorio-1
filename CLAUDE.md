@@ -1,5 +1,7 @@
 # Reglas para CADA vídeo del canal (obligatorias)
 
+> **Al empezar cada conversación:** lee `PENDIENTES.md` y recuérdale al usuario lo que tenga pendiente antes de nada.
+
 ## Flujo obligatorio con las skills (SIEMPRE, en cada vídeo)
 
 1. **`/yt-script`**: escribir 5 ganchos con las 21 fórmulas (`.claude/skills/yt-script/hooks.json`),
