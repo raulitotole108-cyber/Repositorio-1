@@ -226,3 +226,121 @@ def miniatura(salida, lineas, fondo, figuras=(), collage=(), vertical=False, foc
     if salida:
         base.save(salida, quality=93)
     return base
+
+
+# ---------------------------------------------------------------- piezas extra (estilo «Rockstar regala…»)
+COLORES = {"*": AMARILLO, "_": ROSA, "~": (190, 90, 255), "!": (255, 50, 50)}
+
+
+def texto_color(lienzo, lineas, cx, y0, ancho, alto_max, rot=0):
+    """Líneas centradas en cx; cada palabra puede llevar color: *amarillo* _rosa_ ~morado~ !rojo! (resto blanco).
+    Fuente Anton-like gruesa en cursiva simulada. Devuelve la y final."""
+    capa = Image.new("RGBA", lienzo.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    y = y0
+    for ln in lineas:
+        trozos = []
+        for w in ln.split():
+            c = COLORES.get(w[0]) if len(w) > 2 and w[0] == w[-1] else None
+            trozos.append((w[1:-1] if c else w, c or BLANCO))
+        tam = int(alto_max)
+        while tam > 20:
+            fnt = ImageFont.truetype(FUENTE_FUERTE, tam)
+            sw = max(6, tam // 10)
+            esp = tam * .22
+            anchos = [d.textbbox((0, 0), t, font=fnt, stroke_width=sw)[2] for t, _ in trozos]
+            tot = sum(anchos) + esp * (len(trozos) - 1)
+            if tot <= ancho:
+                break
+            tam -= 4
+        x = cx - tot / 2
+        bb = d.textbbox((0, 0), "ÁG", font=fnt, stroke_width=sw)
+        so = max(5, tam // 14)
+        for (t, c), a in zip(trozos, anchos):
+            d.text((x + so, y + so - bb[1]), t, font=fnt, fill=(0, 0, 0), stroke_width=sw, stroke_fill=(0, 0, 0))
+            d.text((x, y - bb[1]), t, font=fnt, fill=c, stroke_width=sw, stroke_fill=(0, 0, 0))
+            x += a + esp
+        y += (bb[3] - bb[1]) * .92
+    capa = capa.transform(capa.size, Image.AFFINE, (1, .12, -.12 * y0, 0, 1, 0), resample=Image.BICUBIC)  # cursiva
+    if rot:
+        capa = capa.rotate(rot, center=(cx, y0), resample=Image.BICUBIC)
+    lienzo.alpha_composite(capa)
+    return y
+
+
+FUENTE_FUERTE = os.path.join(BASE, "fuentes", "Anton-Regular.ttf")
+
+
+def flecha(lienzo, p0, p1, grosor=34, color=(235, 25, 35), curva=.25):
+    """Flecha curva roja con borde blanco, de p0 a p1 (la punta en p1)."""
+    capa = Image.new("RGBA", lienzo.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    (x0, y0), (x1, y1) = p0, p1
+    mx, my = (x0 + x1) / 2 - (y1 - y0) * curva, (y0 + y1) / 2 + (x1 - x0) * curva
+    pts = [((1 - t) ** 2 * x0 + 2 * (1 - t) * t * mx + t * t * x1, (1 - t) ** 2 * y0 + 2 * (1 - t) * t * my + t * t * y1)
+           for t in np.linspace(0, .82, 40)]
+    ex, ey = pts[-1]
+    ang = np.arctan2(y1 - ey, x1 - ex)
+    L = grosor * 2.6
+    cab = [(x1, y1), (ex + np.cos(ang + 1.9) * L * .55, ey + np.sin(ang + 1.9) * L * .55),
+           (ex + np.cos(ang - 1.9) * L * .55, ey + np.sin(ang - 1.9) * L * .55)]
+    for k, (col, extra) in enumerate((((0, 0, 0, 160), 14), ((255, 255, 255, 255), 10), (color + (255,), 0))):
+        off = 8 if k == 0 else 0
+        for i in range(len(pts) - 1):
+            g = int((grosor * (0.35 + 0.65 * i / len(pts))) + extra)
+            d.line([(pts[i][0] + off, pts[i][1] + off), (pts[i + 1][0] + off, pts[i + 1][1] + off)], fill=col, width=g)
+            d.ellipse([pts[i][0] + off - g / 2, pts[i][1] + off - g / 2, pts[i][0] + off + g / 2, pts[i][1] + off + g / 2], fill=col)
+        c2 = [(x + off, y + off) for x, y in cab]
+        if extra:
+            cx_, cy_ = sum(x for x, _ in c2) / 3, sum(y for _, y in c2) / 3
+            c2 = [(cx_ + (x - cx_) * 1.25, cy_ + (y - cy_) * 1.25) for x, y in c2]
+        d.polygon(c2, fill=col)
+    lienzo.alpha_composite(capa)
+
+
+def sello(lienzo, l1, l2, cx, cy, ancho, rot=8):
+    """Cartel rojo inclinado: «¡GRATIS!» en amarillo y debajo una línea en blanco."""
+    w, h = int(ancho), int(ancho * .5)
+    im = Image.new("RGBA", (w + 60, h + 60), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.polygon([(30, 50), (w + 30, 30), (w + 20, h + 30), (40, h + 40)], fill=(0, 0, 0, 255))
+    d.polygon([(22, 40), (w + 22, 22), (w + 12, h + 22), (32, h + 32)], fill=(225, 20, 30, 255))
+    for txt, col, yy, frac in ((l1, AMARILLO, .14, .5), (l2, BLANCO, .62, .3)):
+        tam = int(h * frac)
+        while True:
+            f = ImageFont.truetype(FUENTE_FUERTE, tam)
+            bb = d.textbbox((0, 0), txt, font=f, stroke_width=tam // 9)
+            if bb[2] - bb[0] < w * .86 or tam < 20:
+                break
+            tam -= 3
+        d.text((22 + (w - bb[2]) / 2, 22 + h * yy - bb[1] * .5), txt, font=f, fill=col, stroke_width=tam // 9,
+               stroke_fill=(0, 0, 0))
+    im = im.rotate(rot, expand=True, resample=Image.BICUBIC)
+    lienzo.alpha_composite(im, (int(cx - im.width / 2), int(cy - im.height / 2)))
+
+
+def lista(lienzo, items, x, y, tam):
+    """Lista con ✔ verdes; cada línea admite colores como texto_color."""
+    d = ImageDraw.Draw(lienzo)
+    f = ImageFont.truetype(FUENTE_FUERTE, tam)
+    for i, it in enumerate(items):
+        yy = y + i * tam * 1.25
+        s = tam * .9
+        d.rounded_rectangle([x, yy + tam * .12, x + s, yy + tam * .12 + s], 8, fill=(30, 30, 30), outline=(0, 0, 0), width=4)
+        d.line([(x + s * .2, yy + tam * .12 + s * .5), (x + s * .42, yy + tam * .12 + s * .75),
+                (x + s * .85, yy + tam * .12 + s * .15)], fill=(60, 220, 60), width=max(6, tam // 7), joint="curve")
+        xx = x + s + tam * .3
+        for w in it.split():
+            c = COLORES.get(w[0]) if len(w) > 2 and w[0] == w[-1] else None
+            t = w[1:-1] if c else w
+            d.text((xx + 4, yy + 4), t, font=f, fill=(0, 0, 0), stroke_width=tam // 9, stroke_fill=(0, 0, 0))
+            d.text((xx, yy), t, font=f, fill=c or BLANCO, stroke_width=tam // 9, stroke_fill=(0, 0, 0))
+            xx += d.textbbox((0, 0), t + " ", font=f)[2]
+
+
+def pegar_logo(lienzo, ruta, x, y, alto, centro=False):
+    lg = Image.open(_ruta(ruta)).convert("RGBA")
+    lg = lg.crop(lg.getbbox())
+    lg = lg.resize((int(lg.width * alto / lg.height), int(alto)), Image.LANCZOS)
+    lienzo.alpha_composite(lg, (int(x - lg.width / 2) if centro else int(x), int(y)))
+    return lg.size

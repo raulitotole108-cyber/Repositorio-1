@@ -109,5 +109,10 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
 - Collage tenue y morado de otros personajes arriba a la izquierda.
 - Texto muy gordo (Baloo 2 ExtraBold), líneas alternando blanco y amarillo, borde negro grueso, sombra dura,
   algo inclinado, raya rosa debajo y logo de GTA VI.
+- Segunda referencia (`canal/referencias/estilo_miniatura_2.png`, 21/11): cuando el vídeo va de algo concreto,
+  miniatura «cargada»: titular de 3 líneas con palabras de colores (blanco, *amarillo*, _rosa_, ~morado~), los
+  objetos reales enmarcados (mapa, póster…), flecha roja curva, cartel rojo «¡GRATIS!»/similar, lista con ✔ verdes
+  e icono (impresora, dinero…). Piezas en `miniatura.py`: `texto_color`, `flecha`, `sello`, `lista`, `pegar_logo`.
+  Siempre con imágenes oficiales reales, nunca mapas o personajes inventados.
 - La portada del Short (último fotograma de 0,3 s) la genera el motor con este estilo; en el guion se puede elegir
   `portada_figuras`, `portada_fondo` y `portada_collage`.
