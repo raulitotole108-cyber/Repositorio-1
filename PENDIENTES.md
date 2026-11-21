@@ -9,6 +9,7 @@
 - [ ] Subir el Short **RUTA MILLONARIA💸 parte 2: 200.000 dólares en gta 6** a YouTube y TikTok (`salida_dinero/d20-ruta-2/`, portada `portada-d20-ruta-2.jpg`). En TikTok, fijar un comentario que lleve a la parte 1.
 - [ ] Subir el Short **CARRERA BRUTAL✈️ andando vs coche vs avión en gta 6** (`salida_mapa/m01-cruzar/`, portada `salida_mapa/portadas/portada-m01-cruzar.jpg`).
 - [ ] Mandarme capturas de su partida del Ruiner (el coche con el compresor junto a la casa de Jason, en Key Lento) y de dónde está en el mapa, para hacer su Short.
+- [ ] Subir el Short **MANSIÓN NARCO🏝️ con 30.000 $ y un superdeportivo en gta 6** (`salida_dinero/d21-mansion/`, portada `portada-d21-mansion.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.
