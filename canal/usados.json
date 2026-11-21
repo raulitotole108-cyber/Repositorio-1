@@ -353,11 +353,15 @@
 "ol_167"
 ],
 "d21-mansion": [
-"img:Vice_City_17",
-"img:Vice_City_20",
-"img:Vice_City_21",
 "img:Vice_City_26",
-"img:u_caja_dinero",
+"img:u_vesp_caja",
+"img:u_vesp_caja2",
+"img:u_vesp_emerus",
+"img:u_vesp_emerus2",
+"img:u_vesp_emerus3",
+"img:u_vesp_guardia",
+"img:u_vesp_mansion",
+"img:u_vesp_rifle",
 "ol_186"
 ]
 }
