@@ -455,9 +455,30 @@ V("d23-inteligente", "3 ESTUDIOS",
   ], titulo="CEREBRO GAMER🧠 por qué gta 6 te hace más listo",
   mapas=dict(leo=dict(centro=(0.55, 0.5), desde_lugar="Vice City", zoom=(2.6, 1.05),
                       pins=[("Mount Kalaga", "gigante", "Mount Kalaga"), ("Port Gellhorn", "Leonida", "Port Gellhorn"), ("Vice City", "mapa", "Vice City")]))),
+V("d24-toros", "LA PERLE",
+  "Un Lamborghini dorado gratis en GTA 6 🏎️ El Pegassi Toros «efecto carbón» está en un narcopiso de La Perle, al norte de Vice City. Te digo por dónde entrar y cómo quedártelo\n\n"
+  "gta 6, coches gta 6, coche gratis gta 6, lamborghini gta 6, pegassi toros gta 6, urus gta 6, la perle gta 6, coches secretos gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #lamborghini",
+  [
+   B("¡No deslices! ¿Sabías que hay un *Lamborghini* dorado gratis en GTA seis? Te digo dónde.", ["img:u_toros_coche!"],
+     stat="GRATIS", golpe=True),
+   B("Está en La Perle, al norte de Vice City, entre Crosstown y Stockyard.", ["map:lp"]),
+   B("En el narcopiso de una banda. ¿Y el problema? Que lo vigilan.", ["img:u_toros_calle!", "img:u_toros_casa!"],
+     cortes=["problema"], gfx=[dict(t="icono", emoji="🏚️", titulo="NARCOPISO", sub="vigilado por la banda", y=0.2, desde="narcopiso", hasta="problema")]),
+   B("El truco: no entres por delante. Salta la valla roja del lateral.", ["img:u_toros_valla!"],
+     gfx=[dict(t="icono", emoji="🚧", titulo="LA VALLA ROJA", sub="entra por el lateral", y=0.2, desde="valla")]),
+   B("Cúbrete detrás de los coches y limpia la zona.", ["img:u_toros_tiro!"]),
+   B("El coche está abierto y sin alarma... pero lleva localizador.", ["img:u_toros_banda!"], riser=True,
+     gfx=[dict(t="pasos", items=["Acceso: abierto", "Alarma: desactivada", "Localizador: estándar"], en=["abierto", "alarma", "localizador"])]),
+   B("Llévalo a un Pay and Spray: te quitan el localizador, lo registras y es tuyo.", ["img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_03"],
+     gfx=[dict(t="icono", emoji="🔑", titulo="ES TUYO", sub="sin localizador y registrado", y=0.78, desde="tuyo")]),
+   B("Envíaselo a ese amigo que quiere un Lamborghini. Y pregúntale...", ["bg:"],
+     gfx=[dict(t="icono", emoji="🏎️", titulo="TOROS DORADO", sub="La Perle · Vice City", y=0.45, desde="Envíaselo")]),
+  ], titulo="LAMBORGHINI DORADO🏎️ gratis en gta 6, te digo dónde",
+  mapas=dict(lp=dict(lugar="La Perle", desde_lugar="Vice City", zoom=(1.6, 4.4),
+                     pins=[("Crosstown", "Crosstown", "Crosstown"), ("Stockyard", "Stockyard", "Stockyard"), ("La Perle", "Perle", "El Toros")]))),
 ]
-
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente",):
+    if _v["slug"] in ("d23-inteligente", "d24-toros"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

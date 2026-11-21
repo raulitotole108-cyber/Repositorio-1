@@ -199,11 +199,18 @@ def cargar_plano(nombre, t0, dur):
     x0 = int(np.clip(foco * ww - cw / 2, 0, ww - cw))
     if nombre.startswith("img:"):   # captura oficial: un solo fotograma (el empuje de cámara le da vida)
         nm = nombre[4:]
+        entera = nm.endswith("!")   # «img:foto!»: en vertical, la foto apaisada entera sobre su fondo desenfocado
+        nm = nm.rstrip("!")
         cand = [IMG / f"{nm}.jpg", IMG / "extra" / f"{nm}.jpg", IMG / "newswire" / f"{nm}.jpg",
                 IMG / "frames_oficial" / f"{nm}.jpg", IMG / "oficial_extra" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
         img = next(c for c in cand if c.exists())
         iw, ih = cv2.imread(str(img)).shape[1::-1]
-        if HORIZ and iw / ih < 1.5:   # arte vertical en vídeo 16:9: entero, sobre su propia imagen desenfocada
+        if entera and not HORIZ and iw / ih > 1.0:
+            fh = int(cw * ih / iw * 1.25)   # algo más grande que el ancho, para que llene más
+            vf = (f"split[a][b];[a]scale={cw}:{hh}:force_original_aspect_ratio=increase,crop={cw}:{hh},boxblur=30:2,"
+                  f"eq=brightness=-0.15:saturation=1.4[bg];[b]scale=-2:{fh}:flags=lanczos,crop=min(iw\\,{cw}):{fh}[fg];"
+                  f"[bg][fg]overlay=(W-w)/2:(H-h)/2,scale={cw}:{hh},format=bgr24")
+        elif HORIZ and iw / ih < 1.5:   # arte vertical en vídeo 16:9: entero, sobre su propia imagen desenfocada
             vf = (f"split[a][b];[a]scale={cw}:{hh}:force_original_aspect_ratio=increase,crop={cw}:{hh},boxblur=28:2,"
                   f"eq=brightness=-0.12:saturation=1.35[bg];[b]scale=-2:{hh}:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:0,scale={cw}:{hh},format=bgr24")
         elif iw / ih < 1.2:   # imagen vertical o cuadrada (capturas del usuario): se rellena el encuadre sin pasar por 16:9

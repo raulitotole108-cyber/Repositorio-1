@@ -12,6 +12,7 @@
 - [ ] Subir el Short **MANSIÓN NARCO🏝️ con 30.000 $ y un superdeportivo en gta 6** (`salida_dinero/d21-mansion/`, portada `portada-d21-mansion.jpg`).
 - [ ] Subir el Short **MILLONARIO JUGANDO💶 cómo gta 6 te ahorra un millón** (`salida_dinero/d22-millonario/`, portada `portada-d22-millonario.jpg`, en TikTok `portada-d22-millonario-tiktok.jpg`).
 - [ ] Subir el Short **CEREBRO GAMER🧠 por qué gta 6 te hace más listo** (`salida_dinero/d23-inteligente/`, portada `portada-d23-inteligente.jpg`, en TikTok `portada-d23-inteligente-tiktok.jpg`).
+- [ ] Subir el Short **LAMBORGHINI DORADO🏎️ gratis en gta 6, te digo dónde** (`salida_dinero/d24-toros/`, portada `portada-d24-toros.jpg`, en TikTok `portada-d24-toros-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.

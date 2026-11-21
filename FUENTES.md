@@ -157,3 +157,8 @@ Idea de un TikTok que pasó el usuario (solo como idea; aquí el ahorro es un vi
 - Max Planck (Kühn et al., Molecular Psychiatry 2013): 30 min al día durante 2 meses de un juego de plataformas → más materia gris en el hipocampo derecho, la corteza prefrontal y el cerebelo: https://www.mpg.de/7588840/video-games-brain · https://www.sciencedaily.com/releases/2013/10/131030103856.htm
 - Karolinska (Sauce et al., Scientific Reports 2022), ~9.855 niños de EE. UU. (ABCD): los que más jugaban ganaron ~2,5 puntos de CI más en dos años (estudio observacional): https://news.ki.se/video-games-can-help-boost-childrens-intelligence · https://www.psypost.org/children-who-play-more-video-games-show-greater-gains-in-intelligence-over-time-study-finds/
 - GTA 6 sin doblaje: voces en inglés, textos y subtítulos en español: https://vandal.elespanol.com/noticia/1350791241/sin-doblaje-espanol-gta-6-confirma-que-mantiene-la-tradicion-y-solo-llegara-con-voces-en-ingles/
+
+## Toros dorado de La Perle (`d24-toros`, 21/11/2026)
+- Sitio, banda, valla roja lateral y ficha del coche (Pegassi Toros «efecto carbón», acceso abierto, sistema de seguridad desactivado, localizador estándar): vídeo de TikTok que pasó el usuario (@borkast), visto en su mapa del juego («Narcopiso de La Perle»). Las imágenes del vídeo son fotogramas de ese vídeo, sin subtítulos ni marca: riesgo avisado al usuario.
+- Quitar localizador y registrar: Pay 'n' Spray con localizador estándar (ver «Dinero y coches»).
+- Otros Toros en el juego (no este): Pegassi Residences, Tequesta Retreat (lista de Randy): https://insider-gaming.com/where-to-find-the-pegassi-toros-in-gta-6/ · https://www.pushsquare.com/guides/gta-6-randys-wish-list-vehicle-locations
