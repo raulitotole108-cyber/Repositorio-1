@@ -433,4 +433,31 @@ V("d22-millonario", "MIAMI GRATIS",
   ], titulo="MILLONARIO JUGANDO💶 cómo gta 6 te ahorra un millón",
   mapas=dict(todo=dict(centro=(0.55, 0.5), zoom=(1.0, 1.08),
                        pins=[("Vice City", "Vice", "Vice City"), ("Cayos de Leonida", "Cayos", "Los Cayos")]))),
+V("d23-inteligente", "3 ESTUDIOS",
+  "Por qué GTA 6 te hace más listo 🧠 Jugar media hora al día hace crecer el hipocampo, los niños que más juegan ganan 2,5 puntos de inteligencia y GTA 6 te da clases de inglés gratis\n\n"
+  "gta 6, videojuegos inteligencia, videojuegos cerebro, gta 6 en ingles, gta 6 doblaje, ciencia videojuegos, jugar es bueno\n\n"
+  "#shorts #videoshorts #gta6 #videojuegosyciencia #cerebrogamer",
+  [
+   B("¡Ojo! ¿Sabías que jugar media hora al día hace crecer una parte de tu *cerebro*? Y GTA seis la entrena.",
+     ["img:Jason_Duval_15"], stat="+ LISTO", golpe=True),
+   B("En el Instituto Max Planck, media hora al día durante dos meses hizo crecer el hipocampo: memoria y orientación.",
+     ["bg:"], gfx=[dict(t="titular", medio="Max Planck", texto="Jugar a videojuegos hace crecer zonas del cerebro", desde="Max", hasta="hipocampo"),
+                  dict(t="icono", emoji="🧠", titulo="HIPOCAMPO", sub="memoria y orientación", y=0.45, desde="hipocampo")]),
+   B("¿Y qué lo entrena? Orientarte en un mapa gigante... como Leonida.", ["map:leo"]),
+   B("Pero hay más: con casi diez mil niños, los que más jugaban ganaron dos puntos y medio de inteligencia.",
+     ["img:Jason_Duval_04"], gfx=[dict(t="titular", medio="Scientific Reports", texto="Los niños que más juegan ganan 2,5 puntos de CI en dos años", desde="diez")]),
+   B("Y el tercero sorprende: GTA seis no está doblado. Voces en inglés y subtítulos en español: clases de inglés gratis.",
+     ["img:Jason_and_Lucia_17"], riser=True,
+     gfx=[dict(t="icono", emoji="🇬🇧", titulo="VOCES EN INGLÉS", sub="subtítulos en español", y=0.78, desde="Voces")]),
+   B("Y los secretos se resuelven pensando: códigos en postales y contraseñas en el suelo.", ["img:u_teclado_caravana_v"]),
+   B("Envíaselo a ese amigo que dice que los videojuegos pudren el cerebro. Y pregúntale...", ["bg:"],
+     gfx=[dict(t="icono", emoji="🧠", titulo="CEREBRO GAMER", sub="3 estudios", y=0.45, desde="Envíaselo")]),
+  ], titulo="CEREBRO GAMER🧠 por qué gta 6 te hace más listo",
+  mapas=dict(leo=dict(centro=(0.55, 0.5), desde_lugar="Vice City", zoom=(2.6, 1.05),
+                      pins=[("Mount Kalaga", "gigante", "Mount Kalaga"), ("Port Gellhorn", "Leonida", "Port Gellhorn"), ("Vice City", "mapa", "Vice City")]))),
 ]
+
+# portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
+for _v in VIDEOS:
+    if _v["slug"] in ("d23-inteligente",):
+        _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

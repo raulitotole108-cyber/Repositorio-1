@@ -445,6 +445,11 @@ def portada_img(base, titulo, v=None):
     ws = palabras.split()
     lineas = [" ".join(ws[:len(ws) // 2]), " ".join(ws[len(ws) // 2:])] if len(ws) >= 2 else [palabras]
     v = v or {}
+    if v.get("portada_archivo") and Path(v["portada_archivo"]).exists():   # portada «cargada» hecha a mano
+        im = Image.open(v["portada_archivo"]).convert("RGB").resize((W, H), Image.LANCZOS)
+        f = cv2.cvtColor(np.asarray(im), cv2.COLOR_RGB2BGR)
+        _portada[titulo] = f
+        return f
     cuadro = Image.fromarray(cv2.cvtColor(base, cv2.COLOR_BGR2RGB))
     figs = v.get("portada_figuras") or [dict(img=cuadro, x=.5, y=.31, h=.5, rot=-5, marco=True)]
     im = mn.miniatura(None, lineas, fondo=v.get("portada_fondo") or cuadro, figuras=figs,
@@ -858,6 +863,7 @@ def construir(v, out_dir):
             if (out_dir / dst_).exists():
                 (out_dir / dst_).unlink()
             os.link(out_dir / src_, out_dir / dst_)
+        cta_youtube.aplicar(str(out_dir / f"{v['slug']}-TIKTOK.mp4"), "tiktok")   # «sígueme y dale like» (21/11)
     desc = v["descripcion"]
     if HORIZ:   # capítulos para la descripción de YouTube
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»

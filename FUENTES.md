@@ -152,3 +152,8 @@ Idea de un TikTok que pasó el usuario (solo como idea; aquí el ahorro es un vi
 - Hotel en Miami Beach: media de unos 248 $/noche (Hopper); 7 noches ≈ 1.600 €: https://hopper.com/hotels/us/florida/miami-beach · https://ca.trip.com/hotels/city/us/miami-beach.html
 - Bolsa mundial (MSCI World): ~8-9 % anual nominal a largo plazo, no garantizado: https://www.fondosindexados.net/rentabilidad-historica-msci-world/ · https://bankkers.com/rentabilidad-historica-msci-world/
 - Cuenta: 2.320 €/año (2.400 − 80) al 8 % durante 47 años (de los 20 a los 67, edad de jubilación ordinaria en España) = 1.050.728 €.
+
+## GTA 6 te hace más listo (`d23-inteligente`, 21/11/2026)
+- Max Planck (Kühn et al., Molecular Psychiatry 2013): 30 min al día durante 2 meses de un juego de plataformas → más materia gris en el hipocampo derecho, la corteza prefrontal y el cerebelo: https://www.mpg.de/7588840/video-games-brain · https://www.sciencedaily.com/releases/2013/10/131030103856.htm
+- Karolinska (Sauce et al., Scientific Reports 2022), ~9.855 niños de EE. UU. (ABCD): los que más jugaban ganaron ~2,5 puntos de CI más en dos años (estudio observacional): https://news.ki.se/video-games-can-help-boost-childrens-intelligence · https://www.psypost.org/children-who-play-more-video-games-show-greater-gains-in-intelligence-over-time-study-finds/
+- GTA 6 sin doblaje: voces en inglés, textos y subtítulos en español: https://vandal.elespanol.com/noticia/1350791241/sin-doblaje-espanol-gta-6-confirma-que-mantiene-la-tradicion-y-solo-llegara-con-voces-en-ingles/

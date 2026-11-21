@@ -122,7 +122,8 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
 1. **Shorts de YouTube: cierre «SUSCRÍBETE 🔔 · ME GUSTA 👍 · COMENTA 💬»** en los últimos 2,6 s (antes del fotograma de
    portada). Lo pone el motor solo en la versión de YouTube (`-sin-musica`) con `canal/cta_youtube.py`; la de TikTok
    sigue en bucle limpio (regla 3).
-   **Cada Short se entrega en DOS archivos:** `<slug>-TIKTOK.mp4` (con música, sin botones) y `<slug>-YOUTUBE.mp4`
+   **TikTok (21/11): al final «SÍGUEME ➕ · ME GUSTA ❤️ · COMENTA 💬»** (`cta_youtube.py --tiktok`).
+   **Cada Short se entrega en DOS archivos:** `<slug>-TIKTOK.mp4` (con música y «sígueme») y `<slug>-YOUTUBE.mp4`
    (sin música para poner el sonido en tendencia, con suscríbete/like/comenta al final).
    **Portada de TikTok:** TikTok la recorta a 3:4; se entrega también `portada-<slug>-tiktok.jpg` hecha con
    `canal/portada_tiktok.py` (la portada entera dentro de la zona 3:4, con el fondo desenfocado).

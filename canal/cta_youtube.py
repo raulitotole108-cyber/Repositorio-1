@@ -1,6 +1,6 @@
-"""Cierre para los Shorts de YouTube (petición del usuario, 21/11/2026): en los últimos segundos aparecen tres
+"""Cierre para los Shorts (YouTube: suscríbete/me gusta/comenta; TikTok, con --tiktok: sígueme/me gusta) (petición del usuario, 21/11/2026): en los últimos segundos aparecen tres
 botones animados «SUSCRÍBETE 🔔 · ME GUSTA 👍 · COMENTA 💬», justo antes del fotograma de portada (0,3 s).
-Solo en la versión de YouTube (la «-sin-musica»); la de TikTok sigue en bucle limpio.
+En YouTube va en la versión «-sin-musica»/«-YOUTUBE»; en TikTok, «SÍGUEME · ME GUSTA · COMENTA» en la «-TIKTOK».
 
 Uso: python3 canal/cta_youtube.py video1.mp4 [video2.mp4 ...]   (los modifica en el sitio)"""
 import os
@@ -36,11 +36,16 @@ def boton(txt, emoji, fondo, ancho, alto):
     return im
 
 
-def cta_png(W=1080, H=1920):
+def cta_png(W=1080, H=1920, tipo="youtube"):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    b1 = boton("SUSCRÍBETE", "🔔", (230, 20, 30), int(W * .66), 118)
-    b2 = boton("ME GUSTA", "👍", (40, 40, 52), int(W * .4), 96)
-    b3 = boton("COMENTA", "💬", (40, 40, 52), int(W * .4), 96)
+    if tipo == "tiktok":   # TikTok: «SÍGUEME · ME GUSTA» con los colores de TikTok
+        b1 = boton("SÍGUEME", "➕", (254, 44, 85), int(W * .62), 118)
+        b2 = boton("ME GUSTA", "❤️", (40, 40, 52), int(W * .4), 96)
+        b3 = boton("COMENTA", "💬", (40, 40, 52), int(W * .4), 96)
+    else:
+        b1 = boton("SUSCRÍBETE", "🔔", (230, 20, 30), int(W * .66), 118)
+        b2 = boton("ME GUSTA", "👍", (40, 40, 52), int(W * .4), 96)
+        b3 = boton("COMENTA", "💬", (40, 40, 52), int(W * .4), 96)
     y = int(H * .70)
     im.alpha_composite(b1, ((W - b1.width) // 2, y))
     y2 = y + b1.height + 6
@@ -51,13 +56,13 @@ def cta_png(W=1080, H=1920):
     return im
 
 
-def aplicar(ruta):
+def aplicar(ruta, tipo="youtube"):
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of",
                                          "csv=p=0", ruta]).decode().strip())
     t0, t1 = max(0.0, dur - PORTADA - DUR), dur - PORTADA
     tmpd = tempfile.mkdtemp()
     png = os.path.join(tmpd, "cta.png")
-    cta_png().save(png)
+    cta_png(tipo=tipo).save(png)
     out = os.path.join(tmpd, "out.mp4")
     # entra con un pequeño rebote desde abajo y se va justo cuando sale la portada
     fc = (f"[1]format=rgba,fade=t=in:st={t0}:d=0.25:alpha=1[c];"
@@ -66,9 +71,13 @@ def aplicar(ruta):
                     "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "copy",
                     "-movflags", "+faststart", out], check=True)
     os.replace(out, ruta)
-    print("cierre de YouTube añadido:", ruta)
+    print(f"cierre de {tipo} añadido:", ruta)
 
 
 if __name__ == "__main__":
-    for r in sys.argv[1:]:
-        aplicar(r)
+    args = sys.argv[1:]
+    tipo = "youtube"
+    if args and args[0] in ("--tiktok", "--youtube"):
+        tipo = args.pop(0)[2:]
+    for r in args:
+        aplicar(r, tipo)
