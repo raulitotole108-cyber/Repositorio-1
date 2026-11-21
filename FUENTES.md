@@ -144,3 +144,11 @@ Guías publicadas tras el lanzamiento; las cifras varían entre guías, por eso 
 ## Mansión de Vespucci Island (`d21-mansion`, 21/11/2026)
 - Operación ilegal en Vespucci Island (islas Rialto): mansión de un narco con guardias, caja fuerte con dinero, rifle Kingpin Heathen Bullpup y el Progen Emerus rojo rubí; entrar por detrás saltando el muro de piedra: https://www.respec.net/guide/319-gta6-gang-operations-locations-list-robbery-opportunity-rewards · https://game8.co/games/GTA-6/archives/639211 · https://mapmaster.io/games/grand-theft-auto-6/guides/Safe · https://retrobroker.com/en-US/us/blog/fastest-free-supercars-vice-city-locations
 - 30.000 $: lo que saca un jugador en su vídeo (TikTok que pasó el usuario, solo como información); ninguna guía da cifra, por eso se dice «un jugador sacó treinta mil».
+
+## GTA 6 te hace millonario (`d22-millonario`, 21/11/2026)
+Idea de un TikTok que pasó el usuario (solo como idea; aquí el ahorro es un viaje a Miami en vez de salir de fiesta).
+- Precio de GTA 6 en España: 79,99 € (estándar): https://vandal.elespanol.com/noticia/1350791109/ya-sabemos-cuanto-costara-gta-6-rockstar-revela-su-precio-y-confirma-la-temida-subida-en-sus-dos-ediciones/ · https://www.infobae.com/tecno/2026/06/25/gta-6-precio-en-preventa-cuanto-cuesta-el-juego-de-rockstar-en-argentina-colombia-mexico-y-espana/
+- Vuelo España-Miami: media de unos 767 € ida y vuelta (Kayak): https://www.kayak.es/vuelos/Espana-ES0/Miami-MIA
+- Hotel en Miami Beach: media de unos 248 $/noche (Hopper); 7 noches ≈ 1.600 €: https://hopper.com/hotels/us/florida/miami-beach · https://ca.trip.com/hotels/city/us/miami-beach.html
+- Bolsa mundial (MSCI World): ~8-9 % anual nominal a largo plazo, no garantizado: https://www.fondosindexados.net/rentabilidad-historica-msci-world/ · https://bankkers.com/rentabilidad-historica-msci-world/
+- Cuenta: 2.320 €/año (2.400 − 80) al 8 % durante 47 años (de los 20 a los 67, edad de jubilación ordinaria en España) = 1.050.728 €.

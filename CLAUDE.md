@@ -124,6 +124,8 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
    sigue en bucle limpio (regla 3).
    **Cada Short se entrega en DOS archivos:** `<slug>-TIKTOK.mp4` (con música, sin botones) y `<slug>-YOUTUBE.mp4`
    (sin música para poner el sonido en tendencia, con suscríbete/like/comenta al final).
+   **Portada de TikTok:** TikTok la recorta a 3:4; se entrega también `portada-<slug>-tiktok.jpg` hecha con
+   `canal/portada_tiktok.py` (la portada entera dentro de la zona 3:4, con el fondo desenfocado).
 2. **Que se sepa dónde ir EXACTAMENTE en el mapa** (según el usuario, multiplica las visitas): en cada vídeo de un sitio
    (coche, dinero, secreto), mapa oficial con zoom hasta el punto, chincheta con el nombre, desde qué sitio conocido se
    llega (casa de Jason, una carretera, un barrio) y cuánto se tarda. Si existe, captura del sitio en el juego.

@@ -764,8 +764,8 @@ class Capa2(Capa):
                     x = W / 2 + (i - (n - 1) / 2) * c.shape[1] * sc * 1.05
                     f = pegar(f, c, x, H / 2 + (1 - ei) * 120, sc, ei)
             elif k == "contador":
-                hasta = g["hasta"]
-                v = int(hasta * min(1.0, lt / g.get("dur", 1.2)) ** 0.7)
+                hasta, ini = g["hasta"], g.get("inicio", 0)
+                v = int(ini + (hasta - ini) * min(1.0, lt / g.get("dur", 1.2)) ** 0.7)
                 txt = g.get("prefijo", "") + f"{v:,}".replace(",", ".") + g.get("sufijo", "")
                 im_ = dato(txt, g.get("sub"))
                 f = pegar(f, im_, W / 2, H * (0.5 if not vert else 0.42), min(1.6, (W - 80) / im_.shape[1]), e)
