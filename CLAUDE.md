@@ -131,3 +131,8 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
    (coche, dinero, secreto), mapa oficial con zoom hasta el punto, chincheta con el nombre, desde qué sitio conocido se
    llega (casa de Jason, una carretera, un barrio) y cuánto se tarda. Si existe, captura del sitio en el juego.
    Para recorridos: línea animada sobre el mapa con el vehículo y cronómetro (`trayecto` en los mapas de `pro.py`).
+
+## Formato «meme» / clip gracioso (usuario, 21/11/2026)
+Para clips que pasa el usuario con un texto arriba: fondo NEGRO, texto en MAYÚSCULAS con letra estrecha y gorda (Anton),
+blanco y la palabra clave en ROJO, alineado a la izquierda, y debajo el clip entero con su sonido
+(`canal/meme.py`, referencia `canal/referencias/estilo_meme.jpg`). Sin narrador; al final, el cierre con voz de siempre.
