@@ -81,3 +81,39 @@ if __name__ == "__main__":
         tipo = args.pop(0)[2:]
     for r in args:
         aplicar(r, tipo)
+
+
+TEXTOS = {"tiktok": "Sígueme y dale like.", "youtube": "Suscríbete y dale like."}
+
+
+def voz_final(ruta, tipo="tiktok"):
+    """Que el narrador LO DIGA (petición del usuario, 21/11): congela el último fotograma con los botones, dice
+    «Sígueme y dale like» (TikTok) o «Suscríbete y dale like» (YouTube) y luego sale la portada (0,3 s)."""
+    import numpy as np
+    import pro
+    import render_v2 as v2
+    dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of",
+                                         "csv=p=0", ruta]).decode().strip())
+    c = dur - PORTADA
+    tmpd = tempfile.mkdtemp()
+    y, _ = pro.voz(TEXTOS[tipo])
+    wav = os.path.join(tmpd, "voz.wav")
+    v2.write_wav(wav, np.concatenate([np.zeros(int(0.08 * pro.SR), np.float32), y]))
+    T = len(y) / pro.SR + 0.35
+    png = os.path.join(tmpd, "ultimo.png")
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{c - 0.04:.3f}", "-i", ruta, "-frames:v", "1", png],
+                   check=True)
+    out = os.path.join(tmpd, "out.mp4")
+    fc = (f"[0:v]trim=0:{c:.3f},setpts=PTS-STARTPTS,fps=30,format=yuv420p[v1];"
+          f"[2:v]scale=1080:1920,fps=30,format=yuv420p,trim=0:{T:.3f},setpts=PTS-STARTPTS[v2];"
+          f"[0:v]trim=start={c:.3f},setpts=PTS-STARTPTS,fps=30,format=yuv420p[v3];"
+          f"[0:a]atrim=0:{c:.3f},asetpts=PTS-STARTPTS,aresample=48000[a1];"
+          f"[1:a]aresample=48000,apad=whole_dur={T:.3f},atrim=0:{T:.3f},volume=1.0[a2];"
+          f"anullsrc=r=48000:cl=stereo,atrim=0:{dur - c:.3f}[a3];"
+          f"[a1]aformat=channel_layouts=stereo[a1s];[a2]aformat=channel_layouts=stereo[a2s];"
+          f"[v1][a1s][v2][a2s][v3][a3]concat=n=3:v=1:a=1[v][a]")
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", ruta, "-i", wav, "-loop", "1", "-t", f"{T:.3f}", "-i", png,
+                    "-filter_complex", fc, "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-crf", "18", "-preset",
+                    "medium", "-c:a", "aac", "-b:a", "256k", "-movflags", "+faststart", out], check=True)
+    os.replace(out, ruta)
+    print(f"voz «{TEXTOS[tipo]}» añadida:", ruta)

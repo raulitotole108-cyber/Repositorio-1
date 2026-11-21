@@ -864,6 +864,8 @@ def construir(v, out_dir):
                 (out_dir / dst_).unlink()
             os.link(out_dir / src_, out_dir / dst_)
         cta_youtube.aplicar(str(out_dir / f"{v['slug']}-TIKTOK.mp4"), "tiktok")   # «sígueme y dale like» (21/11)
+        cta_youtube.voz_final(str(out_dir / f"{v['slug']}-TIKTOK.mp4"), "tiktok")    # y el narrador lo dice
+        cta_youtube.voz_final(str(out_dir / f"{v['slug']}-YOUTUBE.mp4"), "youtube")
     desc = v["descripcion"]
     if HORIZ:   # capítulos para la descripción de YouTube
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»
