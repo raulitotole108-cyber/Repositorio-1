@@ -497,8 +497,33 @@ V("d25-glitch", "ANTES DEL PARCHE",
   ], titulo="DINERO INFINITO💰 el glitch de gta 6",
   mapas=dict(alm=dict(lugar="Almacén Apollo", desde_lugar="Vice City", zoom=(1.6, 4.0),
                       pins=[("Hamlet", "Hamlet", "Hamlet"), ("Almacén Apollo", "almacén", "El almacén")]))),
+V("d26-emerus", "WAXMAN ISLAND",
+  "Un superdeportivo morado gratis y 10.000 $ en el mismo sitio de GTA 6 🏎️ El Progen Emerus Purple Drank está en Chatfield Storage, al este de Vice City, encima del Pay 'n' Spray de Waxman Island. La caja fuerte es la 5800\n\n"
+  "gta 6, coches gta 6, coche gratis gta 6, emerus gta 6, superdeportivo gta 6, codigo caja fuerte gta 6, dinero gta 6, 5800 gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #dinerogta6",
+  [
+   B("¡Quieto! ¿Sabías que en GTA seis hay un superdeportivo *gratis*... y diez mil dólares al lado?",
+     ["img:Vice_City_15"], stat="COCHE + 10.000 $", golpe=True),
+   B("Está en Chatfield Storage, al este de Vice City, encima del Pay and Spray de Waxman Island.", ["map:cf"]),
+   B("El coche está dentro y la puerta, cerrada. ¿El truco? Trepa por los baños portátiles y salta la valla.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🔒", titulo="PUERTA CERRADA", sub="el coche está dentro", y=0.3, desde="puerta", hasta="truco"),
+          dict(t="icono", emoji="🚽", titulo="LOS BAÑOS PORTÁTILES", sub="trepa y salta la valla", y=0.5, desde="baños")]),
+   B("Limpia a los tipos armados y sube a la caseta.", ["ol_128"]),
+   B("En el portátil está el código de la caja: cinco ocho cero cero.", ["bg:"],
+     gfx=[dict(t="teclado", codigo="5800", etiqueta="Chatfield Storage", desde="cinco")]),
+   B("Dentro, diez mil dólares y una pistola exclusiva.", ["ol_037+1.0"],
+     gfx=[dict(t="contador", hasta=10000, prefijo="", sufijo=" $", sub="caja fuerte", desde="diez", hasta_t="pistola"),
+          dict(t="icono", emoji="🔫", titulo="QUARTER MILE ES9", sub="pistola exclusiva", y=0.78, desde="pistola")]),
+   B("Y el premio: el Progen Emerus morado. Al Pay and Spray, le quitas el localizador... y es tuyo.",
+     ["bg:", "img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_02"], cortes=["Pay"], riser=True,
+     gfx=[dict(t="icono", emoji="🏎️", titulo="PROGEN EMERUS", sub="«Purple Drank» · morado", y=0.45, desde="Emerus", hasta="Pay")]),
+   B("Envíaselo a ese amigo que siempre pierde las carreras. Y dile...", ["bg:"],
+     gfx=[dict(t="icono", emoji="🏁", titulo="EMERUS GRATIS", sub="Chatfield Storage · 5800", y=0.45, desde="Envíaselo")]),
+  ], titulo="COCHE GRATIS🏎️ y 10.000 $ en un almacén de gta 6",
+  mapas=dict(cf=dict(lugar="Chatfield Storage", desde_lugar="Vice City", zoom=(1.6, 4.4),
+                     pins=[("Vespucci Island", "Vice", "Vice City"), ("Chatfield Storage", "Chatfield", "Chatfield Storage")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

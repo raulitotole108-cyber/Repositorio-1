@@ -15,6 +15,7 @@
 - [ ] Subir el Short **LAMBORGHINI DORADO🏎️ gratis en gta 6, te digo dónde** (`salida_dinero/d24-toros/`, portada `portada-d24-toros.jpg`, en TikTok `portada-d24-toros-tiktok.jpg`).
 - [ ] Subir el Short **LO PEOR😂 que te puede pasar en gta 6** (`salida_mapa/m02-gracioso/`, portada `salida_mapa/portadas/portada-m02-gracioso.jpg`, en TikTok `portada-m02-gracioso-tiktok.jpg`). Clip grabado de pantalla por el usuario.
 - [ ] Subir el Short **DINERO INFINITO💰 el glitch de gta 6** (`salida_dinero/d25-glitch/`, portada `portada-d25-glitch.jpg`, en TikTok `portada-d25-glitch-tiktok.jpg`). Subirlo YA: Rockstar puede arreglar el glitch con un parche.
+- [ ] Subir el Short **COCHE GRATIS🏎️ y 10.000 $ en un almacén de gta 6** (`salida_dinero/d26-emerus/`, portada `portada-d26-emerus.jpg`, en TikTok `portada-d26-emerus-tiktok.jpg`). Si graba el Emerus morado en su partida, cambiar el plano del coche.
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.

@@ -174,3 +174,7 @@ Junta lo verificado en «Dinero y coches», «Ruta millonaria 2», «Mansión de
 - Caja fuerte del desguace Nova: 7777 (contenido no confirmado): https://beebom.com/gta-6-safe-codes/ · https://roonby.com/2026/11/19/gta-6-safe-codes-all-known-combinations-and-how-to-find-them/
 - 39 operaciones ilegales de 9 bandas, trofeo Pest Control: https://www.keengamer.com/articles/guides/how-to-rob-illegal-operations-in-gta-6-all-9-gangs-and-the-pest-control-trophy/
 - Caza da dinero (Rob Nelson), pesca no: ver «Dinero y coches».
+
+## Emerus morado de Chatfield Storage (`d26-emerus`, 21/11/2026)
+- Chatfield Storage & Logistics, al este de Vice City, al norte del Pay 'n' Spray de Waxman Island: caja fuerte 5800 (código en un correo del portátil), Progen Emerus «Purple Drank» y pistola Quarter Mile ES9: https://gamerant.com/gta-6-chatfield-storage-logistics-safe-code-key-valuable/
+- Entrada por los baños portátiles, tipos armados, caseta y ~10.000 $ en la caja: vídeo de TikTok que pasó el usuario (@manoliinyt), usado solo como información (no se usan sus imágenes).

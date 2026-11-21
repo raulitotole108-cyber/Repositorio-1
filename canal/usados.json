@@ -403,7 +403,7 @@
 "img:Jason_and_Lucia_19",
 "img:Jason_and_Lucia_20",
 "img:Leonida_Keys_02",
-"img:Leonida_Keys_06",
+"img:Leonida_Keys_05",
 "img:Leonida_Keys_07",
 "img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_01",
 "img:Vice_City_04",
@@ -449,5 +449,11 @@
 "u_gl_c+7.2",
 "u_gl_d+3.0",
 "u_gl_d+9.2"
+],
+"d26-emerus": [
+"img:ULTIMATE_EDITION_RIDEOUT_CUSTOMS_02",
+"img:Vice_City_15",
+"ol_037+1.0",
+"ol_128"
 ]
 }
