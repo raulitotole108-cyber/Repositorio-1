@@ -136,3 +136,7 @@ Guías publicadas tras el lanzamiento; las cifras varían entre guías, por eso 
 
 ## Ruiner con compresor de Key Lento (pendiente de capturas del usuario)
 - Imponte Ruiner («Turbo Ruiner») en la entrada de una casa cerca del cartel de Cove Condominiums, a un minuto de la casa de Jason; de día; se respray en Coastal Auto Care; registro ~6.000 $: https://www.hotcars.com/how-to-get-fastest-car-early-in-gta-6/ · https://ggwtb.com/blog/gta-6-rare-cars-guide-free-locations--registration-costs-pro-routes
+
+## Banco BuckMe y cajeros (respuesta a un comentario, 21/11/2026)
+- Misión «Buck Me (Set Up Bank Account)», capítulo 1, ~medio día de juego después de «Coming Home»: llama Lucía y vas al Fleeca de Key Lento. Luego «Deposit Cash Into BuckMe»: ingreso en un cajero. Antes del banco, el dinero se esconde bajo el suelo del cuarto de Jason. Al morir o ser detenido se pierde algo del BuckMe (comisión); los Ahorros familiares no se pierden pero tampoco se sacan: https://www.videogameschronicle.com/guide/gta-6-buck-me-mission-walkthrough/ · https://games.gg/grand-theft-auto-vi/guides/how-to-get-a-bank-account-in-grand-theft-auto-6/ · https://www.gtabase.com/gta-6/missions/deposit-cash-into-buckme · https://gameriv.com/gta-6-how-to-store-money-safely-before-unlocking-a-bank-account/ · https://egamers.io/gta-6-buckme-guide-how-family-savings-checking-limits-and-perks-work/
+- La pérdida del dinero al acabar el capítulo 1 la confirma también un espectador en los comentarios (Rafael G); sigue sin estar claro si afecta al dinero del banco.
