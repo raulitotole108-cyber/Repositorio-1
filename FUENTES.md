@@ -166,3 +166,11 @@ Idea de un TikTok que pasó el usuario (solo como idea; aquí el ahorro es un vi
 ## Glitch de dinero infinito (`d25-glitch`, 21/11/2026)
 - Almacén Apollo Aggregates (el de los peluches), al este de Hamlet, condado de Vice-Dale Sur: saquear, meter las bolsas en el vehículo, guardar y cargar partida → el botín reaparece y las bolsas siguen en el vehículo; cada vuelta da menos (~11.280 $ la primera); hacerlo desde el capítulo 2; probado en la versión 1.002.001, Rockstar lo arreglará: https://libertycity.net/guides/gta-6/10581-gta-6-unlimited-money-glitch-warehouse.html · https://beebom.com/gta-6-unlimited-money-glitch/ · https://www.sportskeeda.com/esports/gta-6-infinite-money-glitch-south-vice-dale-county-how-get-unlimited-money-gta-6 · https://www.keengamer.com/articles/guides/gta-6-unlimited-money-glitch-guide/
 - Pasos y clips: vídeos que pasó el usuario (de WISMA en TikTok); la explicación se usó solo como información, sin su voz ni su cara.
+
+## Vídeo largo de dinero (`l07-dinero`, 21/11/2026)
+Junta lo verificado en «Dinero y coches», «Ruta millonaria 2», «Mansión de Vespucci», «Toros dorado», «Glitch» y «Banco BuckMe». Además:
+- Tiendas: casi cualquier negocio se puede atracar; la caja registradora da poco (unos cientos de dólares); la caja fuerte da más (código en notas o amenazando al empleado; el explosivo quema billetes); lo que no es efectivo, al perista: https://games.gg/grand-theft-auto-vi/guides/grand-theft-auto-6-store-robbery-guide/ · https://allthings.how/gta-6-robberies-how-store-diner-and-jewelry-heists-work/ · https://gamesfuze.com/guides/gta-6-how-to-unlock-safes-when-robbing-stores/ · https://www.gtabase.com/articles/gta-6/gta-6-will-let-you-rob-almost-any-store
+- Ocho cámaras acorazadas en el mapa: https://www.gamerbolt.com/gta-6-money-guide/ · https://metaforge.app/gta-6/gta-6-money-guide-how-to-make-money-fast
+- Caja fuerte del desguace Nova: 7777 (contenido no confirmado): https://beebom.com/gta-6-safe-codes/ · https://roonby.com/2026/11/19/gta-6-safe-codes-all-known-combinations-and-how-to-find-them/
+- 39 operaciones ilegales de 9 bandas, trofeo Pest Control: https://www.keengamer.com/articles/guides/how-to-rob-illegal-operations-in-gta-6-all-9-gangs-and-the-pest-control-trophy/
+- Caza da dinero (Rob Nelson), pesca no: ver «Dinero y coches».
