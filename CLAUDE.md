@@ -116,3 +116,13 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
   Siempre con imágenes oficiales reales, nunca mapas o personajes inventados.
 - La portada del Short (último fotograma de 0,3 s) la genera el motor con este estilo; en el guion se puede elegir
   `portada_figuras`, `portada_fondo` y `portada_collage`.
+
+## Reglas añadidas por el usuario (21/11/2026)
+
+1. **Shorts de YouTube: cierre «SUSCRÍBETE 🔔 · ME GUSTA 👍 · COMENTA 💬»** en los últimos 2,6 s (antes del fotograma de
+   portada). Lo pone el motor solo en la versión de YouTube (`-sin-musica`) con `canal/cta_youtube.py`; la de TikTok
+   sigue en bucle limpio (regla 3).
+2. **Que se sepa dónde ir EXACTAMENTE en el mapa** (según el usuario, multiplica las visitas): en cada vídeo de un sitio
+   (coche, dinero, secreto), mapa oficial con zoom hasta el punto, chincheta con el nombre, desde qué sitio conocido se
+   llega (casa de Jason, una carretera, un barrio) y cuánto se tarda. Si existe, captura del sitio en el juego.
+   Para recorridos: línea animada sobre el mapa con el vehículo y cronómetro (`trayecto` en los mapas de `pro.py`).

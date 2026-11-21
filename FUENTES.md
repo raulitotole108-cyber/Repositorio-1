@@ -128,3 +128,11 @@ Guías publicadas tras el lanzamiento; las cifras varían entre guías, por eso 
 - Operaciones ilegales de las bandas (iconos amarillos, el mapa muestra el botín; 9 bandas, trofeo Pest Control) y pérdida del dinero al final del capítulo 1 (solo una guía: «según las guías»): https://www.keengamer.com/articles/guides/how-to-rob-illegal-operations-in-gta-6-all-9-gangs-and-the-pest-control-trophy/ · https://www.gamerguides.com/grand-theft-auto-vi/psn-trophies/pest-control
 - Venta de drogas, joyas y billetes marcados en el garaje de Brian: https://www.keengamer.com/articles/guides/gta-6-best-early-money-farming-spots-and-secret-cash-stashes/ · https://beebom.com/gta-6-best-money-spots/
 - Cámara acorazada del banco (cap. 4, hasta 205.000 $): ver «Dinero y coches».
+
+## Cruzar Leonida (`m01-cruzar`, 21/11/2026)
+- Kotaku, prueba cronometrada de la punta sur a la norte: andando 3:21:20, corriendo 1:41:00, coche por autopista 10:53, avioneta 5:51: https://kotaku.com/it-took-me-over-three-hours-to-walk-across-gta-6s-massive-map-2000755572 · https://vgtimes.com/gaming-news/175002-walking-across-gta-6s-map-took-over-three-hours-kotaku-test-finds.html · https://leonidaplayers.com/guides/gta-6-map-size-how-long-to-cross
+- PC Gamer: unos 4:18 volando de la punta sur al norte: https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-long-to-fly-across-map/
+- No hay tiempos medidos en bici, moto ni barco: no se dicen.
+
+## Ruiner con compresor de Key Lento (pendiente de capturas del usuario)
+- Imponte Ruiner («Turbo Ruiner») en la entrada de una casa cerca del cartel de Cove Condominiums, a un minuto de la casa de Jason; de día; se respray en Coastal Auto Care; registro ~6.000 $: https://www.hotcars.com/how-to-get-fastest-car-early-in-gta-6/ · https://ggwtb.com/blog/gta-6-rare-cars-guide-free-locations--registration-costs-pro-routes

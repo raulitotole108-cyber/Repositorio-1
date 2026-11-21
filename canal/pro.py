@@ -850,6 +850,9 @@ def construir(v, out_dir):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mudo), "-i", str(wav),
                         "-af", "loudnorm=I=-14:TP=-1.0:LRA=9", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
                         "-ar", "48000", "-shortest", "-movflags", "+faststart", str(out_dir / nombre)], check=True)
+    if not HORIZ and v.get("titulo"):   # Shorts de YouTube: cierre «suscríbete · me gusta · comenta» (petición del usuario)
+        import cta_youtube
+        cta_youtube.aplicar(str(out_dir / f"{v['slug']}-sin-musica.mp4"))
     desc = v["descripcion"]
     if HORIZ:   # capítulos para la descripción de YouTube
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»

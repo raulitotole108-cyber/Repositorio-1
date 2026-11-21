@@ -373,7 +373,7 @@ LUGARES = {
     "Vice City": (0.668, 0.521), "Vice Beach": (0.884, 0.489), "Port Gellhorn": (0.300, 0.356),
     "Ambrosia": (0.556, 0.353), "Belville": (0.656, 0.395), "Lago Leonida": (0.566, 0.300),
     "Millport": (0.660, 0.230), "Mount Kalaga": (0.490, 0.232), "Grassrivers": (0.446, 0.660),
-    "Pelican Valley": (0.521, 0.728), "Hamlet": (0.555, 0.686), "Manatee Motel": (0.556, 0.722), "Key Lento": (0.576, 0.832), "Cayos de Leonida": (0.430, 0.862),
+    "Pelican Valley": (0.521, 0.728), "Hamlet": (0.555, 0.686), "Punta sur": (0.470, 0.893), "Punta norte": (0.535, 0.113), "Manatee Motel": (0.556, 0.722), "Key Lento": (0.576, 0.832), "Cayos de Leonida": (0.430, 0.862),
     "Condado de Kelly": (0.420, 0.395), "Condado de Lummox": (0.500, 0.200), "Condado de Leonard": (0.700, 0.357),
     "Condado de Vice-Dale": (0.722, 0.573), "Condado de Mariana": (0.412, 0.730), "Camino de tierra": (0.362, 0.372),
 }
@@ -446,6 +446,91 @@ def render_mapa(spec, lt, dur, W, H):
         cv2.circle(f, (int(x), int(y)), int(6 * a) + 1, (255, 255, 255), -1, cv2.LINE_AA)
         lab = pastilla(etiqueta.upper(), 32 if W > H else 26, punto=False)
         f = pegar(f, lab, x + lab.shape[1] / 2 + 14, y - lab.shape[0] / 2 - 6, 1.0, a)
+    if spec.get("trayecto"):
+        f = trayecto(f, spec["trayecto"], lt, dur, s, M, PW, PH, W, H)
+    return f
+
+
+_cronos = {}
+
+
+def crono_img(txt, color):
+    k = (txt, color)
+    if k not in _cronos:
+        fnt = font("Anton-Regular.ttf", 120)
+        d0 = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+        bb = d0.textbbox((0, 0), "⏱" + txt, font=fnt)
+        tb = d0.textbbox((0, 0), txt, font=fnt)
+        w, h = tb[2] - tb[0] + 200, 170
+        im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        d.rounded_rectangle([6, 6, w - 6, h - 6], 30, fill=(20, 10, 40, 235), outline=color + (255,), width=7)
+        e = emoji_img("⏱", 95)
+        im.alpha_composite(e, (26, (h - e.height) // 2))
+        d.text((150 - tb[0], (h - (tb[3] - tb[1])) // 2 - tb[1]), txt, font=fnt, fill=(255, 255, 255),
+               stroke_width=4, stroke_fill=(0, 0, 0))
+        _cronos[k] = a_bgra(im)
+    return _cronos[k]
+
+
+def _hms(seg, plantilla):
+    seg = int(round(seg))
+    h, m, s_ = seg // 3600, seg % 3600 // 60, seg % 60
+    return f"{h}:{m:02d}:{s_:02d}" if plantilla.count(":") == 2 else f"{m}:{s_:02d}"
+
+
+def trayecto(f, tr, lt, dur, s, M, PW, PH, W, H):
+    """Recorrido animado sobre el mapa: la línea se va dibujando, el vehículo (emoji) va delante y un cronómetro
+    cuenta hasta el tiempo real (tr: pts=[(x,y) póster], emoji, tiempo='3:21:20', color, ini=s, fin=fracción)."""
+    pts = [en_mapa(p) for p in tr["pts"]]
+    pts = [(s * x * PW + M[0, 2], s * y * PH + M[1, 2]) for x, y in pts]
+    ini = tr.get("ini", 0.25)
+    fin = max(ini + 0.5, dur * tr.get("fin", 0.85))
+    p = ease(min(1.0, max(0.0, (lt - ini) / (fin - ini))))
+    seg = [np.hypot(pts[i + 1][0] - pts[i][0], pts[i + 1][1] - pts[i][1]) for i in range(len(pts) - 1)]
+    L = sum(seg) * p
+    dib = [pts[0]]
+    for i, sl in enumerate(seg):
+        if L >= sl:
+            dib.append(pts[i + 1])
+            L -= sl
+        else:
+            t = L / sl if sl else 0
+            dib.append((pts[i][0] + (pts[i + 1][0] - pts[i][0]) * t, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * t))
+            break
+    col = tr.get("color", ROSA)
+    bgr = (col[2], col[1], col[0])
+    arr = np.array(dib, np.int32).reshape(-1, 1, 2)
+    if len(dib) > 1:
+        ov = f.copy()
+        cv2.polylines(ov, [arr], False, bgr, 26, cv2.LINE_AA)
+        f = cv2.addWeighted(ov, 0.35, f, 0.65, 0)
+        cv2.polylines(f, [arr], False, (255, 255, 255), 13, cv2.LINE_AA)
+        cv2.polylines(f, [arr], False, bgr, 8, cv2.LINE_AA)
+    cv2.circle(f, (int(pts[0][0]), int(pts[0][1])), 12, (255, 255, 255), -1, cv2.LINE_AA)
+    hx, hy = dib[-1]
+    if len(dib) > 1:
+        dx, dy = dib[-1][0] - dib[-2][0], dib[-1][1] - dib[-2][1]
+    else:
+        dx, dy = pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]
+    em = tr.get("emoji")
+    if em:
+        k = ("veh", em)
+        if k not in _cronos:
+            _cronos[k] = emoji_img(em, 110)
+        e = _cronos[k]
+        if tr.get("girar"):
+            ang = -np.degrees(np.arctan2(dy, dx)) + tr.get("girar", 0)
+            e = e.rotate(ang, expand=True, resample=Image.BICUBIC)
+        f = pegar(f, a_bgra(e), hx, hy, 1.0, 1.0)
+    if tr.get("tiempo") and "?" in tr["tiempo"]:
+        f = pegar(f, crono_img(tr["tiempo"], col), W / 2, H * 0.215, 0.9 if W < H else 0.7, min(1.0, lt / 0.25))
+    elif tr.get("tiempo"):
+        partes = [int(x) for x in tr["tiempo"].split(":")]
+        tot = sum(v * 60 ** (len(partes) - 1 - i) for i, v in enumerate(partes))
+        txt = _hms(tot * p, tr["tiempo"])
+        c = crono_img(txt, col)
+        f = pegar(f, c, W / 2, H * 0.215, 0.9 if W < H else 0.7, min(1.0, lt / 0.25))
     return f
 
 
