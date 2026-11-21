@@ -42,3 +42,14 @@ pequeñas, de 50 a 5.000 seguidores, así que **lo que hace el vídeo es el form
   las animaciones oficiales de las mascotas de Leonida como reacción.
 - Canciones de artistas: no se pueden meter en el vídeo, pero sí se pueden añadir en TikTok desde su
   biblioteca de sonidos al subirlo.
+
+## Lo que ha funcionado en NUESTRO canal (datos del usuario)
+
+| Fecha | Plataforma | Vídeo | Resultado |
+|---|---|---|---|
+| 21/11/2026 | YouTube Shorts | ATRACO MILLONARIO🏦 a un banco en gta 6 (`d01-bancos`) | 2,6 K vistas |
+| 21/11/2026 | TikTok | RUTA MILLONARIA💸 50.000 dólares en gta 6 (`d14-ruta-50k`) | 2 K vistas, 116 me gusta (5,8 %), 95 guardados (4,7 %) |
+
+Qué tienen en común: los dos llevan **MILLONARIO/A** en el título, una **cifra de dinero concreta** (205.000 $, 50.000 $)
+y son **guías que se pueden seguir** (pasos, paradas). Los guardados tan altos indican que la gente lo guarda para
+hacerlo luego en el juego: más guías de dinero con pasos claros y cifra en el título.
