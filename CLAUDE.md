@@ -122,6 +122,8 @@ GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hac
 1. **Shorts de YouTube: cierre «SUSCRÍBETE 🔔 · ME GUSTA 👍 · COMENTA 💬»** en los últimos 2,6 s (antes del fotograma de
    portada). Lo pone el motor solo en la versión de YouTube (`-sin-musica`) con `canal/cta_youtube.py`; la de TikTok
    sigue en bucle limpio (regla 3).
+   **Cada Short se entrega en DOS archivos:** `<slug>-TIKTOK.mp4` (con música, sin botones) y `<slug>-YOUTUBE.mp4`
+   (sin música para poner el sonido en tendencia, con suscríbete/like/comenta al final).
 2. **Que se sepa dónde ir EXACTAMENTE en el mapa** (según el usuario, multiplica las visitas): en cada vídeo de un sitio
    (coche, dinero, secreto), mapa oficial con zoom hasta el punto, chincheta con el nombre, desde qué sitio conocido se
    llega (casa de Jason, una carretera, un barrio) y cuánto se tarda. Si existe, captura del sitio en el juego.

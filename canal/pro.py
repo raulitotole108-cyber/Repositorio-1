@@ -853,6 +853,11 @@ def construir(v, out_dir):
     if not HORIZ and v.get("titulo"):   # Shorts de YouTube: cierre «suscríbete · me gusta · comenta» (petición del usuario)
         import cta_youtube
         cta_youtube.aplicar(str(out_dir / f"{v['slug']}-sin-musica.mp4"))
+        # entrega con nombres claros: uno para TikTok y otro para YouTube (petición del usuario, 21/11)
+        for src_, dst_ in ((f"{v['slug']}.mp4", f"{v['slug']}-TIKTOK.mp4"), (f"{v['slug']}-sin-musica.mp4", f"{v['slug']}-YOUTUBE.mp4")):
+            if (out_dir / dst_).exists():
+                (out_dir / dst_).unlink()
+            os.link(out_dir / src_, out_dir / dst_)
     desc = v["descripcion"]
     if HORIZ:   # capítulos para la descripción de YouTube
         def bonito(t):   # «PORT GELLHORN» -> «Port Gellhorn», «EL TAMAÑO» -> «El tamaño»
