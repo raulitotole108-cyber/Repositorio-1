@@ -384,5 +384,16 @@
 "img:u_toros_coche!",
 "img:u_toros_tiro!",
 "img:u_toros_valla!"
+],
+"d25-glitch": [
+"u_gl_a",
+"u_gl_b+1.0",
+"u_gl_b+7.0",
+"u_gl_c+0.2",
+"u_gl_c+1.2",
+"u_gl_c+4.0",
+"u_gl_c+6.0",
+"u_gl_d+2.0",
+"u_gl_d+8.6"
 ]
 }

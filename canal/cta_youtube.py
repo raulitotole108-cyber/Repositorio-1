@@ -101,7 +101,7 @@ def voz_final(ruta, tipo="tiktok"):
     v2.write_wav(wav, np.concatenate([np.zeros(int(0.08 * pro.SR), np.float32), y]))
     T = len(y) / pro.SR + 0.35
     png = os.path.join(tmpd, "ultimo.png")
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{c - 0.1:.3f}", "-i", ruta, "-frames:v", "1", png],
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{c - 0.45:.3f}", "-i", ruta, "-frames:v", "1", png],
                    check=True)
     out = os.path.join(tmpd, "out.mp4")
     fc = (f"[0:v]trim=0:{c:.3f},setpts=PTS-STARTPTS,fps=30,format=yuv420p[v1];"

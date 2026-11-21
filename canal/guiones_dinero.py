@@ -477,8 +477,28 @@ V("d24-toros", "LA PERLE",
   ], titulo="LAMBORGHINI DORADO🏎️ gratis en gta 6, te digo dónde",
   mapas=dict(lp=dict(lugar="La Perle", desde_lugar="Vice City", zoom=(1.6, 4.4),
                      pins=[("Crosstown", "Crosstown", "Crosstown"), ("Stockyard", "Stockyard", "Stockyard"), ("La Perle", "Perle", "El Toros")]))),
+V("d25-glitch", "ANTES DEL PARCHE",
+  "El glitch de dinero infinito de GTA 6 💰 Saquea el almacén de los peluches al este de Hamlet, guarda y carga partida y las bolsas vuelven a aparecer. Hazlo antes de que Rockstar lo arregle\n\n"
+  "gta 6, dinero infinito gta 6, glitch gta 6, glitch dinero gta 6, truco dinero gta 6, dinero rapido gta 6, almacen hamlet gta 6\n\n"
+  "#shorts #videoshorts #gta6 #glitchgta6 #dinerogta6",
+  [
+   B("¡Para! Este glitch de GTA seis te da dinero *infinito*... y Rockstar todavía no lo ha arreglado.", ["u_gl_a"],
+     stat="DINERO INFINITO", golpe=True),
+   B("Ve al almacén de los peluches, al este de Hamlet, en el condado de Vice-Dale Sur.", ["map:alm"]),
+   B("Entra, llévate todas las bolsas y guárdalas en tu camioneta.", ["u_gl_b+7.0", "u_gl_c+0.2"], cortes=["guárdalas"]),
+   B("Ahora el truco: guarda la partida y vuelve a cargarla.", ["u_gl_c+1.2"],
+     gfx=[dict(t="pasos", items=["Guarda la partida", "Vuelve a cargarla"], en=["guarda", "cargarla"])]),
+   B("¿Y sabes qué pasa? Las bolsas vuelven a aparecer... y las de la camioneta siguen ahí.", ["u_gl_c+6.0", "u_gl_c+4.0"],
+     cortes=["siguen"], riser=True),
+   B("Véndelas en el garaje y repite. Cada vuelta da algo menos, pero no para.", ["u_gl_d+2.0", "u_gl_d+8.6"], cortes=["repite"]),
+   B("Ojo: hazlo desde el capítulo dos, o lo pierdes todo. Y hazlo ya, antes del parche.", ["bg:"],
+     gfx=[dict(t="icono", emoji="⚠️", titulo="DESDE EL CAPÍTULO 2", sub="y antes del parche", y=0.45, desde="capítulo")]),
+   B("Envíaselo a ese amigo que no tiene ni un dólar en GTA. Y dile...", ["u_gl_b+1.0"]),
+  ], titulo="DINERO INFINITO💰 el glitch de gta 6",
+  mapas=dict(alm=dict(lugar="Almacén Apollo", desde_lugar="Vice City", zoom=(1.6, 4.0),
+                      pins=[("Hamlet", "Hamlet", "Hamlet"), ("Almacén Apollo", "almacén", "El almacén")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

@@ -373,7 +373,7 @@ LUGARES = {
     "Vice City": (0.668, 0.521), "Vice Beach": (0.884, 0.489), "Port Gellhorn": (0.300, 0.356),
     "Ambrosia": (0.556, 0.353), "Belville": (0.656, 0.395), "Lago Leonida": (0.566, 0.300),
     "Millport": (0.660, 0.230), "Mount Kalaga": (0.490, 0.232), "Grassrivers": (0.446, 0.660),
-    "Pelican Valley": (0.521, 0.728), "Hamlet": (0.555, 0.686), "Punta sur": (0.470, 0.893), "Vespucci Island": (0.773, 0.487), "La Perle": (0.684, 0.458), "Crosstown": (0.700, 0.487), "Stockyard": (0.722, 0.444), "Punta norte": (0.535, 0.113), "Manatee Motel": (0.556, 0.722), "Key Lento": (0.576, 0.832), "Cayos de Leonida": (0.430, 0.862),
+    "Pelican Valley": (0.521, 0.728), "Hamlet": (0.555, 0.686), "Almacén Apollo": (0.573, 0.683), "Punta sur": (0.470, 0.893), "Vespucci Island": (0.773, 0.487), "La Perle": (0.684, 0.458), "Crosstown": (0.700, 0.487), "Stockyard": (0.722, 0.444), "Punta norte": (0.535, 0.113), "Manatee Motel": (0.556, 0.722), "Key Lento": (0.576, 0.832), "Cayos de Leonida": (0.430, 0.862),
     "Condado de Kelly": (0.420, 0.395), "Condado de Lummox": (0.500, 0.200), "Condado de Leonard": (0.700, 0.357),
     "Condado de Vice-Dale": (0.722, 0.573), "Condado de Mariana": (0.412, 0.730), "Camino de tierra": (0.362, 0.372),
 }
