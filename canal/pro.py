@@ -433,26 +433,23 @@ _pills = {}
 _portada = {}
 
 
-def portada_img(base, titulo):
-    """Portada del Short: el primer fotograma oscurecido con las DOS palabras clave del título en grande y su emoji."""
+def portada_img(base, titulo, v=None):
+    """Portada del Short (último fotograma, 0,3 s) con el estilo de miniatura del canal (miniatura.py): atardecer,
+    figura recortada o la captura enmarcada, las DOS palabras clave del título en blanco/amarillo y el logo."""
     if titulo in _portada:
         return _portada[titulo]
+    import miniatura as mn
     m = re.match(r"^([A-ZÁÉÍÓÚÑÜ0-9][A-ZÁÉÍÓÚÑÜ0-9 ,.:¡!¿?'-]*?)\s*([^\w\s]+)", titulo)
     palabras = (m.group(1) if m else " ".join(titulo.split()[:2])).strip()
     emo = m.group(2) if m else ""
-    f = cv2.GaussianBlur(base, (0, 0), 3)
-    f = (f.astype(np.float32) * 0.55).astype(np.uint8)
     ws = palabras.split()
     lineas = [" ".join(ws[:len(ws) // 2]), " ".join(ws[len(ws) // 2:])] if len(ws) >= 2 else [palabras]
-    for k, ln in enumerate(lineas):
-        img = stat_img(ln, 250)
-        f = pegar(f, img, W / 2, H * (0.45 + 0.13 * k), min(1.0, (W - 60) / img.shape[1]))
-    if emo:
-        try:
-            e = gx.emoji_img(emo[0], 230)
-            f = gx.pegar(f, gx.a_bgra(e), W / 2, H * 0.30)
-        except Exception:
-            pass
+    v = v or {}
+    cuadro = Image.fromarray(cv2.cvtColor(base, cv2.COLOR_BGR2RGB))
+    figs = v.get("portada_figuras") or [dict(img=cuadro, x=.5, y=.31, h=.5, rot=-5, marco=True)]
+    im = mn.miniatura(None, lineas, fondo=v.get("portada_fondo") or cuadro, figuras=figs,
+                      collage=v.get("portada_collage") or (), vertical=True, emoji=emo[:1] or None)
+    f = cv2.cvtColor(np.asarray(im.resize((W, H), Image.LANCZOS)), cv2.COLOR_RGB2BGR)
     _portada[titulo] = f
     return f
 
@@ -844,7 +841,7 @@ def construir(v, out_dir):
             a = 1 - (fin_contenido - tg) / 0.3
             f = cv2.addWeighted(f, 1 - a, primer, a, 0)
         if PORTADA and tg >= fin_contenido:
-            f = portada_img(limpio if limpio is not None else primer, v["titulo"])
+            f = portada_img(limpio if limpio is not None else primer, v["titulo"], v)
         enc.stdin.write(f.tobytes())
     enc.stdin.close()
     enc.wait()

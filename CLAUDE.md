@@ -98,3 +98,16 @@ lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0
    - Vídeo relacionado: el vídeo largo del mismo tema.
    - Hora: probar entre la 1 y las 3 de la madrugada (hora de España) y comparar con las estadísticas.
    - Ocultar el número de «me gusta» hasta que pase de unos 500-1.000.
+
+## Estilo de miniaturas y portadas (usuario, 21/11/2026) — obligatorio
+
+Todas las miniaturas (vídeos largos) y portadas (Shorts) con el estilo de la miniatura «La Historia Completa de
+GTA VI» que pasó el usuario (`canal/referencias/estilo_miniatura.png`). Se hacen con `canal/miniatura.py`:
+- Dibujo oficial a todo color con atardecer morado, rosa y naranja (palmeras, skyline de Vice City).
+- Personajes oficiales recortados y grandes (a la derecha en 16:9, arriba en vertical), con brillo rosa de neón y sombra.
+  Si el vídeo va de algo concreto (mapa, coche, dinero), sale ese objeto enmarcado e inclinado junto al personaje.
+- Collage tenue y morado de otros personajes arriba a la izquierda.
+- Texto muy gordo (Baloo 2 ExtraBold), líneas alternando blanco y amarillo, borde negro grueso, sombra dura,
+  algo inclinado, raya rosa debajo y logo de GTA VI.
+- La portada del Short (último fotograma de 0,3 s) la genera el motor con este estilo; en el guion se puede elegir
+  `portada_figuras`, `portada_fondo` y `portada_collage`.
