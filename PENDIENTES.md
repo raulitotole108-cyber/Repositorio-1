@@ -17,6 +17,7 @@
 - [ ] Subir el Short **DINERO INFINITO💰 el glitch de gta 6** (`salida_dinero/d25-glitch/`, portada `portada-d25-glitch.jpg`, en TikTok `portada-d25-glitch-tiktok.jpg`). Subirlo YA: Rockstar puede arreglar el glitch con un parche.
 - [ ] Subir el Short **COCHE GRATIS🏎️ y 10.000 $ en un almacén de gta 6** (`salida_dinero/d26-emerus/`, portada `portada-d26-emerus.jpg`, en TikTok `portada-d26-emerus-tiktok.jpg`). Si graba el Emerus morado en su partida, cambiar el plano del coche.
 - [ ] Subir el vídeo largo **DINERO INFINITO💰 todas las formas de ganarlo en gta 6** (`salida_dinerolargo/l07-dinero/l07-dinero-movil.mp4`, miniatura `miniatura.jpg`, descripción `descripcion.txt`). Ponerlo como vídeo relacionado en los Shorts de dinero.
+- [ ] Subir el Short **NADIE SALE🏝️ de key lento en gta 6** (`salida_dinero/d27-keylento/`, portada `portada-d27-keylento.jpg`, en TikTok `portada-d27-keylento-tiktok.jpg`). Es de comentarios: contestar a todos.
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.

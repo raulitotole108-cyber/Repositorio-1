@@ -178,3 +178,6 @@ Junta lo verificado en «Dinero y coches», «Ruta millonaria 2», «Mansión de
 ## Emerus morado de Chatfield Storage (`d26-emerus`, 21/11/2026)
 - Chatfield Storage & Logistics, al este de Vice City, al norte del Pay 'n' Spray de Waxman Island: caja fuerte 5800 (código en un correo del portátil), Progen Emerus «Purple Drank» y pistola Quarter Mile ES9: https://gamerant.com/gta-6-chatfield-storage-logistics-safe-code-key-valuable/
 - Entrada por los baños portátiles, tipos armados, caseta y ~10.000 $ en la caja: vídeo de TikTok que pasó el usuario (@manoliinyt), usado solo como información (no se usan sus imágenes).
+
+## Key Lento (`d27-keylento`, 22/11/2026)
+Idea de un TikTok que pasó el usuario (@bloobygta, solo como idea). Datos: casa de Jason, Fleeca, tienda de Kenton y la tienda de animales del loro están en Key Lento (ver «Banco BuckMe», «Ruta millonaria 2» y «Dinero y coches»); el Ruiner con compresor, a un minuto de casa (ver «Ruiner con compresor»). «+20 horas sin salir» es lo que cuentan jugadores en redes (se dice como «hay gente que lleva»).

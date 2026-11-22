@@ -522,8 +522,31 @@ V("d26-emerus", "WAXMAN ISLAND",
   ], titulo="COCHE GRATIS🏎️ y 10.000 $ en un almacén de gta 6",
   mapas=dict(cf=dict(lugar="Chatfield Storage", desde_lugar="Vice City", zoom=(1.6, 4.4),
                      pins=[("Vespucci Island", "Vice", "Vice City"), ("Chatfield Storage", "Chatfield", "Chatfield Storage")]))),
+V("d27-keylento", "¿QUÉ % LLEVAS?",
+  "¿Todavía no has salido de Key Lento en GTA 6? No eres el único 🏝️ La casa de Jason, el banco, la tienda de buceo, el loro y un coche con compresor a un minuto. ¿Qué porcentaje de la historia llevas?\n\n"
+  "gta 6, key lento gta 6, cayos gta 6, casa de jason gta 6, mapa gta 6, historia gta 6, porcentaje gta 6, leonida\n\n"
+  "#shorts #videoshorts #gta6 #keylento #leonida",
+  [
+   B("¡Espera! Si todavía no has salido de *Key Lento* en GTA seis... no eres el único.", ["map:kl"], stat="KEY LENTO", golpe=True),
+   B("Es esta puntita del mapa, en los Cayos. Y hay gente que lleva veinte horas sin salir de aquí.", ["img:Leonida_Keys_01"],
+     gfx=[dict(t="icono", emoji="⏳", titulo="+20 HORAS", sub="sin salir de aquí", y=0.78, desde="veinte")]),
+   B("¿Y por qué nadie se va? Porque lo tiene todo.", ["img:Leonida_Keys_03"]),
+   B("La casa de Jason. El banco para guardar el dinero. La tienda de buceo de Kenton. El loro de la tienda de animales.", ["bg:"],
+     gfx=[dict(t="pasos", items=["La casa de Jason", "El banco Fleeca", "La tienda de buceo", "El loro de la tienda"],
+               en=["casa", "banco", "buceo", "loro"])]),
+   B("Y a un minuto de casa, un coche con compresor que te puedes quedar gratis.", ["ol_170"],
+     gfx=[dict(t="icono", emoji="🚗", titulo="A UN MINUTO DE CASA", sub="un coche con compresor", y=0.78, desde="minuto")]),
+   B("Mientras, otros ya van a saco con la historia.", ["img:Jason_Duval_01"]),
+   B("Así que dime: ¿qué porcentaje llevas? Uno: sigo en Key Lento. Dos: menos de un cuarto. Tres: hasta la mitad. Cuatro: más de la mitad.",
+     ["bg:"], riser=True,
+     gfx=[dict(t="pasos", items=["Sigo en Key Lento", "Menos del 25 %", "Entre el 25 y el 50 %", "Más del 50 %"],
+               en=["Uno", "Dos", "Tres", "Cuatro"])]),
+   B("Comenta tu número. Y envíaselo a ese amigo que todavía no ha salido de casa. Porque...", ["img:Leonida_Keys_04"]),
+  ], titulo="NADIE SALE🏝️ de key lento en gta 6",
+  mapas=dict(kl=dict(lugar="Key Lento", desde_lugar="Vice City", zoom=(1.0, 3.6),
+                     pins=[("Vice City", 0.3, "¿Vice City?"), ("Key Lento", "Lento", "Key Lento")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")
