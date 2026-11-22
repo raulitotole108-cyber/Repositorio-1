@@ -545,27 +545,26 @@ V("d27-keylento", "¿QUÉ % LLEVAS?",
   ], titulo="NADIE SALE🏝️ de key lento en gta 6",
   mapas=dict(kl=dict(lugar="Key Lento", desde_lugar="Vice City", zoom=(1.0, 3.6),
                      pins=[("Vice City", 0.3, "¿Vice City?"), ("Key Lento", "Lento", "Key Lento")]))),
-V("d28-coches-reales", "¿LO SABÍAS?",
-  "Los Lamborghini y Ferrari que hay en GTA 6, con otro nombre 🏎️ El Urus es el Pegassi Toros, y hay un Huracán dorado junto a un rascacielos de Vice City\n\n"
-  "gta 6, coches gta 6, lamborghini gta 6, ferrari gta 6, coches reales gta 6, urus gta 6, huracan gta 6, pegassi toros gta 6\n\n"
+V("d28-coches-reales", "DESDE EL CAP. 2",
+  "Los Lamborghini y Ferrari de GTA 6 que te puedes quedar a partir del capítulo 2 🏎️ El Urus es el Pegassi Toros, el Huracán es el Pegassi Tempesta, y hay más en los garajes de lujo\n\n"
+  "gta 6, coches gta 6, lamborghini gta 6, ferrari gta 6, coches reales gta 6, urus gta 6, huracan gta 6, pegassi toros gta 6, pegassi tempesta gta 6\n\n"
   "#shorts #videoshorts #gta6 #cochesgta6 #lamborghini",
   [
-   B("¡Mira esto! ¿Sabías que en GTA seis hay un Lamborghini Urus... pero no se llama así?", ["img:u_lb_urus!"],
+   B("¡Mira esto! Estos superdeportivos te los puedes quedar en GTA seis. Pero ninguno se llama como el de verdad.", ["img:u_lb_urus!"],
      stat="LAMBORGHINI", golpe=True),
-   B("En el juego es el Pegassi Toros. Y según las guías, hay uno dorado en las islas Rialto.", ["img:u_lb_urus2!"],
+   B("El Urus es el Pegassi Toros. Y según las guías, hay uno dorado en las islas Rialto.", ["img:u_lb_urus2!"],
      gfx=[dict(t="icono", emoji="🏎️", titulo="PEGASSI TOROS", sub="= Lamborghini Urus", y=0.2, desde="Pegassi")]),
-   B("¿Y el Huracán? También está. El dorado, junto a un rascacielos de Vice City.", ["img:u_lb_huracan!", "img:u_lb_torre!"],
-     cortes=["rascacielos"], gfx=[dict(t="icono", emoji="🐂", titulo="HURACÁN DORADO", sub="junto a un rascacielos", y=0.2, desde="Huracán")]),
-   B("Y en los garajes de lujo hay más. Uno clavado al Aventador...", ["img:u_lb_aventador!"],
-     gfx=[dict(t="icono", emoji="🖤", titulo="COMO EL AVENTADOR", sub="garaje de lujo", y=0.2, desde="Aventador")]),
-   B("... uno que es un Ferrari F8 con otro nombre...", ["img:u_lb_f8!"],
-     gfx=[dict(t="icono", emoji="🐎", titulo="COMO EL FERRARI F8", sub="con otro nombre", y=0.2, desde="Ferrari")]),
-   B("... y hasta el Huracán STO, con sus colores de carreras.", ["img:u_lb_sto!"],
+   B("El Huracán es el Pegassi Tempesta. El dorado, junto a un rascacielos de Vice City.", ["img:u_lb_huracan!", "img:u_lb_torre!"],
+     cortes=["rascacielos"], gfx=[dict(t="icono", emoji="🐂", titulo="PEGASSI TEMPESTA", sub="= Lamborghini Huracán", y=0.2, desde="Tempesta")]),
+   B("Y en los garajes de lujo, uno clavado al Aventador, otro como el Ferrari F8...", ["img:u_lb_aventador!", "img:u_lb_f8!"],
+     cortes=["otro"], gfx=[dict(t="icono", emoji="🖤", titulo="COMO EL AVENTADOR", sub="garaje de lujo", y=0.2, desde="Aventador", hasta="otro"),
+                          dict(t="icono", emoji="🐎", titulo="COMO EL FERRARI F8", sub="garaje de lujo", y=0.2, desde="Ferrari")]),
+   B("... y el Huracán STO, con sus colores de carreras.", ["img:u_lb_sto!", "img:u_lb_sto2!"], cortes=["colores"],
      gfx=[dict(t="icono", emoji="🏁", titulo="COMO EL HURACÁN STO", sub="colores de carreras", y=0.2, desde="STO")]),
-   B("¿Y por qué no se llaman igual? Porque Rockstar nunca usa las marcas reales: cambia el nombre y el logo.", ["img:u_lb_evo2!"], riser=True,
-     gfx=[dict(t="icono", emoji="🚫", titulo="SIN MARCAS REALES", sub="otro nombre, otro logo", y=0.2, desde="Rockstar")]),
+   B("¿Y cuándo son tuyos? A partir del capítulo dos: los registras y se quedan en tu garaje.", ["img:u_lb_evo2!"], riser=True,
+     gfx=[dict(t="icono", emoji="🔑", titulo="DESDE EL CAPÍTULO 2", sub="regístralos y son tuyos", y=0.2, desde="capítulo")]),
    B("Envíaselo a ese amigo que se sabe todos los coches. Y pregúntale...", ["img:u_lb_evo!"]),
-  ], titulo="COCHES COPIADOS🏎️ de lamborghini en gta 6"),
+  ], titulo="LOS COCHES🏎️ que puedes tener en gta VI"),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
