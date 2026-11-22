@@ -565,8 +565,31 @@ V("d28-coches-reales", "DESDE EL CAP. 2",
      gfx=[dict(t="icono", emoji="🔑", titulo="DESDE EL CAPÍTULO 2", sub="regístralos y son tuyos", y=0.2, desde="capítulo")]),
    B("Envíaselo a ese amigo que se sabe todos los coches. Y pregúntale...", ["img:u_lb_evo!"]),
   ], titulo="LOS COCHES🏎️ que puedes tener en gta VI"),
+V("d29-coches-raros", "SITIO EXACTO",
+  "5 superdeportivos de GTA 6 que te puedes llevar y el sitio exacto de cada uno 🏎️ El Emerus rojo de Vespucci Island, el clon del Eclipse verde, el de leopardo y el naranja de Starfish Island y el Toros dorado de Casanova Island\n\n"
+  "gta 6, coches gta 6, coches raros gta 6, coche gratis gta 6, superdeportivos gta 6, vespucci island gta 6, starfish island gta 6, casanova island gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #cochesrarosgta6",
+  [
+   B("¡Ojo! Cinco superdeportivos de GTA seis que te puedes llevar *gratis*... y te digo dónde está cada uno.",
+     ["img:u_rc_emerus!"], stat="5 COCHES", golpe=True),
+   B("Uno: el Emerus rojo y negro, en la puerta de una mansión de Vespucci Island.", ["map:ves"]),
+   B("Dos: en la misma isla, dentro de un garaje, un clon del Eclipse verde de A todo gas.", ["img:u_rc_penumbra!"],
+     gfx=[dict(t="icono", emoji="🟢", titulo="MAIBATSU PENUMBRA", sub="Vespucci Island · en un garaje", y=0.2, desde="garaje")]),
+   B("Tres y cuatro, en Starfish Island: en la entrada de una mansión, uno con estampado de leopardo... y en su garaje, uno naranja.",
+     ["map:star", "img:u_rc_naranja!"], cortes=["garaje"],
+     gfx=[dict(t="icono", emoji="🐆", titulo="ESTAMPADO DE LEOPARDO", sub="entrada de la mansión", y=0.78, desde="leopardo", hasta="garaje")]),
+   B("Y cinco: un Toros dorado en el garaje de una mansión de Casanova Island. Matrícula: CASH TALKS.",
+     ["map:casa", "img:u_toros_coche!"], cortes=["Matrícula"], riser=True,
+     gfx=[dict(t="icono", emoji="💰", titulo="CASH TALKS", sub="la matrícula", y=0.2, desde="Matrícula")]),
+   B("Ojo: si no está, vuelve más tarde. El coche puede cambiar entre visitas.", ["bg:"],
+     gfx=[dict(t="icono", emoji="🔄", titulo="SI NO ESTÁ", sub="vuelve más tarde", y=0.45, desde="está")]),
+   B("Envíaselo a ese amigo que sigue con el coche del principio. Y dile...", ["ol_078"]),
+  ], titulo="5 COCHES🏎️ gratis y dónde están en gta 6",
+  mapas=dict(ves=dict(lugar="Vespucci Island", desde_lugar="Vice City", zoom=(1.6, 4.6), pins=[("Vespucci Island", "mansión", "El Emerus")]),
+             star=dict(lugar="Starfish Island", desde_lugar="Vespucci Island", zoom=(3.4, 4.8), pins=[("Starfish Island", "Starfish", "La mansión")]),
+             casa=dict(lugar="Casanova Island", desde_lugar="Starfish Island", zoom=(3.4, 4.8), pins=[("Casanova Island", "Casanova", "El Toros dorado")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

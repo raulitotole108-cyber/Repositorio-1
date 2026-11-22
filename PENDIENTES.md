@@ -19,6 +19,7 @@
 - [ ] Subir el vídeo largo **DINERO INFINITO💰 todas las formas de ganarlo en gta 6** (`salida_dinerolargo/l07-dinero/l07-dinero-movil.mp4`, miniatura `miniatura.jpg`, descripción `descripcion.txt`). Ponerlo como vídeo relacionado en los Shorts de dinero.
 - [ ] Subir el Short **NADIE SALE🏝️ de key lento en gta 6** (`salida_dinero/d27-keylento/`, portada `portada-d27-keylento.jpg`, en TikTok `portada-d27-keylento-tiktok.jpg`). Es de comentarios: contestar a todos.
 - [ ] Subir el Short **LOS COCHES🏎️ que puedes tener en gta VI** (`salida_dinero/d28-coches-reales/`, portada `portada-d28-coches-reales.jpg`, en TikTok `portada-d28-coches-reales-tiktok.jpg`).
+- [ ] Subir el Short **5 COCHES🏎️ gratis y dónde están en gta 6** (`salida_dinero/d29-coches-raros/`, portada `portada-d29-coches-raros.jpg`, en TikTok `portada-d29-coches-raros-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.
