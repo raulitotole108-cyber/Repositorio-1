@@ -181,3 +181,7 @@ Junta lo verificado en «Dinero y coches», «Ruta millonaria 2», «Mansión de
 
 ## Key Lento (`d27-keylento`, 22/11/2026)
 Idea de un TikTok que pasó el usuario (@bloobygta, solo como idea). Datos: casa de Jason, Fleeca, tienda de Kenton y la tienda de animales del loro están en Key Lento (ver «Banco BuckMe», «Ruta millonaria 2» y «Dinero y coches»); el Ruiner con compresor, a un minuto de casa (ver «Ruiner con compresor»). «+20 horas sin salir» es lo que cuentan jugadores en redes (se dice como «hay gente que lleva»).
+
+## Coches reales (`d28-coches-reales`, 22/11/2026)
+- Imágenes: capturas que pasó el usuario (de otro vídeo, sin sus logotipos de marca). Pegassi Toros = Lamborghini Urus (ver «Toros dorado»); Toros dorado en las islas Rialto y Huracán dorado junto al rascacielos Crimson Palms: solo una guía (Sportskeeda), por eso «según las guías» / sin nombrar el edificio. https://www.sportskeeda.com/gta/how-get-golden-lamborghini-urus-huracan-gta-6
+- Rockstar no usa marcas reales (nombres y logos inventados): conocido de toda la saga.

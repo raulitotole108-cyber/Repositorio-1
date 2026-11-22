@@ -545,8 +545,29 @@ V("d27-keylento", "¿QUÉ % LLEVAS?",
   ], titulo="NADIE SALE🏝️ de key lento en gta 6",
   mapas=dict(kl=dict(lugar="Key Lento", desde_lugar="Vice City", zoom=(1.0, 3.6),
                      pins=[("Vice City", 0.3, "¿Vice City?"), ("Key Lento", "Lento", "Key Lento")]))),
+V("d28-coches-reales", "¿LO SABÍAS?",
+  "Los Lamborghini y Ferrari que hay en GTA 6, con otro nombre 🏎️ El Urus es el Pegassi Toros, y hay un Huracán dorado junto a un rascacielos de Vice City\n\n"
+  "gta 6, coches gta 6, lamborghini gta 6, ferrari gta 6, coches reales gta 6, urus gta 6, huracan gta 6, pegassi toros gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #lamborghini",
+  [
+   B("¡Mira esto! ¿Sabías que en GTA seis hay un Lamborghini Urus... pero no se llama así?", ["img:u_lb_urus!"],
+     stat="LAMBORGHINI", golpe=True),
+   B("En el juego es el Pegassi Toros. Y según las guías, hay uno dorado en las islas Rialto.", ["img:u_lb_urus2!"],
+     gfx=[dict(t="icono", emoji="🏎️", titulo="PEGASSI TOROS", sub="= Lamborghini Urus", y=0.2, desde="Pegassi")]),
+   B("¿Y el Huracán? También está. El dorado, junto a un rascacielos de Vice City.", ["img:u_lb_huracan!", "img:u_lb_torre!"],
+     cortes=["rascacielos"], gfx=[dict(t="icono", emoji="🐂", titulo="HURACÁN DORADO", sub="junto a un rascacielos", y=0.2, desde="Huracán")]),
+   B("Y en los garajes de lujo hay más. Uno clavado al Aventador...", ["img:u_lb_aventador!"],
+     gfx=[dict(t="icono", emoji="🖤", titulo="COMO EL AVENTADOR", sub="garaje de lujo", y=0.2, desde="Aventador")]),
+   B("... uno que es un Ferrari F8 con otro nombre...", ["img:u_lb_f8!"],
+     gfx=[dict(t="icono", emoji="🐎", titulo="COMO EL FERRARI F8", sub="con otro nombre", y=0.2, desde="Ferrari")]),
+   B("... y hasta el Huracán STO, con sus colores de carreras.", ["img:u_lb_sto!"],
+     gfx=[dict(t="icono", emoji="🏁", titulo="COMO EL HURACÁN STO", sub="colores de carreras", y=0.2, desde="STO")]),
+   B("¿Y por qué no se llaman igual? Porque Rockstar nunca usa las marcas reales: cambia el nombre y el logo.", ["img:u_lb_evo2!"], riser=True,
+     gfx=[dict(t="icono", emoji="🚫", titulo="SIN MARCAS REALES", sub="otro nombre, otro logo", y=0.2, desde="Rockstar")]),
+   B("Envíaselo a ese amigo que se sabe todos los coches. Y pregúntale...", ["img:u_lb_evo!"]),
+  ], titulo="COCHES COPIADOS🏎️ de lamborghini en gta 6"),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

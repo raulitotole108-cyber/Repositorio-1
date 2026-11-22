@@ -205,8 +205,8 @@ def cargar_plano(nombre, t0, dur):
                 IMG / "frames_oficial" / f"{nm}.jpg", IMG / "oficial_extra" / f"{nm}.jpg", IMG / f"{nm}.png", IMG / "extra" / f"{nm}.png"]
         img = next(c for c in cand if c.exists())
         iw, ih = cv2.imread(str(img)).shape[1::-1]
-        if entera and not HORIZ and iw / ih > 1.0:
-            fh = int(cw * ih / iw * 1.25)   # algo más grande que el ancho, para que llene más
+        if entera and not HORIZ:
+            fh = min(hh, int(cw * ih / iw * (1.25 if iw / ih > 1.0 else 1.0)))   # entera a lo ancho (apaisada, algo más grande)
             vf = (f"split[a][b];[a]scale={cw}:{hh}:force_original_aspect_ratio=increase,crop={cw}:{hh},boxblur=30:2,"
                   f"eq=brightness=-0.15:saturation=1.4[bg];[b]scale=-2:{fh}:flags=lanczos,crop=min(iw\\,{cw}):{fh}[fg];"
                   f"[bg][fg]overlay=(W-w)/2:(H-h)/2,scale={cw}:{hh},format=bgr24")
