@@ -663,8 +663,25 @@ V("d31-banco", "PAGA A YASMANI",
   ], titulo="BANCO MILLONARIO🏦 205.000 dólares en gta 6",
   mapas=dict(bancos=dict(centro=(0.77, 0.53), zoom=(2.4, 4.0), pins=[("Downtown", "centro", "Lombank · centro"), ("Ocean Beach", "Ocean", "Banco de Ocean Beach")]),
              cuba=dict(lugar="Little Cuba", desde_lugar="Ocean Beach", zoom=(2.6, 4.6), pins=[("Little Cuba", "Cuba", "Yasmani")]))),
+V("d32-pistola", "BARCO ENCALLADO",
+  "Dónde está la pistola dorada con silenciador en GTA 6 🔫 Escondida bajo una trampilla tapada con hojas de palmera, en un barco viejo encallado en los Permit Keys, al sur de Key Lento\n\n"
+  "gta 6, pistola dorada gta 6, silenciador gta 6, armas secretas gta 6, armas gta 6, permit keys gta 6, key lento gta 6, barco gta 6\n\n"
+  "#shorts #videoshorts #gta6 #armasgta6 #secretosgta6",
+  [
+   B("¡Espera! Esta pistola *dorada* con silenciador está escondida en un barco de GTA seis.", ["u_pd_a+0.0"], golpe=True),
+   B("Según las guías, está en los Permit Keys, las islitas al sur de Key Lento.", ["map:permit"]),
+   B("En el mapa del juego es la punta sur de esta isla.", ["u_pd_b+0.2"]),
+   B("Llega en lancha y busca un barco viejo encallado en la arena.", ["u_pd_b+2.4"]),
+   B("Súbete a la cubierta. Pero hay un detalle: la trampilla está tapada con hojas de palmera.", ["u_pd_b+5.0", "u_pd_b+7.2"], cortes=["detalle"]),
+   B("Apártalas, ábrela... y ahí está.", ["u_pd_b+9.0"], riser=True),
+   B("¿Y sabes qué es lo mejor? Con el silenciador disparas y nadie te oye.", ["u_pd_a+2.4"],
+     gfx=[dict(t="icono", emoji="🤫", titulo="CON SILENCIADOR", sub="nadie te oye", y=0.2, desde="silenciador")]),
+   B("Envíaselo a ese amigo que siempre va con la pistola de serie. Y dile...", ["u_pd_a+5.5"]),
+  ], titulo="PISTOLA DORADA🔫 dónde está en gta 6",
+  mapas=dict(permit=dict(lugar="Permit Keys", desde_lugar="Key Lento", zoom=(2.0, 4.6),
+                         pins=[("Key Lento", "Lento", "Key Lento"), ("Permit Keys", "Permit", "Barco encallado (aprox.)")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

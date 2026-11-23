@@ -211,3 +211,8 @@ Junta «Dinero y coches», «Toros dorado», «Emerus morado», «Mansión de Ve
 
 ## Banco de 205.000 $ (`d31-banco`, 23/11/2026)
 Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fotograma a fotograma): solo dos bancos con cámara acorazada (Lombank del centro y Ocean Beach) — choca con guías que hablan de 8 cámaras, por eso se dice «según este jugador»; seguir al furgón blindado y entrar cuando se abre; hacen falta Jason y Lucía para cargar; se desbloquea al final del capítulo 4 (ver «Dinero y coches»); pagar 10.000 $ a Yasmani (Little Cuba) para saber dónde para el siguiente furgón; 4 estrellas al salir; al final del capítulo 1 (misión «Recalibration») te quitan el efectivo: guardarlo en los ahorros familiares (ver «Banco BuckMe»). Fotos: 4 fotogramas de esas grabaciones sin subtítulos.
+
+## d32 · PISTOLA DORADA (23/11/2026)
+- Clips de gameplay: grabación de pantalla que pasó el usuario (Kitos, TikTok, «Cómo conseguir la Pistola Dorada con Silenciador en GTA 6»); crédito en la descripción.
+- Ubicación: guías (games.gg, gtabase «Assassin Nipper .38») sitúan un arma en un barco abandonado en la punta sur de la isla sureste de los Permit Keys, al sur de Key Lento. Coincide con el mapa del juego del clip. Chincheta del póster: aproximada.
+- Que sea «dorada»: se ve en el clip y lo dice el creador; las guías no lo confirman.
