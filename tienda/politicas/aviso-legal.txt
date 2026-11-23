@@ -4,13 +4,10 @@ AVISO LEGAL
 
 En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), te informamos de los datos del titular de este sitio web:
 
-- Titular: [NOMBRE Y APELLIDOS O RAZÓN SOCIAL]
-- NIF / CIF: [NIF O CIF]
-- Domicilio: [DIRECCIÓN COMPLETA, CÓDIGO POSTAL, CIUDAD Y PROVINCIA]
-- Correo electrónico: atencionalcliente@inesolmedo.com
-- Sitio web: www.inesolmedo.com
-- Nombre comercial: Ines Olmedo
-- [Solo si es una sociedad: Inscrita en el Registro Mercantil de [CIUDAD], Tomo [X], Folio [X], Hoja [X]]
+Titular: Ines Olmedo
+Domicilio: España
+Correo electrónico: atencionalcliente@inesolmedo.com
+Sitio web: www.inesolmedo.com
 
 2. OBJETO
 
