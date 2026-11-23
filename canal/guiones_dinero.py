@@ -696,7 +696,7 @@ V("d33-flamencos", "MÍRALE EL PICO",
    B("¿Y sabes qué es lo mejor? Con cincuenta desbloqueas el truco del flamenco hinchable. Y con cien, el cien por cien.", ["bg:"],
      gfx=[dict(t="pasos", items=["50: truco del flamenco hinchable", "100: cuentan para el 100 %"], en=["cincuenta", "cien"])]),
    B("Envíaselo a ese amigo que dispara a todo lo que ve. Y dile...", ["ol_128"]),
-  ], titulo="FLAMENCOS SECRETOS🦩 esconden droga en gta 6",
+  ], titulo="FLAMENCOS SECRETOS🦩 mírales el pico en gta 6",
   mapas=dict(perle=dict(lugar="La Perle", desde_lugar="Vice City", zoom=(1.8, 4.6), pins=[("La Perle", "Perle", "Edificio en C · el 1.º")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
