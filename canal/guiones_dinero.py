@@ -641,8 +641,31 @@ V("d30-clonador", "DESDE EL MÓVIL",
      ["ol_160"], gfx=[dict(t="icono", emoji="🔍", titulo="APP WAiNK", sub="escanea antes de robar", y=0.2, desde="WAiNK", hasta="Envíaselo")]),
   ], titulo="CLONADOR DE LLAVES🔑 cómo conseguirlo en gta 6",
   mapas=dict(ob=dict(lugar="Ocean Beach", desde_lugar="Vice City", zoom=(1.6, 4.0), pins=[("Ocean Beach", "Ocean", "Ocean Beach")]))),
+V("d31-banco", "PAGA A YASMANI",
+  "El truco para sacar 205.000 $ de un banco en GTA 6 🏦 Solo dos bancos tienen cámara acorazada: el Lombank del centro y el de Ocean Beach. Sigue al furgón, entra con él y paga a Yasmani para saber cuándo llega el siguiente\n\n"
+  "gta 6, banco gta 6, atraco banco gta 6, camara acorazada gta 6, 205000 gta 6, dinero gta 6, yasmani gta 6, lombank gta 6\n\n"
+  "#shorts #videoshorts #gta6 #dinerogta6 #atracosgta6",
+  [
+   B("¡Ojo! Así se sacan *doscientos cinco mil* dólares de un banco de GTA seis en cinco minutos.", ["img:u_bk_205!"],
+     stat="205.000 $", golpe=True),
+   B("Según este jugador, de todos los bancos solo dos tienen cámara acorazada: el Lombank del centro y el de Ocean Beach.", ["map:bancos"]),
+   B("¿Y cómo entras? No puedes entrar sin más. Tienes que seguir al furgón blindado.", ["ol_143"],
+     gfx=[dict(t="icono", emoji="🚚", titulo="EL FURGÓN BLINDADO", sub="síguelo hasta el banco", y=0.78, desde="furgón")]),
+   B("Cuando para, el guardia mete el dinero y la cámara se abre un momento. Ese es tu momento.", ["img:u_bk_guardia!", "img:u_bk_camara!"], cortes=["cámara"]),
+   B("Pero hay tanto que no puedes llevarlo solo: necesitas a Jason y a Lucía juntos.", ["ol_044"],
+     gfx=[dict(t="icono", emoji="👫", titulo="JASON Y LUCÍA", sub="hacen falta los dos", y=0.2, desde="Jason")]),
+   B("Y aquí está el truco: paga diez mil a Yasmani, en Little Cuba, y te dice dónde para el siguiente furgón.", ["map:cuba"], riser=True,
+     gfx=[dict(t="contador", hasta=10000, prefijo="-", sufijo=" $", sub="a Yasmani", desde="diez")]),
+   B("Al salir tendrás cuatro estrellas. Huye en moto, piérdelos... y a casa.", ["img:u_bk_calle!", "ol_164"], cortes=["moto"]),
+   B("Se desbloquea al final del capítulo cuatro. Y cuidado: al acabar el uno te quitan el efectivo. Guárdalo en los ahorros familiares.", ["bg:"],
+     gfx=[dict(t="pasos", items=["Bancos: final del capítulo 4", "Capítulo 1: te quitan el efectivo", "Guárdalo en los ahorros familiares"],
+               en=["cuatro", "uno", "ahorros"])]),
+   B("Envíaselo a ese amigo que roba licorerías por cien dólares. Y dile...", ["ol_112"]),
+  ], titulo="BANCO MILLONARIO🏦 205.000 dólares en gta 6",
+  mapas=dict(bancos=dict(centro=(0.77, 0.53), zoom=(2.4, 4.0), pins=[("Downtown", "centro", "Lombank · centro"), ("Ocean Beach", "Ocean", "Banco de Ocean Beach")]),
+             cuba=dict(lugar="Little Cuba", desde_lugar="Ocean Beach", zoom=(2.6, 4.6), pins=[("Little Cuba", "Cuba", "Yasmani")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

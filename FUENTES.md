@@ -208,3 +208,6 @@ Junta «Dinero y coches», «Toros dorado», «Emerus morado», «Mansión de Ve
 
 ## Clonador de llaves (`d30-clonador`, 23/11/2026)
 - Capturas del usuario del menú del móvil («clonador_llaves_v1.6.9: clonador de llaves de corto alcance que lee y replica llaves de vehículos cercanos en segundos»). Capítulo 3, misión de Randy (Zorrusso en Ocean Beach), se instala en el móvil; WAiNK dice si hace falta: ver «Vídeo largo de coches». Grabaciones de un TikTok de Bynach13 que pasó el usuario: solo como información.
+
+## Banco de 205.000 $ (`d31-banco`, 23/11/2026)
+Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fotograma a fotograma): solo dos bancos con cámara acorazada (Lombank del centro y Ocean Beach) — choca con guías que hablan de 8 cámaras, por eso se dice «según este jugador»; seguir al furgón blindado y entrar cuando se abre; hacen falta Jason y Lucía para cargar; se desbloquea al final del capítulo 4 (ver «Dinero y coches»); pagar 10.000 $ a Yasmani (Little Cuba) para saber dónde para el siguiente furgón; 4 estrellas al salir; al final del capítulo 1 (misión «Recalibration») te quitan el efectivo: guardarlo en los ahorros familiares (ver «Banco BuckMe»). Fotos: 4 fotogramas de esas grabaciones sin subtítulos.
