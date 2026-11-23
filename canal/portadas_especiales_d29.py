@@ -19,7 +19,7 @@ for px, py in ((.773, .487), (.796, .474), (.786, .510)):
     x, y = (px * Image.open(mn._ruta("oficial_extra/Leonida_Map_Poster.jpg")).width - (cx - r)), 0
 d = None
 mn._figura(b, dict(img=m, x=.3, y=.67, h=.22, rot=6, marco=True), W, H)
-mn._figura(b, dict(img="u_lb_huracan.jpg", x=.74, y=.66, h=.2, rot=-4, marco=True), W, H)
+mn._figura(b, dict(img="u_rc_rolls2.jpg", x=.74, y=.66, h=.2, rot=-4, marco=True), W, H)
 mn.sello(b, "¡SON TUYOS!", "Y TE DIGO DÓNDE", W * .68, 1460, 420, rot=-5)
-mn.lista(b, ["ROLLS *DORADO*", "URUS _DORADO_", "Y ~14~ MÁS"], 60, 1600, 78)
+mn.lista(b, ["ROLLS, EL *MÁS* *CARO*", "URUS _DORADO_", "Y ~14~ MÁS"], 60, 1600, 78)
 b.convert("RGB").save(sys.argv[1], quality=93)
