@@ -621,8 +621,28 @@ V("d29-coches-raros", "¡SON TUYOS!",
              casa=dict(lugar="Casanova Island", desde_lugar="Starfish Island", zoom=(3.4, 4.8), pins=[("Casanova Island", "Casanova", "El Toros dorado")]),
              cf=dict(lugar="Chatfield Storage", desde_lugar="Vespucci Island", zoom=(3.0, 4.6), pins=[("Chatfield Storage", "Chatfield", "Chatfield Storage")]),
              lp=dict(lugar="La Perle", desde_lugar="Casanova Island", zoom=(2.0, 4.4), pins=[("La Perle", "Perle", "El narcopiso")]))),
+V("d30-clonador", "DESDE EL MÓVIL",
+  "Cómo conseguir el clonador de llaves de GTA 6 🔑 La app del móvil que copia la llave de cualquier coche moderno en segundos. Llega en el capítulo 3, con una misión de Randy en Ocean Beach\n\n"
+  "gta 6, clonador de llaves gta 6, como robar coches gta 6, robar superdeportivos gta 6, randy gta 6, zorrusso gta 6, coches gta 6\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #trucosgta6",
+  [
+   B("¡Para! ¿Sabías que en GTA seis puedes copiar la llave de *cualquier* coche... con el móvil?", ["img:u_clon_app!"],
+     stat="CLONADOR", golpe=True),
+   B("Es el clonador de llaves: lee y copia la llave de los coches cercanos en segundos.", ["img:u_clon_instalar!"],
+     gfx=[dict(t="icono", emoji="🔑", titulo="CLONADOR DE LLAVES", sub="un complemento del móvil", y=0.2, desde="clonador")]),
+   B("¿Y por qué lo necesitas? Porque los coches modernos ya no se abren con ganzúa.", ["ol_124"]),
+   B("¿Cómo lo consigues? En el capítulo tres, Randy te manda robar un superdeportivo en Ocean Beach.", ["map:ob"],
+     gfx=[dict(t="icono", emoji="📋", titulo="MISIÓN DE RANDY", sub="capítulo 3 · Ocean Beach", y=0.78, desde="Randy")]),
+   B("En esa misión se te instala en el móvil. Y desde ahí, solo tienes que acercarte y mantener el botón.", ["ol_075"],
+     gfx=[dict(t="pasos", items=["Acércate al coche", "Mantén el botón", "La llave es tuya"], en=["acercarte", "mantener", "botón"])]),
+   B("Pero ojo: el coche no es tuyo. Si lleva localizador, la policía te encuentra.", ["ol_137"], riser=True,
+     stat="LOCALIZADOR"),
+   B("Antes, escanéalo con la app WAiNK: te dice si hace falta el clonador. Envíaselo a ese amigo que todavía rompe ventanillas. Y pregúntale...",
+     ["ol_160"], gfx=[dict(t="icono", emoji="🔍", titulo="APP WAiNK", sub="escanea antes de robar", y=0.2, desde="WAiNK", hasta="Envíaselo")]),
+  ], titulo="CLONADOR DE LLAVES🔑 cómo conseguirlo en gta 6",
+  mapas=dict(ob=dict(lugar="Ocean Beach", desde_lugar="Vice City", zoom=(1.6, 4.0), pins=[("Ocean Beach", "Ocean", "Ocean Beach")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")
