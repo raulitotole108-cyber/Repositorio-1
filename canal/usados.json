@@ -582,5 +582,12 @@
 "u_pd_b+5.0",
 "u_pd_b+7.2",
 "u_pd_b+9.0"
+],
+"d33-flamencos": [
+"img:u_fl_gancho!",
+"img:u_fl_picos!",
+"ol_128",
+"ol_129",
+"ol_173"
 ]
 }

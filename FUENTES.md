@@ -216,3 +216,8 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 - Clips de gameplay: grabación de pantalla que pasó el usuario (Kitos, TikTok, «Cómo conseguir la Pistola Dorada con Silenciador en GTA 6»); crédito en la descripción.
 - Ubicación: guías (games.gg, gtabase «Assassin Nipper .38») sitúan un arma en un barco abandonado en la punta sur de la isla sureste de los Permit Keys, al sur de Key Lento. Coincide con el mapa del juego del clip. Chincheta del póster: aproximada.
 - Que sea «dorada»: se ve en el clip y lo dice el creador; las guías no lo confirman.
+
+## d33 · FLAMENCOS SECRETOS (23/11/2026)
+- 125 «Cocaine Flamingos»; 100 cuentan para el 100 %; primero en La Perle (centro del edificio en C): PowerPyx, games.gg.
+- Pico blanco y negro = con paquete; amarillo y negro = adorno; 50 desbloquean el truco del flamenco hinchable (tras la historia); el paquete se vende: gmtreks.
+- Las grabaciones que pasó el usuario (humano.planet, TikTok) están marcadas por su creador como «Generado por IA»: NO se usan como imágenes del juego. Gráficos propios + mapa oficial + clips oficiales.

@@ -680,8 +680,26 @@ V("d32-pistola", "BARCO ENCALLADO",
   ], titulo="PISTOLA DORADA🔫 dónde está en gta 6",
   mapas=dict(permit=dict(lugar="Permit Keys", desde_lugar="Key Lento", zoom=(2.0, 4.6),
                          pins=[("Key Lento", "Lento", "Key Lento"), ("Permit Keys", "Permit", "Barco encallado (aprox.)")]))),
+V("d33-flamencos", "MÍRALE EL PICO",
+  "Los flamencos de GTA 6 esconden un paquete de cocaína 🦩 Hay 125 por todo Leonida: si el pico es blanco y negro, dispárale y suelta el paquete. Con 50 desbloqueas el flamenco hinchable\n\n"
+  "gta 6, flamencos gta 6, flamencos de cocaina gta 6, coleccionables gta 6, secretos gta 6, 125 flamencos gta 6, flamenco hinchable gta 6, la perle gta 6\n\n"
+  "#shorts #videoshorts #gta6 #secretosgta6 #coleccionablesgta6",
+  [
+   B("¡Quieto! Ese flamenco de plástico del jardín esconde un paquete de droga en GTA seis.", ["img:u_fl_gancho!"], golpe=True),
+   B("Y no es uno: hay ciento veinticinco escondidos por todo Leonida.", ["ol_173"],
+     gfx=[dict(t="contador", hasta=125, sub="flamencos escondidos", desde="ciento")]),
+   B("Pero hay un detalle: no todos llevan paquete. Mírale el pico.", ["img:u_fl_picos!"]),
+   B("Si es blanco y negro, lleva cocaína. Si es amarillo y negro, es solo un adorno.", ["img:u_fl_picos!"]),
+   B("Dispárale al cuerpo, revienta... y sale el paquete. Luego lo vendes por dinero.", ["ol_129"], riser=True,
+     gfx=[dict(t="icono", emoji="💵", titulo="VÉNDELO", sub="cada paquete es dinero", y=0.2, desde="vendes")]),
+   B("Según las guías, el primero está en La Perle, en el centro del edificio con forma de C.", ["map:perle"]),
+   B("¿Y sabes qué es lo mejor? Con cincuenta desbloqueas el truco del flamenco hinchable. Y con cien, el cien por cien.", ["bg:"],
+     gfx=[dict(t="pasos", items=["50: truco del flamenco hinchable", "100: cuentan para el 100 %"], en=["cincuenta", "cien"])]),
+   B("Envíaselo a ese amigo que dispara a todo lo que ve. Y dile...", ["ol_128"]),
+  ], titulo="FLAMENCOS SECRETOS🦩 esconden droga en gta 6",
+  mapas=dict(perle=dict(lugar="La Perle", desde_lugar="Vice City", zoom=(1.8, 4.6), pins=[("La Perle", "Perle", "Edificio en C · el 1.º")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")
