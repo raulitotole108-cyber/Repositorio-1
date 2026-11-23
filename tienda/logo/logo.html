@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#888}
+  .art{display:flex;align-items:center;justify-content:center;position:relative}
+  .cream{background:#f5efe6}
+  .ink{background:#1c1a17}
+  .clear{background:transparent}
+
+  /* wordmark */
+  .wm{display:flex;flex-direction:column;align-items:center}
+  .name{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:150px;letter-spacing:22px;line-height:1;padding-left:22px}
+  .rule{display:flex;align-items:center;gap:26px;margin-top:26px}
+  .rule span{display:block;width:120px;height:1.5px}
+  .sub{font-family:"Jost",sans-serif;font-weight:300;font-size:30px;letter-spacing:14px;padding-left:14px}
+
+  /* monograma */
+  .mono{width:620px;height:620px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+  .mono .ring{position:absolute;inset:26px;border-radius:50%}
+  .mono .io{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:400;font-size:330px;line-height:1;letter-spacing:-18px;margin-top:-20px;margin-left:-16px}
+  .mono .est{position:absolute;bottom:118px;font-family:"Jost";font-weight:300;font-size:24px;letter-spacing:10px;padding-left:10px}
+
+  .dark{color:#1c1a17}.dark .rule span{background:#1c1a17}.dark .ring{border:1.5px solid #1c1a17}
+  .light{color:#f5efe6}.light .rule span{background:#f5efe6}.light .ring{border:1.5px solid #f5efe6}
+  .terra .io{color:#a8553a}
+</style></head><body>
+
+<!-- 1. Logo principal (fondo crema) -->
+<div class="art cream" id="principal" style="width:1600px;height:700px">
+  <div class="wm dark"><div class="name">INÉS OLMEDO</div>
+    <div class="rule"><span></span><div class="sub">MADRID</div><span></span></div></div>
+</div>
+
+<!-- 2. Logo transparente oscuro (para la cabecera de la tienda) -->
+<div class="art clear" id="cabecera" style="width:1400px;height:320px">
+  <div class="wm dark"><div class="name" style="font-size:120px;letter-spacing:18px;padding-left:18px">INÉS OLMEDO</div>
+    <div class="rule" style="margin-top:18px"><span></span><div class="sub" style="font-size:24px">MADRID</div><span></span></div></div>
+</div>
+
+<!-- 3. Logo transparente claro (sobre fotos oscuras) -->
+<div class="art clear" id="cabecera-blanco" style="width:1400px;height:320px">
+  <div class="wm light"><div class="name" style="font-size:120px;letter-spacing:18px;padding-left:18px">INÉS OLMEDO</div>
+    <div class="rule" style="margin-top:18px"><span></span><div class="sub" style="font-size:24px">MADRID</div><span></span></div></div>
+</div>
+
+<!-- 4. Monograma (favicon, Instagram, TikTok) -->
+<div class="art cream" id="monograma" style="width:800px;height:800px">
+  <div class="mono dark terra"><div class="ring"></div><div class="io">IO</div><div class="est">MADRID</div></div>
+</div>
+
+<!-- 5. Monograma sobre negro -->
+<div class="art ink" id="monograma-negro" style="width:800px;height:800px">
+  <div class="mono light"><div class="ring"></div><div class="io">IO</div><div class="est">MADRID</div></div>
+</div>
+
+</body></html>
