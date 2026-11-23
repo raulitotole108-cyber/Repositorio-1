@@ -22,6 +22,7 @@
 - [ ] Subir el vídeo largo **COCHES GRATIS🏎️ todo lo que tienes que saber en gta 6** (`salida_cocheslargo/l08-coches/l08-coches-movil.mp4`, miniatura `miniatura.jpg`, descripción `descripcion.txt`). Ponerlo como vídeo relacionado en los Shorts de coches.
 - [ ] Subir el Short **CLONADOR DE LLAVES🔑 cómo conseguirlo en gta 6** (`salida_dinero/d30-clonador/`, portada `portada-d30-clonador.jpg`, en TikTok `portada-d30-clonador-tiktok.jpg`).
 - [ ] Subir el Short **BANCO MILLONARIO🏦 205.000 dólares en gta 6** (`salida_dinero/d31-banco/`, portada `portada-d31-banco.jpg`, en TikTok `portada-d31-banco-tiktok.jpg`).
+- [ ] Subir el Short **PISTOLA DORADA🔫 dónde está en gta 6** (`salida_dinero/d32-pistola/`, portada `portada-d32-pistola.jpg`, en TikTok `portada-d32-pistola-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.
