@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#888}
+  .art{width:1600px;height:800px;display:flex;align-items:center;justify-content:center;position:relative;background:#f6f1ea;color:#1c1a17}
+  .lab{position:absolute;left:40px;top:30px;font-family:Jost;font-weight:300;font-size:30px;letter-spacing:6px;color:#a39a8c}
+  .sub{font-family:Jost;font-weight:300;letter-spacing:14px;padding-left:14px}
+  .col{display:flex;flex-direction:column;align-items:center}
+</style></head><body>
+
+<!-- A: firma manuscrita -->
+<div class="art" id="opA"><div class="lab">A · FIRMA</div>
+  <div class="col">
+    <div style="font-family:'Pinyon Script';font-size:250px;line-height:1.1">Inés Olmedo</div>
+    <div class="sub" style="font-size:26px;margin-top:-6px">MADRID</div>
+  </div>
+</div>
+
+<!-- B: Didone alta costura -->
+<div class="art" id="opB"><div class="lab">B · ALTA COSTURA</div>
+  <div class="col">
+    <div style="font-family:'Bodoni Moda';font-weight:400;font-size:150px;letter-spacing:6px;line-height:1">INÉS OLMEDO</div>
+    <div style="display:flex;align-items:center;gap:30px;margin-top:34px">
+      <span style="width:90px;height:1px;background:#1c1a17"></span>
+      <div style="font-family:'Bodoni Moda';font-style:italic;font-size:42px;letter-spacing:2px">Madrid</div>
+      <span style="width:90px;height:1px;background:#1c1a17"></span>
+    </div>
+  </div>
+</div>
+
+<!-- C: Italiana fina + monograma entrelazado -->
+<div class="art" id="opC"><div class="lab">C · MONOGRAMA</div>
+  <div class="col">
+    <svg width="230" height="230" viewBox="0 0 230 230" style="margin-bottom:30px">
+      <circle cx="115" cy="115" r="110" fill="none" stroke="#b08d57" stroke-width="1.2"/>
+      <circle cx="115" cy="115" r="102" fill="none" stroke="#b08d57" stroke-width=".6"/>
+      <text x="115" y="152" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-weight="300" font-size="140" fill="#b08d57">O</text>
+      <text x="113" y="152" text-anchor="middle" font-family="Cormorant Garamond" font-weight="300" font-size="140" fill="#1c1a17">I</text>
+    </svg>
+    <div style="font-family:'Italiana';font-size:110px;letter-spacing:26px;padding-left:26px;line-height:1">INÉS OLMEDO</div>
+  </div>
+</div>
+
+<!-- D: minimal italic -->
+<div class="art" id="opD"><div class="lab">D · MINIMAL</div>
+  <div class="col">
+    <div style="font-family:'Cormorant Garamond';font-style:italic;font-weight:300;font-size:200px;letter-spacing:2px;line-height:1">Inés Olmedo<span style="color:#b08d57">.</span></div>
+    <div class="sub" style="font-size:24px;margin-top:26px;letter-spacing:18px;padding-left:18px">ATELIER · MADRID</div>
+  </div>
+</div>
+
+</body></html>
