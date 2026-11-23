@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#888}
+  .art{width:1000px;height:1000px;display:flex;align-items:center;justify-content:center;position:relative;background:#f6f1ea;color:#1c1a17}
+  .lab{position:absolute;left:34px;top:28px;font-family:Jost;font-weight:300;font-size:26px;letter-spacing:6px;color:#a39a8c}
+  .col{display:flex;flex-direction:column;align-items:center}
+  .script{font-family:'Pinyon Script';line-height:1}
+  .thin{font-family:'Italiana';letter-spacing:20px;padding-left:20px;line-height:1}
+  .small{font-family:Jost;font-weight:300;letter-spacing:12px;padding-left:12px}
+</style></head><body>
+
+<!-- 1. Sello circular con texto alrededor y monograma manuscrito -->
+<div class="art" id="s1"><div class="lab">1 · SELLO</div>
+  <div class="col">
+    <svg width="560" height="560" viewBox="0 0 560 560">
+      <defs><path id="circ" d="M280 280 m-212 0 a212 212 0 1 1 424 0 a212 212 0 1 1 -424 0"/></defs>
+      <circle cx="280" cy="280" r="262" fill="none" stroke="#b08d57" stroke-width="1.6"/>
+      <circle cx="280" cy="280" r="250" fill="none" stroke="#b08d57" stroke-width=".7"/>
+      <circle cx="280" cy="280" r="172" fill="none" stroke="#b08d57" stroke-width=".7"/>
+      <text font-family="Italiana" font-size="36" fill="#1c1a17">
+        <textPath href="#circ" startOffset="0" textLength="1300" lengthAdjust="spacing">INÉS OLMEDO · ATELIER · MADRID · ESTILO ·</textPath>
+      </text>
+      <text x="240" y="345" text-anchor="middle" font-family="Pinyon Script" font-size="200" fill="#1c1a17">I</text>
+      <text x="330" y="345" text-anchor="middle" font-family="Pinyon Script" font-size="200" fill="#b08d57">O</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 2. Hoja de olmo (Olmedo = lugar de olmos) -->
+<div class="art" id="s2"><div class="lab">2 · HOJA DE OLMO</div>
+  <div class="col">
+    <svg width="300" height="360" viewBox="0 0 300 360" style="margin-bottom:40px">
+      <g fill="none" stroke="#b08d57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- contorno: hoja de olmo, base asimétrica y borde aserrado suave -->
+        <path d="M150 40 C 200 70, 238 130, 236 190 C 234 250, 196 292, 156 310 C 112 296, 70 258, 64 200 C 58 140, 98 76, 150 40 Z"/>
+        <!-- nervio central y tallo -->
+        <path d="M150 40 C 152 120, 154 220, 156 310 L 158 345"/>
+        <!-- nervios laterales -->
+        <path d="M151 95 L 196 78"/><path d="M152 135 L 216 112"/><path d="M153 175 L 228 152"/><path d="M154 215 L 226 196"/><path d="M155 255 L 208 242"/>
+        <path d="M151 100 L 112 80"/><path d="M152 140 L 88 120"/><path d="M153 180 L 74 162"/><path d="M154 220 L 78 206"/><path d="M155 260 L 98 250"/>
+      </g>
+    </svg>
+    <div class="script" style="font-size:150px">Inés Olmedo</div>
+    <div class="small" style="font-size:22px;margin-top:22px">MADRID</div>
+  </div>
+</div>
+
+<!-- 3. Arco con monograma -->
+<div class="art" id="s3"><div class="lab">3 · ARCO</div>
+  <div class="col">
+    <svg width="340" height="440" viewBox="0 0 340 440" style="margin-bottom:46px">
+      <path d="M20 430 V170 A150 150 0 0 1 320 170 V430 Z" fill="none" stroke="#1c1a17" stroke-width="1.6"/>
+      <path d="M36 430 V172 A134 134 0 0 1 304 172 V430" fill="none" stroke="#b08d57" stroke-width=".8"/>
+      <text x="118" y="310" text-anchor="middle" font-family="Cormorant Garamond" font-weight="300" font-size="210" fill="#1c1a17">I</text>
+      <text x="214" y="310" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-weight="300" font-size="210" fill="#b08d57">O</text>
+      <line x1="120" y1="372" x2="220" y2="372" stroke="#b08d57" stroke-width=".8"/>
+    </svg>
+    <div class="thin" style="font-size:66px">INÉS OLMEDO</div>
+  </div>
+</div>
+
+<!-- 4. Monograma manuscrito libre con firma -->
+<div class="art" id="s4"><div class="lab">4 · MONOGRAMA FIRMA</div>
+  <div class="col">
+    <svg width="420" height="360" viewBox="0 0 420 360" style="margin-bottom:30px">
+      <ellipse cx="210" cy="180" rx="190" ry="160" fill="none" stroke="#b08d57" stroke-width="1.2"/>
+      <text x="140" y="250" text-anchor="middle" font-family="Pinyon Script" font-size="260" fill="#1c1a17">I</text>
+      <text x="265" y="250" text-anchor="middle" font-family="Pinyon Script" font-size="260" fill="#1c1a17" opacity=".92">O</text>
+    </svg>
+    <div class="thin" style="font-size:58px">INÉS OLMEDO</div>
+    <div class="small" style="font-size:20px;margin-top:22px;color:#b08d57">ATELIER · MADRID</div>
+  </div>
+</div>
+
+</body></html>
