@@ -18,7 +18,7 @@
 - [ ] Subir el Short **COCHE GRATIS🏎️ y 10.000 $ en un almacén de gta 6** (`salida_dinero/d26-emerus/`, portada `portada-d26-emerus.jpg`, en TikTok `portada-d26-emerus-tiktok.jpg`). Si graba el Emerus morado en su partida, cambiar el plano del coche.
 - [ ] Subir el vídeo largo **DINERO INFINITO💰 todas las formas de ganarlo en gta 6** (`salida_dinerolargo/l07-dinero/l07-dinero-movil.mp4`, miniatura `miniatura.jpg`, descripción `descripcion.txt`). Ponerlo como vídeo relacionado en los Shorts de dinero.
 - [ ] Subir el Short **NADIE SALE🏝️ de key lento en gta 6** (`salida_dinero/d27-keylento/`, portada `portada-d27-keylento.jpg`, en TikTok `portada-d27-keylento-tiktok.jpg`). Es de comentarios: contestar a todos.
-- [ ] Subir el Short **MIRA ESTOS🏎️ coches que puedes conseguir en gta 6** (13 coches, incluye los Lamborghini; sustituye al de «LOS COCHES que puedes tener», que ya no hace falta subir) (`salida_dinero/d29-coches-raros/`, portada `portada-d29-coches-raros.jpg`, en TikTok `portada-d29-coches-raros-tiktok.jpg`).
+- [ ] Subir el Short **MIRA ESTOS🏎️ coches que puedes conseguir en gta 6** (15 coches, incluye los Lamborghini, el Emerus de la mansión, el Emerus morado y el Toros de La Perle; sustituye al de «LOS COCHES que puedes tener», que ya no hace falta subir) (`salida_dinero/d29-coches-raros/`, portada `portada-d29-coches-raros.jpg`, en TikTok `portada-d29-coches-raros-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.
