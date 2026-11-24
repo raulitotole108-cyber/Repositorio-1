@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Italiana&family=Jost:wght@300&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:transparent}
+  .art{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .thin{font-family:'Italiana';line-height:1;color:#1c1a17}
+  .small{font-family:Jost;font-weight:300;color:#b08d57}
+</style></head><body>
+
+<!-- Foto de perfil: monograma centrado con margen para el recorte circular -->
+<div class="art" id="fb-perfil" style="width:1080px;height:1080px;background:#f6f1ea">
+  <svg viewBox="0 0 420 360" width="700" height="600">
+    <ellipse cx="210" cy="180" rx="190" ry="160" fill="none" stroke="#b08d57" stroke-width="2.6"/>
+    <text x="140" y="250" text-anchor="middle" font-family="Pinyon Script" font-size="260" fill="#1c1a17">I</text>
+    <text x="265" y="250" text-anchor="middle" font-family="Pinyon Script" font-size="260" fill="#1c1a17">O</text>
+  </svg>
+</div>
+
+<!-- Portada 1640x856: contenido en la franja central segura (móvil recorta los lados) -->
+<div class="art" id="fb-portada" style="width:1640px;height:856px;background:linear-gradient(135deg,#f8f4ee 0%,#efe6d9 55%,#e6d9c7 100%)">
+  <!-- arcos decorativos suaves -->
+  <svg style="position:absolute;left:-180px;top:-220px" width="760" height="760" viewBox="0 0 760 760"><circle cx="380" cy="380" r="370" fill="none" stroke="#b08d57" stroke-width="1.2" opacity=".35"/><circle cx="380" cy="380" r="330" fill="none" stroke="#b08d57" stroke-width=".8" opacity=".25"/></svg>
+  <svg style="position:absolute;right:-220px;bottom:-260px" width="820" height="820" viewBox="0 0 820 820"><circle cx="410" cy="410" r="400" fill="none" stroke="#b08d57" stroke-width="1.2" opacity=".35"/><circle cx="410" cy="410" r="356" fill="none" stroke="#b08d57" stroke-width=".8" opacity=".25"/></svg>
+  <div style="display:flex;flex-direction:column;align-items:center;position:relative">
+    <div class="thin" style="font-size:118px;letter-spacing:34px;padding-left:34px">INES OLMEDO</div>
+    <div style="display:flex;align-items:center;gap:26px;margin-top:34px">
+      <span style="width:90px;height:1px;background:#b08d57"></span>
+      <div class="small" style="font-size:30px;letter-spacing:16px;padding-left:16px">ATELIER · MADRID</div>
+      <span style="width:90px;height:1px;background:#b08d57"></span>
+    </div>
+    <div style="font-family:Jost;font-weight:300;font-size:34px;letter-spacing:3px;color:#5a5148;margin-top:60px">Moda y complementos · Envíos a toda España</div>
+    <div style="font-family:Jost;font-weight:300;font-size:28px;letter-spacing:6px;color:#1c1a17;margin-top:26px">inesolmedo.com</div>
+  </div>
+</div>
+
+</body></html>
