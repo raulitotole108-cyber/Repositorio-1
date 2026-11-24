@@ -713,7 +713,7 @@ V("d34-puertas", "AZUL OSCURO",
    B("¿Y sabes qué es lo mejor? Según este jugador, dentro de una tienda el mapa te enseña el plano: habitaciones, pasillos y los rincones que no has pisado.", ["ol_062", "ol_064"],
      cortes=["habitaciones"], gfx=[dict(t="pasos", items=["Habitaciones", "Pasillos", "Rincones sin pisar"], en=["habitaciones", "pasillos", "rincones"])]),
    B("Envíaselo a ese amigo que se pasa media hora probando puertas. Y dile...", ["ol_002"]),
-  ], titulo="TRUCO DEL MAPA🗺️ dónde puedes entrar en gta 6"),
+  ], titulo="TRUCO SECRETO🗺️ dónde puedes entrar en gta 6"),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
