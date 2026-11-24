@@ -698,8 +698,24 @@ V("d33-flamencos", "MÍRALE EL PICO",
    B("Envíaselo a ese amigo que dispara a todo lo que ve. Y dile...", ["ol_128"]),
   ], titulo="FLAMENCOS SECRETOS🦩 mírales el pico en gta 6",
   mapas=dict(perle=dict(lugar="La Perle", desde_lugar="Vice City", zoom=(1.8, 4.6), pins=[("La Perle", "Perle", "Edificio en C · el 1.º")]))),
+V("d34-puertas", "AZUL OSCURO",
+  "El truco del mapa de GTA 6 para saber dónde se puede entrar 🗺️ Los edificios azul oscuro tienen entrada y los azul clarito están cerrados. Al acercarte, el minimapa te marca la puerta con una línea blanca\n\n"
+  "gta 6, mapa gta 6, edificios gta 6, interiores gta 6, donde entrar gta 6, trucos gta 6, consejos gta 6, minimapa gta 6\n\n"
+  "#shorts #videoshorts #gta6 #trucosgta6 #mapagta6",
+  [
+   B("¡Alto! Deja de probar cien puertas en GTA seis: el mapa ya te dice dónde puedes entrar.", ["img:u_mp_leyenda!"], golpe=True),
+   B("Abre el mapa y mira los edificios. Verás dos azules.", ["img:u_mp_mapa!"]),
+   B("Los de azul oscuro tienen alguna entrada: ahí se puede entrar.", ["ol_001"],
+     gfx=[dict(t="icono", emoji="✅", titulo="AZUL OSCURO", sub="se puede entrar", y=0.2, desde="azul")]),
+   B("Los de azul clarito están cerrados. No pierdas el tiempo con ellos.", ["ol_087"],
+     gfx=[dict(t="icono", emoji="🔒", titulo="AZUL CLARITO", sub="cerrado", y=0.2, desde="clarito")]),
+   B("Pero hay un detalle: cuando te acercas, el minimapa te marca con una raya blanca dónde está la puerta.", ["img:u_mp_puerta!"], riser=True),
+   B("¿Y sabes qué es lo mejor? Según este jugador, dentro de una tienda el mapa te enseña el plano: habitaciones, pasillos y los rincones que no has pisado.", ["ol_062", "ol_064"],
+     cortes=["habitaciones"], gfx=[dict(t="pasos", items=["Habitaciones", "Pasillos", "Rincones sin pisar"], en=["habitaciones", "pasillos", "rincones"])]),
+   B("Envíaselo a ese amigo que se pasa media hora probando puertas. Y dile...", ["ol_002"]),
+  ], titulo="TRUCO DEL MAPA🗺️ dónde puedes entrar en gta 6"),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

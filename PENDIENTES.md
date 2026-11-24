@@ -24,6 +24,7 @@
 - [ ] Subir el Short **BANCO MILLONARIO🏦 205.000 dólares en gta 6** (`salida_dinero/d31-banco/`, portada `portada-d31-banco.jpg`, en TikTok `portada-d31-banco-tiktok.jpg`).
 - [ ] Subir el Short **PISTOLA DORADA🔫 dónde está en gta 6** (`salida_dinero/d32-pistola/`, portada `portada-d32-pistola.jpg`, en TikTok `portada-d32-pistola-tiktok.jpg`).
 - [ ] Subir el Short **FLAMENCOS SECRETOS🦩 mírales el pico en gta 6** (`salida_dinero/d33-flamencos/`, portada `portada-d33-flamencos.jpg`, en TikTok `portada-d33-flamencos-tiktok.jpg`).
+- [ ] Subir el Short **TRUCO DEL MAPA🗺️ dónde puedes entrar en gta 6** (`salida_dinero/d34-puertas/`, portada `portada-d34-puertas.jpg`, en TikTok `portada-d34-puertas-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.

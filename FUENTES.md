@@ -221,3 +221,7 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 - 125 «Cocaine Flamingos»; 100 cuentan para el 100 %; primero en La Perle (centro del edificio en C): PowerPyx, games.gg.
 - Pico blanco y negro = con paquete; amarillo y negro = adorno; 50 desbloquean el truco del flamenco hinchable (tras la historia); el paquete se vende: gmtreks.
 - Las grabaciones que pasó el usuario (humano.planet, TikTok) están marcadas por su creador como «Generado por IA»: NO se usan como imágenes del juego. Gráficos propios + mapa oficial + clips oficiales.
+
+## d34 · TRUCO DEL MAPA (24/11/2026)
+- Azul oscuro = edificio con entrada/interior; azul claro = sin interior; el minimapa marca con líneas blancas las puertas: GameRiv («GTA 6: How to Find Buildings You Can Enter Using the Map»).
+- Plano por dentro (habitaciones, pasillos, rincones sin pisar): solo lo enseña el vídeo de Blooby (@bloobygta) que pasó el usuario → «según este jugador». Sus imágenes (con marca de agua) no se usan: gráficos propios + clips oficiales.
