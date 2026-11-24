@@ -714,8 +714,24 @@ V("d34-puertas", "AZUL OSCURO",
      cortes=["habitaciones"], gfx=[dict(t="pasos", items=["Habitaciones", "Pasillos", "Rincones sin pisar"], en=["habitaciones", "pasillos", "rincones"])]),
    B("Envíaselo a ese amigo que se pasa media hora probando puertas. Y dile...", ["ol_002"]),
   ], titulo="TRUCO SECRETO🗺️ dónde puedes entrar en gta 6"),
+V("d35-bugatti", "SIN LOCALIZADOR",
+  "Cómo conseguir el Bugatti de GTA 6 y quedártelo 🏎️ El Truffade Thrax no tiene localizador ni sistema de seguridad: está en una mansión de Starfish Island. Entra detrás del vigilante, aparca en la esquina, agáchate, saca el móvil y ciérralo\n\n"
+  "gta 6, bugatti gta 6, truffade thrax gta 6, coche gratis gta 6, coches gta 6, starfish island gta 6, mansion gta 6, superdeportivo gta 6\n\n"
+  "Clip de gameplay: Borkast (TikTok)\n\n"
+  "#shorts #videoshorts #gta6 #cochesgta6 #bugattigta6",
+  [
+   B("¡Mira esto! Este Bugatti de GTA seis te lo puedes quedar, estés en el capítulo que estés.", ["u_bu_1", "u_bu_8+3.0"], cortes=["quedar"], golpe=True),
+   B("Y no tiene localizador, ni sistema de seguridad... y está abierto.", ["u_bu_2+1.0"]),
+   B("Según este jugador, está en el condado de Vice-Dale, en una mansión de Starfish Island.", ["u_bu_3+0.0", "map:starfish"], cortes=["Starfish"]),
+   B("Ve exactamente a esta mansión, llega con otro coche y llama al vigilante para que abra la puerta.", ["u_bu_3+2.0", "u_bu_3+4.0", "u_bu_4"], cortes=["llega", "vigilante"]),
+   B("Pero hay un detalle: dentro tienes que aparcar exactamente así, pegado a esta esquina.", ["u_bu_5"]),
+   B("Luego agáchate en la esquina, saca el móvil y ciérralo rápido.", ["u_bu_6", "u_bu_7"], cortes=["móvil"]),
+   B("¿Y sabes qué pasa? El juego te mete dentro del garaje... y el Bugatti es tuyo.", ["u_bu_8"], riser=True),
+   B("Envíaselo a ese amigo que siempre quiso un Bugatti. Y dile...", ["ol_075"]),
+  ], titulo="BUGATTI GRATIS🏎️ cómo quedártelo en gta 6",
+  mapas=dict(starfish=dict(lugar="Starfish Island", desde_lugar="Vice City", zoom=(2.0, 5.0), pins=[("Starfish Island", "Starfish", "Mansión del Bugatti")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas", "d35-bugatti"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")

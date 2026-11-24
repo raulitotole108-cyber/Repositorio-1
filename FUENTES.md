@@ -225,3 +225,8 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 ## d34 · TRUCO DEL MAPA (24/11/2026)
 - Azul oscuro = edificio con entrada/interior; azul claro = sin interior; el minimapa marca con líneas blancas las puertas: GameRiv («GTA 6: How to Find Buildings You Can Enter Using the Map»).
 - Plano por dentro (habitaciones, pasillos, rincones sin pisar): solo lo enseña el vídeo de Blooby (@bloobygta) que pasó el usuario → «según este jugador». Sus imágenes (con marca de agua) no se usan: gráficos propios + clips oficiales.
+
+## d35 · BUGATTI GRATIS (24/11/2026)
+- Método y clips: vídeo de Borkast (TikTok) que pasó el usuario; se usa su gameplay (sin su cámara, con crédito en vídeo y descripción). Sus subtítulos se difuminan.
+- En el juego se ve la ficha «Truffade Thrax de Andrew Node: acceso abierto, sistema de seguridad desactivado, localizador ninguno» y el mapa (condado de Vice-Dale, Isla Starfish).
+- No hay guía escrita que lo confirme → «según este jugador».
