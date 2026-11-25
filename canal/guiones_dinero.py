@@ -744,7 +744,7 @@ V("d36-alvino", "LA MÁS RÁPIDA",
    B("¿Y sabes qué es lo mejor? La registras por nueve mil dólares y es tuya para siempre.", ["u_al_e+6.0"], riser=True,
      gfx=[dict(t="contador", hasta=9000, sufijo=" $", sub="y es tuya", desde="nueve")]),
    B("Envíaselo a ese amigo que dice que las motos de GTA son lentas. Y dile...", ["u_al_f+6.0"]),
-  ], titulo="MOTO SECRETA🏍️ la más rápida de gta 6",
+  ], titulo="MOTO SECRETA🏍️ dónde conseguirla en gta 6",
   mapas=dict(aero=dict(lugar="Aeropuerto VCIA", desde_lugar="Vice City", zoom=(2.0, 4.6), pins=[("Aeropuerto VCIA", "parking", "Parking del aeropuerto")]),
              isla=dict(lugar="Vespucci Island", desde_lugar="Ocean Beach", zoom=(2.2, 5.0), pins=[("Vespucci Island", "isla", "Mansión rosa (aprox.)")]))),
 ]
