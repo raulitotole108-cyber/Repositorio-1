@@ -230,3 +230,8 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 - Método y clips: vídeo de Borkast (TikTok) que pasó el usuario; se usa su gameplay (sin su cámara, con crédito en vídeo y descripción). Sus subtítulos se difuminan.
 - En el juego se ve la ficha «Truffade Thrax de Andrew Node: acceso abierto, sistema de seguridad desactivado, localizador ninguno» y el mapa (condado de Vice-Dale, Isla Starfish).
 - No hay guía escrita que lo confirme → «según este jugador».
+
+## d36 · MOTO SECRETA (25/11/2026)
+- Principe Alvino V1, la moto más rápida (155 mph estimadas): GTABase (otra guía dice que aún no hay pruebas verificadas).
+- La V1 siempre arriba del parking del aeropuerto; versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach; registro por 9.000 $: vídeo de pabloskyto13 (TikTok) que pasó el usuario → «según este jugador». Su plano del parking se usa con su marca de agua.
+- Gameplay de la mansión y la moto morada: grabaciones del usuario. Isla de la mansión en el póster: aproximada (Vespucci Island).

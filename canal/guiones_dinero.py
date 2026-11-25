@@ -730,8 +730,25 @@ V("d35-bugatti", "SIN LOCALIZADOR",
    B("Envíaselo a ese amigo que siempre quiso un Bugatti. Y dile...", ["ol_075"]),
   ], titulo="BUGATTI GRATIS🏎️ cómo quedártelo en gta 6",
   mapas=dict(starfish=dict(lugar="Starfish Island", desde_lugar="Vice City", zoom=(2.0, 5.0), pins=[("Starfish Island", "Starfish", "Mansión del Bugatti")]))),
+V("d36-alvino", "LA MÁS RÁPIDA",
+  "La moto más rápida de GTA 6 y dónde conseguirla 🏍️ La Principe Alvino V1 está siempre arriba del parking del aeropuerto, y su versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach. Regístrala por 9.000 $\n\n"
+  "gta 6, moto mas rapida gta 6, alvino gta 6, principe alvino gta 6, motos gta 6, aeropuerto gta 6, vehiculos gta 6, vice beach gta 6\n\n"
+  "Clips: el parking del aeropuerto, de pabloskyto13 (TikTok)\n\n"
+  "#shorts #videoshorts #gta6 #motosgta6 #vehiculosgta6",
+  [
+   B("¡No deslices! Esta es la moto más rápida de GTA seis... y te enseño dónde está.", ["u_al_e+3.0", "u_al_d"], cortes=["enseño"], golpe=True),
+   B("Es la Principe Alvino. La V1 normal está siempre arriba del parking del aeropuerto.", ["u_al_p1", "map:aero"], cortes=["arriba"]),
+   B("Pero hay un detalle: existe una versión todavía más rápida.", ["u_al_f+1.0"]),
+   B("Según este jugador, está en el garaje de una mansión rosa, en una isla al oeste de Vice Beach.", ["u_al_b", "map:isla"], cortes=["isla"]),
+   B("Cuélate por la puerta, entra al garaje... y súbete.", ["u_al_a", "u_al_c+1.0"], cortes=["garaje"]),
+   B("¿Y sabes qué es lo mejor? La registras por nueve mil dólares y es tuya para siempre.", ["u_al_e+6.0"], riser=True,
+     gfx=[dict(t="contador", hasta=9000, sufijo=" $", sub="y es tuya", desde="nueve")]),
+   B("Envíaselo a ese amigo que dice que las motos de GTA son lentas. Y dile...", ["u_al_f+6.0"]),
+  ], titulo="MOTO SECRETA🏍️ la más rápida de gta 6",
+  mapas=dict(aero=dict(lugar="Aeropuerto VCIA", desde_lugar="Vice City", zoom=(2.0, 4.6), pins=[("Aeropuerto VCIA", "parking", "Parking del aeropuerto")]),
+             isla=dict(lugar="Vespucci Island", desde_lugar="Ocean Beach", zoom=(2.2, 5.0), pins=[("Vespucci Island", "isla", "Mansión rosa (aprox.)")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas", "d35-bugatti"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas", "d35-bugatti", "d36-alvino"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")
