@@ -731,16 +731,18 @@ V("d35-bugatti", "SIN LOCALIZADOR",
   ], titulo="BUGATTI GRATIS🏎️ cómo quedártelo en gta 6",
   mapas=dict(starfish=dict(lugar="Starfish Island", desde_lugar="Vice City", zoom=(2.0, 5.0), pins=[("Starfish Island", "Starfish", "Mansión del Bugatti")]))),
 V("d36-alvino", "LA MÁS RÁPIDA",
-  "La moto más rápida de GTA 6 y dónde conseguirla 🏍️ La Principe Alvino V1 está siempre arriba del parking del aeropuerto, y su versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach. Regístrala por 9.000 $\n\n"
+  "La moto más rápida de GTA 6 y dónde conseguirla 🏍️ La Principe Alvino V1 está siempre arriba del parking del aeropuerto, y su versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach: entra por la puerta de hierro, cruza el patio y el garaje está abierto. Regístrala por 9.000 $\n\n"
   "gta 6, moto mas rapida gta 6, alvino gta 6, principe alvino gta 6, motos gta 6, aeropuerto gta 6, vehiculos gta 6, vice beach gta 6\n\n"
-  "Clips: el parking del aeropuerto, de pabloskyto13 (TikTok)\n\n"
+  "Clips del aeropuerto y de la fachada: pabloskyto13 (TikTok)\n\n"
   "#shorts #videoshorts #gta6 #motosgta6 #vehiculosgta6",
   [
    B("¡No deslices! Esta es la moto más rápida de GTA seis... y te enseño dónde está.", ["u_al_lado", "u_al_e+3.0"], cortes=["enseño"], golpe=True),
    B("Es la Principe Alvino. La V1 normal está siempre arriba del parking del aeropuerto.", ["u_al_p1", "map:aero"], cortes=["arriba"]),
    B("Pero hay un detalle: existe una versión todavía más rápida.", ["u_al_f+1.0"]),
    B("Está en el garaje de una mansión rosa, en una isla al oeste de Vice Beach.", ["u_al_b", "map:isla"], cortes=["isla"]),
-   B("Cuélate por la puerta, entra al garaje... y súbete.", ["u_al_a", "u_al_d"], cortes=["garaje"]),
+   B("¿Y cómo se entra? Llega a la fachada y entra por la puerta de hierro de la entrada.", ["u_al_p2", "u_al_a"], cortes=["puerta"],
+     gfx=[dict(t="icono", emoji="🚪", titulo="PUERTA DE HIERRO", sub="la de la entrada", y=0.2, desde="puerta")]),
+   B("Cruza el patio de las palmeras hasta el fondo: el garaje está abierto. Súbete... y arranca.", ["u_al_c", "u_al_d"], cortes=["Súbete"]),
    B("¿Y sabes qué es lo mejor? La registras por nueve mil dólares y es tuya para siempre.", ["u_al_e+6.0"], riser=True,
      gfx=[dict(t="contador", hasta=9000, sufijo=" $", sub="y es tuya", desde="nueve")]),
    B("Envíaselo a ese amigo que dice que las motos de GTA son lentas. Y dile...", ["u_al_f+6.0"]),
