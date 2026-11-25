@@ -233,5 +233,5 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 
 ## d36 · MOTO SECRETA (25/11/2026)
 - Principe Alvino V1, la moto más rápida (155 mph estimadas): GTABase (otra guía dice que aún no hay pruebas verificadas).
-- La V1 siempre arriba del parking del aeropuerto; versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach; registro por 9.000 $: vídeo de pabloskyto13 (TikTok) que pasó el usuario → «según este jugador». Su plano del parking se usa con su marca de agua.
+- La V1 siempre arriba del parking del aeropuerto; versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach; registro por 9.000 $: vídeo de pabloskyto13 (TikTok) que pasó el usuario (el usuario pidió no decir «según este jugador»). Su plano del parking se usa con su marca de agua.
 - Gameplay de la mansión y la moto morada: grabaciones del usuario. Isla de la mansión en el póster: aproximada (Vespucci Island).
