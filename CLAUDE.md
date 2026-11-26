@@ -98,3 +98,12 @@ lenta. Reglas: velocidad de +26 % a +34 %, silencios internos recortados a ≤ 0
    - Vídeo relacionado: el vídeo largo del mismo tema.
    - Hora: probar entre la 1 y las 3 de la madrugada (hora de España) y comparar con las estadísticas.
    - Ocultar el número de «me gusta» hasta que pase de unos 500-1.000.
+
+## Tienda Shopify «Ines Olmedo» — reglas obligatorias (pedidas por el usuario)
+
+- **URL de producto solo con un nombre propio corto.** Cada producto nuevo o importado lleva como identificador de URL
+  (handle) únicamente un nombre, p. ej. `inesolmedo.com/products/naiara`, nunca el título largo. Se cambia con
+  `productUpdate(handle, redirectNewHandle: true)`. Nombres ya usados: alba, carmela, valeria, martina, elena, candela,
+  olivia, aitana (no repetir).
+- Tienda: `bqb3fd-sb.myshopify.com` (inesolmedo.com). Tema publicado: «Ines Olmedo (Dawn)». Correo de contacto:
+  atencionalcliente@inesolmedo.com.
