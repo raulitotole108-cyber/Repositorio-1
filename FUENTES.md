@@ -235,3 +235,7 @@ Grabaciones de un TikTok en inglés que pasó el usuario (subtítulos leídos fo
 - Principe Alvino V1, la moto más rápida (155 mph estimadas): GTABase (otra guía dice que aún no hay pruebas verificadas).
 - La V1 siempre arriba del parking del aeropuerto; versión más rápida en el garaje de una mansión rosa al oeste de Vice Beach; registro por 9.000 $: vídeo de pabloskyto13 (TikTok) que pasó el usuario (el usuario pidió no decir «según este jugador»). Su plano del parking se usa con su marca de agua.
 - Gameplay de la mansión y la moto morada: grabaciones del usuario. Isla de la mansión en el póster: aproximada (Vespucci Island).
+
+## d37 · UN MILLÓN (28/11/2026)
+- Grabaciones que pasó el usuario (sin marca visible; el creador no se ve). En pantalla: bolsas de botín en un descampado al norte de Hamlet (condado de Vice-Dale), inventario con 2 bolsas, contador 0 → 2.400 → 29.951 $, «capacidad llena», guardar bolsas en la furgoneta, «Vender botín (+$758,400) · Tyrone».
+- Beebom describe un truco parecido en South Vice-Dale (bolsas en el maletero, guardar y cargar). No se ha podido oír la narración del vídeo original.

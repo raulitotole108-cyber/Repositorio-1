@@ -27,6 +27,7 @@
 - [ ] Subir el Short **TRUCO SECRETO🗺️ dónde puedes entrar en gta 6** (`salida_dinero/d34-puertas/`, portada `portada-d34-puertas.jpg`, en TikTok `portada-d34-puertas-tiktok.jpg`).
 - [ ] Subir el Short **BUGATTI GRATIS🏎️ cómo quedártelo en gta 6** (`salida_dinero/d35-bugatti/`, portada `portada-d35-bugatti.jpg`, en TikTok `portada-d35-bugatti-tiktok.jpg`).
 - [ ] Subir el Short **MOTO SECRETA🏍️ dónde conseguirla en gta 6** (`salida_dinero/d36-alvino/`, portada `portada-d36-alvino.jpg`, en TikTok `portada-d36-alvino-tiktok.jpg`).
+- [ ] Subir el Short **UN MILLÓN💰 en 5 minutos en gta 6** (`salida_dinero/d37-millon/`, portada `portada-d37-millon.jpg`, en TikTok `portada-d37-millon-tiktok.jpg`).
 - [ ] Verse el vídeo de YouTube de los vídeos de dibujos (recordárselo cuando pida que le recuerde lo pendiente).
 
 Títulos y descripciones: en `canal/guiones_dinero.py` y en `salida_dinero/<vídeo>/descripcion.txt`.

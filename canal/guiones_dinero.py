@@ -749,8 +749,24 @@ V("d36-alvino", "LA MÁS RÁPIDA",
   ], titulo="MOTO SECRETA🏍️ dónde conseguirla en gta 6",
   mapas=dict(aero=dict(lugar="Aeropuerto VCIA", desde_lugar="Vice City", zoom=(2.0, 4.6), pins=[("Aeropuerto VCIA", "parking", "Parking del aeropuerto")]),
              isla=dict(lugar="Vespucci Island", desde_lugar="Ocean Beach", zoom=(2.2, 5.0), pins=[("Vespucci Island", "isla", "Mansión rosa (aprox.)")]))),
+V("d37-millon", "758.400 $",
+  "Cómo sacar hasta un millón de dólares en GTA 6 en 5 minutos 💰 Ve al descampado al norte de Hamlet, en Vice-Dale, llena tus bolsas de botín, guárdalas en la furgoneta y véndeselo todo a Tyrone por 758.400 $\n\n"
+  "gta 6, dinero gta 6, millon gta 6, truco dinero gta 6, glitch dinero gta 6, bolsas de botin gta 6, tyrone gta 6, hamlet gta 6\n\n"
+  "#shorts #videoshorts #gta6 #dinerogta6 #trucosgta6",
+  [
+   B("¡Espera! Así sacas hasta un *millón* de dólares en cinco minutos en GTA seis.", ["u_mb_a+1.0"], golpe=True),
+   B("Ve a este descampado al norte de Hamlet, en el condado de Vice-Dale.", ["u_mb_a+10.0", "map:hamlet"], cortes=["Hamlet"]),
+   B("Está lleno de bolsas de botín. Cógelas: en el inventario puedes llevar dos a la vez.", ["u_mb_a+4.2", "u_mb_a+6.0"], cortes=["inventario"]),
+   B("Y mira el contador: cero... dos mil cuatrocientos... casi treinta mil.", ["u_mb_b+7.0", "u_mb_b+10.2"], cortes=["casi"]),
+   B("Pero hay un detalle: cuando la bolsa se llene, guárdalas todas en la furgoneta.", ["u_mb_b+13.5", "u_mb_c+3.6"], cortes=["guárdalas"]),
+   B("¿Y sabes qué es lo mejor? Llévaselo a Tyrone y véndeselo todo de golpe.", ["u_mb_c+7.2"], riser=True),
+   B("Setecientos cincuenta y ocho mil dólares. Aprovecha antes de que lo parcheen.", ["u_mb_c+10.5"],
+     gfx=[dict(t="contador", hasta=758400, sufijo=" $", sub="vendiendo a Tyrone", desde="Setecientos")]),
+   B("Envíaselo a ese amigo que siempre está sin un dólar en GTA. Y dile...", ["u_mb_b+3.6"]),
+  ], titulo="UN MILLÓN💰 en 5 minutos en gta 6",
+  mapas=dict(hamlet=dict(lugar="Hamlet", desde_lugar="Vice City", zoom=(2.0, 4.6), pins=[("Hamlet", "Hamlet", "Las bolsas: al norte de Hamlet")]))),
 ]
 # portadas «cargadas» hechas a mano (estilo de la 2.ª referencia): el motor las pone como último fotograma
 for _v in VIDEOS:
-    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas", "d35-bugatti", "d36-alvino"):
+    if _v["slug"] in ("d23-inteligente", "d24-toros", "d25-glitch", "d26-emerus", "d27-keylento", "d28-coches-reales", "d29-coches-raros", "d30-clonador", "d31-banco", "d32-pistola", "d33-flamencos", "d34-puertas", "d35-bugatti", "d36-alvino", "d37-millon"):
         _v["portada_archivo"] = str(__import__("pathlib").Path(__file__).parent.parent / "salida_dinero" / "portadas" / f"portada-{_v['slug']}.jpg")
